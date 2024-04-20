@@ -29,6 +29,10 @@ public class ItemRegister {
 
     public static final DeferredHolder<Item, SpellEffectItem> SPREAD_CAST_SPELL = ITEMS.register("spread_cast", () -> new SpellEffectItem(SpellRegister.SPREAD_CAST));
 
+    public static final DeferredHolder<Item, SpellEffectItem> FREEZING_CHARGE_SPELL = ITEMS.register("freezing_charge", () -> new SpellEffectItem(SpellRegister.FREEZING_CHARGE));
+    public static final DeferredHolder<Item, SpellEffectItem> POISON_CHARGE_SPELL = ITEMS.register("poison_charge", () -> new SpellEffectItem(SpellRegister.POISON_CHARGE));
+    public static final DeferredHolder<Item, SpellEffectItem> IGNEOUS_CHARGE_SPELL = ITEMS.register("igneous_charge", () -> new SpellEffectItem(SpellRegister.IGNEOUS_CHARGE));
+
     public static final DeferredHolder<Item, SpellEffectItem> HEXAGON_CAST_SPELL = ITEMS.register("hexagon_cast", () -> new SpellEffectItem(SpellRegister.HEXAGON_CAST));
 
     public static final DeferredHolder<Item, SpellEffectItem> SMALL_DELAY_CAST_SPELL = ITEMS.register("small_delay_cast", () -> new SpellEffectItem(SpellRegister.SMALL_DELAY_CAST));
@@ -40,9 +44,8 @@ public class ItemRegister {
     public static final DeferredHolder<Item, SpellEffectItem> INCREASE_LIFETIME = ITEMS.register("increase_lifetime", () -> new SpellEffectItem(SpellRegister.INCREASE_LIFETIME));
 
     public static final DeferredHolder<Item, SpellEffectItem> TELEPORT = ITEMS.register("teleport", () -> new SpellEffectItem(SpellRegister.TELEPORT));
-    public static final DeferredHolder<Item, SpellEffectItem> SUMMON_BEE = ITEMS.register("summon_bee", () -> new SpellEffectItem(SpellRegister.SUMMON_BEE));
 
-    public static final DeferredHolder<Item, SpellEffectItem> LIGHTING_BOLT = ITEMS.register("lighting_bolt", () -> new SpellEffectItem(SpellRegister.LIGHTINING_BOLT));
+    public static final DeferredHolder<Item, SpellEffectItem> LIGHTING_BOLT = ITEMS.register("lighting_bolt", () -> new SpellEffectItem(SpellRegister.LIGHTNING_BOLT));
 
     public static final DeferredHolder<Item, SpellEffectItem> TRIGGER_SNOWBALL = ITEMS.register("trigger_snowball", () -> new SpellEffectItem(SpellRegister.TRIGGER_SNOWBALL));
     public static final DeferredHolder<Item, SpellEffectItem> SNOWBALL = ITEMS.register("snowball", () -> new SpellEffectItem(SpellRegister.SNOWBALL));

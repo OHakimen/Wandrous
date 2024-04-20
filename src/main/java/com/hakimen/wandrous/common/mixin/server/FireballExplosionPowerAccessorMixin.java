@@ -1,4 +1,4 @@
-package com.hakimen.wandrous.common.mixin;
+package com.hakimen.wandrous.common.mixin.server;
 
 
 import net.minecraft.world.entity.projectile.LargeFireball;

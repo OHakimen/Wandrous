@@ -2,10 +2,14 @@ package com.hakimen.wandrous.common.spell;
 
 import com.hakimen.wandrous.common.utils.CastingUtils;
 import com.hakimen.wandrous.common.utils.data.Node;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+
+import java.util.List;
 
 public class SpellContext implements Cloneable{
 
@@ -17,6 +21,8 @@ public class SpellContext implements Cloneable{
     Node<SpellEffect> node;
     SpellStatus status;
     boolean castPositionModified;
+    List<LivingEntity> hit;
+    List<SpellHit> hitEffects;
 
     public Entity getOriginalCaster() {
         return originalCaster;
@@ -92,6 +98,24 @@ public class SpellContext implements Cloneable{
 
     public SpellContext setCastPositionModified(boolean castPositionModified) {
         this.castPositionModified = castPositionModified;
+        return this;
+    }
+
+    public List<LivingEntity> getHit() {
+        return hit;
+    }
+
+    public SpellContext setHit(List<LivingEntity> hit) {
+        this.hit = hit;
+        return this;
+    }
+
+    public List<SpellHit> getHitEffects() {
+        return hitEffects;
+    }
+
+    public SpellContext setHitEffects(List<SpellHit> hitEffects) {
+        this.hitEffects = hitEffects;
         return this;
     }
 

@@ -1,8 +1,7 @@
-package com.hakimen.wandrous.common.spell.effects.spells;
+package com.hakimen.wandrous.common.spell.effects.spells.projectiles;
 
-import com.hakimen.wandrous.common.mixin.FireballExplosionPowerAccessorMixin;
+import com.hakimen.wandrous.common.mixin.server.FireballExplosionPowerAccessorMixin;
 import com.hakimen.wandrous.common.spell.SpellContext;
-import com.hakimen.wandrous.common.spell.SpellEffect;
 import com.hakimen.wandrous.common.spell.SpellStatus;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -14,7 +13,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
-public class FireballSpellEffect extends SpellEffect {
+public class FireballSpellEffect extends ProjectileSpellEffect {
 
     public FireballSpellEffect(boolean isTrigger) {
         this.setKind(isTrigger ? TRIGGER : SPELL);
@@ -70,24 +69,13 @@ public class FireballSpellEffect extends SpellEffect {
 
         @Override
         protected void onHitBlock(BlockHitResult pResult) {
-            if (context.getNode().getData().hasKind(TRIGGER)) {
-                this.setDeltaMovement(new Vec3(this.getDeltaMovement().toVector3f().reflect(Vec3.atLowerCornerOf(pResult.getDirection().getNormal()).toVector3f())));
-                context.getNode().getChildren().forEach(
-                        (child) -> child.getData().cast(context.setNode(child).setLocation(pResult.getLocation()))
-                );
-            }
+            ProjectileSpellEffect.onHitBlock(this,pResult,context);
             super.onHitBlock(pResult);
         }
 
         @Override
         protected void onHitEntity(EntityHitResult pResult) {
-            if (context.getNode().getData().hasKind(TRIGGER)) {
-                this.setDeltaMovement(this.getDeltaMovement().multiply(1, -1, 1));
-                context.getNode().getChildren().forEach(
-                        (child) -> child.getData().cast(context.setNode(child).setLocation(pResult.getLocation()))
-                );
-            }
-            pResult.getEntity().hurt(damageSources().magic(), context.getStatus().getDamage());
+            ProjectileSpellEffect.onHitEntity(this, pResult, context);
             super.onHitEntity(pResult);
         }
 

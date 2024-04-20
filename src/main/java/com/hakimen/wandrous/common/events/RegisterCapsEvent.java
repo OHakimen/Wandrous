@@ -27,7 +27,6 @@ public class RegisterCapsEvent {
                                 super.onContentsChanged(slot);
                             }
 
-
                             @Override
                             public boolean isItemValid(int slot, ItemStack stack) {
                                 return stack.getItem() instanceof SpellEffectItem;

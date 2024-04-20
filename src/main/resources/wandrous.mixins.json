@@ -5,7 +5,7 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "WandrousNeoForge.refmap.json",
   "mixins": [
-    "FireballExplosionPowerAccessorMixin"
+    "server.FireballExplosionPowerAccessorMixin"
   ],
   "client": [
   ],

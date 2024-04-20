@@ -5,14 +5,12 @@ import com.hakimen.wandrous.common.spell.SpellStatus;
 import com.hakimen.wandrous.common.spell.effects.modifiers.MulticastEffect;
 import com.hakimen.wandrous.common.spell.SpellEffect;
 import com.hakimen.wandrous.common.utils.data.Node;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CastingUtils {
@@ -60,7 +58,9 @@ public class CastingUtils {
                 .setLocation(location)
                 .setStatus(new SpellStatus())
                 .setNode(toCast)
-                .setOriginalCaster(entity);
+                .setOriginalCaster(entity)
+                .setHit(new ArrayList<>())
+                .setHitEffects(new ArrayList<>());
 
         toCast.getData().cast(context);
     }

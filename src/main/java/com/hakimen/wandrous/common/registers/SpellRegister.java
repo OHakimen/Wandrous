@@ -5,17 +5,31 @@ import com.hakimen.wandrous.common.custom.register.WandrousRegistries;
 import com.hakimen.wandrous.common.spell.SpellEffect;
 import com.hakimen.wandrous.common.spell.SpellStatus;
 import com.hakimen.wandrous.common.spell.effects.modifiers.*;
+import com.hakimen.wandrous.common.spell.effects.modifiers.SpellHitModifierEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.ExplosionEffect;
-import com.hakimen.wandrous.common.spell.effects.spells.FireballSpellEffect;
-import com.hakimen.wandrous.common.spell.effects.spells.SnowballSpellEffect;
+import com.hakimen.wandrous.common.spell.effects.spells.projectiles.FireballSpellEffect;
+import com.hakimen.wandrous.common.spell.effects.spells.projectiles.SnowballSpellEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.TeleportEffect;
-import com.hakimen.wandrous.common.spell.effects.spells.summon_spells.SummonBeeEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.summon_spells.SummonConjuredBlock;
 import com.hakimen.wandrous.common.spell.effects.spells.summon_spells.SummonEntityEffect;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.enchantment.FrostWalkerEnchantment;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Stream;
 
 public class SpellRegister {
     public static final DeferredRegister<SpellEffect> SPELL_EFFECTS = DeferredRegister.create(WandrousRegistries.SPELLS_REGISTER, Wandrous.MODID);
@@ -30,8 +44,64 @@ public class SpellRegister {
     public static final DeferredHolder<SpellEffect, SpellEffect> TRIGGER_FIREBALL = SPELL_EFFECTS.register("trigger_fireball", () -> new FireballSpellEffect(true));
 
     public static final DeferredHolder<SpellEffect, SpellEffect> TELEPORT = SPELL_EFFECTS.register("teleport", TeleportEffect::new);
-    public static final DeferredHolder<SpellEffect, SpellEffect> LIGHTINING_BOLT = SPELL_EFFECTS.register("lighting_bolt", () -> new SummonEntityEffect(EntityType.LIGHTNING_BOLT,70));
-    public static final DeferredHolder<SpellEffect, SpellEffect> SUMMON_BEE = SPELL_EFFECTS.register("summon_bee", SummonBeeEffect::new);
+    public static final DeferredHolder<SpellEffect, SpellEffect> LIGHTNING_BOLT = SPELL_EFFECTS.register("lightning_bolt", () -> new SummonEntityEffect(EntityType.LIGHTNING_BOLT, 70));
+
+    public static final DeferredHolder<SpellEffect, SpellEffect> FREEZING_CHARGE = SPELL_EFFECTS.register("freezing_charge", () -> new SpellHitModifierEffect(
+            entity -> {
+                if(entity instanceof LivingEntity livingEntity){
+                    livingEntity.addEffect(new MobEffectInstance(EffectRegister.FREEZING.get(), 30 * 20));
+                }
+            },
+            (level, blockPos, blockState) -> {
+                Iterator positions = BlockPos.betweenClosed(blockPos.offset(-5, -5, -5), blockPos.offset(5, 5, 5)).iterator();
+
+                while(positions.hasNext()){
+                    BlockPos pos = (BlockPos)positions.next();
+                    if(pos.closerToCenterThan(blockPos.getCenter(), 5)){
+                        if(level.getBlockState(pos).is(Blocks.WATER)){
+                            level.setBlockAndUpdate(pos, Blocks.FROSTED_ICE.defaultBlockState());
+                        }else if(!level.getBlockState(pos).is(Blocks.AIR) && Block.isShapeFullBlock(level.getBlockState(pos).getShape(level,pos)) && !level.getBlockState(pos).is(Blocks.FROSTED_ICE) && level.getBlockState(pos.above()).is(Blocks.AIR)){
+                            level.setBlockAndUpdate(pos.above(), Blocks.SNOW.defaultBlockState());
+                        }
+                    }
+                }
+
+            },
+            50
+    ));
+
+    public static final DeferredHolder<SpellEffect, SpellEffect> IGNEOUS_CHARGE = SPELL_EFFECTS.register("igneous_charge", () -> new SpellHitModifierEffect(
+            entity -> {
+                if(entity instanceof LivingEntity livingEntity){
+                    livingEntity.addEffect(new MobEffectInstance(EffectRegister.IGNITE.get(), 30 * 20));
+                }
+            },
+            (level, blockPos, blockState) -> {
+                Iterator positions = BlockPos.betweenClosed(blockPos.offset(-5, -5, -5), blockPos.offset(5, 5, 5)).iterator();
+
+                while(positions.hasNext()){
+                    BlockPos pos = (BlockPos)positions.next();
+                    if(!level.getBlockState(pos).is(Blocks.AIR) && Block.isShapeFullBlock(level.getBlockState(pos).getShape(level,pos)) && level.getBlockState(pos.above()).is(Blocks.AIR) && pos.closerToCenterThan(blockPos.getCenter(), 5)){
+                        level.setBlockAndUpdate(pos.above(), Blocks.FIRE.defaultBlockState());
+                    }
+                }
+            },50
+    ));
+
+    public static final DeferredHolder<SpellEffect, SpellEffect> POISON_CHARGE = SPELL_EFFECTS.register("poison_charge", () -> new SpellHitModifierEffect(
+            entity -> {
+                if(entity instanceof LivingEntity livingEntity){
+                    livingEntity.addEffect(new MobEffectInstance(MobEffects.POISON, 30 * 20,1));
+                }
+            },
+            (level, blockPos, blockState) -> {
+                AreaEffectCloud cloud = new AreaEffectCloud(level, blockPos.getX(), blockPos.getY()+1, blockPos.getZ());
+                cloud.addEffect(new MobEffectInstance(MobEffects.POISON, 30 * 20,1));
+
+                level.addFreshEntity(cloud);
+            },50
+    ));
+
 
     public static final DeferredHolder<SpellEffect, SpellEffect> DOUBLE_CAST = SPELL_EFFECTS.register("double_cast", () -> new MulticastEffect(2));
     public static final DeferredHolder<SpellEffect, SpellEffect> TRIPLE_CAST = SPELL_EFFECTS.register("triple_cast", () -> new MulticastEffect(3));
@@ -70,10 +140,10 @@ public class SpellRegister {
                     .setManaDrain(30)
     ));
 
-    public static final DeferredHolder<SpellEffect, SpellEffect> CONJURE_LIGHT = SPELL_EFFECTS.register("conjure_light", () ->new SummonConjuredBlock(BlockRegister.CONJURED_LIGHT_BLOCK.get().defaultBlockState(),20));
-    public static final DeferredHolder<SpellEffect, SpellEffect> CONJURE_BLOCK = SPELL_EFFECTS.register("conjure_block", () ->new SummonConjuredBlock(BlockRegister.CONJURED_BLOCK.get().defaultBlockState(),20));
+    public static final DeferredHolder<SpellEffect, SpellEffect> CONJURE_LIGHT = SPELL_EFFECTS.register("conjure_light", () -> new SummonConjuredBlock(BlockRegister.CONJURED_LIGHT_BLOCK.get().defaultBlockState(), 20));
+    public static final DeferredHolder<SpellEffect, SpellEffect> CONJURE_BLOCK = SPELL_EFFECTS.register("conjure_block", () -> new SummonConjuredBlock(BlockRegister.CONJURED_BLOCK.get().defaultBlockState(), 20));
 
-    public static void register(IEventBus bus){
+    public static void register(IEventBus bus) {
         SPELL_EFFECTS.register(bus);
     }
 }

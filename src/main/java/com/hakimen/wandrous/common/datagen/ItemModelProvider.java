@@ -32,6 +32,10 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         makeSpell(ItemRegister.HEXAGON_CAST_SPELL.get());
         makeSpell(ItemRegister.SPREAD_CAST_SPELL.get());
 
+        makeSpell(ItemRegister.FREEZING_CHARGE_SPELL.get());
+        makeSpell(ItemRegister.POISON_CHARGE_SPELL.get());
+        makeSpell(ItemRegister.IGNEOUS_CHARGE_SPELL.get());
+
         makeSpell(ItemRegister.ACCELERATE_SPELL.get());
         makeSpell(ItemRegister.CRITICAL_PLUS_SPELL.get());
         makeSpell(ItemRegister.ADD_MANA_SPELL.get());
