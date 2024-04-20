@@ -1,0 +1,25 @@
+// 1.20.4	2024-04-19T17:34:01.3162972	Item Models: wandrous
+70cc88c4158ff94537dbcc51580cc8b905d06269 assets/wandrous/models/item/accelerate_cast.json
+4e5e8e3d5579e5375b8bd695ed36e8cb66c1382c assets/wandrous/models/item/add_mana.json
+89e1e7afa6a8a56d72514fb87c8b8573ce177977 assets/wandrous/models/item/big_delay_cast.json
+280175532359607316c0efb7dc4fc8e68e9e8d65 assets/wandrous/models/item/conjure_block.json
+ff4197bbe10ef6c7d6ab09ab8f73e3dfd8a64a90 assets/wandrous/models/item/conjure_light.json
+6110ab028306b9afbb8ad4d59a1a8439f0eecbad assets/wandrous/models/item/critical_plus.json
+8986aac6c0c558e25c5720fd4afe1db3a5959337 assets/wandrous/models/item/divide_by_2.json
+f49c8393aa5db4338f6ac6c4c56ec46cc0c27847 assets/wandrous/models/item/divide_by_3.json
+dfbf8f3b5c70ca4a9bbd322fe23688062e994ab6 assets/wandrous/models/item/divide_by_4.json
+80412efc68487f1cbd9a23cdd051c011d3164c30 assets/wandrous/models/item/double_cast.json
+e7c47cd148058c6662ec0c2223e1b7d2fd85093e assets/wandrous/models/item/explosion.json
+af06bdb14f372a6656b8775cfed204de0bf0658a assets/wandrous/models/item/fireball.json
+334727202197d28859133525b615b08bc6bca5d4 assets/wandrous/models/item/hexagon_cast.json
+098abc71509107fbc1450056e0fe22308309c28a assets/wandrous/models/item/increase_lifetime.json
+8b646f773a5c25ddfd157024fdd4815045181985 assets/wandrous/models/item/lighting_bolt.json
+6f47b9e924f224750f6402a2cbe89d901f1a92da assets/wandrous/models/item/major_explosion.json
+be7d4825afab3a63e1045fe4ae0808d611df2b62 assets/wandrous/models/item/medium_delay_cast.json
+ed7f1cbe6aef6835f3389b0dc7cdf2d2a1f853b4 assets/wandrous/models/item/small_delay_cast.json
+6105e5b03f96dbe25c35624d08e7b4e7ac753d91 assets/wandrous/models/item/snowball.json
+0a2c9213f860c05a6a17cfb4354a813394a920e3 assets/wandrous/models/item/spread_cast.json
+ee9ac0c4e2a52c988b9b646bde2904f01f7907c9 assets/wandrous/models/item/teleport.json
+272317db559b5b04a9d072dfff6b9169d9a89341 assets/wandrous/models/item/trigger_fireball.json
+1d1683c5b20450dd341e7d0728c5e1857a079321 assets/wandrous/models/item/trigger_snowball.json
+4db169c6db21f16846c55fde16f603125c9aa8cc assets/wandrous/models/item/triple_cast.json

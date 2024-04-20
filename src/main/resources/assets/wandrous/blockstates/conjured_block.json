@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "wandrous:block/conjured_block"
+    }
+  }
+}
