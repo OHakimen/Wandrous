@@ -29,9 +29,9 @@ public class DivideBySpellEffect extends SpellEffect {
     public void cast(SpellContext context) {
         context.mergeStatus(this.getStatus());
         for (int i = 0; i < castCount; i++) {
-            context.getNode().getChildren().forEach((child) -> {
+            for (Node<SpellEffect> child : context.getNode().getChildren()) {
                 child.getData().cast(context.clone().setNode(child));
-            });
+            }
         }
     }
 }

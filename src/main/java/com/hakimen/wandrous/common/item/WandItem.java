@@ -1,11 +1,14 @@
 package com.hakimen.wandrous.common.item;
 
 import com.hakimen.wandrous.common.client.menus.WandTinkerMenu;
+import com.hakimen.wandrous.common.registers.ContainerRegister;
 import com.hakimen.wandrous.common.spell.SpellEffect;
 import com.hakimen.wandrous.common.utils.CastingUtils;
 import com.hakimen.wandrous.common.utils.WandUtils;
 import com.hakimen.wandrous.common.utils.data.Node;
+import io.netty.buffer.*;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -21,6 +24,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+import net.neoforged.neoforge.common.util.FriendlyByteBufUtil;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
@@ -41,6 +45,7 @@ public class WandItem extends Item {
     public static final String MANA_CHARGE_SPEED = "ManaChargeSpeed";
     public static final String CASTABLE_SIZE = "CastableSize";
     public static final String CURRENT_IDX = "CurrentIdx";
+
     public WandItem() {
         super(new Properties().stacksTo(1));
     }
@@ -64,7 +69,7 @@ public class WandItem extends Item {
 
     @Override
     public int getBarWidth(ItemStack pStack) {
-        return Math.round((float)pStack.getOrCreateTag().getInt(MANA) * 13.0F / (float)pStack.getOrCreateTag().getInt(MAX_MANA));
+        return Math.round((float) pStack.getOrCreateTag().getInt(MANA) * 13.0F / (float) pStack.getOrCreateTag().getInt(MAX_MANA));
     }
 
 
@@ -76,7 +81,7 @@ public class WandItem extends Item {
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
 
-        if(!pStack.getOrCreateTag().isEmpty()){
+        if (!pStack.getOrCreateTag().isEmpty()) {
             pTooltipComponents.add(Component.literal("⌛ Cast Delay %.2fs".formatted(pStack.getOrCreateTag().getFloat(CAST_DELAY))));
             pTooltipComponents.add(Component.literal("⚡ Recharge Speed %.2fs".formatted(pStack.getOrCreateTag().getFloat(RECHARGE_SPEED))));
             pTooltipComponents.add(Component.literal("⭐ Mana Max %s".formatted(pStack.getOrCreateTag().getInt(MAX_MANA))));
@@ -84,7 +89,7 @@ public class WandItem extends Item {
             pTooltipComponents.add(Component.literal("⚡ Mana Charge Speed %s".formatted(pStack.getOrCreateTag().getInt(MANA_CHARGE_SPEED))));
             pTooltipComponents.add(Component.literal(" "));
             pTooltipComponents.add(Component.literal("⛚ Capacity %s".formatted(pStack.getOrCreateTag().getInt(CAPACITY))));
-        }else{
+        } else {
             pTooltipComponents.add(Component.literal("Put in inventory to initialize"));
         }
 
@@ -99,32 +104,32 @@ public class WandItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
 
-        if(!pLevel.isClientSide()) {
-            if(pPlayer.isShiftKeyDown()) {
-                MenuProvider containerProvider = new MenuProvider() {
-                    @Override
-                    public Component getDisplayName() {
-                        return getName(pPlayer.getItemInHand(pUsedHand));
-                    }
+        if (pPlayer.isShiftKeyDown()) {
+            MenuProvider containerProvider = new MenuProvider() {
+                @Override
+                public Component getDisplayName() {
+                    return getName(pPlayer.getItemInHand(pUsedHand));
+                }
 
-                    @Override
-                    public AbstractContainerMenu createMenu(int windowId, Inventory playerInventory, Player playerEntity) {
-                        return new WandTinkerMenu(windowId, playerInventory, playerEntity);
-                    }
-                };
-                pPlayer.openMenu(containerProvider);
-            } else
-                pPlayer.startUsingItem(pUsedHand);
+
+                @Override
+                public AbstractContainerMenu createMenu(int windowId, Inventory playerInventory, Player playerEntity) {
+                    return ContainerRegister.WAND_TINKER_MENU.get().create(windowId, playerInventory);
+                }
+            };
+            pPlayer.openMenu(containerProvider);
+        } else if (!pLevel.isClientSide()) {
+            pPlayer.startUsingItem(pUsedHand);
         }
-        return super.use(pLevel, pPlayer, pUsedHand);
+
+        return InteractionResultHolder.success(pPlayer.getItemInHand(pUsedHand));
     }
 
     @Override
     public void onUseTick(Level pLevel, LivingEntity pLivingEntity, ItemStack wand, int pRemainingUseDuration) {
-        if(pLivingEntity instanceof Player pPlayer){
-            if (!pLevel.isClientSide) {
-                if(!pPlayer.hasContainerOpen() && !pPlayer.getCooldowns().isOnCooldown(wand.getItem())){
-
+        if (pLivingEntity instanceof Player pPlayer) {
+            if (wand.getItem() instanceof WandItem) {
+                if (!pPlayer.hasContainerOpen() && !pPlayer.getCooldowns().isOnCooldown(wand.getItem())) {
                     CastingUtils castingUtils = new CastingUtils();
 
                     Optional<IItemHandler> handler = Optional.ofNullable(wand.getCapability(Capabilities.ItemHandler.ITEM));
@@ -133,25 +138,25 @@ public class WandItem extends Item {
                     handler.ifPresent(iItemHandler -> {
                         for (int i = 0; i < iItemHandler.getSlots(); i++) {
                             ItemStack stack = iItemHandler.getStackInSlot(i);
-                            if(stack.getItem() instanceof SpellEffectItem spellEffectItem){
+                            if (stack.getItem() instanceof SpellEffectItem spellEffectItem) {
                                 effect.add(spellEffectItem.getSpellEffect());
                             }
                         }
                     });
 
-                    if(effect.size() != wand.getOrCreateTag().getInt(CASTABLE_SIZE)){
+                    if (effect.size() != wand.getOrCreateTag().getInt(CASTABLE_SIZE)) {
                         wand.getOrCreateTag().putInt(CURRENT_IDX, 0);
                         wand.getOrCreateTag().putInt(CASTABLE_SIZE, effect.size());
                     }
 
                     int getOldIdx = wand.getOrCreateTag().getInt(CURRENT_IDX);
 
-                    Node<SpellEffect> cast = castingUtils.makeCastingTree(effect.subList(getOldIdx,effect.size()));
+                    Node<SpellEffect> cast = castingUtils.makeCastingTree(effect.subList(getOldIdx, effect.size()));
 
                     float rechargeSpeed = wand.getOrCreateTag().getFloat(RECHARGE_SPEED);
                     float castDelay = wand.getOrCreateTag().getFloat(CAST_DELAY);
 
-                    if(!effect.isEmpty() && cast.getData() != null) {
+                    if (!effect.isEmpty() && cast.getData() != null) {
 
                         int current = (getOldIdx + castingUtils.idx) % effect.size();
                         wand.getOrCreateTag().putInt(CURRENT_IDX, current);
@@ -163,12 +168,11 @@ public class WandItem extends Item {
                             CastingUtils.castSpells(pPlayer, wand, pLevel, pPlayer.getEyePosition(), cast);
                             wand.getOrCreateTag().putInt(MANA, currentMana - Math.max(cost, 0));
 
-                            pPlayer.getCooldowns().addCooldown(wand.getItem(),  (int)(current == 0 ? rechargeSpeed : castDelay)*20);
-                        }
-                        else{
+                            pPlayer.getCooldowns().addCooldown(wand.getItem(), (int) (current == 0 ? rechargeSpeed : castDelay) * 20);
+                        } else {
                             pPlayer.displayClientMessage(Component.literal("Not enough mana"), true);
                         }
-                    }else{
+                    } else {
                         pPlayer.displayClientMessage(Component.literal("No spells to cast"), true);
                     }
                 }
@@ -179,7 +183,7 @@ public class WandItem extends Item {
 
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
-        if(pStack.getOrCreateTag().isEmpty()){
+        if (pStack.getOrCreateTag().isEmpty()) {
             WandUtils.createWand(pStack);
         }
 
@@ -192,8 +196,8 @@ public class WandItem extends Item {
         int mana = pStack.getOrCreateTag().getInt(MANA);
         int maxMana = pStack.getOrCreateTag().getInt(MAX_MANA);
 
-        if(mana <= maxMana){
-            pStack.getOrCreateTag().putInt(MANA, (int)Math.clamp(0, maxMana, (mana + pStack.getOrCreateTag().getInt(MANA_CHARGE_SPEED)/20f)));
+        if (mana <= maxMana) {
+            pStack.getOrCreateTag().putInt(MANA, (int) Math.clamp(0, maxMana, (mana + pStack.getOrCreateTag().getInt(MANA_CHARGE_SPEED) / 20f)));
         }
 
     }

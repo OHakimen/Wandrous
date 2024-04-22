@@ -48,7 +48,6 @@ public class DelayCastEffect extends SpellEffect {
         };
 
         timer.setPos(context.getLocation());
-
         context.getLevel().addFreshEntity(timer);
     }
 }

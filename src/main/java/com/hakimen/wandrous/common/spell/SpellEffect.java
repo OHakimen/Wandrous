@@ -17,8 +17,8 @@ public class SpellEffect {
     public static final int SPELL = 4;
     int kind;
     SpellStatus status;
-    public void cast(SpellContext context) {
-    }
+
+    public void cast(SpellContext context) {}
 
     public int getKind() {
         return kind;

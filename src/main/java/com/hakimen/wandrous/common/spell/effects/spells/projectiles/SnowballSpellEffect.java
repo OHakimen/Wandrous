@@ -12,7 +12,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
-public class SnowballSpellEffect extends SpellEffect {
+public class SnowballSpellEffect extends ProjectileSpellEffect {
 
     public SnowballSpellEffect(boolean isTrigger) {
         this.setKind(isTrigger ? TRIGGER : SPELL);
@@ -30,19 +30,8 @@ public class SnowballSpellEffect extends SpellEffect {
 
         Level level = context.getLevel();
         Vec3 location = context.getLocation();
-        Entity caster = context.getCaster();
-        SpellStatus status = context.getStatus();
-
-
         TriggerSnowball snowball = new TriggerSnowball(level, location.x, location.y, location.z, context);
-
-
-        if (caster instanceof LivingEntity livingEntity) {
-            snowball.shootFromRotation(livingEntity, livingEntity.getXRot(), livingEntity.getYRot(), 0, status.getSpeed(), status.getSpread() * 10);
-        } else {
-            snowball.setDeltaMovement(caster.getDeltaMovement());
-        }
-
+        shootProjectile(snowball, context);
         level.addFreshEntity(snowball);
     }
 

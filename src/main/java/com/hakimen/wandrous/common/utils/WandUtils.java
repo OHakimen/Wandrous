@@ -163,6 +163,8 @@ public class WandUtils {
         tag.putInt(WandItem.MANA_CHARGE_SPEED, random.nextInt(128,1024));
         tag.putFloat(WandItem.CAST_DELAY, random.nextFloat(-1f,5f));
         tag.putFloat(WandItem.RECHARGE_SPEED, random.nextFloat(-1f,5f));
+
+
         tag.putString("name", buildWandName());
 
         tag.put("Inventory", new ItemStackHandler(tag.getInt(WandItem.CAPACITY)).serializeNBT());

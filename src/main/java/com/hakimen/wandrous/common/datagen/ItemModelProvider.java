@@ -16,11 +16,11 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
 
     @Override
     protected void registerModels() {
-        makeTriggerSpell(ItemRegister.TRIGGER_FIREBALL.get(), "minecraft:item/fire_charge");
-        makeTriggerSpell(ItemRegister.TRIGGER_SNOWBALL.get(), "minecraft:item/snowball");
+        makeTriggerSpell(ItemRegister.TRIGGER_FIREBALL_SPELL.get(), "minecraft:item/fire_charge");
+        makeTriggerSpell(ItemRegister.TRIGGER_SNOWBALL_SPELL.get(), "minecraft:item/snowball");
 
-        makeVanillaBasedSpell(ItemRegister.FIREBALL.get(), "minecraft:item/fire_charge");
-        makeVanillaBasedSpell(ItemRegister.SNOWBALL.get(), "minecraft:item/snowball");
+        makeVanillaBasedSpell(ItemRegister.FIREBALL_SPELL.get(), "minecraft:item/fire_charge");
+        makeVanillaBasedSpell(ItemRegister.SNOWBALL_SPELL.get(), "minecraft:item/snowball");
 
 
         makeSpell(ItemRegister.DIVIDE_BY_2_SPELL.get());
@@ -29,21 +29,32 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
 
         makeSpell(ItemRegister.DOUBLE_CAST_SPELL.get());
         makeSpell(ItemRegister.TRIPLE_CAST_SPELL.get());
+
+        makeSpell(ItemRegister.DOUBLE_SPLIT_SPELL.get());
+        makeSpell(ItemRegister.TRIPLE_SPLIT_SPELL.get());
+        makeSpell(ItemRegister.QUAD_SPLIT_SPELL.get());
+
         makeSpell(ItemRegister.HEXAGON_CAST_SPELL.get());
         makeSpell(ItemRegister.SPREAD_CAST_SPELL.get());
 
         makeSpell(ItemRegister.FREEZING_CHARGE_SPELL.get());
         makeSpell(ItemRegister.POISON_CHARGE_SPELL.get());
         makeSpell(ItemRegister.IGNEOUS_CHARGE_SPELL.get());
+        makeSpell(ItemRegister.CRUMBLING_CHARGE_SPELL.get());
 
         makeSpell(ItemRegister.ACCELERATE_SPELL.get());
         makeSpell(ItemRegister.CRITICAL_PLUS_SPELL.get());
         makeSpell(ItemRegister.ADD_MANA_SPELL.get());
-        makeSpell(ItemRegister.INCREASE_LIFETIME.get());
+        makeSpell(ItemRegister.INCREASE_LIFETIME_SPELL.get());
+        makeSpell(ItemRegister.DECREASE_LIFETIME_SPELL.get());
+        makeSpell(ItemRegister.INCREASE_RANGE_SPELL.get());
+        makeSpell(ItemRegister.DECREASE_RANGE_SPELL.get());
 
-        makeSpell(ItemRegister.LIGHTING_BOLT.get());
+        makeSpell(ItemRegister.LIGHTING_BOLT_SPELL.get());
 
-        makeSpell(ItemRegister.TELEPORT.get());
+        makeSpell(ItemRegister.TELEPORT_SPELL.get());
+        makeSpell(ItemRegister.SWAP_TELEPORT_SPELL.get());
+        makeSpell(ItemRegister.HOME_BRINGER_TELEPORT_SPELL.get());
 
         makeSpell(ItemRegister.SMALL_DELAY_CAST_SPELL.get());
         makeSpell(ItemRegister.MEDIUM_DELAY_CAST_SPELL.get());

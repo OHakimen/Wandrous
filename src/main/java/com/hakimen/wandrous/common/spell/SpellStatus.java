@@ -17,6 +17,7 @@ public class SpellStatus {
     protected float spreadMod;
     protected float speedMod;
     protected float lifetimeMod;
+    protected float radiusMod;
     protected float damageMod;
     protected float critChance;              // Crit multiplies damage by 5
 
@@ -44,7 +45,7 @@ public class SpellStatus {
     }
 
     public float getRadius() {
-        return radius;
+        return radius * (1 + getRadiusMod());
     }
 
     public SpellStatus setRadius(float radius) {
@@ -124,6 +125,15 @@ public class SpellStatus {
 
     public SpellStatus setSpeedMod(float speedMod) {
         this.speedMod = speedMod;
+        return this;
+    }
+
+    public float getRadiusMod() {
+        return radiusMod;
+    }
+
+    public SpellStatus setRadiusMod(float radiusMod) {
+        this.radiusMod = radiusMod;
         return this;
     }
 

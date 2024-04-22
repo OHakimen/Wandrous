@@ -31,17 +31,8 @@ public class FireballSpellEffect extends ProjectileSpellEffect {
 
         Level level = context.getLevel();
         Vec3 location = context.getLocation();
-        Entity caster = context.getCaster();
-        SpellStatus status = context.getStatus();
-
         TriggerFireball fireball = new TriggerFireball(level, location.x, location.y, location.z, context);
-
-        if (caster instanceof Player player) {
-            fireball.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, status.getSpeed(), status.getSpread() * 10);
-        } else {
-            fireball.setDeltaMovement(caster.getDeltaMovement());
-        }
-
+        shootProjectile(fireball, context);
         level.addFreshEntity(fireball);
     }
 

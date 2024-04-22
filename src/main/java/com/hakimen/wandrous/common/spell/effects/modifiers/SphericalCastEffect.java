@@ -23,8 +23,8 @@ public class SphericalCastEffect extends MulticastEffect {
     @Override
     public void cast(SpellContext context) {
         float i = 1;
-        SpellContext context1 = context.clone();
-        for (Node<SpellEffect> child : context1.getNode().getChildren()) {
+        for (Node<SpellEffect> child : context.getNode().getChildren()) {
+            SpellContext context1 = context.clone();
             context1.setLocation(context.getLocation().add((float) Math.cos(i) * castCount, (float) 0 * castCount, (float) Math.sin(i) * castCount));
             context1.setCastPositionModified(true);
             child.getData().cast(context1.setNode(child));

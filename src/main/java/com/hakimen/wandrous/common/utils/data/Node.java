@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Node<T> implements Cloneable{
+    Node<T> parent;
     T data;
     List<Node<T>> children;
 
-    public Node(T data, List<Node<T>> children) {
+    public Node(Node<T> parent, T data, List<Node<T>> children) {
+        this.parent = parent;
         this.data = data;
         this.children = children;
     }
@@ -45,8 +47,17 @@ public class Node<T> implements Cloneable{
     }
 
     public static void print(int depth, Node<?> node) {
-        System.out.println("\t".repeat(depth) + node.data);
+        System.out.println("\t".repeat(depth) + node.parent);
         node.children.forEach((e) -> print(depth + 1, e));
+    }
+
+    public Node<T> getParent() {
+        return parent;
+    }
+
+    public Node<T> setParent(Node<T> parent) {
+        this.parent = parent;
+        return this;
     }
 
     public Node<T> clone(){

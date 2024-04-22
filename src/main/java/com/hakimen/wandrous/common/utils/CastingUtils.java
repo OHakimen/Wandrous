@@ -20,18 +20,21 @@ public class CastingUtils {
         if (idx > effects.size() - 1) {
             return new Node<>(null);
         }
+
         Node<SpellEffect> tree = new Node<>(effects.get(idx++));
         if (tree.getData() instanceof MulticastEffect effect) {
             int casts = Math.min(effect.getCastCount(), effects.size());
             for (int i = 0; i < casts; i++) {
                 Node<SpellEffect> cast = makeCastingTree(effects);
                 if (cast.getData() != null) {
+                    cast.setParent(tree);
                     tree.addChild(cast);
                 }
             }
         } else if (tree.getData().hasKind(SpellEffect.TRIGGER) || tree.getData().hasKind(SpellEffect.MODIFIER)) {
             Node<SpellEffect> cast = makeCastingTree(effects);
             if (cast.getData() != null) {
+                cast.setParent(tree);
                 tree.addChild(cast);
             }
         }
@@ -59,8 +62,7 @@ public class CastingUtils {
                 .setStatus(new SpellStatus())
                 .setNode(toCast)
                 .setOriginalCaster(entity)
-                .setHit(new ArrayList<>())
-                .setHitEffects(new ArrayList<>());
+                .setHit(new ArrayList<>());
 
         toCast.getData().cast(context);
     }
@@ -71,12 +73,14 @@ public class CastingUtils {
 
         status.setDamage(first.getRawDamage());
         status.setLifeTime(first.getLifeTime());
+        status.setRadius(first.getRadius());
 
         status.setCastDelayMod(first.getCastDelayMod() + second.getCastDelayMod());
         status.setDamageMod(first.getDamageMod() + second.getDamageMod());
         status.setSpeedMod(first.getSpeedMod() + second.getSpeedMod());
         status.setCritChance(first.getCritChance() + second.getCritChance());
         status.setSpreadMod(first.getSpreadMod() + second.getSpreadMod());
+        status.setRadiusMod(first.getRadiusMod() + second.getRadiusMod());
 
         status.setSpeed(first.getSpeed() + second.getSpeed());
         status.setSpread(first.getSpread() + second.getSpread());

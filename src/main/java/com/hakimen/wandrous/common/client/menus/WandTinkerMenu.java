@@ -26,13 +26,16 @@ public class WandTinkerMenu extends AbstractContainerMenu {
         return wand;
     }
 
-    public WandTinkerMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
+
+
+    public WandTinkerMenu(int pContainerId, Inventory pInventory, Player pPlayer, ItemStack stack) {
         super(ContainerRegister.WAND_TINKER_MENU.get(), pContainerId);
 
         this.playerInventory = new InvWrapper(pInventory);
 
-        this.wand = pPlayer.getItemInHand(pPlayer.getUsedItemHand());
+        this.wand = stack.getItem() instanceof WandItem ? stack : pPlayer.getOffhandItem();
         Optional<ItemStackHandler> caps = Optional.ofNullable((ItemStackHandler) wand.getCapability(Capabilities.ItemHandler.ITEM));
+
         caps.ifPresent(handler -> {
             for (int i = 0; i < handler.getSlots(); i++) {
                 addSlot(new SlotItemHandler(handler, i, 8 + (18 * (i % 9)), 10 + 18 * (i / 9)) {

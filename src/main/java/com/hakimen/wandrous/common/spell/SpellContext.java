@@ -22,7 +22,7 @@ public class SpellContext implements Cloneable{
     SpellStatus status;
     boolean castPositionModified;
     List<LivingEntity> hit;
-    List<SpellHit> hitEffects;
+    int split;
 
     public Entity getOriginalCaster() {
         return originalCaster;
@@ -110,12 +110,12 @@ public class SpellContext implements Cloneable{
         return this;
     }
 
-    public List<SpellHit> getHitEffects() {
-        return hitEffects;
+    public int getSplit() {
+        return split;
     }
 
-    public SpellContext setHitEffects(List<SpellHit> hitEffects) {
-        this.hitEffects = hitEffects;
+    public SpellContext setSplit(int split) {
+        this.split = split;
         return this;
     }
 

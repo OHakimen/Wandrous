@@ -30,9 +30,10 @@ public class SpreadCastEffect extends SpellEffect {
     public void cast(SpellContext context) {
         context.mergeStatus(this.getStatus());
         Random r = new Random();
-        context.setLocation(context.getLocation().add(r.nextDouble(-1,1) * radius,0,r.nextDouble(-1,1) * radius));
         context.getNode().getChildren().forEach(child -> {
-            child.getData().cast(context.setNode(child));
+            SpellContext nextContext = context.clone();
+            nextContext.setLocation(context.getLocation().add(r.nextDouble(-1,1) * radius,0,r.nextDouble(-1,1) * radius));
+            child.getData().cast(nextContext.setNode(child));
         });
 
     }

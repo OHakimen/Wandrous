@@ -1,4 +1,4 @@
-package com.hakimen.wandrous.common.spell.effects.spells;
+package com.hakimen.wandrous.common.spell.effects.spells.teleports;
 
 import com.hakimen.wandrous.common.spell.SpellContext;
 import com.hakimen.wandrous.common.spell.SpellEffect;

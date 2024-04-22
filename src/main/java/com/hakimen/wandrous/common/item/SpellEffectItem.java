@@ -46,6 +46,10 @@ public class SpellEffectItem extends Item {
             pTooltipComponents.add(Component.literal("⏱  Lifetime %.2fs".formatted(status.getLifeTime() / 20f)));
         }
 
+        if(status.getRadius() != 0){
+            pTooltipComponents.add(Component.literal("⤡  Radius %.2f".formatted(status.getRadius())));
+        }
+
         if(status.getSpeedMod() != 0) {
             pTooltipComponents.add(Component.literal("⏩  Speed Modifier %s".formatted(status.getSpeedMod() > 0 ? "+%.2f".formatted(status.getSpeedMod()): "%.2f".formatted(status.getSpeedMod()))));
         }
@@ -72,6 +76,10 @@ public class SpellEffectItem extends Item {
 
         if(status.getLifetimeMod() != 0){
             pTooltipComponents.add(Component.literal("⏱  Lifetime Mod %s".formatted(status.getLifetimeMod() > 0 ? "+%.2f".formatted(status.getLifetimeMod()): "%.2f".formatted(status.getLifetimeMod()))));
+        }
+
+        if(status.getRadiusMod() != 0){
+            pTooltipComponents.add(Component.literal("⤡  Radius Mod %s".formatted(status.getRadiusMod() > 0 ? "+%.2f".formatted(status.getRadiusMod()): "%.2f".formatted(status.getRadiusMod()))));
         }
 
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
