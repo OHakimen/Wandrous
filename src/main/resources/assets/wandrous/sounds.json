@@ -1,0 +1,10 @@
+{
+  "timer": {
+    "sounds": [
+      {
+        "name": "wandrous:timer",
+        "attenuation_distance": 8
+      }
+    ]
+  }
+}

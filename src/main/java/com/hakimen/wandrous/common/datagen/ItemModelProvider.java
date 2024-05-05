@@ -17,10 +17,20 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
     @Override
     protected void registerModels() {
         makeTriggerSpell(ItemRegister.TRIGGER_FIREBALL_SPELL.get(), "minecraft:item/fire_charge");
-        makeTriggerSpell(ItemRegister.TRIGGER_SNOWBALL_SPELL.get(), "minecraft:item/snowball");
-
+        makeTimerSpell(ItemRegister.TIMER_FIREBALL_SPELL.get(), "minecraft:item/fire_charge");
         makeVanillaBasedSpell(ItemRegister.FIREBALL_SPELL.get(), "minecraft:item/fire_charge");
-        makeVanillaBasedSpell(ItemRegister.SNOWBALL_SPELL.get(), "minecraft:item/snowball");
+
+
+        makeTriggerSpell(ItemRegister.TRIGGER_GLIMMERING_BOLT_SPELL.get(), "wandrous:item/spell/glimmering_bolt");
+        makeTimerSpell(ItemRegister.TIMER_GLIMMERING_BOLT_SPELL.get(), "wandrous:item/spell/glimmering_bolt");
+        makeSpell(ItemRegister.GLIMMERING_BOLT_SPELL.get());
+
+        makeTriggerSpell(ItemRegister.TRIGGER_SONIC_BOOM_SPELL.get(), "wandrous:item/spell/sonic_boom");
+        makeTimerSpell(ItemRegister.TIMER_SONIC_BOOM_SPELL.get(), "wandrous:item/spell/sonic_boom");
+        makeSpell(ItemRegister.SONIC_BOOM_SPELL.get());
+
+        makeSpell(ItemRegister.BLACK_HOLE_SPELL.get());
+        makeTimerSpell(ItemRegister.TIMER_BLACK_HOLE_SPELL.get(), "wandrous:item/spell/black_hole");
 
 
         makeSpell(ItemRegister.DIVIDE_BY_2_SPELL.get());
@@ -29,6 +39,9 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
 
         makeSpell(ItemRegister.DOUBLE_CAST_SPELL.get());
         makeSpell(ItemRegister.TRIPLE_CAST_SPELL.get());
+
+        makeSpell(ItemRegister.TELEPORT_CAST_SPELL.get());
+        makeSpell(ItemRegister.LONG_DISTANCE_CAST_SPELL.get());
 
         makeSpell(ItemRegister.DOUBLE_SPLIT_SPELL.get());
         makeSpell(ItemRegister.TRIPLE_SPLIT_SPELL.get());
@@ -52,6 +65,10 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
 
         makeSpell(ItemRegister.LIGHTING_BOLT_SPELL.get());
 
+        makeSpell(ItemRegister.CHAINSAW_SPELL.get());
+        makeSpell(ItemRegister.DRILL_SPELL.get());
+        makeSpell(ItemRegister.GIGA_DRILL_SPELL.get());
+
         makeSpell(ItemRegister.TELEPORT_SPELL.get());
         makeSpell(ItemRegister.SWAP_TELEPORT_SPELL.get());
         makeSpell(ItemRegister.HOME_BRINGER_TELEPORT_SPELL.get());
@@ -63,6 +80,9 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         makeSpell(ItemRegister.EXPLOSION_SPELL.get());
         makeSpell(ItemRegister.MAJOR_EXPLOSION_SPELL.get());
 
+        makeSpell(ItemRegister.HOMING_SPELL.get());
+        makeSpell(ItemRegister.BOOMERANG_SPELL.get());
+
         makeSpell(ItemRegister.CONJURE_LIGHT_SPELL.get());
         makeSpell(ItemRegister.CONJURE_BLOCK_SPELL.get());
 
@@ -73,8 +93,25 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
                 .parent(new ModelFile.ExistingModelFile(new ResourceLocation("minecraft:item/generated"), existingFileHelper))
                 .texture("layer0", "wandrous:item/spell/bases/spell_base")
                 .texture("layer1", texture)
-                .texture("layer2", "wandrous:item/spell/trigger");
+                .texture("layer2", "wandrous:item/spell/layers/trigger");
 
+    }
+
+    public void makeTriggerSpell(SpellEffectItem item){
+        getBuilder(item.toString())
+                .parent(new ModelFile.ExistingModelFile(new ResourceLocation("minecraft:item/generated"), existingFileHelper))
+                .texture("layer0", "wandrous:item/spell/bases/spell_base")
+                .texture("layer1",  item.toString().replace(":", ":item/spell/"))
+                .texture("layer2", "wandrous:item/spell/layers/trigger");
+
+    }
+
+    public void makeTimerSpell(SpellEffectItem item, String texture){
+        getBuilder(item.toString())
+                .parent(new ModelFile.ExistingModelFile(new ResourceLocation("minecraft:item/generated"), existingFileHelper))
+                .texture("layer0", "wandrous:item/spell/bases/spell_base")
+                .texture("layer1", texture)
+                .texture("layer2", "wandrous:item/spell/layers/timer");
     }
 
     public void makeVanillaBasedSpell(SpellEffectItem item, String texture){

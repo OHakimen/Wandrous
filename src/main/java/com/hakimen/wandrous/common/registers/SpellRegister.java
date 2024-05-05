@@ -5,19 +5,23 @@ import com.hakimen.wandrous.common.custom.register.WandrousRegistries;
 import com.hakimen.wandrous.common.spell.SpellEffect;
 import com.hakimen.wandrous.common.spell.SpellStatus;
 import com.hakimen.wandrous.common.spell.effects.modifiers.*;
-import com.hakimen.wandrous.common.spell.effects.modifiers.charges.CrumblingChargeHitEffect;
-import com.hakimen.wandrous.common.spell.effects.modifiers.charges.FreezingChargeHitEffect;
-import com.hakimen.wandrous.common.spell.effects.modifiers.charges.IgneousChargeHitEffect;
-import com.hakimen.wandrous.common.spell.effects.modifiers.charges.PoisonChargeHitEffect;
-import com.hakimen.wandrous.common.spell.effects.spells.ExplosionEffect;
-import com.hakimen.wandrous.common.spell.effects.spells.projectiles.FireballSpellEffect;
-import com.hakimen.wandrous.common.spell.effects.spells.projectiles.SnowballSpellEffect;
+import com.hakimen.wandrous.common.spell.effects.modifiers.charges.*;
+import com.hakimen.wandrous.common.spell.effects.modifiers.location.RelativeCastEffect;
+import com.hakimen.wandrous.common.spell.effects.modifiers.location.TeleportCastEffect;
+import com.hakimen.wandrous.common.spell.effects.spells.projectiles.SonicBoomSpellEffect;
+import com.hakimen.wandrous.common.spell.effects.spells.static_projectiles.ExplosionEffect;
+import com.hakimen.wandrous.common.spell.effects.spells.projectiles.BlackHoleSpellEffect;
+import com.hakimen.wandrous.common.spell.effects.spells.projectiles.FireboltSpellEffect;
+import com.hakimen.wandrous.common.spell.effects.spells.projectiles.GlimmeringBoltSpellEffect;
+import com.hakimen.wandrous.common.spell.effects.spells.static_projectiles.ChainsawSpellEffect;
+import com.hakimen.wandrous.common.spell.effects.spells.static_projectiles.DrillSpellEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.summon_spells.SummonConjuredBlock;
 import com.hakimen.wandrous.common.spell.effects.spells.summon_spells.SummonEntityEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.teleports.HomebringerTeleportEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.teleports.SwapTeleportEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.teleports.TeleportEffect;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -28,11 +32,20 @@ public class SpellRegister {
     public static final DeferredHolder<SpellEffect, SpellEffect> EXPLOSION = SPELL_EFFECTS.register("explosion", () -> new ExplosionEffect(2));
     public static final DeferredHolder<SpellEffect, SpellEffect> MAJOR_EXPLOSION = SPELL_EFFECTS.register("major_explosion", () -> new ExplosionEffect(5));
 
-    public static final DeferredHolder<SpellEffect, SpellEffect> SNOWBALL = SPELL_EFFECTS.register("snowball", () -> new SnowballSpellEffect(false));
-    public static final DeferredHolder<SpellEffect, SpellEffect> TRIGGER_SNOWBALL = SPELL_EFFECTS.register("trigger_snowball", () -> new SnowballSpellEffect(true));
+    public static final DeferredHolder<SpellEffect, SpellEffect> GLIMMERING_BOLT = SPELL_EFFECTS.register("glimmering_bolt", () -> new GlimmeringBoltSpellEffect(SpellEffect.SPELL));
+    public static final DeferredHolder<SpellEffect, SpellEffect> TRIGGER_GLIMMERING_BOLT = SPELL_EFFECTS.register("trigger_glimmering_bolt", () -> new GlimmeringBoltSpellEffect(SpellEffect.TRIGGER));
+    public static final DeferredHolder<SpellEffect, SpellEffect> TIMER_GLIMMERING_BOLT = SPELL_EFFECTS.register("timer_glimmering_bolt", () -> new GlimmeringBoltSpellEffect(SpellEffect.TIMER));
 
-    public static final DeferredHolder<SpellEffect, SpellEffect> FIREBALL = SPELL_EFFECTS.register("fireball", () -> new FireballSpellEffect(false));
-    public static final DeferredHolder<SpellEffect, SpellEffect> TRIGGER_FIREBALL = SPELL_EFFECTS.register("trigger_fireball", () -> new FireballSpellEffect(true));
+    public static final DeferredHolder<SpellEffect, SpellEffect> FIREBALL = SPELL_EFFECTS.register("fireball", () -> new FireboltSpellEffect(SpellEffect.SPELL));
+    public static final DeferredHolder<SpellEffect, SpellEffect> TRIGGER_FIREBALL = SPELL_EFFECTS.register("trigger_fireball", () -> new FireboltSpellEffect(SpellEffect.TRIGGER));
+    public static final DeferredHolder<SpellEffect, SpellEffect> TIMER_FIREBALL = SPELL_EFFECTS.register("timer_fireball", () -> new FireboltSpellEffect(SpellEffect.TIMER));
+
+    public static final DeferredHolder<SpellEffect, SpellEffect> BLACK_HOLE = SPELL_EFFECTS.register("black_hole", () -> new BlackHoleSpellEffect(SpellEffect.SPELL));
+    public static final DeferredHolder<SpellEffect, SpellEffect> TIMER_BLACK_HOLE = SPELL_EFFECTS.register("timer_black_hole", () -> new BlackHoleSpellEffect(SpellEffect.TIMER));
+
+    public static final DeferredHolder<SpellEffect, SpellEffect> SONIC_BOOM = SPELL_EFFECTS.register("sonic_boom", () -> new SonicBoomSpellEffect(SpellEffect.SPELL));
+    public static final DeferredHolder<SpellEffect, SpellEffect> TRIGGER_SONIC_BOOM = SPELL_EFFECTS.register("trigger_sonic_boom", () -> new SonicBoomSpellEffect(SpellEffect.TRIGGER));
+    public static final DeferredHolder<SpellEffect, SpellEffect> TIMER_SONIC_BOOM = SPELL_EFFECTS.register("timer_sonic_boom", () -> new SonicBoomSpellEffect(SpellEffect.TIMER));
 
     public static final DeferredHolder<SpellEffect, SpellEffect> TELEPORT = SPELL_EFFECTS.register("teleport", TeleportEffect::new);
     public static final DeferredHolder<SpellEffect, SpellEffect> SWAP_TELEPORT = SPELL_EFFECTS.register("swap_teleport", SwapTeleportEffect::new);
@@ -51,6 +64,14 @@ public class SpellRegister {
 
     public static final DeferredHolder<SpellEffect, SpellEffect> DOUBLE_CAST = SPELL_EFFECTS.register("double_cast", () -> new MulticastEffect(2));
     public static final DeferredHolder<SpellEffect, SpellEffect> TRIPLE_CAST = SPELL_EFFECTS.register("triple_cast", () -> new MulticastEffect(3));
+
+    public static final DeferredHolder<SpellEffect, SpellEffect> TELEPORT_CAST = SPELL_EFFECTS.register("teleport_cast", TeleportCastEffect::new);
+    public static final DeferredHolder<SpellEffect, SpellEffect> LONG_DISTANCE_CAST = SPELL_EFFECTS.register("long_distance_cast", RelativeCastEffect::new);
+
+    public static final DeferredHolder<SpellEffect, SpellEffect> DRILL = SPELL_EFFECTS.register("drill", () -> new DrillSpellEffect(40, 3).setMineAs(Items.IRON_PICKAXE.getDefaultInstance()));
+    public static final DeferredHolder<SpellEffect, SpellEffect> GIGA_DRILL = SPELL_EFFECTS.register("giga_drill", () -> new DrillSpellEffect(80, 5).setMineAs(Items.DIAMOND_PICKAXE.getDefaultInstance()));
+
+    public static final DeferredHolder<SpellEffect, SpellEffect> CHAINSAW = SPELL_EFFECTS.register("chainsaw", () -> new ChainsawSpellEffect(40, 3).setMineAs(Items.IRON_AXE.getDefaultInstance()));
 
     public static final DeferredHolder<SpellEffect, SpellEffect> SMALL_DELAY_CAST = SPELL_EFFECTS.register("small_delay_cast", () -> new DelayCastEffect(1));
     public static final DeferredHolder<SpellEffect, SpellEffect> MEDIUM_DELAY_CAST = SPELL_EFFECTS.register("medium_delay_cast", () -> new DelayCastEffect(5));
@@ -105,6 +126,8 @@ public class SpellRegister {
                     .setRadiusMod(-0.25f)
     ));
 
+    public static final DeferredHolder<SpellEffect, SpellEffect> HOMING = SPELL_EFFECTS.register("homing", () -> new MoverCastEffect(SpellMoverRegister.HOMING));
+    public static final DeferredHolder<SpellEffect, SpellEffect> BOOMERANG = SPELL_EFFECTS.register("boomerang", () -> new MoverCastEffect(SpellMoverRegister.BOOMERANG));
 
     public static final DeferredHolder<SpellEffect, SpellEffect> CONJURE_LIGHT = SPELL_EFFECTS.register("conjure_light", () -> new SummonConjuredBlock(BlockRegister.CONJURED_LIGHT_BLOCK.get().defaultBlockState(), 20));
     public static final DeferredHolder<SpellEffect, SpellEffect> CONJURE_BLOCK = SPELL_EFFECTS.register("conjure_block", () -> new SummonConjuredBlock(BlockRegister.CONJURED_BLOCK.get().defaultBlockState(), 20));

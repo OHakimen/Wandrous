@@ -7,9 +7,11 @@ import com.hakimen.wandrous.common.spell.SpellEffect;
 import com.hakimen.wandrous.common.spell.SpellStatus;
 import com.hakimen.wandrous.common.utils.CastingUtils;
 import com.hakimen.wandrous.common.utils.data.Node;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.TickRateManager;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -36,18 +38,22 @@ public class DelayCastEffect extends SpellEffect {
         TimerEntity timer = new TimerEntity(EntityRegister.TIMER_ENTITY.get(), context.getLevel(), time) {
             @Override
             public void tick() {
-                tickTime++;
-                if (this.tickedEnough()) {
+                super.tick();
+                if (tickedEnough()) {
                     context.getNode().getChildren().forEach((child)-> {
                         this.setDeltaMovement(context.getCaster().getDeltaMovement());
                         child.getData().cast(context.clone().setCaster(this).setNode(child));
                     });
+
                     discard();
                 }
             }
         };
-
-        timer.setPos(context.getLocation());
+        if(context.getCaster() instanceof Player player){
+            timer.setPos(player.getPosition(0));
+        }else{
+            timer.setPos(context.getLocation());
+        }
         context.getLevel().addFreshEntity(timer);
     }
 }

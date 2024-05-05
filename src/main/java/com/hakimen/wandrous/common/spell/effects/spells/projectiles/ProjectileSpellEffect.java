@@ -26,12 +26,12 @@ public class ProjectileSpellEffect extends SpellEffect {
         SpellStatus status = context.getStatus();
 
         if (caster instanceof LivingEntity livingEntity) {
-            float yRot = livingEntity.getYRot() + Math.round(context.getSplit() / 2.0) * 10 * (context.getSplit() % 2 == 1 ? -1 : 1);
+            float yRot = livingEntity.getYRot() + Math.round(context.getSplit() / 2.0) * (10 + status.getSpread() * 10) * (context.getSplit() % 2 == 1 ? -1 : 1);
             float xRot = livingEntity.getXRot();
             self.shootFromRotation(livingEntity,xRot, yRot, 0, status.getSpeed(), status.getSpread() * 10);
-            status.setSpeedMod(0);
         } else {
-            self.setDeltaMovement(caster.getDeltaMovement().yRot( Math.round(context.getSplit() / 2.0) * 10 * (context.getSplit() % 2 == 1 ? -1 : 1)).multiply(context.getSplit() % 2 == 1 ? -1 : 1,1,context.getSplit() % 2 == 1 ? -1 : 1).scale(1 + status.getSpeedMod()));
+            float yRot = Math.round(context.getSplit() / 2.0) * (10 + status.getSpread() * 10) * (context.getSplit() % 2 == 1 ? -1 : 1);
+            self.setDeltaMovement(caster.getDeltaMovement().yRot((float) Math.toRadians(yRot)));
         }
     }
 

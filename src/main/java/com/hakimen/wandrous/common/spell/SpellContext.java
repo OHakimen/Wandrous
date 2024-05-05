@@ -11,7 +11,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
-public class SpellContext implements Cloneable{
+public class SpellContext implements Cloneable {
 
     Entity originalCaster;
     Entity caster;
@@ -20,9 +20,10 @@ public class SpellContext implements Cloneable{
     Vec3 location;
     Node<SpellEffect> node;
     SpellStatus status;
-    boolean castPositionModified;
     List<LivingEntity> hit;
+    LivingEntity homingTarget;
     int split;
+    boolean castPositionModified;
 
     public Entity getOriginalCaster() {
         return originalCaster;
@@ -119,11 +120,21 @@ public class SpellContext implements Cloneable{
         return this;
     }
 
-    public SpellContext clone(){
+    public LivingEntity getHomingTarget() {
+        return homingTarget;
+    }
+
+    public SpellContext setHomingTarget(LivingEntity homingTarget) {
+        this.homingTarget = homingTarget;
+        return this;
+    }
+
+    public SpellContext clone() {
         try {
             return (SpellContext) super.clone();
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
         }
     }
+
 }

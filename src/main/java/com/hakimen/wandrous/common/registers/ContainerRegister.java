@@ -1,7 +1,7 @@
 package com.hakimen.wandrous.common.registers;
 
 import com.hakimen.wandrous.Wandrous;
-import com.hakimen.wandrous.common.client.menus.WandTinkerMenu;
+import com.hakimen.wandrous.client.menus.WandTinkerMenu;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.inventory.MenuType;
 import net.neoforged.bus.api.IEventBus;

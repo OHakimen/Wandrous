@@ -11,5 +11,6 @@ public class AddRegistriesEvent {
     @SubscribeEvent
     static void registerRegistries(NewRegistryEvent event) {
         event.register(WandrousRegistries.SPELLS_REGISTER);
+        event.register(WandrousRegistries.IMOVER_REGISTER);
     }
 }

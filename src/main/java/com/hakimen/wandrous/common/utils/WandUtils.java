@@ -5,8 +5,12 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 public class WandUtils {
 
@@ -153,22 +157,21 @@ public class WandUtils {
             "§k????????§r"
     );
 
-    public static void createWand(ItemStack stack) {
-        Random random = new Random();
 
+    public static void makeWand(ItemStack stack){
         CompoundTag tag = new CompoundTag();
 
-        tag.putInt(WandItem.CAPACITY, random.nextInt(2,27));
-        tag.putInt(WandItem.MAX_MANA, random.nextInt(128,1024));
-        tag.putInt(WandItem.MANA_CHARGE_SPEED, random.nextInt(128,1024));
-        tag.putFloat(WandItem.CAST_DELAY, random.nextFloat(-1f,5f));
-        tag.putFloat(WandItem.RECHARGE_SPEED, random.nextFloat(-1f,5f));
+        Random r = new Random();
 
+        tag.putInt(WandItem.CAPACITY, r.nextInt(3, 54));
+        tag.putInt(WandItem.MAX_MANA, r.nextInt(64, 2048));
+        tag.putInt(WandItem.MANA_CHARGE_SPEED, r.nextInt(64, 2048));
+        tag.putFloat(WandItem.CAST_DELAY, r.nextFloat(-2f, 5f));
+        tag.putFloat(WandItem.RECHARGE_SPEED, r.nextFloat(-2f, 5f));
 
         tag.putString("name", buildWandName());
 
         tag.put("Inventory", new ItemStackHandler(tag.getInt(WandItem.CAPACITY)).serializeNBT());
-
         stack.setTag(tag);
     }
 

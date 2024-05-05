@@ -3,6 +3,6 @@
   "textures": {
     "layer0": "wandrous:item/spell/bases/spell_base",
     "layer1": "minecraft:item/fire_charge",
-    "layer2": "wandrous:item/spell/trigger"
+    "layer2": "wandrous:item/spell/layers/trigger"
   }
 }

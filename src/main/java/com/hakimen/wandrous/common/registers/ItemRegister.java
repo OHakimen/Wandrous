@@ -22,6 +22,12 @@ public class ItemRegister {
     public static final DeferredHolder<Item, SpellEffectItem> DOUBLE_CAST_SPELL = ITEMS.register("double_cast", () -> new SpellEffectItem(SpellRegister.DOUBLE_CAST));
     public static final DeferredHolder<Item, SpellEffectItem> TRIPLE_CAST_SPELL = ITEMS.register("triple_cast", () -> new SpellEffectItem(SpellRegister.TRIPLE_CAST));
 
+    public static final DeferredHolder<Item, SpellEffectItem> HOMING_SPELL = ITEMS.register("homing", () -> new SpellEffectItem(SpellRegister.HOMING));
+    public static final DeferredHolder<Item, SpellEffectItem> BOOMERANG_SPELL = ITEMS.register("boomerang", () -> new SpellEffectItem(SpellRegister.BOOMERANG));
+
+    public static final DeferredHolder<Item, SpellEffectItem> TELEPORT_CAST_SPELL = ITEMS.register("teleport_cast", () -> new SpellEffectItem(SpellRegister.TELEPORT_CAST));
+    public static final DeferredHolder<Item, SpellEffectItem> LONG_DISTANCE_CAST_SPELL = ITEMS.register("long_distance_cast", () -> new SpellEffectItem(SpellRegister.LONG_DISTANCE_CAST));
+
     public static final DeferredHolder<Item, SpellEffectItem> DOUBLE_SPLIT_SPELL = ITEMS.register("double_split_cast", () -> new SpellEffectItem(SpellRegister.DOUBLE_SPLIT));
     public static final DeferredHolder<Item, SpellEffectItem> TRIPLE_SPLIT_SPELL = ITEMS.register("triple_split_cast", () -> new SpellEffectItem(SpellRegister.TRIPLE_SPLIT));
     public static final DeferredHolder<Item, SpellEffectItem> QUAD_SPLIT_SPELL = ITEMS.register("quad_split_cast", () -> new SpellEffectItem(SpellRegister.QUAD_SPLIT));
@@ -56,17 +62,30 @@ public class ItemRegister {
     public static final DeferredHolder<Item, SpellEffectItem> SWAP_TELEPORT_SPELL = ITEMS.register("swap_teleport", () -> new SpellEffectItem(SpellRegister.SWAP_TELEPORT));
     public static final DeferredHolder<Item, SpellEffectItem> HOME_BRINGER_TELEPORT_SPELL = ITEMS.register("home_bringer_teleport", () -> new SpellEffectItem(SpellRegister.HOME_BRINGER_TELEPORT));
 
+    public static final DeferredHolder<Item, SpellEffectItem> DRILL_SPELL = ITEMS.register("drill", () -> new SpellEffectItem(SpellRegister.DRILL));
+    public static final DeferredHolder<Item, SpellEffectItem> GIGA_DRILL_SPELL = ITEMS.register("giga_drill", () -> new SpellEffectItem(SpellRegister.GIGA_DRILL));
+
+    public static final DeferredHolder<Item, SpellEffectItem> CHAINSAW_SPELL = ITEMS.register("chainsaw", () -> new SpellEffectItem(SpellRegister.CHAINSAW));
+
     public static final DeferredHolder<Item, SpellEffectItem> LIGHTING_BOLT_SPELL = ITEMS.register("lighting_bolt", () -> new SpellEffectItem(SpellRegister.LIGHTNING_BOLT));
 
-    public static final DeferredHolder<Item, SpellEffectItem> TRIGGER_SNOWBALL_SPELL = ITEMS.register("trigger_snowball", () -> new SpellEffectItem(SpellRegister.TRIGGER_SNOWBALL));
-    public static final DeferredHolder<Item, SpellEffectItem> SNOWBALL_SPELL = ITEMS.register("snowball", () -> new SpellEffectItem(SpellRegister.SNOWBALL));
+    public static final DeferredHolder<Item, SpellEffectItem> GLIMMERING_BOLT_SPELL = ITEMS.register("glimmering_bolt", () -> new SpellEffectItem(SpellRegister.GLIMMERING_BOLT));
+    public static final DeferredHolder<Item, SpellEffectItem> TRIGGER_GLIMMERING_BOLT_SPELL = ITEMS.register("trigger_glimmering_bolt", () -> new SpellEffectItem(SpellRegister.TRIGGER_GLIMMERING_BOLT));
+    public static final DeferredHolder<Item, SpellEffectItem> TIMER_GLIMMERING_BOLT_SPELL = ITEMS.register("timer_glimmering_bolt", () -> new SpellEffectItem(SpellRegister.TIMER_GLIMMERING_BOLT));
 
-    public static final DeferredHolder<Item, SpellEffectItem> TRIGGER_FIREBALL_SPELL = ITEMS.register("trigger_fireball", () -> new SpellEffectItem(SpellRegister.TRIGGER_FIREBALL));
     public static final DeferredHolder<Item, SpellEffectItem> FIREBALL_SPELL = ITEMS.register("fireball", () -> new SpellEffectItem(SpellRegister.FIREBALL));
+    public static final DeferredHolder<Item, SpellEffectItem> TRIGGER_FIREBALL_SPELL = ITEMS.register("trigger_fireball", () -> new SpellEffectItem(SpellRegister.TRIGGER_FIREBALL));
+    public static final DeferredHolder<Item, SpellEffectItem> TIMER_FIREBALL_SPELL = ITEMS.register("timer_fireball", () -> new SpellEffectItem(SpellRegister.TIMER_FIREBALL));
+
+    public static final DeferredHolder<Item, SpellEffectItem> SONIC_BOOM_SPELL = ITEMS.register("sonic_boom", () -> new SpellEffectItem(SpellRegister.SONIC_BOOM));
+    public static final DeferredHolder<Item, SpellEffectItem> TRIGGER_SONIC_BOOM_SPELL = ITEMS.register("trigger_sonic_boom", () -> new SpellEffectItem(SpellRegister.TRIGGER_SONIC_BOOM));
+    public static final DeferredHolder<Item, SpellEffectItem> TIMER_SONIC_BOOM_SPELL = ITEMS.register("timer_sonic_boom", () -> new SpellEffectItem(SpellRegister.TIMER_SONIC_BOOM));
+
+    public static final DeferredHolder<Item, SpellEffectItem> BLACK_HOLE_SPELL = ITEMS.register("black_hole", () -> new SpellEffectItem(SpellRegister.BLACK_HOLE));
+    public static final DeferredHolder<Item, SpellEffectItem> TIMER_BLACK_HOLE_SPELL = ITEMS.register("timer_black_hole", () -> new SpellEffectItem(SpellRegister.TIMER_BLACK_HOLE));
 
     public static final DeferredHolder<Item, SpellEffectItem> EXPLOSION_SPELL = ITEMS.register("explosion", () -> new SpellEffectItem(SpellRegister.EXPLOSION));
     public static final DeferredHolder<Item, SpellEffectItem> MAJOR_EXPLOSION_SPELL = ITEMS.register("major_explosion", () -> new SpellEffectItem(SpellRegister.MAJOR_EXPLOSION));
-
 
     public static final DeferredHolder<Item, SpellEffectItem> CONJURE_LIGHT_SPELL = ITEMS.register("conjure_light", () -> new SpellEffectItem(SpellRegister.CONJURE_LIGHT));
     public static final DeferredHolder<Item, SpellEffectItem> CONJURE_BLOCK_SPELL = ITEMS.register("conjure_block", () -> new SpellEffectItem(SpellRegister.CONJURE_BLOCK));

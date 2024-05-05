@@ -3,22 +3,11 @@ package com.hakimen.wandrous.common.spell.effects.modifiers.charges;
 import com.hakimen.wandrous.common.spell.SpellContext;
 import com.hakimen.wandrous.common.spell.effects.modifiers.ProjectileHitEffect;
 import net.minecraft.core.BlockPos;
-import net.minecraft.data.tags.VanillaBlockTagsProvider;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.BuddingAmethystBlock;
-import net.minecraft.world.level.block.FallingBlock;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.PushReaction;
-import net.neoforged.neoforge.common.Tags;
 
 import java.util.Iterator;
 
@@ -30,7 +19,6 @@ public class CrumblingChargeHitEffect extends ProjectileHitEffect {
 
     @Override
     public void onHitEntity(SpellContext context, Entity hit) {
-
     }
 
     @Override

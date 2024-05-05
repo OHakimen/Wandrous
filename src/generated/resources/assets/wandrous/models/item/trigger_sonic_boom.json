@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "wandrous:item/spell/bases/spell_base",
+    "layer1": "wandrous:item/spell/sonic_boom",
+    "layer2": "wandrous:item/spell/layers/trigger"
+  }
+}

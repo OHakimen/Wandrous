@@ -2,6 +2,7 @@ package com.hakimen.wandrous.common.utils;
 
 import com.hakimen.wandrous.common.spell.SpellContext;
 import com.hakimen.wandrous.common.spell.SpellStatus;
+import com.hakimen.wandrous.common.spell.effects.modifiers.DivideBySpellEffect;
 import com.hakimen.wandrous.common.spell.effects.modifiers.MulticastEffect;
 import com.hakimen.wandrous.common.spell.SpellEffect;
 import com.hakimen.wandrous.common.utils.data.Node;
@@ -31,7 +32,7 @@ public class CastingUtils {
                     tree.addChild(cast);
                 }
             }
-        } else if (tree.getData().hasKind(SpellEffect.TRIGGER) || tree.getData().hasKind(SpellEffect.MODIFIER)) {
+        } else if (tree.getData().hasKind(SpellEffect.TRIGGER) || tree.getData().hasKind(SpellEffect.MODIFIER) || tree.getData().hasKind(SpellEffect.TIMER)) {
             Node<SpellEffect> cast = makeCastingTree(effects);
             if (cast.getData() != null) {
                 cast.setParent(tree);
@@ -44,10 +45,16 @@ public class CastingUtils {
 
     public static int calculateManaCost(int cost, Node<SpellEffect> castTree) {
 
-        cost += castTree.getData().getStatus().getManaDrain();
+        int multiplier = 1;
+
+        if(castTree.getData() instanceof DivideBySpellEffect divideBySpellEffect){
+            multiplier = divideBySpellEffect.getCastCount();
+        }
+
+        cost += castTree.getData().getStatus().getManaDrain() * multiplier;
 
         for (Node<SpellEffect> child : castTree.getChildren()) {
-            cost += calculateManaCost(0, child);
+            cost += calculateManaCost(0, child) * multiplier;
         }
         return cost;
     }
@@ -81,6 +88,7 @@ public class CastingUtils {
         status.setCritChance(first.getCritChance() + second.getCritChance());
         status.setSpreadMod(first.getSpreadMod() + second.getSpreadMod());
         status.setRadiusMod(first.getRadiusMod() + second.getRadiusMod());
+        status.setLifetimeMod(first.getLifetimeMod() + second.getLifetimeMod());
 
         status.setSpeed(first.getSpeed() + second.getSpeed());
         status.setSpread(first.getSpread() + second.getSpread());

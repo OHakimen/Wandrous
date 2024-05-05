@@ -14,7 +14,8 @@ public class SpellEffect {
 
     public static final int TRIGGER = 1;
     public static final int MODIFIER = 2;
-    public static final int SPELL = 4;
+    public static final int TIMER = 4;
+    public static final int SPELL = 8;
     int kind;
     SpellStatus status;
 

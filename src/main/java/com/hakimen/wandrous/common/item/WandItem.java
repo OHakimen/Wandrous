@@ -1,14 +1,12 @@
 package com.hakimen.wandrous.common.item;
 
-import com.hakimen.wandrous.common.client.menus.WandTinkerMenu;
+import com.hakimen.wandrous.client.tooltip.SpellTooltipRenderer;
 import com.hakimen.wandrous.common.registers.ContainerRegister;
 import com.hakimen.wandrous.common.spell.SpellEffect;
 import com.hakimen.wandrous.common.utils.CastingUtils;
 import com.hakimen.wandrous.common.utils.WandUtils;
 import com.hakimen.wandrous.common.utils.data.Node;
-import io.netty.buffer.*;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -20,11 +18,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
-import net.neoforged.neoforge.common.util.FriendlyByteBufUtil;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
@@ -45,6 +43,7 @@ public class WandItem extends Item {
     public static final String MANA_CHARGE_SPEED = "ManaChargeSpeed";
     public static final String CASTABLE_SIZE = "CastableSize";
     public static final String CURRENT_IDX = "CurrentIdx";
+    public static final String TIER = "Tier";
 
     public WandItem() {
         super(new Properties().stacksTo(1));
@@ -81,14 +80,17 @@ public class WandItem extends Item {
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
 
+
+
         if (!pStack.getOrCreateTag().isEmpty()) {
-            pTooltipComponents.add(Component.literal("⌛ Cast Delay %.2fs".formatted(pStack.getOrCreateTag().getFloat(CAST_DELAY))));
-            pTooltipComponents.add(Component.literal("⚡ Recharge Speed %.2fs".formatted(pStack.getOrCreateTag().getFloat(RECHARGE_SPEED))));
-            pTooltipComponents.add(Component.literal("⭐ Mana Max %s".formatted(pStack.getOrCreateTag().getInt(MAX_MANA))));
-            pTooltipComponents.add(Component.literal("● Mana %s".formatted(pStack.getOrCreateTag().getInt(MANA))));
-            pTooltipComponents.add(Component.literal("⚡ Mana Charge Speed %s".formatted(pStack.getOrCreateTag().getInt(MANA_CHARGE_SPEED))));
+            pTooltipComponents.add(Component.literal("Cast Delay %.2fs".formatted(pStack.getOrCreateTag().getFloat(CAST_DELAY))));
+            pTooltipComponents.add(Component.literal("Recharge Speed %.2fs".formatted(pStack.getOrCreateTag().getFloat(RECHARGE_SPEED))));
+            pTooltipComponents.add(Component.literal("Mana Max %s".formatted(pStack.getOrCreateTag().getInt(MAX_MANA))));
+            pTooltipComponents.add(Component.literal("Mana %s".formatted(pStack.getOrCreateTag().getInt(MANA))));
+            pTooltipComponents.add(Component.literal("Mana Charge Speed %s".formatted(pStack.getOrCreateTag().getInt(MANA_CHARGE_SPEED))));
             pTooltipComponents.add(Component.literal(" "));
-            pTooltipComponents.add(Component.literal("⛚ Capacity %s".formatted(pStack.getOrCreateTag().getInt(CAPACITY))));
+            pTooltipComponents.add(Component.literal("Capacity %s".formatted(pStack.getOrCreateTag().getInt(CAPACITY))));
+            pTooltipComponents.add(Component.literal("WAND_SPELLS_MARKER"));
         } else {
             pTooltipComponents.add(Component.literal("Put in inventory to initialize"));
         }
@@ -184,7 +186,7 @@ public class WandItem extends Item {
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
         if (pStack.getOrCreateTag().isEmpty()) {
-            WandUtils.createWand(pStack);
+            WandUtils.makeWand(pStack);
         }
 
         Optional<ItemStackHandler> handler = Optional.ofNullable((ItemStackHandler) pStack.getCapability(Capabilities.ItemHandler.ITEM));
