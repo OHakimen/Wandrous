@@ -9,6 +9,7 @@ import net.minecraft.world.phys.Vec3;
 public class ExplosionEffect extends SpellEffect {
 
 
+
     public ExplosionEffect(float strength) {
         this.setKind(SpellEffect.SPELL);
         this.setStatus(new SpellStatus()

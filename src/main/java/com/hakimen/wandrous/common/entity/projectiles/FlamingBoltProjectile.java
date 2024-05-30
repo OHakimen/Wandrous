@@ -110,7 +110,7 @@ public class FlamingBoltProjectile extends SpellCastingProjectile {
 
     @Override
     public float getFluidInertia() {
-        return 0.3f;
+        return 0.9f;
     }
 
     @Override

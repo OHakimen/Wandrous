@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "wandrous:block/chert_pillar_end",
+    "side": "wandrous:block/chert_pillar_side"
+  }
+}

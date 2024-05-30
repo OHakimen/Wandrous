@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.PushReaction;
 
@@ -32,7 +33,7 @@ public class CrumblingChargeHitEffect extends ProjectileHitEffect {
             BlockPos blockpos = positions.next();
             if (blockpos.closerToCenterThan(pos.getCenter(), radius - 1)) {
                 BlockState blockstate = level.getBlockState(blockpos);
-                if (blockstate.getDestroySpeed(level, blockpos) != -1 && blockstate.getPistonPushReaction() != PushReaction.BLOCK && level.getBlockState(blockpos.below()).isAir()) {
+                if (blockstate.getDestroySpeed(level, blockpos) != -1 && blockstate.getPistonPushReaction() != PushReaction.BLOCK && (level.getBlockState(blockpos.below()).is(Blocks.AIR) || level.getBlockState(blockpos.below()).is(Blocks.WATER))) {
                     FallingBlockEntity.fall(level, blockpos, blockstate);
                 }
             }

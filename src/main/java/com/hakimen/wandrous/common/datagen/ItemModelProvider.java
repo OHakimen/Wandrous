@@ -2,10 +2,14 @@ package com.hakimen.wandrous.common.datagen;
 
 import com.hakimen.wandrous.Wandrous;
 import com.hakimen.wandrous.common.item.SpellEffectItem;
+import com.hakimen.wandrous.common.registers.BlockRegister;
 import com.hakimen.wandrous.common.registers.ItemRegister;
 import com.hakimen.wandrous.common.spell.SpellEffect;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
@@ -14,8 +18,57 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         super(output, Wandrous.MODID, existingFileHelper);
     }
 
+
     @Override
     protected void registerModels() {
+
+        makeItems();
+        makeSpells();
+    }
+
+    private void makeItems(){
+        block(BlockRegister.CHERT.get());
+        block(BlockRegister.CHERT_STAIRS.get());
+        block(BlockRegister.CHERT_SLAB.get());
+        getBuilder(BuiltInRegistries.BLOCK.getKey(BlockRegister.CHERT_WALL.get()).toString().replaceAll(Wandrous.MODID+":",""))
+                .parent(new ModelFile.ExistingModelFile(new ResourceLocation("minecraft", "block/wall_inventory"), existingFileHelper))
+                .texture("wall", new ResourceLocation(Wandrous.MODID, "block/chert"));
+
+
+        block(BlockRegister.POLISHED_CHERT.get());
+        block(BlockRegister.POLISHED_CHERT_STAIRS.get());
+        block(BlockRegister.POLISHED_CHERT_SLAB.get());
+
+
+
+        block(BlockRegister.CHERT_BRICKS.get());
+        block(BlockRegister.CHERT_BRICKS_STAIRS.get());
+        block(BlockRegister.CHERT_BRICKS_SLAB.get());
+        getBuilder(BuiltInRegistries.BLOCK.getKey(BlockRegister.CHERT_BRICKS_WALL.get()).toString().replaceAll(Wandrous.MODID+":",""))
+                .parent(new ModelFile.ExistingModelFile(new ResourceLocation("minecraft", "block/wall_inventory"), existingFileHelper))
+                .texture("wall", new ResourceLocation(Wandrous.MODID, "block/chert_bricks"));
+
+        block(BlockRegister.CRACKED_CHERT_BRICKS.get());
+        blockWithAnotherModel(BlockRegister.CHISELED_CHERT_BRICKS.get(), new ResourceLocation(Wandrous.MODID, "block/chiseled_chert_bricks_0"));
+        block(BlockRegister.CHERT_PILLAR.get());
+
+        block(BlockRegister.MOSSY_CHERT_BRICKS.get());
+        block(BlockRegister.MOSSY_CHERT_BRICKS_STAIRS.get());
+        block(BlockRegister.MOSSY_CHERT_BRICKS_SLAB.get());
+        getBuilder(BuiltInRegistries.BLOCK.getKey(BlockRegister.MOSSY_CHERT_BRICKS_WALL.get()).toString().replaceAll(Wandrous.MODID+":",""))
+                .parent(new ModelFile.ExistingModelFile(new ResourceLocation("minecraft", "block/wall_inventory"), existingFileHelper))
+                .texture("wall", new ResourceLocation(Wandrous.MODID, "block/mossy_chert_bricks"));
+
+        block(BlockRegister.CHERT_TILES.get());
+        block(BlockRegister.CHERT_TILES_STAIRS.get());
+        block(BlockRegister.CHERT_TILES_SLAB.get());
+
+        block(BlockRegister.MOSSY_CHERT_TILES.get());
+        block(BlockRegister.MOSSY_CHERT_TILES_STAIRS.get());
+        block(BlockRegister.MOSSY_CHERT_TILES_SLAB.get());
+    }
+
+    private void makeSpells(){
         makeTriggerSpell(ItemRegister.TRIGGER_FIREBALL_SPELL.get(), "minecraft:item/fire_charge");
         makeTimerSpell(ItemRegister.TIMER_FIREBALL_SPELL.get(), "minecraft:item/fire_charge");
         makeVanillaBasedSpell(ItemRegister.FIREBALL_SPELL.get(), "minecraft:item/fire_charge");
@@ -32,6 +85,11 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         makeSpell(ItemRegister.BLACK_HOLE_SPELL.get());
         makeTimerSpell(ItemRegister.TIMER_BLACK_HOLE_SPELL.get(), "wandrous:item/spell/black_hole");
 
+        makeTriggerSpell(ItemRegister.TRIGGER_CHAIN_SHOT_SPELL.get(), "wandrous:item/spell/chain_shot");
+        makeTimerSpell(ItemRegister.TIMER_CHAIN_SHOT_SPELL.get(), "wandrous:item/spell/chain_shot");
+        makeSpell(ItemRegister.CHAIN_SHOT_SPELL.get());
+
+        makeSpell(ItemRegister.BOMB_SPELL.get());
 
         makeSpell(ItemRegister.DIVIDE_BY_2_SPELL.get());
         makeSpell(ItemRegister.DIVIDE_BY_3_SPELL.get());
@@ -42,6 +100,7 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
 
         makeSpell(ItemRegister.TELEPORT_CAST_SPELL.get());
         makeSpell(ItemRegister.LONG_DISTANCE_CAST_SPELL.get());
+        makeSpell(ItemRegister.LINE_CAST_SPELL.get());
 
         makeSpell(ItemRegister.DOUBLE_SPLIT_SPELL.get());
         makeSpell(ItemRegister.TRIPLE_SPLIT_SPELL.get());
@@ -62,6 +121,8 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         makeSpell(ItemRegister.DECREASE_LIFETIME_SPELL.get());
         makeSpell(ItemRegister.INCREASE_RANGE_SPELL.get());
         makeSpell(ItemRegister.DECREASE_RANGE_SPELL.get());
+        makeSpell(ItemRegister.INCREASE_SPREAD_SPELL.get());
+        makeSpell(ItemRegister.DECREASE_SPREAD_SPELL.get());
 
         makeSpell(ItemRegister.LIGHTING_BOLT_SPELL.get());
 
@@ -73,20 +134,51 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         makeSpell(ItemRegister.SWAP_TELEPORT_SPELL.get());
         makeSpell(ItemRegister.HOME_BRINGER_TELEPORT_SPELL.get());
 
+        makeSpell(ItemRegister.COLLECT_SPELL.get());
+
         makeSpell(ItemRegister.SMALL_DELAY_CAST_SPELL.get());
         makeSpell(ItemRegister.MEDIUM_DELAY_CAST_SPELL.get());
         makeSpell(ItemRegister.BIG_DELAY_CAST_SPELL.get());
 
         makeSpell(ItemRegister.EXPLOSION_SPELL.get());
         makeSpell(ItemRegister.MAJOR_EXPLOSION_SPELL.get());
+        makeSpell(ItemRegister.NUKE_SPELL.get());
 
         makeSpell(ItemRegister.HOMING_SPELL.get());
         makeSpell(ItemRegister.BOOMERANG_SPELL.get());
 
         makeSpell(ItemRegister.CONJURE_LIGHT_SPELL.get());
         makeSpell(ItemRegister.CONJURE_BLOCK_SPELL.get());
+        makeVanillaBasedSpell(ItemRegister.CONJURE_WEBS_SPELL.get(), "minecraft:block/cobweb");
 
+        makeSpell(ItemRegister.BESTOW_CURSE_HUNGER_SPELL.get());
+        makeSpell(ItemRegister.BESTOW_CURSE_MINING_FATIGUE_SPELL.get());
+        makeSpell(ItemRegister.BESTOW_CURSE_LEVITATE_SPELL.get());
+        makeSpell(ItemRegister.BESTOW_CURSE_GLOW_SPELL.get());
+        makeSpell(ItemRegister.BESTOW_CURSE_DARKNESS_SPELL.get());
+        makeSpell(ItemRegister.BESTOW_CURSE_WEAKNESS_SPELL.get());
+        makeSpell(ItemRegister.BESTOW_CURSE_NAUSEA_SPELL.get());
+        makeSpell(ItemRegister.BESTOW_CURSE_SLOWNESS_SPELL.get());
+
+        makeSpell(ItemRegister.BESTOW_BLESSING_HASTE_SPELL.get());
+        makeSpell(ItemRegister.BESTOW_BLESSING_BOOST_HEALTH_SPELL.get());
+        makeSpell(ItemRegister.BESTOW_BLESSING_REGENERATION_SPELL.get());
+        makeSpell(ItemRegister.BESTOW_BLESSING_RESISTANCE_SPELL.get());
+        makeSpell(ItemRegister.BESTOW_BLESSING_SATURATION_SPELL.get());
+        makeSpell(ItemRegister.BESTOW_BLESSING_NIGHT_VISION_SPELL.get());
+        makeSpell(ItemRegister.BESTOW_BLESSING_RESIST_FIRE_SPELL.get());
+        makeSpell(ItemRegister.BESTOW_BLESSING_SPEED_SPELL.get());
     }
+
+
+    private ItemModelBuilder block(Block block){
+        return withExistingParent(BuiltInRegistries.BLOCK.getKey(block).toString().replaceAll(Wandrous.MODID+":",""),new ResourceLocation(Wandrous.MODID,"block/"+BuiltInRegistries.BLOCK.getKey(block).toString().replaceAll(Wandrous.MODID+":","")));
+    }
+
+    private ItemModelBuilder blockWithAnotherModel(Block block, ResourceLocation location){
+        return withExistingParent(BuiltInRegistries.BLOCK.getKey(block).toString().replaceAll(Wandrous.MODID+":",""),location);
+    }
+
 
     public void makeTriggerSpell(SpellEffectItem item, String texture){
         getBuilder(item.toString())

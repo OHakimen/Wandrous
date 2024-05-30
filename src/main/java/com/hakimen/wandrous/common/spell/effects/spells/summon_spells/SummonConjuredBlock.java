@@ -22,7 +22,7 @@ public class SummonConjuredBlock extends SummonBlockEffect{
     @Override
     protected boolean placeBlockIfReplaceable(Level level, BlockPos pos, SpellContext context) {
 
-        boolean did = super.placeBlockIfReplaceable(level, pos, context);;
+        boolean did = super.placeBlockIfReplaceable(level, pos, context);
 
         if(did){
             ConjuredBlockEntity conjuredBlockEntity = level.getBlockEntity(pos, BlockEntityRegister.CONJURED_BLOCK_ENTITY.get()).orElse(null);

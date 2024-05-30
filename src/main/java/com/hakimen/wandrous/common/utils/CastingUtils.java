@@ -1,10 +1,9 @@
 package com.hakimen.wandrous.common.utils;
 
 import com.hakimen.wandrous.common.spell.SpellContext;
-import com.hakimen.wandrous.common.spell.SpellStatus;
-import com.hakimen.wandrous.common.spell.effects.modifiers.DivideBySpellEffect;
-import com.hakimen.wandrous.common.spell.effects.modifiers.MulticastEffect;
 import com.hakimen.wandrous.common.spell.SpellEffect;
+import com.hakimen.wandrous.common.spell.SpellStatus;
+import com.hakimen.wandrous.common.spell.effects.modifiers.MultiCastEffect;
 import com.hakimen.wandrous.common.utils.data.Node;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
@@ -23,7 +22,7 @@ public class CastingUtils {
         }
 
         Node<SpellEffect> tree = new Node<>(effects.get(idx++));
-        if (tree.getData() instanceof MulticastEffect effect) {
+        if (tree.getData() instanceof MultiCastEffect effect) {
             int casts = Math.min(effect.getCastCount(), effects.size());
             for (int i = 0; i < casts; i++) {
                 Node<SpellEffect> cast = makeCastingTree(effects);
@@ -45,16 +44,10 @@ public class CastingUtils {
 
     public static int calculateManaCost(int cost, Node<SpellEffect> castTree) {
 
-        int multiplier = 1;
-
-        if(castTree.getData() instanceof DivideBySpellEffect divideBySpellEffect){
-            multiplier = divideBySpellEffect.getCastCount();
-        }
-
-        cost += castTree.getData().getStatus().getManaDrain() * multiplier;
+        cost += castTree.getData().getStatus().getManaDrain();
 
         for (Node<SpellEffect> child : castTree.getChildren()) {
-            cost += calculateManaCost(0, child) * multiplier;
+            cost += calculateManaCost(0, child);
         }
         return cost;
     }

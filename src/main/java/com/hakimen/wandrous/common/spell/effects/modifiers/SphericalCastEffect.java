@@ -4,14 +4,8 @@ import com.hakimen.wandrous.common.spell.SpellContext;
 import com.hakimen.wandrous.common.spell.SpellEffect;
 import com.hakimen.wandrous.common.spell.SpellStatus;
 import com.hakimen.wandrous.common.utils.data.Node;
-import net.minecraft.core.Vec3i;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
-import org.joml.Quaternionf;
 
-public class SphericalCastEffect extends MulticastEffect {
+public class SphericalCastEffect extends MultiCastEffect {
 
     public SphericalCastEffect(int count) {
         super(count);

@@ -2,7 +2,6 @@ package com.hakimen.wandrous.common.spell;
 
 import com.hakimen.wandrous.common.utils.CastingUtils;
 import com.hakimen.wandrous.common.utils.data.Node;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -12,6 +11,7 @@ import net.minecraft.world.phys.Vec3;
 import java.util.List;
 
 public class SpellContext implements Cloneable {
+
 
     Entity originalCaster;
     Entity caster;

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "wandrous:block/chert_pillar_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "wandrous:block/chert_pillar"
+    },
+    "axis=z": {
+      "model": "wandrous:block/chert_pillar_horizontal",
+      "x": 90
+    }
+  }
+}

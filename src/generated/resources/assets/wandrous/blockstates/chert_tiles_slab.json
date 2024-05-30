@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "wandrous:block/chert_tiles_slab"
+    },
+    "type=double": {
+      "model": "wandrous:block/chert_tiles"
+    },
+    "type=top": {
+      "model": "wandrous:block/chert_tiles_slab_top"
+    }
+  }
+}

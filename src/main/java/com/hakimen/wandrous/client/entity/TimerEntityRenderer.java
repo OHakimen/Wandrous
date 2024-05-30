@@ -1,7 +1,7 @@
 package com.hakimen.wandrous.client.entity;
 
 import com.hakimen.wandrous.Wandrous;
-import com.hakimen.wandrous.common.entity.TimerEntity;
+import com.hakimen.wandrous.common.entity.static_spell.TimerEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;

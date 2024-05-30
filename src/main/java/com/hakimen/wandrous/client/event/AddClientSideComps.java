@@ -14,4 +14,6 @@ public class AddClientSideComps {
     public static void addTooltipTypes(RegisterClientTooltipComponentFactoriesEvent e) {
         e.register(SpellTooltipRenderer.SpellTooltipComponent.class, SpellTooltipRenderer::new);
     }
+
 }
+

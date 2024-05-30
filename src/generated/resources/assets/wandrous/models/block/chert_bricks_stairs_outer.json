@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "wandrous:block/chert_bricks",
+    "side": "wandrous:block/chert_bricks",
+    "top": "wandrous:block/chert_bricks"
+  }
+}

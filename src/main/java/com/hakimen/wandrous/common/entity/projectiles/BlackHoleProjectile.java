@@ -46,7 +46,6 @@ public class BlackHoleProjectile extends SpellCastingProjectile {
         this.setNoGravity(true);
         this.maxTicks = this.context.getStatus().getLifeTime();
         this.movers = new ArrayList<>();
-
     }
 
     @Override
@@ -126,7 +125,7 @@ public class BlackHoleProjectile extends SpellCastingProjectile {
 
     @Override
     public float getFluidInertia() {
-        return 0.3f;
+        return 1f;
     }
 
     @Override

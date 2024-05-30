@@ -5,13 +5,13 @@ import com.hakimen.wandrous.common.spell.SpellEffect;
 import com.hakimen.wandrous.common.spell.SpellStatus;
 import com.hakimen.wandrous.common.utils.data.Node;
 
-public class SplitCastEffect extends MulticastEffect{
+public class SplitCastEffect extends MultiCastEffect {
     public SplitCastEffect(int castCount) {
         super(castCount);
         setKind(MODIFIER);
         setStatus(new SpellStatus()
                 .setManaDrain(10 * castCount)
-                .setSpreadMod(0.1f));
+                .setSpread(1f));
     }
 
     @Override

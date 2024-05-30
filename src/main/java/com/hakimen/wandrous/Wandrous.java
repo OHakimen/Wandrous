@@ -19,6 +19,7 @@ public class Wandrous
     public Wandrous(IEventBus bus) {
         Registration.register(bus);
 
+
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 }

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "wandrous:item/spell/bases/spell_base",
+    "layer1": "wandrous:item/spell/bestow_curse_weakness"
+  }
+}

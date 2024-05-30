@@ -115,7 +115,7 @@ public class SonicBoomProjectile extends SpellCastingProjectile {
 
     @Override
     public float getFluidInertia() {
-        return 0.3f;
+        return 1f;
     }
 
     @Override

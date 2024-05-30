@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "wandrous:block/mossy_chert_tiles",
+    "side": "wandrous:block/mossy_chert_tiles",
+    "top": "wandrous:block/mossy_chert_tiles"
+  }
+}

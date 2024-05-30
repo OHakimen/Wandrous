@@ -4,6 +4,7 @@ import com.hakimen.wandrous.common.spell.SpellContext;
 import com.hakimen.wandrous.common.spell.SpellEffect;
 import com.hakimen.wandrous.common.spell.SpellStatus;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.EntityType;
@@ -43,27 +44,28 @@ public class DrillSpellEffect extends SpellEffect {
 
         Level level = context.getLevel();
 
-        Iterator<BlockPos> positions = BlockPos.betweenClosed(pos.offset(-radius,-radius,-radius), pos.offset(radius, radius, radius)).iterator();
+        Iterator<BlockPos> positions = BlockPos.betweenClosed(pos.offset(-radius, -radius, -radius), pos.offset(radius, radius, radius)).iterator();
 
-        while(positions.hasNext()) {
+        while (positions.hasNext()) {
             BlockPos blockpos = positions.next();
             if (blockpos.closerToCenterThan(location, radius)) {
                 BlockState state = level.getBlockState(blockpos);
-                if(!level.isClientSide){
-                    if(state.is(BlockTags.MINEABLE_WITH_PICKAXE) || state.is(BlockTags.MINEABLE_WITH_SHOVEL)) {
-                        List<ItemStack> stackList =  state.getDrops(new LootParams.Builder((ServerLevel) context.getLevel())
+                if (!level.isClientSide) {
+                    if (state.is(BlockTags.MINEABLE_WITH_PICKAXE) || state.is(BlockTags.MINEABLE_WITH_SHOVEL)) {
+                        List<ItemStack> stackList = state.getDrops(new LootParams.Builder((ServerLevel) context.getLevel())
                                 .withParameter(LootContextParams.TOOL, getMineAs())
                                 .withParameter(LootContextParams.ORIGIN, pos.getCenter()));
                         level.setBlockAndUpdate(blockpos, Blocks.AIR.defaultBlockState());
-                        for(ItemStack stack : stackList) {
+                        for (ItemStack stack : stackList) {
                             ItemEntity entity = new ItemEntity(EntityType.ITEM, level);
                             entity.setItem(stack);
-                            entity.setPos(blockpos.getX() + 0.5f + level.getRandom().nextInt(-1,1) / 4f, blockpos.getY() + 0.5f + level.getRandom().nextInt(-1,1) / 4f, blockpos.getZ() + 0.5f + level.getRandom().nextInt(-1,1) / 4f);
+                            entity.setPos(blockpos.getX() + 0.5f + level.getRandom().nextInt(-1, 1) / 4f, blockpos.getY() + 0.5f + level.getRandom().nextInt(-1, 1) / 4f, blockpos.getZ() + 0.5f + level.getRandom().nextInt(-1, 1) / 4f);
                             level.addFreshEntity(entity);
                         }
                     }
                 }
             }
+
         }
     }
 

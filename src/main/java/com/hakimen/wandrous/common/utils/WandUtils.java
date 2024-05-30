@@ -5,12 +5,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 public class WandUtils {
 
@@ -161,13 +157,16 @@ public class WandUtils {
     public static void makeWand(ItemStack stack){
         CompoundTag tag = new CompoundTag();
 
-        Random r = new Random();
+        Random r = new Random(stack.hashCode() ^ System.nanoTime());
 
         tag.putInt(WandItem.CAPACITY, r.nextInt(3, 54));
         tag.putInt(WandItem.MAX_MANA, r.nextInt(64, 2048));
         tag.putInt(WandItem.MANA_CHARGE_SPEED, r.nextInt(64, 2048));
         tag.putFloat(WandItem.CAST_DELAY, r.nextFloat(-2f, 5f));
         tag.putFloat(WandItem.RECHARGE_SPEED, r.nextFloat(-2f, 5f));
+
+        tag.putInt(WandItem.WAND, r.nextInt(0, 6));
+        tag.putInt(WandItem.GEM, r.nextInt(0, 8));
 
         tag.putString("name", buildWandName());
 

@@ -7,7 +7,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -43,7 +42,7 @@ public class ConjuredBlockEntity extends BlockEntity implements BlockEntityTicke
     public void tick(Level level, BlockPos blockPos, BlockState blockState, ConjuredBlockEntity conjuredLightBlockEntity) {
         if(level.isClientSide()) {
             Random r = new Random();
-            if(r.nextFloat(0,1) < 0.5){
+            if(r.nextFloat(0,1) < 0.05){
                 if(blockState.getBlock() instanceof ConjuredLightBlock){
                     level.addParticle(ParticleTypes.END_ROD,blockPos.getX() + 0.5 + r.nextFloat(-0.2f,0.2f), blockPos.getY() + 0.5 + r.nextFloat(-0.2f,0.2f), blockPos.getZ() + 0.5 + r.nextFloat(-0.2f,0.2f), 0.0D, 0.0D, 0.0D);
                 }else{

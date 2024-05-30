@@ -1,13 +1,14 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "com.hakimen.wandrous.common.mixin",
+  "package": "com.hakimen.wandrous.mixin",
   "compatibilityLevel": "JAVA_8",
   "refmap": "WandrousNeoForge.refmap.json",
   "mixins": [
-    "server.FireballExplosionPowerAccessorMixin"
   ],
   "client": [
+    "client.BlockModelAccessorMixin",
+    "client.DynamicModelItemShaperMixin"
   ],
   "injectors": {
     "defaultRequire": 1

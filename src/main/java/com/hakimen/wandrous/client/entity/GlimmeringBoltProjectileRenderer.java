@@ -24,7 +24,7 @@ public class GlimmeringBoltProjectileRenderer extends EntityRenderer<GlimmeringB
 
     @Override
     public void render(GlimmeringBoltProjectile pEntity, float pEntityYaw, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
-       if(pEntity.tickCount >= 1) {
+       if(pEntity.tickCount >=1) {
            for (int i = 0; i < 2; i++) {
                pEntity.level().addParticle(
                        ParticleRegister.GLIMMERING_BOLT.get(),

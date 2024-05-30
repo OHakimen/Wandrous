@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "wandrous:block/chiseled_chert_bricks_0"
+  }
+}

@@ -2,16 +2,13 @@ package com.hakimen.wandrous.client.event;
 
 import com.hakimen.wandrous.Wandrous;
 import com.hakimen.wandrous.client.tooltip.SpellTooltipRenderer;
-import com.hakimen.wandrous.common.item.SpellEffectItem;
 import com.hakimen.wandrous.common.item.WandItem;
-import com.hakimen.wandrous.common.spell.SpellEffect;
 import com.mojang.datafixers.util.Either;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.network.chat.contents.PlainTextContents;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;

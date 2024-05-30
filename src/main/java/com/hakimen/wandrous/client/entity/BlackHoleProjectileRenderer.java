@@ -32,19 +32,21 @@ public class BlackHoleProjectileRenderer extends EntityRenderer<BlackHoleProject
     @Override
     public void render(BlackHoleProjectile pEntity, float pEntityYaw, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
         float scale = 4f;
-        pPoseStack.pushPose();
-        pPoseStack.scale(scale,scale,scale);
-        pPoseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
-        pPoseStack.mulPose(Axis.YP.rotationDegrees(180.0F));
-        PoseStack.Pose posestack$pose = pPoseStack.last();
-        Matrix4f matrix4f = posestack$pose.pose();
-        Matrix3f matrix3f = posestack$pose.normal();
-        VertexConsumer vertexconsumer = pBuffer.getBuffer(RenderType.entityTranslucent(TEXTURE));
-        vertex(vertexconsumer, matrix4f, matrix3f, pPackedLight, 0.0F, -0.25f, 0, 1);
-        vertex(vertexconsumer, matrix4f, matrix3f, pPackedLight, 1.0F, -0.25f, 1, 1);
-        vertex(vertexconsumer, matrix4f, matrix3f, pPackedLight, 1.0F, 1f - 0.25f, 1, 0);
-        vertex(vertexconsumer, matrix4f, matrix3f, pPackedLight, 0.0F, 1f - 0.25f, 0, 0);
-        pPoseStack.popPose();
+        if(pEntity.tickCount > 2){
+            pPoseStack.pushPose();
+            pPoseStack.scale(scale,scale,scale);
+            pPoseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
+            pPoseStack.mulPose(Axis.YP.rotationDegrees(180.0F));
+            PoseStack.Pose posestack$pose = pPoseStack.last();
+            Matrix4f matrix4f = posestack$pose.pose();
+            Matrix3f matrix3f = posestack$pose.normal();
+            VertexConsumer vertexconsumer = pBuffer.getBuffer(RenderType.entityTranslucent(TEXTURE));
+            vertex(vertexconsumer, matrix4f, matrix3f, pPackedLight, 0.0F, -0.25f, 0, 1);
+            vertex(vertexconsumer, matrix4f, matrix3f, pPackedLight, 1.0F, -0.25f, 1, 1);
+            vertex(vertexconsumer, matrix4f, matrix3f, pPackedLight, 1.0F, 1f - 0.25f, 1, 0);
+            vertex(vertexconsumer, matrix4f, matrix3f, pPackedLight, 0.0F, 1f - 0.25f, 0, 0);
+            pPoseStack.popPose();
+        }
         super.render(pEntity, pEntityYaw, pPartialTick, pPoseStack, pBuffer, pPackedLight);
     }
 

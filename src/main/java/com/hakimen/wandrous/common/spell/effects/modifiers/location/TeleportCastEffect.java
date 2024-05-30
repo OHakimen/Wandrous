@@ -7,6 +7,8 @@ import com.hakimen.wandrous.common.spell.SpellStatus;
 import com.hakimen.wandrous.common.utils.data.Node;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.Snowball;
+import net.minecraft.world.item.SnowballItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -28,7 +30,7 @@ public class TeleportCastEffect extends SpellEffect {
 
         Level level = context.getLevel();
         Vec3 location = context.getLocation();
-        List<Entity> allEntities = level.getEntities(clone.getOriginalCaster(), AABB.ofSize(location,16,16,16), entity -> entity instanceof LivingEntity);
+        List<Entity> allEntities = level.getEntities(clone.getOriginalCaster(), AABB.ofSize(location,16,16,16), entity -> entity instanceof LivingEntity && !context.getHit().contains(entity));
 
         Entity closestEntity = null;
         for (Entity entity : allEntities) {

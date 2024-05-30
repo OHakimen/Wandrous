@@ -14,7 +14,9 @@ import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.*;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -24,7 +26,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.event.EventHooks;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,6 +77,7 @@ public class SpellCastingProjectile extends ThrowableProjectile {
             );
         }
     }
+
 
     protected static void onHitEntity(Projectile self, EntityHitResult pResult, SpellContext context) {
         SpellContext nextContext = context.clone();
@@ -132,7 +134,6 @@ public class SpellCastingProjectile extends ThrowableProjectile {
         return movers;
     }
 
-
     @Override
     protected void addAdditionalSaveData(CompoundTag pCompound) {
         pCompound.putInt("MaxTicks", maxTicks);
@@ -161,6 +162,8 @@ public class SpellCastingProjectile extends ThrowableProjectile {
 
     @Override
     public void tick() {
+        Vec3 vec3 = this.getDeltaMovement();
+        super.tick();
         HitResult hitresult = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
         boolean flag = false;
         if (hitresult.getType() == HitResult.Type.BLOCK) {
@@ -179,29 +182,30 @@ public class SpellCastingProjectile extends ThrowableProjectile {
             }
         }
 
-        if (hitresult.getType() != HitResult.Type.MISS && !flag && !EventHooks.onProjectileImpact(this, hitresult)) {
+        if (hitresult.getType() != HitResult.Type.MISS && !flag && !net.neoforged.neoforge.event.EventHooks.onProjectileImpact(this, hitresult)) {
             this.onHit(hitresult);
         }
 
         this.checkInsideBlocks();
-        Vec3 vec3 = this.getDeltaMovement();
+
         double d2 = this.getX() + vec3.x;
         double d0 = this.getY() + vec3.y;
         double d1 = this.getZ() + vec3.z;
         this.updateRotation();
+
         float f;
         if (this.isInWater()) {
-            f = getFluidInertia();
             for(int i = 0; i < 4; ++i) {
-                this.level().addParticle(ParticleTypes.BUBBLE, d2 - vec3.x * f, d0 - vec3.y * f, d1 - vec3.z * f, vec3.x, vec3.y, vec3.z);
+                float f1 = 0.25F;
+                this.level().addParticle(ParticleTypes.BUBBLE, d2 - vec3.x * f1, d0 - vec3.y * f1, d1 - vec3.z * f1, vec3.x, vec3.y, vec3.z);
             }
 
+            f = getFluidInertia();
         } else {
             f = getInertia();
         }
 
-        this.setDeltaMovement(vec3.scale(f));
-
+        this.setDeltaMovement(vec3.scale((double)f));
         if (!this.isNoGravity()) {
             Vec3 vec31 = this.getDeltaMovement();
             this.setDeltaMovement(vec31.x, vec31.y - (double)this.getGravity(), vec31.z);

@@ -27,11 +27,14 @@ public class WandrousClient {
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event){
         event.registerEntityRenderer(EntityRegister.TIMER_ENTITY.get(), TimerEntityRenderer::new);
+        event.registerEntityRenderer(EntityRegister.NUKE_ENTITY.get(), NukeRenderer::new);
+        event.registerEntityRenderer(EntityRegister.BOMB.get(), BombRenderer::new);
 
         event.registerEntityRenderer(EntityRegister.GLIMMERING_BOLT_PROJECTILE.get(), GlimmeringBoltProjectileRenderer::new);
         event.registerEntityRenderer(EntityRegister.FLAMING_BOLT_PROJECTILE.get(), FlamingBoltProjectileRenderer::new);
         event.registerEntityRenderer(EntityRegister.BLACK_HOLE_PROJECTILE.get(), BlackHoleProjectileRenderer::new);
         event.registerEntityRenderer(EntityRegister.SONIC_BOOM_PROJECTILE.get(), SonicBoomProjectileRenderer::new);
+        event.registerEntityRenderer(EntityRegister.CHAIN_SHOT.get(), ChainShotProjectileRenderer::new);
 
         Minecraft.getInstance().particleEngine.register(ParticleRegister.GLIMMERING_BOLT.get(),
                 GlimmeringBoltParticle.GlimmeringProvider::new);

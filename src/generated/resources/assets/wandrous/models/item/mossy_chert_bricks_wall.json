@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "wandrous:block/mossy_chert_bricks"
+  }
+}

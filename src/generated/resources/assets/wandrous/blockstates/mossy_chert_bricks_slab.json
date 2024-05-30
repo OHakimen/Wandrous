@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "wandrous:block/mossy_chert_bricks_slab"
+    },
+    "type=double": {
+      "model": "wandrous:block/mossy_chert_bricks"
+    },
+    "type=top": {
+      "model": "wandrous:block/mossy_chert_bricks_slab_top"
+    }
+  }
+}
