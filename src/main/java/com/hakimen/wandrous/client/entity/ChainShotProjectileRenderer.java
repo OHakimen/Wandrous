@@ -12,7 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class ChainShotProjectileRenderer extends EntityRenderer<ChainShotProjectile> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Wandrous.MODID, "");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "");
 
 
     public ChainShotProjectileRenderer(EntityRendererProvider.Context pContext) {
@@ -27,7 +27,7 @@ public class ChainShotProjectileRenderer extends EntityRenderer<ChainShotProject
     @Override
     public void render(ChainShotProjectile pEntity, float pEntityYaw, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
         for (int i = 0; i < 2; i++) {
-            pEntity.level().addParticle(ParticleTypes.GLOW, pEntity.getX() - 0.5f, pEntity.getY() - 0.5f, pEntity.getZ() - 0.5f, 0, 0, 0);
+            pEntity.level().addParticle(ParticleTypes.GLOW, pEntity.getX(), pEntity.getY() + 0.25f, pEntity.getZ(), 0, 0, 0);
         }
         super.render(pEntity, pEntityYaw, pPartialTick, pPoseStack, pBuffer, pPackedLight);
     }

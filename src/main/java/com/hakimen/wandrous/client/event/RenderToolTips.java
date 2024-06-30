@@ -3,6 +3,7 @@ package com.hakimen.wandrous.client.event;
 import com.hakimen.wandrous.Wandrous;
 import com.hakimen.wandrous.client.tooltip.SpellTooltipRenderer;
 import com.hakimen.wandrous.common.item.WandItem;
+import com.hakimen.wandrous.common.registers.DataComponentsRegister;
 import com.mojang.datafixers.util.Either;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
@@ -11,7 +12,7 @@ import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.client.event.RenderTooltipEvent;
 import net.neoforged.neoforge.items.IItemHandler;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Mod.EventBusSubscriber(modid = Wandrous.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@EventBusSubscriber(modid = Wandrous.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.GAME)
 public class RenderToolTips {
     @SubscribeEvent
     public static void renderTooltips(RenderTooltipEvent.GatherComponents e) {
@@ -28,7 +29,7 @@ public class RenderToolTips {
         ItemStack stack = e.getItemStack();
 
         if(stack.getItem() instanceof WandItem) {
-            int wandCapacity = stack.getOrCreateTag().getInt(WandItem.CAPACITY);
+            int wandCapacity = stack.get(DataComponentsRegister.WAND_COMPONENT.get()).getCapacity();
             if (wandCapacity == 0) return;
 
             Optional<IItemHandler> handler = Optional.ofNullable(stack.getCapability(Capabilities.ItemHandler.ITEM));

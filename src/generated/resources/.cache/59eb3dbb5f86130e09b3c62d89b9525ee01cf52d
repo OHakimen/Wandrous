@@ -1,3 +1,3 @@
-// 1.20.4	2024-05-30T14:16:49.60347	Loot Tables
-fec065f4487f033d04b5d0580fda6ba861d4c631 data/wandrous/loot_tables/chests/dungeon_cell.json
-521df4d048e1675842ad6a0cd712d21147d368af data/wandrous/loot_tables/chests/dungeon_study_quarters.json
+// 1.21	2024-06-20T17:19:31.3196449	Loot Tables
+3a3177d031b73b231accdd842773b91ab0f3bf2b data/wandrous/loot_table/chests/dungeon_cell.json
+fadd6a385cb81e43af316698e1447c0fff818102 data/wandrous/loot_table/chests/dungeon_study_quarters.json

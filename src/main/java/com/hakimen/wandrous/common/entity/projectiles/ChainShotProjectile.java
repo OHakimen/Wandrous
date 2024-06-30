@@ -6,6 +6,9 @@ import com.hakimen.wandrous.common.spell.SpellEffect;
 import com.hakimen.wandrous.common.spell.mover.ISpellMover;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -91,6 +94,7 @@ public class ChainShotProjectile extends SpellCastingProjectile {
             this.level().broadcastEntityEvent(this, (byte) 3);
             if (hitCount > 0 && pResult.getEntity() instanceof LivingEntity livingEntity && !hit.contains(livingEntity)) {
                 hit.add(livingEntity);
+                level().playSound(null, context.getCaster().getOnPos(), SoundEvents.AMETHYST_BLOCK_HIT, SoundSource.PLAYERS, 1,1f + (hit.size() / 10f));
                 context.setHomingTarget(null);
                 hitCount--;
             }
@@ -114,18 +118,32 @@ public class ChainShotProjectile extends SpellCastingProjectile {
                 float radius = context.getStatus().getRadius();
                 List<Entity> entities = level.getEntities(context.getCaster(), AABB.ofSize(pos, radius, radius, radius), (entity) -> entity instanceof LivingEntity && !entity.equals(context.getOriginalCaster()) && !hit.contains(entity));
 
-                LivingEntity closest = !entities.isEmpty() ? (LivingEntity) entities.get(new Random().nextInt(0, entities.size())) : null ;
+                LivingEntity closest = null;
+
+                float closestDist = Float.MAX_VALUE;
+                for (Entity entity : entities) {
+                    if (closest == null) {
+                        closest = (LivingEntity) entity;
+                        closestDist = (float) closest.position().distanceTo(getPosition(0));
+                    } else if(closestDist >= entity.position().distanceTo(getPosition(0))){
+                        closest = (LivingEntity) entity;
+                        closestDist = (float) closest.position().distanceTo(getPosition(0));
+                    }
+                }
 
                 if (closest != null) {
                     context.setHomingTarget(closest);
                 }
 
-            } else if (context.getHomingTarget() != null) {
+            }
+
+            if (context.getHomingTarget() != null) {
                 LivingEntity target = context.getHomingTarget();
-                if(target.isAlive()){
+                if (target.isAlive()) {
                     setDeltaMovement(target.getEyePosition().subtract(getPosition(0)).normalize().scale(context.getStatus().getSpeed()));
+                }else{
+                    context.setHomingTarget(null);
                 }
-                context.setHomingTarget(null);
             }
         }
 
@@ -136,6 +154,7 @@ public class ChainShotProjectile extends SpellCastingProjectile {
                     this.context.getHit().addAll(hit);
                     SpellCastingProjectile.onTimeEnd(this, this.context);
                 }
+                level().playSound(null, context.getCaster().getOnPos(), SoundEvents.AMETHYST_CLUSTER_HIT, SoundSource.PLAYERS, 1,1f);
                 discard();
             }
         }
@@ -153,8 +172,8 @@ public class ChainShotProjectile extends SpellCastingProjectile {
     }
 
     @Override
-    protected void defineSynchedData() {
-
+    protected void defineSynchedData(SynchedEntityData.Builder pBuilder) {
+        super.defineSynchedData(pBuilder);
     }
 
     @Override

@@ -1,0 +1,76 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:explosion"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:major_explosion"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:crumbling_charge"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:fireball"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:trigger_fireball"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:timer_fireball"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:black_hole"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:timer_black_hole"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:hexagon_cast"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:line_cast"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:conjure_webs"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:add_mana"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:small_delay_cast"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:medium_delay_cast"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:big_delay_cast"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 16.0,
+        "min": 6.0
+      }
+    }
+  ],
+  "random_sequence": "wandrous:chests/dungeon_study_quarters"
+}

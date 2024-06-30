@@ -1,9 +1,9 @@
 package com.hakimen.wandrous.common.utils;
 
-import com.hakimen.wandrous.common.item.WandItem;
+import com.hakimen.wandrous.common.item.component.WandDataComponent;
+import com.hakimen.wandrous.common.registers.DataComponentsRegister;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.items.ItemStackHandler;
 
 import java.util.List;
 import java.util.Random;
@@ -155,23 +155,25 @@ public class WandUtils {
 
 
     public static void makeWand(ItemStack stack){
-        CompoundTag tag = new CompoundTag();
 
         Random r = new Random(stack.hashCode() ^ System.nanoTime());
 
-        tag.putInt(WandItem.CAPACITY, r.nextInt(3, 54));
-        tag.putInt(WandItem.MAX_MANA, r.nextInt(64, 2048));
-        tag.putInt(WandItem.MANA_CHARGE_SPEED, r.nextInt(64, 2048));
-        tag.putFloat(WandItem.CAST_DELAY, r.nextFloat(-2f, 5f));
-        tag.putFloat(WandItem.RECHARGE_SPEED, r.nextFloat(-2f, 5f));
+        WandDataComponent.WandStatBuilder builder = new WandDataComponent.WandStatBuilder();
 
-        tag.putInt(WandItem.WAND, r.nextInt(0, 6));
-        tag.putInt(WandItem.GEM, r.nextInt(0, 8));
+        builder.setCapacity(r.nextInt(3, 54));
+        builder.setMaxMana(r.nextInt(64, 2048));
+        builder.setManaChargeSpeed(r.nextInt(64, 2048));
+        builder.setCastDelay(r.nextFloat(-2f, 5f));
+        builder.setRechargeSpeed(r.nextFloat(-2f, 5f));
+        builder.setMana(builder.getMaxMana());
 
-        tag.putString("name", buildWandName());
+        builder.setWand(r.nextInt(0, 6));
+        builder.setGem(r.nextInt(0, 8));
 
-        tag.put("Inventory", new ItemStackHandler(tag.getInt(WandItem.CAPACITY)).serializeNBT());
-        stack.setTag(tag);
+        builder.setWandName(buildWandName());
+
+        builder.setInventory(new CompoundTag());
+        stack.set(DataComponentsRegister.WAND_COMPONENT.get(), builder.build());
     }
 
     public static String buildWandName() {

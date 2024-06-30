@@ -4,10 +4,10 @@ import com.hakimen.wandrous.Wandrous;
 import com.hakimen.wandrous.client.tooltip.SpellTooltipRenderer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
 
-@Mod.EventBusSubscriber(modid = Wandrous.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = Wandrous.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
 public class AddClientSideComps {
 
     @SubscribeEvent

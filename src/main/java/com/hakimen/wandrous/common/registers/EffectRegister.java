@@ -15,7 +15,6 @@ public class EffectRegister {
     public static final DeferredHolder<MobEffect, MobEffect> FREEZING = MOB_EFFECTS.register("freezing", FreezingEffect::new);
     public static final DeferredHolder<MobEffect, MobEffect> IGNITE = MOB_EFFECTS.register("ignite", IgniteEffect::new);
 
-
     public static void register(IEventBus bus) {
         MOB_EFFECTS.register(bus);
     }

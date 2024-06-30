@@ -18,9 +18,9 @@ import org.joml.Matrix4f;
 
 public class TimerEntityRenderer extends EntityRenderer<TimerEntity> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Wandrous.MODID, "textures/entity/timer/base.png");
-    private static final ResourceLocation SMALL_ARM = new ResourceLocation(Wandrous.MODID, "textures/entity/timer/small.png");
-    private static final ResourceLocation BIG_ARM = new ResourceLocation(Wandrous.MODID, "textures/entity/timer/large.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "textures/entity/timer/base.png");
+    private static final ResourceLocation SMALL_ARM = ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "textures/entity/timer/small.png");
+    private static final ResourceLocation BIG_ARM = ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "textures/entity/timer/large.png");
 
     public TimerEntityRenderer(EntityRendererProvider.Context pContext) {
         super(pContext);
@@ -75,10 +75,10 @@ public class TimerEntityRenderer extends EntityRenderer<TimerEntity> {
         Matrix4f matrix4f = posestack$pose.pose();
         Matrix3f matrix3f = posestack$pose.normal();
         VertexConsumer vertexconsumer = pBuffer.getBuffer(RenderType.entityTranslucent(extra));
-        vertex(vertexconsumer, matrix4f, matrix3f, pPackedLight, 0.0F, -0.25f, 0, 1, 0,255,200);
-        vertex(vertexconsumer, matrix4f, matrix3f, pPackedLight, 1.0F, -0.25f, 1, 1, 0,255,200);
-        vertex(vertexconsumer, matrix4f, matrix3f, pPackedLight, 1.0F, 1f - 0.25f, 1, 0, 0,255,200);
-        vertex(vertexconsumer, matrix4f, matrix3f, pPackedLight, 0.0F, 1f - 0.25f, 0, 0, 0,255,200);
+        vertex(vertexconsumer, matrix4f, pPackedLight, 0.0F, -0.25f, 0, 1, 0,255,200);
+        vertex(vertexconsumer, matrix4f, pPackedLight, 1.0F, -0.25f, 1, 1, 0,255,200);
+        vertex(vertexconsumer, matrix4f, pPackedLight, 1.0F, 1f - 0.25f, 1, 0, 0,255,200);
+        vertex(vertexconsumer, matrix4f, pPackedLight, 0.0F, 1f - 0.25f, 0, 0, 0,255,200);
         pPoseStack.popPose();
     }
 
@@ -95,14 +95,14 @@ public class TimerEntityRenderer extends EntityRenderer<TimerEntity> {
         Matrix4f matrix4f = posestack$pose.pose();
         Matrix3f matrix3f = posestack$pose.normal();
         VertexConsumer vertexconsumer = pBuffer.getBuffer(RenderType.entityTranslucent(BIG_ARM));
-        vertex(vertexconsumer, matrix4f, matrix3f, pPackedLight, 0.0F, -0.25f, 0, 1, 0,255,200);
-        vertex(vertexconsumer, matrix4f, matrix3f, pPackedLight, 1.0F, -0.25f, 1, 1, 0,255,200);
-        vertex(vertexconsumer, matrix4f, matrix3f, pPackedLight, 1.0F, 1f - 0.25f, 1, 0, 0,255,200);
-        vertex(vertexconsumer, matrix4f, matrix3f, pPackedLight, 0.0F, 1f - 0.25f, 0, 0, 0,255,200);
+        vertex(vertexconsumer, matrix4f, pPackedLight, 0.0F, -0.25f, 0, 1, 0,255,200);
+        vertex(vertexconsumer, matrix4f, pPackedLight, 1.0F, -0.25f, 1, 1, 0,255,200);
+        vertex(vertexconsumer, matrix4f, pPackedLight, 1.0F, 1f - 0.25f, 1, 0, 0,255,200);
+        vertex(vertexconsumer, matrix4f, pPackedLight, 0.0F, 1f - 0.25f, 0, 0, 0,255,200);
         pPoseStack.popPose();
     }
 
-    private static void vertex(VertexConsumer pConsumer, Matrix4f pPose, Matrix3f pNormal, int pLightmapUV, float pX, float pY, int pU, int pV, int r, int g, int b) {
-        pConsumer.vertex(pPose, pX - 0.5F, pY - 0.25F, 0.0F).color(r, g,b, 255).uv((float)pU, (float)pV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(pLightmapUV).normal(pNormal, 0.0F, 0.0F, 1.0F).endVertex();
+    private static void vertex(VertexConsumer pConsumer, Matrix4f pPose, int pLightmapUV, float pX, float pY, int pU, int pV, int r, int g, int b) {
+        pConsumer.addVertex(pPose, pX - 0.5F, pY - 0.25F, 0.0F).setColor(r, g,b, 255).setUv((float)pU, (float)pV).setOverlay(OverlayTexture.NO_OVERLAY).setUv2(pLightmapUV,pLightmapUV).setNormal(0.0F, 0.0F, 1.0F);
     }
 }

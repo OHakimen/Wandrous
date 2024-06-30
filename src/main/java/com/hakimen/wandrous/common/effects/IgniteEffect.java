@@ -4,8 +4,6 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 
-import java.awt.*;
-
 public class IgniteEffect extends MobEffect {
 
 
@@ -19,7 +17,8 @@ public class IgniteEffect extends MobEffect {
     }
 
     @Override
-    public void applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
-        pLivingEntity.setSecondsOnFire(2);
+    public boolean applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
+        pLivingEntity.setRemainingFireTicks(2);
+        return true;
     }
 }

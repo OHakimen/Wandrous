@@ -12,10 +12,10 @@ public class BlockModelProvider extends net.neoforged.neoforge.client.model.gene
 
     @Override
     protected void registerModels() {
-        cubeAll("chiseled_chert_bricks_0", new ResourceLocation(Wandrous.MODID,"block/chiseled_chert_bricks_0"));
-        cubeAll("chiseled_chert_bricks_1", new ResourceLocation(Wandrous.MODID,"block/chiseled_chert_bricks_1"));
-        cubeAll("chiseled_chert_bricks_2", new ResourceLocation(Wandrous.MODID,"block/chiseled_chert_bricks_2"));
-        cubeAll("chiseled_chert_bricks_3", new ResourceLocation(Wandrous.MODID,"block/chiseled_chert_bricks_3"));
+        cubeAll("chiseled_chert_bricks_0", ResourceLocation.fromNamespaceAndPath(Wandrous.MODID,"block/chiseled_chert_bricks_0"));
+        cubeAll("chiseled_chert_bricks_1", ResourceLocation.fromNamespaceAndPath(Wandrous.MODID,"block/chiseled_chert_bricks_1"));
+        cubeAll("chiseled_chert_bricks_2", ResourceLocation.fromNamespaceAndPath(Wandrous.MODID,"block/chiseled_chert_bricks_2"));
+        cubeAll("chiseled_chert_bricks_3", ResourceLocation.fromNamespaceAndPath(Wandrous.MODID,"block/chiseled_chert_bricks_3"));
         
     }
 }

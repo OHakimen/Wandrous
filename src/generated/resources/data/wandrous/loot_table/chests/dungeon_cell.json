@@ -1,0 +1,114 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:glimmering_bolt",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:timer_glimmering_bolt",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:trigger_glimmering_bolt",
+          "weight": 4
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:chain_shot",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:timer_chain_shot"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:trigger_chain_shot",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:bomb",
+          "weight": 4
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:accelerate_cast"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:decrease_spread"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:homing"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:bestow_curse_glow"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:bestow_blessing_night_vision"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:collect"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:drill"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:teleport_cast"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:long_distance_cast"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:poison_charge"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:freezing_charge"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:igneous_charge"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:swap_teleport"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:teleport"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:conjure_block"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wandrous:conjure_light"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 16.0,
+        "min": 6.0
+      }
+    }
+  ],
+  "random_sequence": "wandrous:chests/dungeon_cell"
+}

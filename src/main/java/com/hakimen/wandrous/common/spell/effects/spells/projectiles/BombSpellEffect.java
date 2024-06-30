@@ -1,6 +1,5 @@
 package com.hakimen.wandrous.common.spell.effects.spells.projectiles;
 
-import com.hakimen.wandrous.common.entity.projectiles.BlackHoleProjectile;
 import com.hakimen.wandrous.common.entity.projectiles.BombProjectile;
 import com.hakimen.wandrous.common.spell.SpellContext;
 import com.hakimen.wandrous.common.spell.SpellStatus;
@@ -14,7 +13,7 @@ public class BombSpellEffect extends ProjectileSpellEffect {
         this.setStatus(new SpellStatus()
                 .setDamage(5)
                 .setManaDrain(30)
-                .setSpeed(0.5f)
+                .setSpeed(1f)
                 .setSpread(0)
                 .setLifeTime(100)
         );

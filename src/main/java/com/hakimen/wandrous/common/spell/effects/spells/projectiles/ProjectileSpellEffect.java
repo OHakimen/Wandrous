@@ -25,6 +25,9 @@ public class ProjectileSpellEffect extends SpellEffect {
         Entity caster = context.getCaster();
         SpellStatus status = context.getStatus();
 
+        if(caster.equals(context.getOriginalCaster())){
+            self.setPos(self.getX(), self.getY() - self.getBbHeight()/2f, self.getZ());
+        }
 
         if (caster instanceof LivingEntity livingEntity) {
             float yRot = livingEntity.getYRot() + Math.round(context.getSplit() / 2.0) * (10 + status.getSpread() * 10) * (context.getSplit() % 2 == 1 ? -1 : 1);

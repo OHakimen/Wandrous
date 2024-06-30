@@ -3,6 +3,9 @@ package com.hakimen.wandrous.client.model;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.hakimen.wandrous.common.item.component.WandDataComponent;
+import com.hakimen.wandrous.common.registers.DataComponentsRegister;
+import com.mojang.math.Transformation;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.client.renderer.block.model.ItemModelGenerator;
@@ -16,6 +19,7 @@ import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.client.model.SimpleModelState;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -62,7 +66,7 @@ public class DynamicTextureModel {
         return this;
     }
 
-    private static Map<ItemStack, BakedModel> bakedModelsFromTextures = new HashMap<>();
+    private static Map<WandDataComponent.WandStat, BakedModel> bakedModelsFromTextures = new HashMap<>();
 
     @Nullable
     public BakedModel getBakedModel(ModelManager modelManager) {
@@ -71,6 +75,8 @@ public class DynamicTextureModel {
 
     @Nullable
     private BakedModel getBakedModel(ModelManager modelManager, int nests) {
+        WandDataComponent.WandStat actualData = stack.get(DataComponentsRegister.WAND_COMPONENT.get());
+        WandDataComponent.WandStat stat = new WandDataComponent.WandStatBuilder(WandDataComponent.DEFAULT_STAT).setWand(actualData.getWand()).setGem(actualData.getGem()).build();
         if (nests > 10) {
             return null;
         }
@@ -80,22 +86,29 @@ public class DynamicTextureModel {
             }
             return null;
         }
+
+        if(bakedModelsFromTextures.containsKey(stat)){
+            return bakedModelsFromTextures.get(stat);
+        }
+
         if (fromJson) {
-            BakedModel model = modelManager.getModel(new ModelResourceLocation(id.getNamespace(), id.getPath(), "inventory"));
+            BakedModel model = modelManager.getModel(ModelResourceLocation.inventory(ResourceLocation.fromNamespaceAndPath(id.getNamespace(), id.getPath())));
             if (model != modelManager.getMissingModel()) {
                 return model;
             }
         } else {
-
             BlockModel jsonModel = makeUnbakedModel();
 
+            ModelBakerImpl impl = new ModelBakerImpl(DynamicTextureModel::spriteLoader);
 
-            BakedModel bakedModel = jsonModel.bake(null, DynamicTextureModel::spriteLoader, BlockModelRotation.X0_Y0, id);
+            BakedModel model = impl.bakeUncached(jsonModel, new SimpleModelState(
+                    Transformation.identity()
+            ));
 
-
-            bakedModelsFromTextures.put(stack, bakedModel);
-            return bakedModel;
+            bakedModelsFromTextures.put(stat,model);
+            return model;
         }
+
         return null;
     }
 
@@ -149,13 +162,13 @@ public class DynamicTextureModel {
     }
 
     public static boolean hasTexture(ResourceLocation textureId) {
-        ResourceLocation resourceId = new ResourceLocation(textureId.getNamespace(), "textures/" + textureId.getPath() + ".png");
+        ResourceLocation resourceId = ResourceLocation.fromNamespaceAndPath(textureId.getNamespace(), "textures/" + textureId.getPath() + ".png");
         Optional<Resource> maybeTexture = Minecraft.getInstance().getResourceManager().getResource(resourceId);
         return maybeTexture.isPresent();
     }
 
     public static boolean hasModel(ResourceLocation modelId) {
-        ResourceLocation resourceId = new ResourceLocation(modelId.getNamespace(), "models/" + modelId.getPath() + ".json");
+        ResourceLocation resourceId = ResourceLocation.fromNamespaceAndPath(modelId.getNamespace(), "models/" + modelId.getPath() + ".json");
         Optional<Resource> maybeModel = Minecraft.getInstance().getResourceManager().getResource(resourceId);
         return maybeModel.isPresent();
     }
@@ -169,4 +182,5 @@ public class DynamicTextureModel {
         clearCache();
         return preparationBarrier.wait(null);
     }
+
 }

@@ -5,7 +5,6 @@ import com.hakimen.wandrous.common.spell.SpellEffect;
 import com.hakimen.wandrous.common.spell.SpellStatus;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -17,6 +16,7 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -46,25 +46,35 @@ public class ChainsawSpellEffect extends SpellEffect {
         Iterator<BlockPos> positions = BlockPos.betweenClosed(pos.offset((int) -radius, (int) -radius, (int) -radius), pos.offset((int) radius, (int) radius, (int) radius)).iterator();
 
 
-        while(positions.hasNext()) {
+        List<ItemStack> stacksList = new ArrayList<>();
+
+        while (positions.hasNext()) {
             BlockPos blockpos = positions.next();
             if (blockpos.closerToCenterThan(location, radius)) {
                 BlockState state = level.getBlockState(blockpos);
-                if(!level.isClientSide){
-                    if(state.is(BlockTags.MINEABLE_WITH_AXE)) {
-                        List<ItemStack> stackList =  state.getDrops(new LootParams.Builder((ServerLevel) context.getLevel())
+                if (!level.isClientSide) {
+                    if (state.is(BlockTags.MINEABLE_WITH_AXE) || state.is(BlockTags.LEAVES)) {
+                        List<ItemStack> stackList = state.getDrops(new LootParams.Builder((ServerLevel) context.getLevel())
                                 .withParameter(LootContextParams.TOOL, getMineAs())
                                 .withParameter(LootContextParams.ORIGIN, pos.getCenter()));
                         level.setBlockAndUpdate(blockpos, Blocks.AIR.defaultBlockState());
-                        for(ItemStack stack : stackList) {
-                            ItemEntity entity = new ItemEntity(EntityType.ITEM, level);
-                            entity.setItem(stack);
-                            entity.setPos(blockpos.getX() + 0.5f + level.getRandom().nextInt(-1,1) / 4f, blockpos.getY() + 0.5f + level.getRandom().nextInt(-1,1) / 4f, blockpos.getZ() + 0.5f + level.getRandom().nextInt(-1,1) / 4f);
-                            level.addFreshEntity(entity);
-                        }
+                        stacksList.addAll(stackList);
                     }
                 }
             }
+        }
+
+        stacksList.stream().reduce((i1, i2) -> {
+            if (i1.getCount() + i2.getCount() <= i1.getMaxStackSize()) {
+                i1.setCount(i1.getCount() + i2.getCount());
+            }
+            return i1;
+        });
+        for (ItemStack stack : stacksList) {
+            ItemEntity entity = new ItemEntity(EntityType.ITEM, level);
+            entity.setItem(stack);
+            entity.setPos(location.x() + 0.5f + level.getRandom().nextInt(-1, 1) / 4f, location.y() + 0.5f + level.getRandom().nextInt(-1, 1) / 4f, location.z() + 0.5f + level.getRandom().nextInt(-1, 1) / 4f);
+            level.addFreshEntity(entity);
         }
     }
 

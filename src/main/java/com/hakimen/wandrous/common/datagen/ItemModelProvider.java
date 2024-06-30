@@ -31,8 +31,8 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         block(BlockRegister.CHERT_STAIRS.get());
         block(BlockRegister.CHERT_SLAB.get());
         getBuilder(BuiltInRegistries.BLOCK.getKey(BlockRegister.CHERT_WALL.get()).toString().replaceAll(Wandrous.MODID+":",""))
-                .parent(new ModelFile.ExistingModelFile(new ResourceLocation("minecraft", "block/wall_inventory"), existingFileHelper))
-                .texture("wall", new ResourceLocation(Wandrous.MODID, "block/chert"));
+                .parent(new ModelFile.ExistingModelFile(ResourceLocation.fromNamespaceAndPath("minecraft", "block/wall_inventory"), existingFileHelper))
+                .texture("wall", ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/chert"));
 
 
         block(BlockRegister.POLISHED_CHERT.get());
@@ -45,19 +45,19 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         block(BlockRegister.CHERT_BRICKS_STAIRS.get());
         block(BlockRegister.CHERT_BRICKS_SLAB.get());
         getBuilder(BuiltInRegistries.BLOCK.getKey(BlockRegister.CHERT_BRICKS_WALL.get()).toString().replaceAll(Wandrous.MODID+":",""))
-                .parent(new ModelFile.ExistingModelFile(new ResourceLocation("minecraft", "block/wall_inventory"), existingFileHelper))
-                .texture("wall", new ResourceLocation(Wandrous.MODID, "block/chert_bricks"));
+                .parent(new ModelFile.ExistingModelFile(ResourceLocation.fromNamespaceAndPath("minecraft", "block/wall_inventory"), existingFileHelper))
+                .texture("wall", ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/chert_bricks"));
 
         block(BlockRegister.CRACKED_CHERT_BRICKS.get());
-        blockWithAnotherModel(BlockRegister.CHISELED_CHERT_BRICKS.get(), new ResourceLocation(Wandrous.MODID, "block/chiseled_chert_bricks_0"));
+        blockWithAnotherModel(BlockRegister.CHISELED_CHERT_BRICKS.get(), ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/chiseled_chert_bricks_0"));
         block(BlockRegister.CHERT_PILLAR.get());
 
         block(BlockRegister.MOSSY_CHERT_BRICKS.get());
         block(BlockRegister.MOSSY_CHERT_BRICKS_STAIRS.get());
         block(BlockRegister.MOSSY_CHERT_BRICKS_SLAB.get());
         getBuilder(BuiltInRegistries.BLOCK.getKey(BlockRegister.MOSSY_CHERT_BRICKS_WALL.get()).toString().replaceAll(Wandrous.MODID+":",""))
-                .parent(new ModelFile.ExistingModelFile(new ResourceLocation("minecraft", "block/wall_inventory"), existingFileHelper))
-                .texture("wall", new ResourceLocation(Wandrous.MODID, "block/mossy_chert_bricks"));
+                .parent(new ModelFile.ExistingModelFile(ResourceLocation.fromNamespaceAndPath("minecraft", "block/wall_inventory"), existingFileHelper))
+                .texture("wall", ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/mossy_chert_bricks"));
 
         block(BlockRegister.CHERT_TILES.get());
         block(BlockRegister.CHERT_TILES_STAIRS.get());
@@ -151,6 +151,9 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         makeSpell(ItemRegister.CONJURE_BLOCK_SPELL.get());
         makeVanillaBasedSpell(ItemRegister.CONJURE_WEBS_SPELL.get(), "minecraft:block/cobweb");
 
+        makeSpell(ItemRegister.GUST_SPELL.get());
+        makeSpell(ItemRegister.CHAIN_PRISON_SPELL.get());
+
         makeSpell(ItemRegister.BESTOW_CURSE_HUNGER_SPELL.get());
         makeSpell(ItemRegister.BESTOW_CURSE_MINING_FATIGUE_SPELL.get());
         makeSpell(ItemRegister.BESTOW_CURSE_LEVITATE_SPELL.get());
@@ -168,11 +171,12 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         makeSpell(ItemRegister.BESTOW_BLESSING_NIGHT_VISION_SPELL.get());
         makeSpell(ItemRegister.BESTOW_BLESSING_RESIST_FIRE_SPELL.get());
         makeSpell(ItemRegister.BESTOW_BLESSING_SPEED_SPELL.get());
+
     }
 
 
     private ItemModelBuilder block(Block block){
-        return withExistingParent(BuiltInRegistries.BLOCK.getKey(block).toString().replaceAll(Wandrous.MODID+":",""),new ResourceLocation(Wandrous.MODID,"block/"+BuiltInRegistries.BLOCK.getKey(block).toString().replaceAll(Wandrous.MODID+":","")));
+        return withExistingParent(BuiltInRegistries.BLOCK.getKey(block).toString().replaceAll(Wandrous.MODID+":",""),ResourceLocation.fromNamespaceAndPath(Wandrous.MODID,"block/"+BuiltInRegistries.BLOCK.getKey(block).toString().replaceAll(Wandrous.MODID+":","")));
     }
 
     private ItemModelBuilder blockWithAnotherModel(Block block, ResourceLocation location){
@@ -182,7 +186,7 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
 
     public void makeTriggerSpell(SpellEffectItem item, String texture){
         getBuilder(item.toString())
-                .parent(new ModelFile.ExistingModelFile(new ResourceLocation("minecraft:item/generated"), existingFileHelper))
+                .parent(new ModelFile.ExistingModelFile(ResourceLocation.parse("minecraft:item/generated"), existingFileHelper))
                 .texture("layer0", "wandrous:item/spell/bases/spell_base")
                 .texture("layer1", texture)
                 .texture("layer2", "wandrous:item/spell/layers/trigger");
@@ -191,7 +195,7 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
 
     public void makeTriggerSpell(SpellEffectItem item){
         getBuilder(item.toString())
-                .parent(new ModelFile.ExistingModelFile(new ResourceLocation("minecraft:item/generated"), existingFileHelper))
+                .parent(new ModelFile.ExistingModelFile(ResourceLocation.parse("minecraft:item/generated"), existingFileHelper))
                 .texture("layer0", "wandrous:item/spell/bases/spell_base")
                 .texture("layer1",  item.toString().replace(":", ":item/spell/"))
                 .texture("layer2", "wandrous:item/spell/layers/trigger");
@@ -200,7 +204,7 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
 
     public void makeTimerSpell(SpellEffectItem item, String texture){
         getBuilder(item.toString())
-                .parent(new ModelFile.ExistingModelFile(new ResourceLocation("minecraft:item/generated"), existingFileHelper))
+                .parent(new ModelFile.ExistingModelFile(ResourceLocation.parse("minecraft:item/generated"), existingFileHelper))
                 .texture("layer0", "wandrous:item/spell/bases/spell_base")
                 .texture("layer1", texture)
                 .texture("layer2", "wandrous:item/spell/layers/timer");
@@ -208,14 +212,14 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
 
     public void makeVanillaBasedSpell(SpellEffectItem item, String texture){
         getBuilder(item.toString())
-                .parent(new ModelFile.ExistingModelFile(new ResourceLocation("minecraft:item/generated"), existingFileHelper))
+                .parent(new ModelFile.ExistingModelFile(ResourceLocation.parse("minecraft:item/generated"), existingFileHelper))
                 .texture("layer0", item.getSpellEffect().hasKind(SpellEffect.SPELL) ? "wandrous:item/spell/bases/spell_base" : "wandrous:item/spell/bases/modifier_base")
                 .texture("layer1", texture);
     }
 
     public void makeSpell(SpellEffectItem item){
         getBuilder(item.toString())
-                .parent(new ModelFile.ExistingModelFile(new ResourceLocation("minecraft:item/generated"), existingFileHelper))
+                .parent(new ModelFile.ExistingModelFile(ResourceLocation.parse("minecraft:item/generated"), existingFileHelper))
                 .texture("layer0", item.getSpellEffect().hasKind(SpellEffect.SPELL) ? "wandrous:item/spell/bases/spell_base" : "wandrous:item/spell/bases/modifier_base")
                 .texture("layer1", item.toString().replace(":", ":item/spell/"));
     }

@@ -11,7 +11,8 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class SoundRegister {
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, Wandrous.MODID);
 
-    public static final DeferredHolder<SoundEvent, SoundEvent> TIMER_SPELL = SOUNDS.register("timer", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(Wandrous.MODID, "timer")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> TIMER_SPELL = SOUNDS.register("timer", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "timer")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> NUKE = SOUNDS.register("nuke", () -> SoundEvent.createFixedRangeEvent(ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "nuke"), 256));
 
     public static void register(IEventBus bus){
         SOUNDS.register(bus);

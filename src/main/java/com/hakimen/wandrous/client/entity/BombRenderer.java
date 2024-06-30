@@ -12,19 +12,18 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
-import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 
 public class BombRenderer extends EntityRenderer<BombProjectile> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Wandrous.MODID, "textures/items/spell/bomb.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "textures/item/spell/bomb.png");
 
     public BombRenderer(EntityRendererProvider.Context pContext) {
         super(pContext);
     }
 
     @Override
-    public ResourceLocation getTextureLocation(BombProjectile timerEntity) {
+    public ResourceLocation getTextureLocation(BombProjectile bomb) {
         return TEXTURE;
     }
 
@@ -37,12 +36,11 @@ public class BombRenderer extends EntityRenderer<BombProjectile> {
             pPoseStack.scale(1.25f,1.25f,1.25f);
             PoseStack.Pose posestack$pose = pPoseStack.last();
             Matrix4f matrix4f = posestack$pose.pose();
-            Matrix3f matrix3f = posestack$pose.normal();
-            VertexConsumer vertexconsumer = pBuffer.getBuffer(RenderType.entityTranslucent( new ResourceLocation(Wandrous.MODID, "textures/item/spell/bomb.png")));
-            vertex(vertexconsumer, matrix4f, matrix3f, pPackedLight, 0.0F, -0.25f, 0, 1);
-            vertex(vertexconsumer, matrix4f, matrix3f, pPackedLight, 1.0F, -0.25f, 1, 1);
-            vertex(vertexconsumer, matrix4f, matrix3f, pPackedLight, 1.0F, 1f - 0.25f, 1, 0);
-            vertex(vertexconsumer, matrix4f, matrix3f, pPackedLight, 0.0F, 1f - 0.25f, 0, 0);
+            VertexConsumer vertexconsumer = pBuffer.getBuffer(RenderType.entityTranslucent( TEXTURE ));
+            vertex(vertexconsumer, matrix4f, pPackedLight, 0.0F, 0f, 0, 1);
+            vertex(vertexconsumer, matrix4f, pPackedLight, 1.0F, 0f, 1, 1);
+            vertex(vertexconsumer, matrix4f, pPackedLight, 1.0F, 1f, 1, 0);
+            vertex(vertexconsumer, matrix4f, pPackedLight, 0.0F, 1f, 0, 0);
             pPoseStack.popPose();
         }
         super.render(pEntity, pEntityYaw, pPartialTick, pPoseStack, pBuffer, pPackedLight);
@@ -53,7 +51,7 @@ public class BombRenderer extends EntityRenderer<BombProjectile> {
         return super.getBlockLightLevel(pEntity, pPos);
     }
 
-    private static void vertex(VertexConsumer pConsumer, Matrix4f pPose, Matrix3f pNormal, int pLightmapUV, float pX, float pY, int pU, int pV) {
-        pConsumer.vertex(pPose, pX - 0.5F, pY - 0.25F, 0.0F).color(255, 255, 255, 255).uv((float)pU, (float)pV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(pLightmapUV).normal(pNormal, 0.0F, 0.0F, 1.0F).endVertex();
+    private static void vertex(VertexConsumer pConsumer, Matrix4f pPose, int pLightmapUV, float pX, float pY, int pU, int pV) {
+        pConsumer.addVertex(pPose, pX - 0.5F, pY - 0.25F, 0.0F).setColor(255, 255, 255, 255).setUv((float)pU, (float)pV).setOverlay(OverlayTexture.NO_OVERLAY).setUv2(pLightmapUV,pLightmapUV).setNormal( 1.0F, 1.0F, 1.0F);
     }
 }

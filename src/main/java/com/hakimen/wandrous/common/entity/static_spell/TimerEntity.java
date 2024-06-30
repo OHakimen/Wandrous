@@ -23,10 +23,9 @@ public class TimerEntity extends Entity {
         this.entityData.set(MAX_TICK_TIME, maxTickTime);
     }
 
-
     @Override
-    protected void defineSynchedData() {
-        this.entityData.define(MAX_TICK_TIME, maxTickTime);
+    protected void defineSynchedData(SynchedEntityData.Builder pBuilder) {
+        pBuilder.define(MAX_TICK_TIME, maxTickTime);
     }
 
     @Override

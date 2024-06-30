@@ -11,7 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class GlimmeringBoltProjectileRenderer extends EntityRenderer<GlimmeringBoltProjectile> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Wandrous.MODID, "");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "");
 
     public GlimmeringBoltProjectileRenderer(EntityRendererProvider.Context pContext) {
         super(pContext);

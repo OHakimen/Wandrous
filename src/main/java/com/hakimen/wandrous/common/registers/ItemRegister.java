@@ -61,6 +61,8 @@ public class ItemRegister {
     public static final DeferredHolder<Item, SpellEffectItem> INCREASE_SPREAD_SPELL = ITEMS.register("increase_spread", () -> new SpellEffectItem(SpellRegister.INCREASE_SPREAD));
     public static final DeferredHolder<Item, SpellEffectItem> DECREASE_SPREAD_SPELL = ITEMS.register("decrease_spread", () -> new SpellEffectItem(SpellRegister.DECREASE_SPREAD));
 
+    public static final DeferredHolder<Item, SpellEffectItem> HEALTH_TO_POWER = ITEMS.register("health_to_power", () -> new SpellEffectItem(SpellRegister.HEALTH_TO_POWER));
+
     public static final DeferredHolder<Item, SpellEffectItem> TELEPORT_SPELL = ITEMS.register("teleport", () -> new SpellEffectItem(SpellRegister.TELEPORT));
     public static final DeferredHolder<Item, SpellEffectItem> SWAP_TELEPORT_SPELL = ITEMS.register("swap_teleport", () -> new SpellEffectItem(SpellRegister.SWAP_TELEPORT));
     public static final DeferredHolder<Item, SpellEffectItem> HOME_BRINGER_TELEPORT_SPELL = ITEMS.register("home_bringer_teleport", () -> new SpellEffectItem(SpellRegister.HOME_BRINGER_TELEPORT));
@@ -93,12 +95,14 @@ public class ItemRegister {
     public static final DeferredHolder<Item, SpellEffectItem> TRIGGER_CHAIN_SHOT_SPELL = ITEMS.register("trigger_chain_shot", () -> new SpellEffectItem(SpellRegister.TRIGGER_CHAIN_SHOT));
     public static final DeferredHolder<Item, SpellEffectItem> TIMER_CHAIN_SHOT_SPELL = ITEMS.register("timer_chain_shot", () -> new SpellEffectItem(SpellRegister.TIMER_CHAIN_SHOT));
 
-
     public static final DeferredHolder<Item, SpellEffectItem> BOMB_SPELL = ITEMS.register("bomb", () -> new SpellEffectItem(SpellRegister.BOMB));
 
     public static final DeferredHolder<Item, SpellEffectItem> EXPLOSION_SPELL = ITEMS.register("explosion", () -> new SpellEffectItem(SpellRegister.EXPLOSION));
     public static final DeferredHolder<Item, SpellEffectItem> MAJOR_EXPLOSION_SPELL = ITEMS.register("major_explosion", () -> new SpellEffectItem(SpellRegister.MAJOR_EXPLOSION));
     public static final DeferredHolder<Item, SpellEffectItem> NUKE_SPELL = ITEMS.register("nuke", () -> new SpellEffectItem(SpellRegister.NUKE));
+
+    public static final DeferredHolder<Item, SpellEffectItem> CHAIN_PRISON_SPELL = ITEMS.register("chain_prison", () -> new SpellEffectItem(SpellRegister.CHAIN_PRISON));
+    public static final DeferredHolder<Item, SpellEffectItem> GUST_SPELL = ITEMS.register("gust", () -> new SpellEffectItem(SpellRegister.GUST));
 
     public static final DeferredHolder<Item, SpellEffectItem> CONJURE_LIGHT_SPELL = ITEMS.register("conjure_light", () -> new SpellEffectItem(SpellRegister.CONJURE_LIGHT));
     public static final DeferredHolder<Item, SpellEffectItem> CONJURE_BLOCK_SPELL = ITEMS.register("conjure_block", () -> new SpellEffectItem(SpellRegister.CONJURE_BLOCK));
@@ -157,7 +161,13 @@ public class ItemRegister {
             .icon(() -> new ItemStack(WAND.get()))
             .title(Component.translatable("itemGroup.wandrous"))
             .displayItems((flags, out) -> {
-                ItemRegister.ITEMS.getEntries().forEach(x -> out.accept(x.get()));
+                ItemRegister.ITEMS.getEntries().forEach(x -> {
+                    if(x.get() instanceof WandItem wandItem){
+                        out.accept(wandItem.getNonInitializedInstance());
+                    }else{
+                        out.accept(x.get());
+                    }
+                });
             }).build());
 
     public static void register(IEventBus bus) {

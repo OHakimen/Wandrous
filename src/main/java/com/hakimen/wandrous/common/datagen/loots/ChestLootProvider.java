@@ -2,7 +2,9 @@ package com.hakimen.wandrous.common.datagen.loots;
 
 import com.hakimen.wandrous.Wandrous;
 import com.hakimen.wandrous.common.registers.ItemRegister;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.LootTableSubProvider;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -14,17 +16,16 @@ import java.util.function.BiConsumer;
 
 public class ChestLootProvider implements LootTableSubProvider {
 
-    ResourceLocation DUNGEON = new ResourceLocation(Wandrous.MODID, "chests/dungeon_cell");
-    ResourceLocation STUDY_QUARTERS = new ResourceLocation(Wandrous.MODID, "chests/dungeon_study_quarters");
+    ResourceKey<LootTable> DUNGEON = ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "chests/dungeon_cell"));
+    ResourceKey<LootTable> STUDY_QUARTERS = ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "chests/dungeon_study_quarters"));
 
     @Override
-    public void generate(BiConsumer<ResourceLocation, LootTable.Builder> registry) {
+    public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> registry) {
         registry.accept(DUNGEON, LootTable
                 .lootTable()
                 .withPool(
                         LootPool.lootPool()
                                 .setRolls(new UniformGenerator(ConstantValue.exactly(6), ConstantValue.exactly(16)))
-                                .add(LootItem.lootTableItem(ItemRegister.WAND.get()).setWeight(2))
                                 .add(LootItem.lootTableItem(ItemRegister.GLIMMERING_BOLT_SPELL.get()).setWeight(8))
                                 .add(LootItem.lootTableItem(ItemRegister.TIMER_GLIMMERING_BOLT_SPELL.get()).setWeight(2))
                                 .add(LootItem.lootTableItem(ItemRegister.TRIGGER_GLIMMERING_BOLT_SPELL.get()).setWeight(4))
@@ -56,7 +57,9 @@ public class ChestLootProvider implements LootTableSubProvider {
                 .withPool(
                         LootPool.lootPool()
                                 .setRolls(new UniformGenerator(ConstantValue.exactly(6), ConstantValue.exactly(16)))
-                                .add(LootItem.lootTableItem(ItemRegister.WAND.get()).setWeight(2))
+                                .add(LootItem.lootTableItem(ItemRegister.EXPLOSION_SPELL.get()).setWeight(1))
+                                .add(LootItem.lootTableItem(ItemRegister.MAJOR_EXPLOSION_SPELL.get()).setWeight(1))
+                                .add(LootItem.lootTableItem(ItemRegister.CRUMBLING_CHARGE_SPELL.get()).setWeight(1))
                                 .add(LootItem.lootTableItem(ItemRegister.FIREBALL_SPELL.get()).setWeight(1))
                                 .add(LootItem.lootTableItem(ItemRegister.TRIGGER_FIREBALL_SPELL.get()).setWeight(1))
                                 .add(LootItem.lootTableItem(ItemRegister.TIMER_FIREBALL_SPELL.get()).setWeight(1))
@@ -71,4 +74,6 @@ public class ChestLootProvider implements LootTableSubProvider {
                                 .add(LootItem.lootTableItem(ItemRegister.BIG_DELAY_CAST_SPELL.get()).setWeight(1))
                 ));
     }
+
+
 }

@@ -4,7 +4,6 @@ import com.hakimen.wandrous.Wandrous;
 import com.hakimen.wandrous.common.item.SpellEffectItem;
 import com.hakimen.wandrous.common.registers.ItemRegister;
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 
 public class LangProvider extends LanguageProvider {
@@ -34,6 +33,7 @@ public class LangProvider extends LanguageProvider {
         addSpell(ItemRegister.TIMER_SONIC_BOOM_SPELL.get(), "Sonic Boom with Timer", "A sonically charged shriek that casts a spell once it expires");
         addSpell(ItemRegister.TRIGGER_SONIC_BOOM_SPELL.get(), "Sonic Boom with Trigger", "A sonically charged shriek that casts a spell upon collision");
 
+
         addSpell(ItemRegister.GLIMMERING_BOLT_SPELL.get(), "Glimmering Bolt", "A shiny arcane projectile");
         addSpell(ItemRegister.TIMER_GLIMMERING_BOLT_SPELL.get(), "Glimmering Bolt with Timer", "A shiny arcane projectile that casts a spell once it expires");
         addSpell(ItemRegister.TRIGGER_GLIMMERING_BOLT_SPELL.get(), "Glimmering Bolt with Trigger", "A shiny arcane projectile that casts a spell upon collision");
@@ -41,6 +41,11 @@ public class LangProvider extends LanguageProvider {
         addSpell(ItemRegister.FIREBALL_SPELL.get(), "Fireball", "A fiery orb");
         addSpell(ItemRegister.TIMER_FIREBALL_SPELL.get(), "Fireball with Timer", "A fiery orb that casts a spell once it expires");
         addSpell(ItemRegister.TRIGGER_FIREBALL_SPELL.get(), "Fireball with Trigger", "A fiery orb that casts a spell upon collision");
+
+        addSpell(ItemRegister.FIREBALL_SPELL.get(), "Chain Shot", "A projectile that bounces around targets");
+        addSpell(ItemRegister.TIMER_FIREBALL_SPELL.get(), "Chain Shot with Timer", "projectile that bounces around targets and casts a spell once it expires");
+        addSpell(ItemRegister.TRIGGER_FIREBALL_SPELL.get(), "Chain Shot with Trigger", "projectile that bounces around targets and casts a spell upon collision");
+
 
         addSpell(ItemRegister.FREEZING_CHARGE_SPELL.get(), "Freezing Charge", "It is cold to the touch");
         addSpell(ItemRegister.IGNEOUS_CHARGE_SPELL.get(), "Igneous Charge", "It glows red hot");
@@ -94,6 +99,27 @@ public class LangProvider extends LanguageProvider {
         addSpell(ItemRegister.CONJURE_BLOCK_SPELL.get(), "Conjure Block", "Summons a temporary block");
         addSpell(ItemRegister.CONJURE_LIGHT_SPELL.get(), "Conjure Light", "Summons a temporary light source");
         addSpell(ItemRegister.CONJURE_WEBS_SPELL.get(), "Conjure Webs", "Summons a web cocoon");
+
+        addSpell(ItemRegister.GUST_SPELL.get(), "Gust", "Conjures a burst of air that send entities flying");
+        addSpell(ItemRegister.CHAIN_PRISON_SPELL.get(), "Chain Prison", "Locks an entity into place");
+
+        addSpell(ItemRegister.BESTOW_BLESSING_HASTE_SPELL.get(), "Bestow Blessing: Haste", "Blesses the target with faster mining speed");
+        addSpell(ItemRegister.BESTOW_BLESSING_SPEED_SPELL.get(), "Bestow Blessing: Speed", "Blesses the target with faster movement speed");
+        addSpell(ItemRegister.BESTOW_BLESSING_BOOST_HEALTH_SPELL.get(), "Bestow Blessing: Boost Health", "Blesses the target with more maximum health");
+        addSpell(ItemRegister.BESTOW_BLESSING_REGENERATION_SPELL.get(), "Bestow Blessing: Regeneration", "Blesses the target with health regeneration");
+        addSpell(ItemRegister.BESTOW_BLESSING_RESISTANCE_SPELL.get(), "Bestow Blessing: Resistance", "Blesses the target with damage resistance");
+        addSpell(ItemRegister.BESTOW_BLESSING_NIGHT_VISION_SPELL.get(), "Bestow Blessing: Night Vision", "Blesses the target with night vision");
+        addSpell(ItemRegister.BESTOW_BLESSING_RESIST_FIRE_SPELL.get(), "Bestow Blessing: Fire Resistance", "Blesses the target with immunity against fire");
+        addSpell(ItemRegister.BESTOW_BLESSING_SATURATION_SPELL.get(), "Bestow Blessing: Saturation", "Blesses the target with saturation");
+
+        addSpell(ItemRegister.BESTOW_CURSE_DARKNESS_SPELL.get(), "Bestow Curse: Darkness", "Curses the target with limited vision");
+        addSpell(ItemRegister.BESTOW_CURSE_GLOW_SPELL.get(), "Bestow Curse: Glow", "Curses the target making it have a shiny aura");
+        addSpell(ItemRegister.BESTOW_CURSE_HUNGER_SPELL.get(), "Bestow Curse: Hunger", "Curses the target with hunger");
+        addSpell(ItemRegister.BESTOW_CURSE_NAUSEA_SPELL.get(), "Bestow Curse: Nausea", "Curses the target with nausea");
+        addSpell(ItemRegister.BESTOW_CURSE_LEVITATE_SPELL.get(), "Bestow Curse: Levitate", "Curses the target making it ascend to the heavens");
+        addSpell(ItemRegister.BESTOW_CURSE_MINING_FATIGUE_SPELL.get(), "Bestow Curse: Mining Fatigue", "Curses the target with reduced mining speed");
+        addSpell(ItemRegister.BESTOW_CURSE_SLOWNESS_SPELL.get(), "Bestow Curse: Slowness", "Curses the target with reduced movement speed");
+        addSpell(ItemRegister.BESTOW_CURSE_WEAKNESS_SPELL.get(), "Bestow Curse: Weakness", "Curses the target with reduced damage");
     }
 
     private void addSpell(SpellEffectItem item, String name, String description){

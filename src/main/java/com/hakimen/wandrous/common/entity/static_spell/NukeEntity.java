@@ -1,17 +1,10 @@
 package com.hakimen.wandrous.common.entity.static_spell;
 
-import com.hakimen.wandrous.common.registers.SoundRegister;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageSources;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -43,10 +36,9 @@ public class NukeEntity extends Entity {
         this.entityData.set(MAX_TICK_TIME, maxTickTime);
     }
 
-
     @Override
-    protected void defineSynchedData() {
-        this.entityData.define(MAX_TICK_TIME, maxTickTime);
+    protected void defineSynchedData(SynchedEntityData.Builder pBuilder) {
+        pBuilder.define(MAX_TICK_TIME, maxTickTime);
     }
 
     @Override
@@ -74,7 +66,6 @@ public class NukeEntity extends Entity {
             Vec3 location = this.getPosition(0);
             float radius = ((float) tickCount / maxTickTime * 50f);
 
-
             Random r = new Random();
 
             List<LivingEntity> entityList = level.getEntities(EntityTypeTest.forClass(LivingEntity.class), AABB.ofSize(location,radius * 2,radius * 2,radius * 2),entity -> entity instanceof LivingEntity);
@@ -92,7 +83,7 @@ public class NukeEntity extends Entity {
             ).iterator();
 
             if (tickedEnough()) {
-                if (EventHooks.getMobGriefingEvent(level, this)) {
+                if (EventHooks.canEntityGrief(level, this)) {
                     while (positions.hasNext()) {
                         BlockPos blockpos = positions.next();
 
@@ -109,9 +100,10 @@ public class NukeEntity extends Entity {
                             level.setBlock(blockpos.above(), Blocks.FIRE.defaultBlockState(), Block.UPDATE_ALL);
                         }
                     }
+
                 }
                 discard();
-            } else if (EventHooks.getMobGriefingEvent(level, this)) {
+            } else if (EventHooks.canEntityGrief(level, this)) {
                 while (positions.hasNext()) {
                     BlockPos blockpos = positions.next();
 

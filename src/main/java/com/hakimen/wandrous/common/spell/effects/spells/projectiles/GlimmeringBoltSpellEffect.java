@@ -28,7 +28,7 @@ public class GlimmeringBoltSpellEffect extends ProjectileSpellEffect {
         Level level = context.getLevel();
         Vec3 location = context.getLocation();
         GlimmeringBoltProjectile glimmeringBoltProjectile = new GlimmeringBoltProjectile(location.x, location.y, location.z, level, context);
-        level.playSound(null, context.getCaster().getOnPos(), SoundEvents.ALLAY_ITEM_TAKEN, SoundSource.PLAYERS, 1f,1f);
+        level.playSound(null, context.getCaster().getOnPos(), SoundEvents.ALLAY_ITEM_TAKEN, SoundSource.PLAYERS, 1,1f);
         shootProjectile(glimmeringBoltProjectile, context);
         level.addFreshEntity(glimmeringBoltProjectile);
     }

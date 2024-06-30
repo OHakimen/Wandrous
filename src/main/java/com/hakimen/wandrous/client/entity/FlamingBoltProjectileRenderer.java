@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class FlamingBoltProjectileRenderer extends EntityRenderer<FlamingBoltProjectile> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Wandrous.MODID, "");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "textures/entity/nuke.png");
 
 
     public FlamingBoltProjectileRenderer(EntityRendererProvider.Context pContext) {
@@ -30,38 +30,43 @@ public class FlamingBoltProjectileRenderer extends EntityRenderer<FlamingBoltPro
     @Override
     public void render(FlamingBoltProjectile pEntity, float pEntityYaw, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
 
+        float tickPlusPartial = pPartialTick + pEntity.tickCount;
+
         Random r = new Random();
 
-        if(pEntity.tickCount >= 2){
-            if(pEntity.tickCount % 4 == 0) {
+        if (pEntity.tickCount >= 2) {
+
+
+            if (pEntity.tickCount % 4 == 0) {
                 pEntity.level().addParticle(
                         ParticleTypes.LAVA,
                         true,
                         pEntity.getX() + r.nextFloat(-0.25f, 0.25f),
                         pEntity.getY() + r.nextFloat(-0.25f, 0.25f),
                         pEntity.getZ() + r.nextFloat(-0.25f, 0.25f),
-                        0,0,0
+                        0, 0, 0
                 );
             }
 
-            for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < 8; i++) {
+                float scale = (0.25f * ((1 + i))) / 3f;
                 pEntity.level().addParticle(
                         ParticleTypes.FLAME,
                         true,
-                        pEntity.getX() + r.nextFloat(-0.25f, 0.25f),
-                        pEntity.getY() + r.nextFloat(-0.25f, 0.25f),
-                        pEntity.getZ() + r.nextFloat(-0.25f, 0.25f),
+                        pEntity.getX() + r.nextFloat(-scale, scale),
+                        pEntity.getY() + r.nextFloat(-scale, scale),
+                        pEntity.getZ() + r.nextFloat(-scale, scale),
                         pEntity.getDeltaMovement().x / 4, pEntity.getDeltaMovement().y / 4, pEntity.getDeltaMovement().z / 4
                 );
 
-                float color = r.nextFloat(0,0.65f);
+                float color = r.nextFloat(0, 0.65f);
 
                 pEntity.level().addParticle(
-                        new DustParticleOptions(new Vector3f(color,color,color), 2),
+                        new DustParticleOptions(new Vector3f(color, color, color), 2),
                         true,
-                        pEntity.getX() + r.nextFloat(-0.25f, 0.25f),
-                        pEntity.getY() + r.nextFloat(-0.25f, 0.25f),
-                        pEntity.getZ() + r.nextFloat(-0.25f, 0.25f),
+                        pEntity.getX() + r.nextFloat(-scale, scale),
+                        pEntity.getY() + r.nextFloat(-scale, scale),
+                        pEntity.getZ() + r.nextFloat(-scale, scale),
                         pEntity.getDeltaMovement().x / 4, pEntity.getDeltaMovement().y / 4, pEntity.getDeltaMovement().z / 4
                 );
             }

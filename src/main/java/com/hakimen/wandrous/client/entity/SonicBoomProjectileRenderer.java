@@ -1,22 +1,17 @@
 package com.hakimen.wandrous.client.entity;
 
 import com.hakimen.wandrous.Wandrous;
-import com.hakimen.wandrous.common.entity.projectiles.FlamingBoltProjectile;
 import com.hakimen.wandrous.common.entity.projectiles.SonicBoomProjectile;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
-import org.joml.Vector3f;
-
-import java.util.Random;
 
 public class SonicBoomProjectileRenderer extends EntityRenderer<SonicBoomProjectile> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Wandrous.MODID, "");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "");
 
 
     public SonicBoomProjectileRenderer(EntityRendererProvider.Context pContext) {

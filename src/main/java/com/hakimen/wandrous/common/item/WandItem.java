@@ -2,7 +2,9 @@ package com.hakimen.wandrous.common.item;
 
 import com.hakimen.wandrous.Wandrous;
 import com.hakimen.wandrous.client.model.DynamicTextureModel;
+import com.hakimen.wandrous.common.item.component.WandDataComponent;
 import com.hakimen.wandrous.common.registers.ContainerRegister;
+import com.hakimen.wandrous.common.registers.DataComponentsRegister;
 import com.hakimen.wandrous.common.spell.SpellEffect;
 import com.hakimen.wandrous.common.utils.CastingUtils;
 import com.hakimen.wandrous.common.utils.WandUtils;
@@ -24,7 +26,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
-import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Math;
@@ -34,23 +35,15 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 
+import static com.hakimen.wandrous.common.item.component.WandDataComponent.DEFAULT_STAT;
+
 public class WandItem extends Item implements DynamicModelled {
 
-    public static final String CAPACITY = "Capacity";
-    public static final String MAX_MANA = "MaxMana";
-    public static final String MANA = "Mana";
-    public static final String CAST_DELAY = "CastDelay";
-    public static final String RECHARGE_SPEED = "RechargeSpeed";
-    public static final String MANA_CHARGE_SPEED = "ManaChargeSpeed";
-    public static final String CASTABLE_SIZE = "CastableSize";
-    public static final String CURRENT_IDX = "CurrentIdx";
-    public static final String GEM = "Gem";
-    public static final String WAND = "Wand";
 
     public WandItem() {
-        super(new Properties().stacksTo(1));
+        super(new Properties().stacksTo(1)
+                .component(DataComponentsRegister.WAND_COMPONENT.get(), DEFAULT_STAT));
     }
-
 
 
     @Override
@@ -66,14 +59,22 @@ public class WandItem extends Item implements DynamicModelled {
 
     @Override
     public boolean isBarVisible(ItemStack pStack) {
-        return pStack.getOrCreateTag().getInt(MANA) != pStack.getOrCreateTag().getInt(MAX_MANA);
+        WandDataComponent.WandStat stat = pStack.get(DataComponentsRegister.WAND_COMPONENT);
+
+        return stat.getMana() != stat.getMaxMana();
     }
 
     @Override
     public int getBarWidth(ItemStack pStack) {
-        return Math.round((float) pStack.getOrCreateTag().getInt(MANA) * 13.0F / (float) pStack.getOrCreateTag().getInt(MAX_MANA));
+        WandDataComponent.WandStat stat = pStack.get(DataComponentsRegister.WAND_COMPONENT);
+
+        return Math.round((float) stat.getMana() * 13.0F / (float) stat.getMaxMana());
     }
 
+    @Override
+    public Component getName(ItemStack pStack) {
+        return pStack.get(DataComponentsRegister.WAND_COMPONENT.get()).equals(DEFAULT_STAT) ? super.getName(pStack) : Component.literal(pStack.get(DataComponentsRegister.WAND_COMPONENT.get()).getName());
+    }
 
     @Override
     public int getBarColor(ItemStack pStack) {
@@ -81,29 +82,31 @@ public class WandItem extends Item implements DynamicModelled {
     }
 
     @Override
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+    public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
 
+        WandDataComponent.WandStat stat = pStack.get(DataComponentsRegister.WAND_COMPONENT);
 
-        if (!pStack.getOrCreateTag().isEmpty()) {
-            pTooltipComponents.add(Component.literal("Cast Delay %.2fs".formatted(pStack.getOrCreateTag().getFloat(CAST_DELAY))));
-            pTooltipComponents.add(Component.literal("Recharge Speed %.2fs".formatted(pStack.getOrCreateTag().getFloat(RECHARGE_SPEED))));
-            pTooltipComponents.add(Component.literal("Mana Max %s".formatted(pStack.getOrCreateTag().getInt(MAX_MANA))));
-            pTooltipComponents.add(Component.literal("Mana %s".formatted(pStack.getOrCreateTag().getInt(MANA))));
-            pTooltipComponents.add(Component.literal("Mana Charge Speed %s".formatted(pStack.getOrCreateTag().getInt(MANA_CHARGE_SPEED))));
+        if (!stat.equals(DEFAULT_STAT)) {
+            pTooltipComponents.add(Component.literal("Cast Delay %.2fs".formatted(stat.getCastDelay())));
+            pTooltipComponents.add(Component.literal("Recharge Speed %.2fs".formatted(stat.getRechargeSpeed())));
+            pTooltipComponents.add(Component.literal("Mana Max %s".formatted(stat.getMaxMana())));
+            pTooltipComponents.add(Component.literal("Mana %s".formatted(stat.getMana())));
+            pTooltipComponents.add(Component.literal("Mana Charge Speed %s".formatted(stat.getManaChargeSpeed())));
             pTooltipComponents.add(Component.literal(" "));
-            pTooltipComponents.add(Component.literal("Capacity %s".formatted(pStack.getOrCreateTag().getInt(CAPACITY))));
+            pTooltipComponents.add(Component.literal("Capacity %s".formatted(stat.getCapacity())));
             pTooltipComponents.add(Component.literal("WAND_SPELLS_MARKER"));
         } else {
             pTooltipComponents.add(Component.literal("Put in inventory to initialize"));
         }
 
-        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+        super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
     }
 
     @Override
-    public int getUseDuration(ItemStack pStack) {
+    public int getUseDuration(ItemStack pStack, LivingEntity p_344979_) {
         return 200;
     }
+
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
@@ -112,7 +115,7 @@ public class WandItem extends Item implements DynamicModelled {
             MenuProvider containerProvider = new MenuProvider() {
                 @Override
                 public Component getDisplayName() {
-                    return pPlayer.getItemInHand(pUsedHand).hasCustomHoverName() ? pPlayer.getItemInHand(pUsedHand).getHoverName() : getName(pPlayer.getItemInHand(pUsedHand));
+                    return getName(pPlayer.getItemInHand(pUsedHand));
                 }
 
 
@@ -121,6 +124,7 @@ public class WandItem extends Item implements DynamicModelled {
                     return ContainerRegister.WAND_TINKER_MENU.get().create(windowId, playerInventory);
                 }
             };
+
             pPlayer.openMenu(containerProvider);
         } else if (!pLevel.isClientSide()) {
             pPlayer.startUsingItem(pUsedHand);
@@ -136,10 +140,12 @@ public class WandItem extends Item implements DynamicModelled {
                 if (!pPlayer.hasContainerOpen() && !pPlayer.getCooldowns().isOnCooldown(wand.getItem())) {
                     CastingUtils castingUtils = new CastingUtils();
 
-                    Optional<IItemHandler> handler = Optional.ofNullable(wand.getCapability(Capabilities.ItemHandler.ITEM));
+                    Optional<ItemStackHandler> handler = Optional.ofNullable((ItemStackHandler)wand.getCapability(Capabilities.ItemHandler.ITEM));
                     List<SpellEffect> effect = new ArrayList<>();
 
+                    WandDataComponent.WandStat stat = wand.get(DataComponentsRegister.WAND_COMPONENT.get());
                     handler.ifPresent(iItemHandler -> {
+                        iItemHandler.deserializeNBT(pPlayer.level().registryAccess(), stat.getInventory());
                         for (int i = 0; i < iItemHandler.getSlots(); i++) {
                             ItemStack stack = iItemHandler.getStackInSlot(i);
                             if (stack.getItem() instanceof SpellEffectItem spellEffectItem) {
@@ -148,35 +154,41 @@ public class WandItem extends Item implements DynamicModelled {
                         }
                     });
 
-                    if (effect.size() != wand.getOrCreateTag().getInt(CASTABLE_SIZE)) {
-                        wand.getOrCreateTag().putInt(CURRENT_IDX, 0);
-                        wand.getOrCreateTag().putInt(CASTABLE_SIZE, effect.size());
+                    WandDataComponent.WandStatBuilder builder = new WandDataComponent.WandStatBuilder(stat);
+
+
+                    if (effect.size() != stat.getCastableSize()) {
+                        builder.setCurrentIdx(0);
+                        builder.setCastableSize(effect.size());
                     }
 
-                    int getOldIdx = wand.getOrCreateTag().getInt(CURRENT_IDX);
+                    int getOldIdx = stat.getCurrentIdx();
 
                     Node<SpellEffect> cast = castingUtils.makeCastingTree(effect.subList(getOldIdx, effect.size()));
 
-                    float rechargeSpeed = wand.getOrCreateTag().getFloat(RECHARGE_SPEED);
-                    float castDelay = wand.getOrCreateTag().getFloat(CAST_DELAY);
+                    float rechargeSpeed = stat.getRechargeSpeed();
+                    float castDelay = stat.getCastDelay();
 
                     if (!effect.isEmpty() && cast.getData() != null) {
 
                         int current = (getOldIdx + castingUtils.idx) % effect.size();
-                        wand.getOrCreateTag().putInt(CURRENT_IDX, current);
+                        builder.setCurrentIdx(current);
 
                         int cost = CastingUtils.calculateManaCost(0, cast); //TODO: make a gamerule for making the cast cost nothing in creative
 
-
-                        int currentMana = wand.getOrCreateTag().getInt(MANA);
+                        int currentMana = stat.getMana();
 
                         if (cost <= currentMana) {
                             CastingUtils.castSpells(pPlayer, wand, pLevel, pPlayer.getEyePosition(), cast);
-                            wand.getOrCreateTag().putInt(MANA, currentMana - Math.max(cost, 0));
+                            builder.setMana(currentMana - Math.max(cost, 0));
 
                             pPlayer.getCooldowns().addCooldown(wand.getItem(), (int) (current == 0 ? rechargeSpeed : castDelay) * 20);
                         } else {
                             pPlayer.displayClientMessage(Component.literal("Not enough mana"), true);
+                        }
+
+                        if (!pLevel.isClientSide) {
+                            wand.set(DataComponentsRegister.WAND_COMPONENT.get(), builder.build());
                         }
                     } else {
                         pPlayer.displayClientMessage(Component.literal("No spells to cast"), true);
@@ -189,43 +201,49 @@ public class WandItem extends Item implements DynamicModelled {
 
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
-        if (pStack.getOrCreateTag().isEmpty()) {
+        if (pStack.get(DataComponentsRegister.WAND_COMPONENT.get()).equals(DEFAULT_STAT)) {
             WandUtils.makeWand(pStack);
         }
-
-        Optional<ItemStackHandler> handler = Optional.ofNullable((ItemStackHandler) pStack.getCapability(Capabilities.ItemHandler.ITEM));
-
-        handler.ifPresent(itemStackHandler -> {
-            pStack.getOrCreateTag().put("Inventory", itemStackHandler.serializeNBT());
-        });
-
-        int mana = pStack.getOrCreateTag().getInt(MANA);
-        int maxMana = pStack.getOrCreateTag().getInt(MAX_MANA);
+        WandDataComponent.WandStat stat = pStack.get(DataComponentsRegister.WAND_COMPONENT.get());
+        int mana = stat.getMana();
+        int maxMana = stat.getMaxMana();
+        int manaRegen = stat.getManaChargeSpeed();
 
         if (mana <= maxMana) {
-            pStack.getOrCreateTag().putInt(MANA, (int) Math.clamp(0, maxMana, (mana + pStack.getOrCreateTag().getInt(MANA_CHARGE_SPEED) / 20f)));
+            int manaCost = (int) Math.clamp(0, maxMana, (mana +  manaRegen / 20f));
+            pStack.update(DataComponentsRegister.WAND_COMPONENT.get(), stat, wandStat -> new WandDataComponent.WandStatBuilder(wandStat).setMana(manaCost).build());
         }
-
     }
 
     @Override
-    public Component getName(ItemStack pStack) {
-        return pStack.getOrCreateTag().isEmpty() ? super.getName(pStack) : Component.literal(pStack.getOrCreateTag().getString("name"));
+    public ItemStack getDefaultInstance() {
+        ItemStack stack = super.getDefaultInstance();
+        if (stack.get(DataComponentsRegister.WAND_COMPONENT.get()).equals(DEFAULT_STAT)) {
+            WandUtils.makeWand(stack);
+        }
+        return stack;
+    }
+
+
+    public ItemStack getNonInitializedInstance() {
+        return new ItemStack(this);
     }
 
     @Override
     public DynamicTextureModel makeModel(ItemStack stack) {
 
-        int gem = stack.getOrCreateTag().getInt(GEM);
-        int wand = stack.getOrCreateTag().getInt(WAND);
+        WandDataComponent.WandStat stat = stack.get(DataComponentsRegister.WAND_COMPONENT.get());
+
+        int gem = stat.getGem();
+        int wand = stat.getWand();
 
         DynamicTextureModel model = DynamicTextureModel.fromTextures(
-                List.of(
-                        new ResourceLocation(Wandrous.MODID, "item/wand/gems/gem_%s".formatted(gem)),
-                        new ResourceLocation(Wandrous.MODID, "item/wand/wands/wand_%s".formatted(wand))
-                ),
-                new ResourceLocation(Wandrous.MODID, "wand")
-        ).setDisplay("{ \"ground\": {\"rotation\": [0, 0, 0],\"translation\": [0, 3, 0],\"scale\":[ 1,1,1 ]}, \"thirdperson_righthand\":{\"rotation\":[0,90,50],\"translation\":[0,10,2.5],\"scale\":[2,2,2]},\"thirdperson_lefthand\":{\"rotation\":[0,-90,-50],\"translation\":[0,10,2.5],\"scale\":[2,2,2]},\"firstperson_righthand\":{\"rotation\":[0,90,35],\"translation\":[0,5,0],\"scale\":[1.25,1.25,1.25]},\"firstperson_lefthand\":{\"rotation\":[0,-90,-35],\"translation\":[0,5,0],\"scale\":[1.25,1.25,1.25]}}")
+                        List.of(
+                                ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "item/wand/gems/gem_%s".formatted(gem)),
+                                ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "item/wand/wands/wand_%s".formatted(wand))
+                        ),
+                        ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "wand")
+                ).setDisplay("{ \"ground\": {\"rotation\": [0, 0, 0],\"translation\": [0, 3, 0],\"scale\":[ 1,1,1 ]}, \"thirdperson_righthand\":{\"rotation\":[0,90,50],\"translation\":[0,10,2.5],\"scale\":[2,2,2]},\"thirdperson_lefthand\":{\"rotation\":[0,-90,-50],\"translation\":[0,10,2.5],\"scale\":[2,2,2]},\"firstperson_righthand\":{\"rotation\":[0,90,35],\"translation\":[0,5,0],\"scale\":[1.25,1.25,1.25]},\"firstperson_lefthand\":{\"rotation\":[0,-90,-35],\"translation\":[0,5,0],\"scale\":[1.25,1.25,1.25]}}")
                 .setStack(stack);
         return model;
     }

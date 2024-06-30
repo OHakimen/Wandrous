@@ -5,6 +5,7 @@ import com.hakimen.wandrous.common.spell.SpellContext;
 import com.hakimen.wandrous.common.spell.mover.ISpellMover;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.level.Level;
@@ -81,7 +82,6 @@ public class BombProjectile extends SpellCastingProjectile {
         }
     }
 
-
     @Override
     public void tick() {
         super.tick();
@@ -115,9 +115,9 @@ public class BombProjectile extends SpellCastingProjectile {
 
     private void consume() {
         Level level = level();
-        if (EventHooks.getMobGriefingEvent(level, this)) {
+        if (EventHooks.canEntityGrief(level, this)) {
             float radius = this.damage;
-            level.explode(this, getX(), getY(), getZ(), radius, Level.ExplosionInteraction.BLOW);
+            level.explode(this, getX(), getY(), getZ(), radius, Level.ExplosionInteraction.NONE);
         }
     }
 
@@ -133,9 +133,9 @@ public class BombProjectile extends SpellCastingProjectile {
     }
 
     @Override
-    protected void defineSynchedData() {
+    protected void defineSynchedData(SynchedEntityData.Builder pBuilder) {
+        super.defineSynchedData(pBuilder);
     }
-
 
     @Override
     public void addAdditionalSaveData(CompoundTag pCompound) {

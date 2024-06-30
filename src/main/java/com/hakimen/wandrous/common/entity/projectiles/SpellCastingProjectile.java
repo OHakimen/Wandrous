@@ -3,13 +3,13 @@ package com.hakimen.wandrous.common.entity.projectiles;
 import com.hakimen.wandrous.common.spell.SpellContext;
 import com.hakimen.wandrous.common.spell.SpellEffect;
 import com.hakimen.wandrous.common.spell.SpellStatus;
-import com.hakimen.wandrous.common.spell.effects.modifiers.MoverCastEffect;
+import com.hakimen.wandrous.common.spell.effects.modifiers.MoverSpellEffect;
 import com.hakimen.wandrous.common.spell.effects.modifiers.ProjectileHitEffect;
 import com.hakimen.wandrous.common.spell.mover.ISpellMover;
 import com.hakimen.wandrous.common.utils.data.Node;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -18,10 +18,6 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.TheEndGatewayBlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -126,7 +122,7 @@ public class SpellCastingProjectile extends ThrowableProjectile {
     static List<ISpellMover> getMovers(Node<SpellEffect> node){
         List<ISpellMover> movers = new ArrayList<>();
         if(node.getParent() != null &&  node.getParent().getData().hasKind(SpellEffect.MODIFIER)){
-            if( node.getParent().getData() instanceof MoverCastEffect effect){
+            if( node.getParent().getData() instanceof MoverSpellEffect effect){
                 movers.add(effect.getMover());
             }
             movers.addAll(getMovers(node.getParent()));
@@ -154,50 +150,31 @@ public class SpellCastingProjectile extends ThrowableProjectile {
         return 0;
     }
 
-
     @Override
-    protected void defineSynchedData() {
+    protected void defineSynchedData(SynchedEntityData.Builder pBuilder) {
 
     }
 
     @Override
     public void tick() {
-        Vec3 vec3 = this.getDeltaMovement();
         super.tick();
+
         HitResult hitresult = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
-        boolean flag = false;
-        if (hitresult.getType() == HitResult.Type.BLOCK) {
-            BlockPos blockpos = ((BlockHitResult)hitresult).getBlockPos();
-            BlockState blockstate = this.level().getBlockState(blockpos);
-            if (blockstate.is(Blocks.NETHER_PORTAL)) {
-                this.handleInsidePortal(blockpos);
-                flag = true;
-            } else if (blockstate.is(Blocks.END_GATEWAY)) {
-                BlockEntity blockentity = this.level().getBlockEntity(blockpos);
-                if (blockentity instanceof TheEndGatewayBlockEntity && TheEndGatewayBlockEntity.canEntityTeleport(this)) {
-                    TheEndGatewayBlockEntity.teleportEntity(this.level(), blockpos, blockstate, this, (TheEndGatewayBlockEntity)blockentity);
-                }
-
-                flag = true;
-            }
-        }
-
-        if (hitresult.getType() != HitResult.Type.MISS && !flag && !net.neoforged.neoforge.event.EventHooks.onProjectileImpact(this, hitresult)) {
-            this.onHit(hitresult);
+        if (hitresult.getType() != HitResult.Type.MISS && !net.neoforged.neoforge.event.EventHooks.onProjectileImpact(this, hitresult)) {
+            this.hitTargetOrDeflectSelf(hitresult);
         }
 
         this.checkInsideBlocks();
-
-        double d2 = this.getX() + vec3.x;
-        double d0 = this.getY() + vec3.y;
-        double d1 = this.getZ() + vec3.z;
+        Vec3 vec3 = this.getDeltaMovement();
+        double d0 = this.getX() + vec3.x;
+        double d1 = this.getY() + vec3.y;
+        double d2 = this.getZ() + vec3.z;
         this.updateRotation();
-
         float f;
         if (this.isInWater()) {
-            for(int i = 0; i < 4; ++i) {
+            for (int i = 0; i < 4; i++) {
                 float f1 = 0.25F;
-                this.level().addParticle(ParticleTypes.BUBBLE, d2 - vec3.x * f1, d0 - vec3.y * f1, d1 - vec3.z * f1, vec3.x, vec3.y, vec3.z);
+                this.level().addParticle(ParticleTypes.BUBBLE, d0 - vec3.x * 0.25, d1 - vec3.y * 0.25, d2 - vec3.z * 0.25, vec3.x, vec3.y, vec3.z);
             }
 
             f = getFluidInertia();
@@ -206,12 +183,8 @@ public class SpellCastingProjectile extends ThrowableProjectile {
         }
 
         this.setDeltaMovement(vec3.scale((double)f));
-        if (!this.isNoGravity()) {
-            Vec3 vec31 = this.getDeltaMovement();
-            this.setDeltaMovement(vec31.x, vec31.y - (double)this.getGravity(), vec31.z);
-        }
-
-        this.setPos(d2, d0, d1);
+        this.applyGravity();
+        this.setPos(d0, d1, d2);
     }
 
     public int getMaxTicks() {

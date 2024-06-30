@@ -3,6 +3,7 @@ package com.hakimen.wandrous.common.block_entity;
 import com.hakimen.wandrous.common.block.ConjuredLightBlock;
 import com.hakimen.wandrous.common.registers.BlockEntityRegister;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
@@ -25,17 +26,17 @@ public class ConjuredBlockEntity extends BlockEntity implements BlockEntityTicke
     }
 
     @Override
-    protected void saveAdditional(CompoundTag pTag) {
+    protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider registries) {
         pTag.putInt("LifeTime", lifeTime);
         pTag.putInt("Tick", tick);
-        super.saveAdditional(pTag);
+        super.saveAdditional(pTag, registries);
     }
 
     @Override
-    public void load(CompoundTag pTag) {
+    protected void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
         tick = pTag.getInt("Tick");
         lifeTime = pTag.getInt("LifeTime");
-        super.load(pTag);
+        loadAdditional(pTag, pRegistries);
     }
 
     @Override

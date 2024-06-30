@@ -17,7 +17,8 @@ public class FreezingEffect extends MobEffect {
     }
 
     @Override
-    public void applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
+    public boolean applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
         pLivingEntity.setTicksFrozen(pLivingEntity.isFullyFrozen() ? pLivingEntity.getTicksRequiredToFreeze() + 10 : pLivingEntity.getTicksFrozen() + 5);
+        return true;
     }
 }

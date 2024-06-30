@@ -1,7 +1,9 @@
 package com.hakimen.wandrous.client.menus;
 
 import com.hakimen.wandrous.common.item.WandItem;
+import com.hakimen.wandrous.common.item.component.WandDataComponent;
 import com.hakimen.wandrous.common.registers.ContainerRegister;
+import com.hakimen.wandrous.common.registers.DataComponentsRegister;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -24,8 +26,6 @@ public class WandTinkerMenu extends AbstractContainerMenu {
         return wand;
     }
 
-
-
     public WandTinkerMenu(int pContainerId, Inventory pInventory, Player pPlayer, ItemStack stack) {
         super(ContainerRegister.WAND_TINKER_MENU.get(), pContainerId);
 
@@ -34,13 +34,29 @@ public class WandTinkerMenu extends AbstractContainerMenu {
         this.wand = stack.getItem() instanceof WandItem ? stack : pPlayer.getOffhandItem();
         Optional<ItemStackHandler> caps = Optional.ofNullable((ItemStackHandler) wand.getCapability(Capabilities.ItemHandler.ITEM));
 
+
+        WandDataComponent.WandStat stat = stack.get(DataComponentsRegister.WAND_COMPONENT.get());
+
+        caps.ifPresent(itemStackHandler -> {
+            if(!pPlayer.level().isClientSide){
+                itemStackHandler.deserializeNBT(pPlayer.level().registryAccess(), stat.getInventory());
+            }
+        });
+
         caps.ifPresent(handler -> {
             for (int i = 0; i < handler.getSlots(); i++) {
                 addSlot(new SlotItemHandler(handler, i, 8 + (18 * (i % 9)), 18 + 18 * (i / 9)) {
                     @Override
                     public void setChanged() {
-                        pPlayer.getItemInHand(pPlayer.getUsedItemHand()).getOrCreateTag().put("Inventory", handler.serializeNBT());
-                        super.setChanged();
+                        ItemStack stack = wand;
+                        WandDataComponent.WandStat stat = stack.get(DataComponentsRegister.WAND_COMPONENT.get());
+                        WandDataComponent.WandStatBuilder builder = new WandDataComponent.WandStatBuilder(stat);
+
+                        if(!pPlayer.isLocalPlayer() && !pPlayer.level().isClientSide){
+                            builder.setInventory(handler.serializeNBT(pPlayer.registryAccess()));
+                            stack.set(DataComponentsRegister.WAND_COMPONENT.get(), builder.build());
+                        }
+
                     }
                 });
             }
@@ -49,7 +65,7 @@ public class WandTinkerMenu extends AbstractContainerMenu {
         layoutPlayerInventorySlots(8, 148, caps, pPlayer);
     }
 
-    private int addSlotRange(IItemHandler handler, int index, int x, int y, int amount, int dx, Optional<ItemStackHandler> caps, Player player) {
+    private int addSlotRange(IItemHandler handler, int index, int x, int y, int amount, int dx, Optional<ItemStackHandler> caps, Player pPlayer) {
         for (int i = 0; i < amount; i++) {
             addSlot(new SlotItemHandler(handler, index, x, y) {
                 @Override
@@ -60,9 +76,16 @@ public class WandTinkerMenu extends AbstractContainerMenu {
                 @Override
                 public void setChanged() {
                     caps.ifPresent(itemStackHandler -> {
-                        player.getItemInHand(player.getUsedItemHand()).getOrCreateTag().put("Inventory", itemStackHandler.serializeNBT());
+                        ItemStack stack = wand;
+                        WandDataComponent.WandStat stat = stack.get(DataComponentsRegister.WAND_COMPONENT.get());
+                        WandDataComponent.WandStatBuilder builder = new WandDataComponent.WandStatBuilder(stat);
+
+                        if(!pPlayer.level().isClientSide){
+                            builder.setInventory(itemStackHandler.serializeNBT(pPlayer.level().registryAccess()));
+                            stack.set(DataComponentsRegister.WAND_COMPONENT.get(), builder.build());
+                            super.setChanged();
+                        }
                     });
-                    super.setChanged();
                 }
             });
             x += dx;
@@ -92,7 +115,8 @@ public class WandTinkerMenu extends AbstractContainerMenu {
     public ItemStack quickMoveStack(Player player, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
-        int capacity = wand.getOrCreateTag().getInt(WandItem.CAPACITY);
+        WandDataComponent.WandStat stat = wand.get(DataComponentsRegister.WAND_COMPONENT.get());
+        int capacity = stat.getCapacity();
         if (slot != null && slot.hasItem()) {
             ItemStack itemstack1 = slot.getItem();
             itemstack = itemstack1.copy();
@@ -106,8 +130,6 @@ public class WandTinkerMenu extends AbstractContainerMenu {
 
             if (itemstack1.isEmpty()) {
                 slot.setByPlayer(ItemStack.EMPTY);
-            } else {
-                slot.setChanged();
             }
         }
         return itemstack;

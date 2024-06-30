@@ -14,20 +14,24 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ItemModelShaper.class)
-public class DynamicModelItemShaperMixin {
+public abstract class DynamicModelItemShaperMixin {
 
     @Shadow @Final private ModelManager modelManager;
 
+    @Shadow public abstract ModelManager getModelManager();
+
     @Inject(method="getItemModel(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/client/resources/model/BakedModel;",
             at=@At("HEAD"), cancellable=true)
-    private void getDynamicModel(ItemStack stack, CallbackInfoReturnable<BakedModel> info){
-        if(stack.getItem() instanceof DynamicModelled dynamicModelItem){
-            DynamicTextureModel override = dynamicModelItem.makeModel(stack);
+    private void getDynamicModel(ItemStack pItem, CallbackInfoReturnable<BakedModel> cir){
+        if(pItem.getItem() instanceof DynamicModelled dynamicModelItem){
+            DynamicTextureModel override = dynamicModelItem.makeModel(pItem);
             if(override == null) return;
             BakedModel model = override.getBakedModel(modelManager);
             if(model != null){
-                info.setReturnValue(model);
+                cir.setReturnValue(model);
             }
         }
     }
+
+
 }

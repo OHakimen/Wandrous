@@ -9,6 +9,8 @@ public class Registration {
         SoundRegister.register(bus);
 
         EffectRegister.register(bus);
+
+        DataComponentsRegister.register(bus);
         ItemRegister.register(bus);
         BlockRegister.register(bus);
         ContainerRegister.register(bus);
@@ -19,6 +21,8 @@ public class Registration {
 
         SpellMoverRegister.register(bus);
         SpellRegister.register(bus);
+
+        LootModRegistry.register(bus);
 
     }
 }

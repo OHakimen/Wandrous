@@ -7,21 +7,18 @@ import com.hakimen.wandrous.common.registers.ContainerRegister;
 import com.hakimen.wandrous.common.registers.EntityRegister;
 import com.hakimen.wandrous.common.registers.ParticleRegister;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.MenuScreens;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 
-@Mod.EventBusSubscriber(value = Dist.CLIENT, modid = Wandrous.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(value = Dist.CLIENT, modid = Wandrous.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class WandrousClient {
 
     @SubscribeEvent
-    public static void clientInit(FMLClientSetupEvent event){
-        event.enqueueWork(() -> {
-            MenuScreens.register(ContainerRegister.WAND_TINKER_MENU.get(), WandTinkerScreen::new);
-        });
+    public static void clientInit(RegisterMenuScreensEvent event){
+        event.register(ContainerRegister.WAND_TINKER_MENU.get(), WandTinkerScreen::new);
     }
 
     @SubscribeEvent
@@ -35,6 +32,7 @@ public class WandrousClient {
         event.registerEntityRenderer(EntityRegister.BLACK_HOLE_PROJECTILE.get(), BlackHoleProjectileRenderer::new);
         event.registerEntityRenderer(EntityRegister.SONIC_BOOM_PROJECTILE.get(), SonicBoomProjectileRenderer::new);
         event.registerEntityRenderer(EntityRegister.CHAIN_SHOT.get(), ChainShotProjectileRenderer::new);
+        event.registerEntityRenderer(EntityRegister.CHAIN_PRISON.get(), ChainPrisonRenderer::new);
 
         Minecraft.getInstance().particleEngine.register(ParticleRegister.GLIMMERING_BOLT.get(),
                 GlimmeringBoltParticle.GlimmeringProvider::new);

@@ -11,9 +11,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 
 import java.util.Iterator;
+
+import static net.minecraft.world.level.dimension.BuiltinDimensionTypes.NETHER_EFFECTS;
 
 public class FreezingChargeHitEffect extends ProjectileHitEffect {
     public FreezingChargeHitEffect(int cost) {
@@ -23,8 +24,8 @@ public class FreezingChargeHitEffect extends ProjectileHitEffect {
     @Override
     public void onHitEntity(SpellContext context, Entity hit) {
         context.mergeStatus(this.getStatus());
-        if(hit instanceof LivingEntity entity && !entity.level().dimensionTypeId().equals(BuiltinDimensionTypes.NETHER)) {
-            entity.addEffect(new MobEffectInstance(EffectRegister.FREEZING.get(), 30 * 20));
+        if(hit instanceof LivingEntity entity && !context.getLevel().dimensionType().effectsLocation().equals(NETHER_EFFECTS)) {
+            entity.addEffect(new MobEffectInstance(EffectRegister.FREEZING, 30 * 20));
         }
     }
 
@@ -36,7 +37,7 @@ public class FreezingChargeHitEffect extends ProjectileHitEffect {
 
         while(positions.hasNext()) {
             BlockPos blockpos = positions.next();
-            if (blockpos.closerToCenterThan(pos.getCenter(), radius-1) && !level.dimensionTypeId().equals(BuiltinDimensionTypes.NETHER)) {
+            if (blockpos.closerToCenterThan(pos.getCenter(), radius-1) && !level.dimensionType().effectsLocation().equals(NETHER_EFFECTS)) {
                 BlockState blockstate = level.getBlockState(blockpos);
                 BlockState aboveState = level.getBlockState(blockpos.above());
 

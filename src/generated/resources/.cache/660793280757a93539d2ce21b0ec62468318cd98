@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-24T13:36:42.5948355	Item Models: wandrous
+// 1.21	2024-06-24T23:38:25.3764157	Item Models: wandrous
 70cc88c4158ff94537dbcc51580cc8b905d06269 assets/wandrous/models/item/accelerate_cast.json
 4e5e8e3d5579e5375b8bd695ed36e8cb66c1382c assets/wandrous/models/item/add_mana.json
 d77a6fbdccd523590be943b001f617020984100a assets/wandrous/models/item/bestow_blessing_boost_health.json
@@ -22,6 +22,7 @@ a958d8bb5c0c1f3ce7171e3cdbfe727435ba0c19 assets/wandrous/models/item/bestow_curs
 a026ecbf2a2e2968584f741636e7fd682ea665ce assets/wandrous/models/item/bomb.json
 1004cbb229803c8f8dffc90c5ba5b5dc0d13ee1f assets/wandrous/models/item/boomerang.json
 dd2e09f9dfc758a1dce15cd43960dee14ef6c214 assets/wandrous/models/item/chainsaw.json
+d462c9b824f3db8e2bcbebc61b6da6f5fd6eaae6 assets/wandrous/models/item/chain_prison.json
 6e111b0f84dde7de992cb90e20870152e3b915b8 assets/wandrous/models/item/chain_shot.json
 1bbc52c601ed6f3fa9baa5773bfe35d531640bb8 assets/wandrous/models/item/chert.json
 3627eee21ea867ea53982d836188074fa8ca1295 assets/wandrous/models/item/chert_bricks.json
@@ -57,6 +58,7 @@ af06bdb14f372a6656b8775cfed204de0bf0658a assets/wandrous/models/item/fireball.js
 d719ed513c0bb5035331f72f1b9bed6ca541d665 assets/wandrous/models/item/freezing_charge.json
 672b1629a814c774df53a46707e906e672c50048 assets/wandrous/models/item/giga_drill.json
 53867ae09062624fd9d932366f667dc2381ff5ad assets/wandrous/models/item/glimmering_bolt.json
+6f086fb65cd94c620a307d5e5654c5e2fe35804d assets/wandrous/models/item/gust.json
 334727202197d28859133525b615b08bc6bca5d4 assets/wandrous/models/item/hexagon_cast.json
 1e8f0221a76114ea2e2d655eb2641392d5b57402 assets/wandrous/models/item/home_bringer_teleport.json
 97ead081c873d26de856902f37edaa3c752360ef assets/wandrous/models/item/homing.json
