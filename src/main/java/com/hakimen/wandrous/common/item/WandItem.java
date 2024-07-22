@@ -5,7 +5,7 @@ import com.hakimen.wandrous.client.model.DynamicTextureModel;
 import com.hakimen.wandrous.common.item.component.WandDataComponent;
 import com.hakimen.wandrous.common.registers.ContainerRegister;
 import com.hakimen.wandrous.common.registers.DataComponentsRegister;
-import com.hakimen.wandrous.common.spell.SpellEffect;
+import com.hakimen.wandrous.common.spell.SpellStack;
 import com.hakimen.wandrous.common.utils.CastingUtils;
 import com.hakimen.wandrous.common.utils.WandUtils;
 import com.hakimen.wandrous.common.utils.data.Node;
@@ -38,7 +38,6 @@ import java.util.function.Consumer;
 import static com.hakimen.wandrous.common.item.component.WandDataComponent.DEFAULT_STAT;
 
 public class WandItem extends Item implements DynamicModelled {
-
 
     public WandItem() {
         super(new Properties().stacksTo(1)
@@ -141,57 +140,58 @@ public class WandItem extends Item implements DynamicModelled {
                     CastingUtils castingUtils = new CastingUtils();
 
                     Optional<ItemStackHandler> handler = Optional.ofNullable((ItemStackHandler)wand.getCapability(Capabilities.ItemHandler.ITEM));
-                    List<SpellEffect> effect = new ArrayList<>();
-
-                    WandDataComponent.WandStat stat = wand.get(DataComponentsRegister.WAND_COMPONENT.get());
+                    List<SpellStack> effect = new ArrayList<>();
                     handler.ifPresent(iItemHandler -> {
-                        iItemHandler.deserializeNBT(pPlayer.level().registryAccess(), stat.getInventory());
+                        iItemHandler.deserializeNBT(pPlayer.level().registryAccess(),  wand.get(DataComponentsRegister.WAND_COMPONENT.get()).getInventory());
                         for (int i = 0; i < iItemHandler.getSlots(); i++) {
                             ItemStack stack = iItemHandler.getStackInSlot(i);
-                            if (stack.getItem() instanceof SpellEffectItem spellEffectItem) {
-                                effect.add(spellEffectItem.getSpellEffect());
+                            if(stack.getItem() instanceof SpellEffectItem){
+                                effect.add(SpellStack.fromItemStack(stack));
                             }
                         }
                     });
 
-                    WandDataComponent.WandStatBuilder builder = new WandDataComponent.WandStatBuilder(stat);
 
-
-                    if (effect.size() != stat.getCastableSize()) {
-                        builder.setCurrentIdx(0);
-                        builder.setCastableSize(effect.size());
+                    if (effect.size() - 1 != wand.get(DataComponentsRegister.WAND_COMPONENT.get()).getCastableSize()) {
+                        wand.update(DataComponentsRegister.WAND_COMPONENT.get(), DEFAULT_STAT, wandStat -> new WandDataComponent.WandStatBuilder(wandStat).setCurrentIdx(0).setCastableSize(effect.size()).build());
                     }
 
-                    int getOldIdx = stat.getCurrentIdx();
+                    int getOldIdx =  wand.get(DataComponentsRegister.WAND_COMPONENT.get()).getCurrentIdx();
 
-                    Node<SpellEffect> cast = castingUtils.makeCastingTree(effect.subList(getOldIdx, effect.size()));
+                    if(effect.isEmpty()){
+                        pPlayer.displayClientMessage(Component.translatable("item.wandrous.wand.empty_wand"), true);
+                        return;
+                    }
 
-                    float rechargeSpeed = stat.getRechargeSpeed();
-                    float castDelay = stat.getCastDelay();
+                    List<SpellStack> stackList = effect.subList(getOldIdx, effect.size());
+                    Node<SpellStack> cast = castingUtils.makeCastingTree(stackList,effect);
 
-                    if (!effect.isEmpty() && cast.getData() != null) {
+                    float rechargeSpeed =  wand.get(DataComponentsRegister.WAND_COMPONENT.get()).getRechargeSpeed();
+                    float castDelay =  wand.get(DataComponentsRegister.WAND_COMPONENT.get()).getCastDelay();
+
+                    handler.ifPresent(iItemHandler -> {
+                        wand.update(DataComponentsRegister.WAND_COMPONENT.get(), DEFAULT_STAT, wandStat -> new WandDataComponent.WandStatBuilder(wandStat).
+                                setInventory(iItemHandler.serializeNBT(pLevel.registryAccess())).build());
+                    });
+
+
+                    if (cast.getData() != null && cast.getData().getEffect() != null) {
 
                         int current = (getOldIdx + castingUtils.idx) % effect.size();
-                        builder.setCurrentIdx(current);
+                        wand.update(DataComponentsRegister.WAND_COMPONENT.get(), DEFAULT_STAT, wandStat -> new WandDataComponent.WandStatBuilder(wandStat).setCurrentIdx(current).build());
 
-                        int cost = CastingUtils.calculateManaCost(0, cast); //TODO: make a gamerule for making the cast cost nothing in creative
-
-                        int currentMana = stat.getMana();
+                        int cost = CastingUtils.calculateManaCost(cast); //TODO: make a gamerule for making the cast cost nothing in creative
+                        float delayMod = CastingUtils.calculateCastDelayMod(cast);
+                        float rechargeSpeedMod = CastingUtils.calculateRechargeSpeedMod(cast);
+                        int currentMana =  wand.get(DataComponentsRegister.WAND_COMPONENT.get()).getMana();
 
                         if (cost <= currentMana) {
                             CastingUtils.castSpells(pPlayer, wand, pLevel, pPlayer.getEyePosition(), cast);
-                            builder.setMana(currentMana - Math.max(cost, 0));
-
-                            pPlayer.getCooldowns().addCooldown(wand.getItem(), (int) (current == 0 ? rechargeSpeed : castDelay) * 20);
+                            wand.update(DataComponentsRegister.WAND_COMPONENT.get(), DEFAULT_STAT, wandStat -> new WandDataComponent.WandStatBuilder(wandStat).setMana(currentMana - Math.max(cost, 0)).build());
+                            pPlayer.getCooldowns().addCooldown(wand.getItem(), (int) ((current == 0 ? rechargeSpeed + rechargeSpeedMod : castDelay + delayMod) * 20));
                         } else {
-                            pPlayer.displayClientMessage(Component.literal("Not enough mana"), true);
+                            pPlayer.displayClientMessage(Component.translatable("item.wandrous.wand.no_mana"), true);
                         }
-
-                        if (!pLevel.isClientSide) {
-                            wand.set(DataComponentsRegister.WAND_COMPONENT.get(), builder.build());
-                        }
-                    } else {
-                        pPlayer.displayClientMessage(Component.literal("No spells to cast"), true);
                     }
                 }
             }
@@ -210,7 +210,7 @@ public class WandItem extends Item implements DynamicModelled {
         int manaRegen = stat.getManaChargeSpeed();
 
         if (mana <= maxMana) {
-            int manaCost = (int) Math.clamp(0, maxMana, (mana +  manaRegen / 20f));
+            int manaCost = (int) Math.clamp(0, maxMana, (mana + manaRegen / 20f));
             pStack.update(DataComponentsRegister.WAND_COMPONENT.get(), stat, wandStat -> new WandDataComponent.WandStatBuilder(wandStat).setMana(manaCost).build());
         }
     }

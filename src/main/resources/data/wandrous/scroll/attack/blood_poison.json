@@ -1,0 +1,14 @@
+{
+  "name": "Zarovi's Scroll of Bloodstream Poisoning",
+  "lore": [
+    "Using vitality against itself"
+  ],
+  "spells": [
+    "wandrous:health_to_power",
+    "wandrous:teleport_cast",
+    "wandrous:triple_cast",
+    "wandrous:bestow_curse_poison",
+    "wandrous:bestow_curse_hunger",
+    "wandrous:bestow_curse_weakness"
+  ]
+}

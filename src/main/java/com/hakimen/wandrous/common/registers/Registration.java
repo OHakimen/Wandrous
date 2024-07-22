@@ -6,8 +6,13 @@ public class Registration {
 
     public static void register(IEventBus bus){
 
-        SoundRegister.register(bus);
 
+        //Init these earlier
+        GlyphRegister.register(bus);
+        SpellMoverRegister.register(bus);
+        SpellRegister.register(bus);
+
+        SoundRegister.register(bus);
         EffectRegister.register(bus);
 
         DataComponentsRegister.register(bus);
@@ -18,9 +23,6 @@ public class Registration {
         BlockEntityRegister.register(bus);
 
         ParticleRegister.register(bus);
-
-        SpellMoverRegister.register(bus);
-        SpellRegister.register(bus);
 
         LootModRegistry.register(bus);
 

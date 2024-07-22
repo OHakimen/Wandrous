@@ -21,4 +21,5 @@ public class IgniteEffect extends MobEffect {
         pLivingEntity.setRemainingFireTicks(2);
         return true;
     }
+
 }

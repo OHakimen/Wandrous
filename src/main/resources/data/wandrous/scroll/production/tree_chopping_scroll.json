@@ -1,0 +1,15 @@
+{
+  "name": "Klein's Scroll of Tree Chopping",
+  "lore": [
+    "A lumberjack's friend"
+  ],
+  "spells": [
+    "wandrous:long_distance_cast",
+    "wandrous:double_cast",
+    "wandrous:increase_range",
+    "wandrous:increase_range",
+    "wandrous:increase_range",
+    "wandrous:chainsaw",
+    "wandrous:collect"
+  ]
+}

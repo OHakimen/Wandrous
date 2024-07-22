@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "wandrous:block/small_tealestite_bud"
+  }
+}

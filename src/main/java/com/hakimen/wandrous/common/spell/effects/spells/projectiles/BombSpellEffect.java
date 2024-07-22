@@ -14,7 +14,7 @@ public class BombSpellEffect extends ProjectileSpellEffect {
                 .setDamage(5)
                 .setManaDrain(30)
                 .setSpeed(1f)
-                .setSpread(0)
+                .setSpread(0.01f)
                 .setLifeTime(100)
         );
     }
@@ -25,7 +25,7 @@ public class BombSpellEffect extends ProjectileSpellEffect {
 
         Level level = context.getLevel();
         Vec3 location = context.getLocation();
-        BombProjectile bomb = new BombProjectile(location.x, location.y, location.z,level, context.clone());
+        BombProjectile bomb = new BombProjectile(location.x, location.y, location.z,level, context);
         shootProjectile(bomb, context);
         level.addFreshEntity(bomb);
     }

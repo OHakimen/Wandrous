@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentPatch;
-import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -12,12 +11,11 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
 
-public class WandDataComponent implements DataComponentType<WandDataComponent.WandStat> {
+public class WandDataComponent {
 
     public static WandStat DEFAULT_STAT = new WandDataComponent.WandStat(
             0,0,0,0f,0f,0,0,0,0,0, new CompoundTag(), ""
@@ -360,16 +358,4 @@ public class WandDataComponent implements DataComponentType<WandDataComponent.Wa
             pBuffer.writeUtf(pValue.getName());
         }
     };
-
-
-    @Nullable
-    @Override
-    public Codec<WandStat> codec() {
-        return CODEC;
-    }
-
-    @Override
-    public StreamCodec<? super RegistryFriendlyByteBuf, WandStat> streamCodec() {
-        return STREAM_CODEC;
-    }
 }

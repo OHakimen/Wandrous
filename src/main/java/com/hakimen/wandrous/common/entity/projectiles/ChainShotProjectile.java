@@ -124,10 +124,10 @@ public class ChainShotProjectile extends SpellCastingProjectile {
                 for (Entity entity : entities) {
                     if (closest == null) {
                         closest = (LivingEntity) entity;
-                        closestDist = (float) closest.position().distanceTo(getPosition(0));
-                    } else if(closestDist >= entity.position().distanceTo(getPosition(0))){
+                        closestDist = (float) closest.position().distanceTo(getPosition(0).subtract(0, closest.getEyeY()/2f, 0));
+                    } else if(closestDist >= entity.position().distanceTo(getPosition(0).subtract(0, closest.getEyeY()/2f, 0))){
                         closest = (LivingEntity) entity;
-                        closestDist = (float) closest.position().distanceTo(getPosition(0));
+                        closestDist = (float) closest.position().distanceTo(getPosition(0).subtract(0, closest.getEyeY()/2f, 0));
                     }
                 }
 
@@ -149,7 +149,7 @@ public class ChainShotProjectile extends SpellCastingProjectile {
 
         if (!level().isClientSide) {
             if (this.tickCount > maxTicks || hitCount == 0) {
-                if (this.context != null && this.context.getNode().getData().hasKind(SpellEffect.TIMER)) {
+                if (this.context != null && this.context.getNode().getData().getEffect().hasKind(SpellEffect.TIMER)) {
                     this.context.getStatus().setLifetimeMod(0);
                     this.context.getHit().addAll(hit);
                     SpellCastingProjectile.onTimeEnd(this, this.context);

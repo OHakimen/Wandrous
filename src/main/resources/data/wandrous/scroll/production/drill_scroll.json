@@ -1,0 +1,12 @@
+{
+  "name": "Klein's Scroll of Arcane Digging",
+  "lore": [
+    "It yearns for the mines"
+  ],
+  "spells": [
+    "wandrous:long_distance_cast",
+    "wandrous:double_cast",
+    "wandrous:drill",
+    "wandrous:collect"
+  ]
+}

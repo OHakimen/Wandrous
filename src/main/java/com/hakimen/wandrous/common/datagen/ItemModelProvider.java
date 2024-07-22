@@ -40,7 +40,6 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         block(BlockRegister.POLISHED_CHERT_SLAB.get());
 
 
-
         block(BlockRegister.CHERT_BRICKS.get());
         block(BlockRegister.CHERT_BRICKS_STAIRS.get());
         block(BlockRegister.CHERT_BRICKS_SLAB.get());
@@ -66,9 +65,27 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         block(BlockRegister.MOSSY_CHERT_TILES.get());
         block(BlockRegister.MOSSY_CHERT_TILES_STAIRS.get());
         block(BlockRegister.MOSSY_CHERT_TILES_SLAB.get());
+
+        block(BlockRegister.TEALESTITE_BLOCK.get());
+        block(BlockRegister.BUDDING_TEALESTITE.get());
+
+        block(BlockRegister.GLYPH_PROJECTOR.get());
+
+        singleTexture("small_tealestite_bud", mcLoc("generated"),"layer0", ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/small_tealestite_bud"));
+        singleTexture("medium_tealestite_bud", mcLoc("generated"),"layer0", ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/medium_tealestite_bud"));
+        singleTexture("big_tealestite_bud", mcLoc("generated"),"layer0", ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/big_tealestite_bud"));
+        singleTexture("tealestite_cluster", mcLoc("generated"),"layer0", ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/tealestite_cluster"));
+
+
+        basicItem(ItemRegister.SCROLL.get());
+        basicItem(ItemRegister.TEALESTITE_SHARD.get());
+        basicItem(ItemRegister.TEALESTITE_RECHARGE_CRYSTAL.get());
+        basicItem(ItemRegister.TEALESTITE_GREATER_RECHARGE_CRYSTAL.get());
+        basicItem(ItemRegister.INSCRIBED_LENS.get());
     }
 
     private void makeSpells(){
+
         makeTriggerSpell(ItemRegister.TRIGGER_FIREBALL_SPELL.get(), "minecraft:item/fire_charge");
         makeTimerSpell(ItemRegister.TIMER_FIREBALL_SPELL.get(), "minecraft:item/fire_charge");
         makeVanillaBasedSpell(ItemRegister.FIREBALL_SPELL.get(), "minecraft:item/fire_charge");
@@ -123,6 +140,9 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         makeSpell(ItemRegister.DECREASE_RANGE_SPELL.get());
         makeSpell(ItemRegister.INCREASE_SPREAD_SPELL.get());
         makeSpell(ItemRegister.DECREASE_SPREAD_SPELL.get());
+        makeSpell(ItemRegister.HEAVY_SPREAD_SPELL.get());
+        makeSpell(ItemRegister.DECREASE_RECHARGE_TIME_SPELL.get());
+        makeSpell(ItemRegister.HEALTH_TO_POWER_SPELL.get());
 
         makeSpell(ItemRegister.LIGHTING_BOLT_SPELL.get());
 
@@ -162,6 +182,9 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         makeSpell(ItemRegister.BESTOW_CURSE_WEAKNESS_SPELL.get());
         makeSpell(ItemRegister.BESTOW_CURSE_NAUSEA_SPELL.get());
         makeSpell(ItemRegister.BESTOW_CURSE_SLOWNESS_SPELL.get());
+        makeSpell(ItemRegister.BESTOW_CURSE_OF_BIG_SPELL.get());
+        makeSpell(ItemRegister.BESTOW_CURSE_OF_SMALL_SPELL.get());
+        makeSpell(ItemRegister.BESTOW_CURSE_POISON_SPELL.get());
 
         makeSpell(ItemRegister.BESTOW_BLESSING_HASTE_SPELL.get());
         makeSpell(ItemRegister.BESTOW_BLESSING_BOOST_HEALTH_SPELL.get());
@@ -171,7 +194,11 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         makeSpell(ItemRegister.BESTOW_BLESSING_NIGHT_VISION_SPELL.get());
         makeSpell(ItemRegister.BESTOW_BLESSING_RESIST_FIRE_SPELL.get());
         makeSpell(ItemRegister.BESTOW_BLESSING_SPEED_SPELL.get());
+        makeSpell(ItemRegister.BESTOW_BLESSING_STRENGTH_SPELL.get());
 
+        makeSpell(ItemRegister.GREEK_LETTER_DELTA_SPELL.get());
+        makeSpell(ItemRegister.GREEK_LETTER_LAMBDA_SPELL.get());
+        makeSpellWithSpellFrame(ItemRegister.GREEK_LETTER_KAPPA_SPELL.get());
     }
 
 
@@ -221,6 +248,20 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         getBuilder(item.toString())
                 .parent(new ModelFile.ExistingModelFile(ResourceLocation.parse("minecraft:item/generated"), existingFileHelper))
                 .texture("layer0", item.getSpellEffect().hasKind(SpellEffect.SPELL) ? "wandrous:item/spell/bases/spell_base" : "wandrous:item/spell/bases/modifier_base")
+                .texture("layer1", item.toString().replace(":", ":item/spell/"));
+    }
+
+    public void makeSpellWithSpellFrame(SpellEffectItem item){
+        getBuilder(item.toString())
+                .parent(new ModelFile.ExistingModelFile(ResourceLocation.parse("minecraft:item/generated"), existingFileHelper))
+                .texture("layer0", "wandrous:item/spell/bases/spell_base" )
+                .texture("layer1", item.toString().replace(":", ":item/spell/"));
+    }
+
+    public void makeSpellWithModifierFrame(SpellEffectItem item){
+        getBuilder(item.toString())
+                .parent(new ModelFile.ExistingModelFile(ResourceLocation.parse("minecraft:item/generated"), existingFileHelper))
+                .texture("layer0", "wandrous:item/spell/bases/modifier_base" )
                 .texture("layer1", item.toString().replace(":", ":item/spell/"));
     }
 

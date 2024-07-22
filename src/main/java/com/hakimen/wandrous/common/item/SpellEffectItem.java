@@ -1,7 +1,10 @@
 package com.hakimen.wandrous.common.item;
 
+import com.hakimen.wandrous.common.item.component.SpellCastsDataComponent;
+import com.hakimen.wandrous.common.registers.DataComponentsRegister;
 import com.hakimen.wandrous.common.spell.SpellEffect;
 import com.hakimen.wandrous.common.spell.SpellStatus;
+import com.hakimen.wandrous.common.utils.ChargesUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -21,6 +24,11 @@ public class SpellEffectItem extends Item {
         this.spellEffect = spellEffect;
     }
 
+
+    public SpellEffectItem(Supplier<SpellEffect> spellEffect, int maxCasts) {
+        super(new Properties().stacksTo(1).component(DataComponentsRegister.CHARGES_COMPONENT.get(), new SpellCastsDataComponent.SpellCastsData(maxCasts, maxCasts)));
+        this.spellEffect = spellEffect;
+    }
 
     @Override
     public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
@@ -83,6 +91,11 @@ public class SpellEffectItem extends Item {
         if (status.getRadiusMod() != 0) {
             pTooltipComponents.add(Component.literal("Radius Mod %s".formatted(status.getRadiusMod() > 0 ? "+%.2f".formatted(status.getRadiusMod()) : "%.2f".formatted(status.getRadiusMod()))));
         }
+
+        if(ChargesUtils.hasCharge(pStack)){
+            pTooltipComponents.add(Component.literal("Charges (%s/%s)".formatted(ChargesUtils.currentCharges(pStack), ChargesUtils.maxCharges(pStack))));
+        }
+
         super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
     }
 

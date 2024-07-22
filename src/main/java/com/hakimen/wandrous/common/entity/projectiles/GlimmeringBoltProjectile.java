@@ -101,7 +101,7 @@ public class GlimmeringBoltProjectile extends SpellCastingProjectile {
 
         if(!level().isClientSide){
             if(this.tickCount > maxTicks){
-                if(this.context != null && this.context.getNode().getData().hasKind(SpellEffect.TIMER)){
+                if(this.context != null && this.context.getNode().getData().getEffect().hasKind(SpellEffect.TIMER)){
                     this.context.getStatus().setLifetimeMod(0);
                     SpellCastingProjectile.onTimeEnd(this, this.context);
                 }

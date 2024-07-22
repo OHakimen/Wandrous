@@ -1,7 +1,5 @@
 package com.hakimen.wandrous.common.spell;
 
-import net.minecraft.world.entity.Entity;
-
 import java.util.Random;
 
 public class SpellStatus {

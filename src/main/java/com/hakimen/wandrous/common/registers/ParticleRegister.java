@@ -1,6 +1,7 @@
 package com.hakimen.wandrous.common.registers;
 
 import com.hakimen.wandrous.Wandrous;
+import com.hakimen.wandrous.common.particle.ArcaneKnowledgeParticle.ArcaneKnowledgeParticleType;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -17,6 +18,10 @@ public class ParticleRegister {
 
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> GLIMMERING_BOLT_HIT =
             PARTICLE_TYPES.register("glimmering_bolt_hit", () -> new SimpleParticleType(true));
+
+    public static final DeferredHolder<ParticleType<?>, ArcaneKnowledgeParticleType> KNOWLEDGE =
+            PARTICLE_TYPES.register("arcane_knowledge", ArcaneKnowledgeParticleType::new);
+
 
     public static void register(IEventBus eventBus) {
         PARTICLE_TYPES.register(eventBus);

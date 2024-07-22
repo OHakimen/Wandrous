@@ -1,0 +1,11 @@
+{
+  "name": "Klein's Scroll of Gusting",
+  "lore": [
+    "For one must ascend further than its own"
+  ],
+  "spells": [
+    "wandrous:trigger_glimmering_bolt",
+    "wandrous:divide_by_4",
+    "wandrous:gust"
+  ]
+}

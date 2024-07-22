@@ -29,7 +29,7 @@ public class HomingMover implements ISpellMover {
             } else if (context.getHomingTarget() != null) {
                 LivingEntity target = context.getHomingTarget();
                 if(target.isAlive()){
-                    projectile.setDeltaMovement(target.getEyePosition().subtract(projectile.getPosition(0)).normalize().scale(0.9f));
+                    projectile.setDeltaMovement(target.getEyePosition().subtract(projectile.getPosition(0).subtract(0,-target.getBbHeight()/2f, 0)).normalize().scale(0.9f));
                 }else{
                     context.setHomingTarget(null);
                 }

@@ -1,0 +1,36 @@
+package com.hakimen.wandrous.common.spell.effects.spells;
+
+import com.hakimen.wandrous.common.spell.SpellContext;
+import com.hakimen.wandrous.common.spell.SpellEffect;
+import com.hakimen.wandrous.common.spell.SpellStack;
+import com.hakimen.wandrous.common.spell.SpellStatus;
+import com.hakimen.wandrous.common.utils.CastingUtils;
+import com.hakimen.wandrous.common.utils.data.Node;
+import org.apache.commons.lang3.function.TriFunction;
+
+import java.util.List;
+
+public class GreekLetterSpellEffect extends SpellEffect {
+
+    TriFunction<Node<SpellStack>, CastingUtils, List<SpellStack>, Node<SpellStack>> apply;
+    public GreekLetterSpellEffect(TriFunction<Node<SpellStack>, CastingUtils, List<SpellStack>, Node<SpellStack>> apply) {
+        this.apply = apply;
+        setKind(MODIFIER);
+        setStatus(new SpellStatus()
+                .setManaDrain(100)
+        );
+    }
+
+    public Node<SpellStack> apply(Node<SpellStack> tree, CastingUtils castingUtils, List<SpellStack> itemHandler){
+        return apply.apply(tree, castingUtils,itemHandler);
+    }
+
+    @Override
+    public void cast(SpellContext context) {
+        context.mergeStatus(getStatus());
+        for (Node<SpellStack> child : context.getNode().getChildren()) {
+
+            child.getData().getEffect().cast(context.setNode(child));
+        }
+    }
+}

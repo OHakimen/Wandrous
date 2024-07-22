@@ -2,7 +2,7 @@ package com.hakimen.wandrous.common.entity.projectiles;
 
 import com.hakimen.wandrous.common.spell.SpellContext;
 import com.hakimen.wandrous.common.spell.SpellEffect;
-import com.hakimen.wandrous.common.spell.SpellStatus;
+import com.hakimen.wandrous.common.spell.SpellStack;
 import com.hakimen.wandrous.common.spell.effects.modifiers.MoverSpellEffect;
 import com.hakimen.wandrous.common.spell.effects.modifiers.ProjectileHitEffect;
 import com.hakimen.wandrous.common.spell.mover.ISpellMover;
@@ -11,7 +11,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.damagesource.DamageTypes;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -43,55 +42,39 @@ public class SpellCastingProjectile extends ThrowableProjectile {
     }
 
 
-    protected static void shootProjectile(Projectile self, SpellContext context){
-        Entity caster = context.getCaster();
-        SpellStatus status = context.getStatus();
-
-        if (caster instanceof LivingEntity livingEntity) {
-            float yRot = livingEntity.getYRot() + Math.round(context.getSplit() / 2.0) * 10 * (context.getSplit() % 2 == 1 ? -1 : 1);
-            float xRot = livingEntity.getXRot();
-            self.shootFromRotation(livingEntity,xRot, yRot, 0, status.getSpeed(), status.getSpread() * 10);
-            status.setSpeedMod(0);
-        } else {
-            self.setDeltaMovement(caster.getDeltaMovement().yRot( Math.round(context.getSplit() / 2.0) * 10 * (context.getSplit() % 2 == 1 ? -1 : 1)).multiply(context.getSplit() % 2 == 1 ? -1 : 1,1,context.getSplit() % 2 == 1 ? -1 : 1).scale(1 + status.getSpeedMod()));
-        }
-    }
-
     protected static void onHitBlock(Projectile self, BlockHitResult pResult, SpellContext context){
-        SpellContext nextContext = context.clone();
 
         List<ProjectileHitEffect> effects = addProjectileEffects(context.getNode());
 
         effects.forEach(projectileHitEffect -> {
-            projectileHitEffect.onHitBlock(nextContext, self.level(), pResult.getBlockPos(), self.level().getBlockState(pResult.getBlockPos()));
+            projectileHitEffect.onHitBlock(context, self.level(), pResult.getBlockPos(), self.level().getBlockState(pResult.getBlockPos()));
         });
 
-        if (nextContext.getNode().getData().hasKind(SpellEffect.TRIGGER)) {
+        if (context.getNode().getData().getEffect().hasKind(SpellEffect.TRIGGER)) {
             self.setDeltaMovement(new Vec3(self.getDeltaMovement().toVector3f().reflect(Vec3.atLowerCornerOf(pResult.getDirection().getNormal()).toVector3f())));
-            nextContext.getNode().getChildren().forEach(
-                    (child) -> child.getData().cast(nextContext.setNode(child).setLocation(pResult.getLocation()))
+            context.getNode().getChildren().forEach(
+                    (child) -> child.getData().getEffect().cast(context.setNode(child).setLocation(pResult.getLocation()))
             );
         }
     }
 
 
     protected static void onHitEntity(Projectile self, EntityHitResult pResult, SpellContext context) {
-        SpellContext nextContext = context.clone();
         if (pResult.getEntity() instanceof LivingEntity entity) {
-            nextContext.getHit().add(entity);
+            context.getHit().add(entity);
         }
 
         List<ProjectileHitEffect> effects = addProjectileEffects(context.getNode());
 
         effects.forEach(projectileHitEffect -> {
-            projectileHitEffect.onHitBlock(nextContext, self.level(), pResult.getEntity().getOnPos(), self.level().getBlockState(pResult.getEntity().getOnPos()));
-            projectileHitEffect.onHitEntity(nextContext, pResult.getEntity());
+            projectileHitEffect.onHitBlock(context, self.level(), pResult.getEntity().getOnPos(), self.level().getBlockState(pResult.getEntity().getOnPos()));
+            projectileHitEffect.onHitEntity(context, pResult.getEntity());
         });
 
-        if (nextContext.getNode().getData().hasKind(SpellEffect.TRIGGER)) {
+        if (context.getNode().getData().getEffect().hasKind(SpellEffect.TRIGGER)) {
             self.setDeltaMovement(self.getDeltaMovement().multiply(1, -1, 1));
-            nextContext.getNode().getChildren().forEach(
-                    (child) -> child.getData().cast(nextContext.setNode(child).setLocation(pResult.getLocation()))
+            context.getNode().getChildren().forEach(
+                    (child) -> child.getData().getEffect().cast(context.setNode(child).setLocation(pResult.getLocation()))
             );
         }
 
@@ -100,30 +83,33 @@ public class SpellCastingProjectile extends ThrowableProjectile {
 
 
     protected static void onTimeEnd(Projectile self, SpellContext context) {
-        SpellContext nextContext = context.clone();
-        if (nextContext.getNode().getData().hasKind(SpellEffect.TIMER)) {
-            nextContext.getNode().getChildren().forEach(
-                    (child) -> child.getData().cast(nextContext.setNode(child).setLocation(self.getPosition(0)))
+        if (context.getNode().getData().getEffect().hasKind(SpellEffect.TIMER)) {
+            context.getNode().getChildren().forEach(
+                    (child) -> child.getData().getEffect().cast(context.setNode(child).setLocation(self.getPosition(0)))
             );
         }
     }
 
-    private static List<ProjectileHitEffect> addProjectileEffects(Node<SpellEffect> node){
+    private static List<ProjectileHitEffect> addProjectileEffects(Node<SpellStack> node){
         List<ProjectileHitEffect> effects = new ArrayList<>();
-        if(node.getParent() != null &&  node.getParent().getData().hasKind(SpellEffect.MODIFIER)){
-            if( node.getParent().getData() instanceof ProjectileHitEffect effect){
-                effects.add(effect);
+
+        if(node.getParent() != null &&  node.getParent().getData().getEffect().hasKind(SpellEffect.MODIFIER)){
+            SpellEffect effect = node.getParent().getData().getEffect();
+            if(effect instanceof ProjectileHitEffect eff){
+                effects.add(eff);
             }
             effects.addAll(addProjectileEffects(node.getParent()));
         }
         return effects;
     }
 
-    static List<ISpellMover> getMovers(Node<SpellEffect> node){
+    static List<ISpellMover> getMovers(Node<SpellStack> node){
         List<ISpellMover> movers = new ArrayList<>();
-        if(node.getParent() != null &&  node.getParent().getData().hasKind(SpellEffect.MODIFIER)){
-            if( node.getParent().getData() instanceof MoverSpellEffect effect){
-                movers.add(effect.getMover());
+
+        if(node.getParent() != null &&  node.getParent().getData().getEffect().hasKind(SpellEffect.MODIFIER)){
+            SpellEffect effect = node.getParent().getData().getEffect();
+            if(effect instanceof MoverSpellEffect eff){
+                movers.add(eff.getMover());
             }
             movers.addAll(getMovers(node.getParent()));
         }

@@ -91,7 +91,6 @@ public class NukeEntity extends Entity {
                             level.setBlock(blockpos, Blocks.NETHERRACK.defaultBlockState(), Block.UPDATE_ALL);
                         }
 
-
                         if (r.nextFloat() < 0.5 && !level.getBlockState(blockpos).is(Blocks.FIRE)) {
                             level.setBlock(blockpos, Blocks.MAGMA_BLOCK.defaultBlockState(), Block.UPDATE_ALL);
                         }

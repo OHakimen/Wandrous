@@ -15,6 +15,7 @@ public class SpreadCastSpellEffect extends SpellEffect {
         this.setKind(MODIFIER);
         this.setStatus(new SpellStatus()
                 .setManaDrain((int)radius * 2)
+                .setCastDelayMod(-0.25f)
         );
     }
 
@@ -23,9 +24,8 @@ public class SpreadCastSpellEffect extends SpellEffect {
         context.mergeStatus(this.getStatus());
         Random r = new Random();
         context.getNode().getChildren().forEach(child -> {
-            SpellContext nextContext = context.clone();
-            nextContext.setLocation(context.getLocation().add(r.nextDouble(-1,1) * radius,0,r.nextDouble(-1,1) * radius));
-            child.getData().cast(nextContext.setNode(child));
+            context.setLocation(context.getLocation().add(r.nextDouble(-1,1) * radius,0,r.nextDouble(-1,1) * radius));
+            child.getData().getEffect().cast(context.setNode(child));
         });
 
     }

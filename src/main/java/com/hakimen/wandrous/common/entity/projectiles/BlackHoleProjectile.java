@@ -90,7 +90,7 @@ public class BlackHoleProjectile extends SpellCastingProjectile {
             BlockPos pos = getOnPos();
             Vec3 location = getPosition(0);
             Level level = level();
-            float radius = 2;
+            float radius = this.context.getStatus().getRadius();
 
             Iterator<BlockPos> positions = BlockPos.betweenClosed(pos.offset((int) -radius, (int) -radius, (int) -radius), pos.offset((int) radius, (int) radius, (int) radius)).iterator();
 
@@ -107,7 +107,7 @@ public class BlackHoleProjectile extends SpellCastingProjectile {
 
         if(!level().isClientSide){
             if(this.tickCount > maxTicks){
-                if(this.context != null && this.context.getNode().getData().hasKind(SpellEffect.TIMER)){
+                if(this.context != null && this.context.getNode().getData().getEffect().hasKind(SpellEffect.TIMER)){
                     this.context.getStatus().setLifetimeMod(0);
                     SpellCastingProjectile.onTimeEnd(this, this.context);
                 }

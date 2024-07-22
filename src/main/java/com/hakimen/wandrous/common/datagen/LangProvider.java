@@ -1,7 +1,9 @@
 package com.hakimen.wandrous.common.datagen;
 
 import com.hakimen.wandrous.Wandrous;
+import com.hakimen.wandrous.common.data.Glyph;
 import com.hakimen.wandrous.common.item.SpellEffectItem;
+import com.hakimen.wandrous.common.registers.GlyphRegister;
 import com.hakimen.wandrous.common.registers.ItemRegister;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.LanguageProvider;
@@ -14,7 +16,78 @@ public class LangProvider extends LanguageProvider {
     @Override
     protected void addTranslations() {
         add("itemGroup.wandrous", "Wandrous");
+        add("itemGroup.wandrous.scrolls", "Scrolls");
+        add("itemGroup.wandrous.glyphs", "Glyphs");
 
+        addSpells();
+        addGlyphs();
+        addItems();
+    }
+
+    public void addGlyphs(){
+        addGlyph(GlyphRegister.BIND.get(), "Bind");
+        addGlyph(GlyphRegister.CONTROL.get(), "Control");
+        addGlyph(GlyphRegister.DESTINY.get(), "Destiny");
+        addGlyph(GlyphRegister.FOCUS.get(), "Focus");
+        addGlyph(GlyphRegister.GUIDANCE.get(),"Guidance");
+        addGlyph(GlyphRegister.KNOWLEDGE.get(), "Knowledge");
+        addGlyph(GlyphRegister.MIND.get(), "Mind");
+        addGlyph(GlyphRegister.NEW.get(), "New");
+        addGlyph(GlyphRegister.POWER.get(), "Power");
+        addGlyph(GlyphRegister.TINKER.get(), "Tinker");
+        addGlyph(GlyphRegister.VITALITY.get(), "Vitality");
+        addGlyph(GlyphRegister.WEAVE.get(), "Weave");
+    }
+
+    public void addItems(){
+        add(ItemRegister.WAND.get(), "Wand");
+        add(ItemRegister.SCROLL.get(), "Magic Scroll");
+        add(ItemRegister.INSCRIBED_LENS.get(), "Inscribed Lens");
+
+        add(ItemRegister.CHERT.get(), "Chert");
+        add(ItemRegister.CHERT_SLAB.get(), "Chert Slab");
+        add(ItemRegister.CHERT_STAIRS.get(), "Chert Stairs");
+        add(ItemRegister.CHERT_WALL.get(), "Chert Wall");
+
+        add(ItemRegister.POLISHED_CHERT.get(), "Polished Chert");
+        add(ItemRegister.POLISHED_CHERT_SLAB.get(), "Polished Chert Slab");
+        add(ItemRegister.POLISHED_CHERT_STAIRS.get(), "Polished Chert Stairs");
+
+        add(ItemRegister.CHERT_BRICKS.get(), "Chert Bricks");
+        add(ItemRegister.CHISELED_CHERT_BRICKS.get(), "Chiseled Chert Bricks");
+        add(ItemRegister.CRACKED_CHERT_BRICKS.get(), "Cracked Chert Bricks");
+
+        add(ItemRegister.CHERT_BRICKS_SLAB.get(), "Chert Brick Slab");
+        add(ItemRegister.CHERT_BRICKS_STAIRS.get(), "Chert Brick Stairs");
+        add(ItemRegister.CHERT_BRICKS_WALL.get(), "Chert Brick Wall");
+
+        add(ItemRegister.MOSSY_CHERT_BRICKS.get(), "Mossy Chert Bricks");
+        add(ItemRegister.MOSSY_CHERT_BRICKS_SLAB.get(), "Mossy Chert Brick Slab");
+        add(ItemRegister.MOSSY_CHERT_BRICKS_STAIRS.get(), "Mossy Chert Brick Stairs");
+        add(ItemRegister.MOSSY_CHERT_BRICKS_WALL.get(), "Mossy Chert Brick Wall");
+
+        add(ItemRegister.CHERT_PILLAR.get(), "Chert Pillar");
+
+        add(ItemRegister.CHERT_TILES.get(), "Chert Tiles");
+        add(ItemRegister.CHERT_TILES_STAIRS.get(), "Chert Tile Stairs");
+        add(ItemRegister.CHERT_TILES_SLAB.get(), "Chert Tile Slab");
+
+        add(ItemRegister.MOSSY_CHERT_TILES.get(), "Mossy Chert Tiles");
+        add(ItemRegister.MOSSY_CHERT_TILES_STAIRS.get(), "Mossy Chert Tiles Stairs");
+        add(ItemRegister.MOSSY_CHERT_TILES_SLAB.get(), "Mossy Chert Tiles Slab");
+
+        add(ItemRegister.TEALESTITE_BLOCK.get(), "Tealestite Block");
+        add(ItemRegister.BUDDING_TEALESTITE.get(), "Budding Tealestite");
+        add(ItemRegister.SMALL_TEALESTITE_BUD.get(), "Small Tealestite Bud");
+        add(ItemRegister.MEDIUM_TEALESTITE_BUD.get(), "Medium Tealestite Bud");
+        add(ItemRegister.LARGE_TEALESTITE_BUD.get(), "Large Tealestite Bud");
+        add(ItemRegister.TEALESTITE_CLUSTER.get(), "Tealestite Cluster");
+        add(ItemRegister.TEALESTITE_SHARD.get(), "Tealestite Shard");
+        add(ItemRegister.TEALESTITE_RECHARGE_CRYSTAL.get(), "Tealestite Recharging Crystal");
+        add(ItemRegister.TEALESTITE_GREATER_RECHARGE_CRYSTAL.get(), "Greater Tealestite Recharging Crystal");
+    }
+
+    public void addSpells(){
         addSpell(ItemRegister.NUKE_SPELL.get(), "Nuke", "How'd you get your hands in this...");
 
         addSpell(ItemRegister.BOMB_SPELL.get(), "Bomb", "Throws a bomb that damages foes");
@@ -22,6 +95,7 @@ public class LangProvider extends LanguageProvider {
         addSpell(ItemRegister.GIGA_DRILL_SPELL.get(), "Giga Drill", "Bigger and therefore better (ROW ROW FIGHT THE POWER !!)");
         addSpell(ItemRegister.DRILL_SPELL.get(), "Drill", "It drills!");
         addSpell(ItemRegister.CHAINSAW_SPELL.get(), "Chainsaw", "A good way to get rid of trees");
+        addSpell(ItemRegister.COLLECT_SPELL.get(), "Collect", "Collects items and teleports them to the caster");
 
         addSpell(ItemRegister.EXPLOSION_SPELL.get(), "Explosion", "A small explosion");
         addSpell(ItemRegister.MAJOR_EXPLOSION_SPELL.get(), "Major Explosion", "A large explosion");
@@ -42,14 +116,13 @@ public class LangProvider extends LanguageProvider {
         addSpell(ItemRegister.TIMER_FIREBALL_SPELL.get(), "Fireball with Timer", "A fiery orb that casts a spell once it expires");
         addSpell(ItemRegister.TRIGGER_FIREBALL_SPELL.get(), "Fireball with Trigger", "A fiery orb that casts a spell upon collision");
 
-        addSpell(ItemRegister.FIREBALL_SPELL.get(), "Chain Shot", "A projectile that bounces around targets");
-        addSpell(ItemRegister.TIMER_FIREBALL_SPELL.get(), "Chain Shot with Timer", "projectile that bounces around targets and casts a spell once it expires");
-        addSpell(ItemRegister.TRIGGER_FIREBALL_SPELL.get(), "Chain Shot with Trigger", "projectile that bounces around targets and casts a spell upon collision");
-
+        addSpell(ItemRegister.CHAIN_SHOT_SPELL.get(), "Chain Shot", "A projectile that bounces around targets");
+        addSpell(ItemRegister.TIMER_CHAIN_SHOT_SPELL.get(), "Chain Shot with Timer", "A Projectile that bounces around targets and casts a spell once it expires");
+        addSpell(ItemRegister.TRIGGER_CHAIN_SHOT_SPELL.get(), "Chain Shot with Trigger", "A Projectile that bounces around targets and casts a spell upon collision");
 
         addSpell(ItemRegister.FREEZING_CHARGE_SPELL.get(), "Freezing Charge", "It is cold to the touch");
         addSpell(ItemRegister.IGNEOUS_CHARGE_SPELL.get(), "Igneous Charge", "It glows red hot");
-        addSpell(ItemRegister.POISON_CHARGE_SPELL.get(), "Poison Charge", "Doesn't smell nice");
+        addSpell(ItemRegister.POISON_CHARGE_SPELL.get(), "Poison Charge",   "Doesn't smell nice");
         addSpell(ItemRegister.CRUMBLING_CHARGE_SPELL.get(), "Crumbling Charge", "Caught in a landslide...");
 
         addSpell(ItemRegister.CRITICAL_PLUS_SPELL.get(), "Critical Plus", "Increases the chance to do critical damage");
@@ -111,6 +184,7 @@ public class LangProvider extends LanguageProvider {
         addSpell(ItemRegister.BESTOW_BLESSING_NIGHT_VISION_SPELL.get(), "Bestow Blessing: Night Vision", "Blesses the target with night vision");
         addSpell(ItemRegister.BESTOW_BLESSING_RESIST_FIRE_SPELL.get(), "Bestow Blessing: Fire Resistance", "Blesses the target with immunity against fire");
         addSpell(ItemRegister.BESTOW_BLESSING_SATURATION_SPELL.get(), "Bestow Blessing: Saturation", "Blesses the target with saturation");
+        addSpell(ItemRegister.BESTOW_BLESSING_STRENGTH_SPELL.get(), "Bestow Blessing: Strength", "Blesses the target with strength");
 
         addSpell(ItemRegister.BESTOW_CURSE_DARKNESS_SPELL.get(), "Bestow Curse: Darkness", "Curses the target with limited vision");
         addSpell(ItemRegister.BESTOW_CURSE_GLOW_SPELL.get(), "Bestow Curse: Glow", "Curses the target making it have a shiny aura");
@@ -120,10 +194,25 @@ public class LangProvider extends LanguageProvider {
         addSpell(ItemRegister.BESTOW_CURSE_MINING_FATIGUE_SPELL.get(), "Bestow Curse: Mining Fatigue", "Curses the target with reduced mining speed");
         addSpell(ItemRegister.BESTOW_CURSE_SLOWNESS_SPELL.get(), "Bestow Curse: Slowness", "Curses the target with reduced movement speed");
         addSpell(ItemRegister.BESTOW_CURSE_WEAKNESS_SPELL.get(), "Bestow Curse: Weakness", "Curses the target with reduced damage");
+        addSpell(ItemRegister.BESTOW_CURSE_POISON_SPELL.get(), "Bestow Curse: Poison", "Curses the target with poison");
+        addSpell(ItemRegister.BESTOW_CURSE_OF_BIG_SPELL.get(), "Bestow Curse: Big", "Curses the target and makes them big");
+        addSpell(ItemRegister.BESTOW_CURSE_OF_SMALL_SPELL.get(), "Bestow Curse: Small", "Curses the target and makes them small");
+
+        addSpell(ItemRegister.GREEK_LETTER_LAMBDA_SPELL.get(), "Lambda", "Casts a copy of the last spell in the wand");
+        addSpell(ItemRegister.GREEK_LETTER_DELTA_SPELL.get(), "Delta", "Casts a copy of the first spell in the wand");
+        addSpell(ItemRegister.GREEK_LETTER_KAPPA_SPELL.get(), "Kappa", "Copies all the modifiers in the wand");
+
+        addSpell(ItemRegister.HEALTH_TO_POWER_SPELL.get(), "Health to Power", "Consumes the caster's lifeforce to make spells stronger");
+        addSpell(ItemRegister.HEAVY_SPREAD_SPELL.get(), "Heavy Spread", "Increases the spread on spells, but reduces de cast and recharge times");
+        addSpell(ItemRegister.DECREASE_RECHARGE_TIME_SPELL.get(), "Decrease Recharge Time", "Reduces the cast and recharge times");
     }
 
     private void addSpell(SpellEffectItem item, String name, String description){
         add(item,name);
         add(item.getDescriptionId() + ".desc", description);
+    }
+
+    private void addGlyph(Glyph glyph, String name){
+        add(glyph.getTexture().toLanguageKey("glyph"), name);
     }
 }

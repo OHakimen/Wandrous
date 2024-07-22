@@ -1,0 +1,16 @@
+{
+  "name": "Jyke's Scroll of Cluster Bombs",
+  "lore": [
+    "There seems to always be more coming"
+  ],
+  "spells": [
+    "wandrous:trigger_glimmering_bolt",
+    "wandrous:hexagon_cast",
+    "wandrous:bomb",
+    "wandrous:bomb",
+    "wandrous:bomb",
+    "wandrous:bomb",
+    "wandrous:bomb",
+    "wandrous:bomb"
+  ]
+}

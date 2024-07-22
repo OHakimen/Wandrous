@@ -1,0 +1,10 @@
+{
+  "name": "Hollow's Scroll of Shrieking Charge",
+  "lore": [
+    "The sound it made, was..."
+  ],
+  "spells": [
+    "wandrous:crumbling_charge",
+    "wandrous:sonic_boom"
+  ]
+}

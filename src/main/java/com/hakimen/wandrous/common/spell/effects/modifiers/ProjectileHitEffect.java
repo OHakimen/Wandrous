@@ -4,7 +4,6 @@ import com.hakimen.wandrous.common.spell.SpellContext;
 import com.hakimen.wandrous.common.spell.SpellEffect;
 import com.hakimen.wandrous.common.spell.SpellStatus;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -26,6 +25,6 @@ public abstract class ProjectileHitEffect extends SpellEffect{
     @Override
     public void cast(SpellContext context) {
         context.mergeStatus(this.getStatus());
-        context.getNode().getChildren().forEach(child -> child.getData().cast(context.clone().setNode(child)));
+        context.getNode().getChildren().forEach(child -> child.getData().getEffect().cast(context.setNode(child)));
     }
 }

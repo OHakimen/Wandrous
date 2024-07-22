@@ -1,8 +1,11 @@
 package com.hakimen.wandrous;
 
+import com.hakimen.wandrous.client.ber.GlyphProjectorRenderer;
 import com.hakimen.wandrous.client.entity.*;
 import com.hakimen.wandrous.client.screens.WandTinkerScreen;
+import com.hakimen.wandrous.common.particle.ArcaneKnowledgeParticle;
 import com.hakimen.wandrous.common.particle.GlimmeringBoltParticle;
+import com.hakimen.wandrous.common.registers.BlockEntityRegister;
 import com.hakimen.wandrous.common.registers.ContainerRegister;
 import com.hakimen.wandrous.common.registers.EntityRegister;
 import com.hakimen.wandrous.common.registers.ParticleRegister;
@@ -23,6 +26,8 @@ public class WandrousClient {
 
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event){
+        event.registerBlockEntityRenderer(BlockEntityRegister.GLYPH_PROJECTOR_ENTITY.get(), GlyphProjectorRenderer::new);
+
         event.registerEntityRenderer(EntityRegister.TIMER_ENTITY.get(), TimerEntityRenderer::new);
         event.registerEntityRenderer(EntityRegister.NUKE_ENTITY.get(), NukeRenderer::new);
         event.registerEntityRenderer(EntityRegister.BOMB.get(), BombRenderer::new);
@@ -39,5 +44,8 @@ public class WandrousClient {
 
         Minecraft.getInstance().particleEngine.register(ParticleRegister.GLIMMERING_BOLT_HIT.get(),
                 GlimmeringBoltParticle.GlimmeringHitProvider::new);
+
+        Minecraft.getInstance().particleEngine.register(ParticleRegister.KNOWLEDGE.get(),
+                ArcaneKnowledgeParticle.ArcaneKnowledgeParticleProvider::new);
     }
 }

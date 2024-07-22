@@ -1,0 +1,12 @@
+{
+  "name": "Greg's Scroll of Hawkings Fate",
+  "lore": [
+    "The culmination of a great mind, woven into destructive power"
+  ],
+  "spells": [
+    "wandrous:accelerate_cast",
+    "wandrous:accelerate_cast",
+    "wandrous:timer_black_hole",
+    "wandrous:nuke"
+  ]
+}

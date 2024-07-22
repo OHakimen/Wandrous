@@ -1,0 +1,11 @@
+{
+  "name": "Mydia's Scroll of Imprisoning",
+  "lore": [
+    "If a cell can't contain you,",
+    "we must resort to chains"
+  ],
+  "spells": [
+    "wandrous:teleport_cast",
+    "wandrous:chain_prison"
+  ]
+}

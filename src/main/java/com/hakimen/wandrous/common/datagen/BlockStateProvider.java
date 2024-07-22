@@ -54,5 +54,22 @@ public class BlockStateProvider extends net.neoforged.neoforge.client.model.gene
         simpleBlock(BlockRegister.MOSSY_CHERT_TILES.get());
         stairsBlock(BlockRegister.MOSSY_CHERT_TILES_STAIRS.get(), ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/mossy_chert_tiles"));
         slabBlock(BlockRegister.MOSSY_CHERT_TILES_SLAB.get(), ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/mossy_chert_tiles"), ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/mossy_chert_tiles"));
+
+
+        simpleBlock(BlockRegister.TEALESTITE_BLOCK.get());
+        simpleBlock(BlockRegister.BUDDING_TEALESTITE.get());
+
+        simpleBlock(BlockRegister.GLYPH_PROJECTOR.get(), new ModelFile.ExistingModelFile(ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/glyph_projector"), existingFileHelper));
+
+        directionalBlock(BlockRegister.SMALL_TEALESTITE_BUD.get(),
+                new ModelFile.ExistingModelFile(ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/small_tealestite_bud"), existingFileHelper));
+        directionalBlock(BlockRegister.MEDIUM_TEALESTITE_BUD.get(),
+                new ModelFile.ExistingModelFile(ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/medium_tealestite_bud"), existingFileHelper));
+        directionalBlock(BlockRegister.BIG_TEALESTITE_BUD.get(),
+                new ModelFile.ExistingModelFile(ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/big_tealestite_bud"), existingFileHelper));
+        directionalBlock(BlockRegister.TEALESTITE_CLUSTER.get(),
+                new ModelFile.ExistingModelFile(ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/tealestite_cluster"), existingFileHelper));
+
     }
+
 }

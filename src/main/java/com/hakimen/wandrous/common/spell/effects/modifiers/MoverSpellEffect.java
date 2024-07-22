@@ -2,6 +2,7 @@ package com.hakimen.wandrous.common.spell.effects.modifiers;
 
 import com.hakimen.wandrous.common.spell.SpellContext;
 import com.hakimen.wandrous.common.spell.SpellEffect;
+import com.hakimen.wandrous.common.spell.SpellStack;
 import com.hakimen.wandrous.common.spell.SpellStatus;
 import com.hakimen.wandrous.common.spell.mover.ISpellMover;
 import com.hakimen.wandrous.common.utils.data.Node;
@@ -30,8 +31,8 @@ public class MoverSpellEffect extends SpellEffect {
 
     @Override
     public void cast(SpellContext context) {
-        for (Node<SpellEffect> child : context.getNode().getChildren()) {
-            child.getData().cast(context.clone().setNode(child));
+        for (Node<SpellStack> child : context.getNode().getChildren()) {
+            child.getData().getEffect().cast(context.setNode(child));
         }
     }
 }

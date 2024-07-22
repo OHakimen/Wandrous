@@ -1,0 +1,15 @@
+{
+  "name": "Cynther's Scroll of Bouncing Fire",
+  "lore": [
+    "It pours from above, like rain,",
+    "but instead of life,",
+    "it brings destruction."
+  ],
+  "spells": [
+    "wandrous:trigger_fireball",
+    "wandrous:triple_split_cast",
+    "wandrous:fireball",
+    "wandrous:fireball",
+    "wandrous:fireball"
+  ]
+}

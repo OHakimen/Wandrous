@@ -29,7 +29,7 @@ public class DelayCastEffect extends SpellEffect {
                 if (tickedEnough()) {
                     context.getNode().getChildren().forEach((child)-> {
                         this.setDeltaMovement(context.getCaster().getDeltaMovement());
-                        child.getData().cast(context.clone().setCaster(this).setNode(child));
+                        child.getData().getEffect().cast(context.setCaster(this).setNode(child));
                     });
 
                     discard();

@@ -15,5 +15,12 @@
         "attenuation_distance": 128
       }
     ]
+  },
+  "recharge": {
+    "sounds": [
+      {
+        "name": "wandrous:recharge"
+      }
+    ]
   }
 }

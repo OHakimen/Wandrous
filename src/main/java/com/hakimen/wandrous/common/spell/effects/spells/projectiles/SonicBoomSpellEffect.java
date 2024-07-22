@@ -1,6 +1,5 @@
 package com.hakimen.wandrous.common.spell.effects.spells.projectiles;
 
-import com.hakimen.wandrous.common.entity.projectiles.BlackHoleProjectile;
 import com.hakimen.wandrous.common.entity.projectiles.SonicBoomProjectile;
 import com.hakimen.wandrous.common.spell.SpellContext;
 import com.hakimen.wandrous.common.spell.SpellStatus;
@@ -18,7 +17,7 @@ public class SonicBoomSpellEffect extends ProjectileSpellEffect {
                 .setManaDrain(60)
                 .setSpeed(1f)
                 .setDamage(8f)
-                .setSpread(0)
+                .setSpread(0.01f)
                 .setLifeTime(20)
         );
     }
@@ -29,7 +28,7 @@ public class SonicBoomSpellEffect extends ProjectileSpellEffect {
 
         Level level = context.getLevel();
         Vec3 location = context.getLocation();
-        SonicBoomProjectile sonicBoomProjectile = new SonicBoomProjectile(location.x, location.y, location.z, level, context.clone());
+        SonicBoomProjectile sonicBoomProjectile = new SonicBoomProjectile(location.x, location.y, location.z, level, context);
         level.playSound(null, context.getCaster().getOnPos(), SoundEvents.WARDEN_SONIC_BOOM, SoundSource.PLAYERS, 1f,1f);
         shootProjectile(sonicBoomProjectile, context);
         level.addFreshEntity(sonicBoomProjectile);

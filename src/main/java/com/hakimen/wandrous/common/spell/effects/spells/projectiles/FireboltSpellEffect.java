@@ -16,7 +16,7 @@ public class FireboltSpellEffect extends ProjectileSpellEffect {
                 .setDamage(4f)
                 .setManaDrain(20)
                 .setSpeed(1.5f)
-                .setSpread(0)
+                .setSpread(0.5f)
                 .setLifeTime(100)
         );
     }

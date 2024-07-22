@@ -16,6 +16,23 @@ public class BlockModelProvider extends net.neoforged.neoforge.client.model.gene
         cubeAll("chiseled_chert_bricks_1", ResourceLocation.fromNamespaceAndPath(Wandrous.MODID,"block/chiseled_chert_bricks_1"));
         cubeAll("chiseled_chert_bricks_2", ResourceLocation.fromNamespaceAndPath(Wandrous.MODID,"block/chiseled_chert_bricks_2"));
         cubeAll("chiseled_chert_bricks_3", ResourceLocation.fromNamespaceAndPath(Wandrous.MODID,"block/chiseled_chert_bricks_3"));
-        
+
+        crystal("small_tealestite_bud", ResourceLocation.fromNamespaceAndPath(Wandrous.MODID,"block/small_tealestite_bud"));
+        crystal("medium_tealestite_bud", ResourceLocation.fromNamespaceAndPath(Wandrous.MODID,"block/medium_tealestite_bud"));
+        crystal("big_tealestite_bud", ResourceLocation.fromNamespaceAndPath(Wandrous.MODID,"block/big_tealestite_bud"));
+        crystal("tealestite_cluster", ResourceLocation.fromNamespaceAndPath(Wandrous.MODID,"block/tealestite_cluster"));
+
+
+        withExistingParent("glyph_projector", "wandrous:block/cube_bottom_top_no_cull")
+                .texture("top", ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/projectors/projector_top"))
+                .texture("side", ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/projectors/projector_side"))
+                .texture("bottom", ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/projectors/projector_bottom"))
+                .renderType("translucent");
+    }
+
+    private void crystal(String name, ResourceLocation resourceLocation){
+        withExistingParent(name, "minecraft:block/cross")
+                .texture("cross", resourceLocation)
+                .renderType("cutout");
     }
 }

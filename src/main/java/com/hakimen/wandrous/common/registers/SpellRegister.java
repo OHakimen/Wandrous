@@ -5,12 +5,15 @@ import com.hakimen.wandrous.common.custom.register.WandrousRegistries;
 import com.hakimen.wandrous.common.spell.SpellEffect;
 import com.hakimen.wandrous.common.spell.SpellStatus;
 import com.hakimen.wandrous.common.spell.effects.modifiers.*;
-import com.hakimen.wandrous.common.spell.effects.modifiers.charges.*;
+import com.hakimen.wandrous.common.spell.effects.modifiers.charges.CrumblingChargeHitEffect;
+import com.hakimen.wandrous.common.spell.effects.modifiers.charges.FreezingChargeHitEffect;
+import com.hakimen.wandrous.common.spell.effects.modifiers.charges.IgneousChargeHitEffect;
+import com.hakimen.wandrous.common.spell.effects.modifiers.charges.PoisonChargeHitEffect;
 import com.hakimen.wandrous.common.spell.effects.modifiers.location.RelativeCastEffect;
 import com.hakimen.wandrous.common.spell.effects.modifiers.location.TeleportCastEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.BestowSpellEffect;
+import com.hakimen.wandrous.common.spell.effects.spells.GreekLetterSpellEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.projectiles.*;
-import com.hakimen.wandrous.common.spell.effects.spells.static_projectiles.GustSpellEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.static_projectiles.*;
 import com.hakimen.wandrous.common.spell.effects.spells.summon_spells.SummonConjuredBlockSpellEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.summon_spells.SummonEntityEffect;
@@ -19,12 +22,15 @@ import com.hakimen.wandrous.common.spell.effects.spells.teleports.CollectEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.teleports.HomebringerTeleportEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.teleports.SwapTeleportEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.teleports.TeleportEffect;
+import com.hakimen.wandrous.common.utils.CastingUtils;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.List;
 
 public class SpellRegister {
     public static final DeferredRegister<SpellEffect> SPELL_EFFECTS = DeferredRegister.create(WandrousRegistries.SPELLS_REGISTER, Wandrous.MODID);
@@ -150,6 +156,21 @@ public class SpellRegister {
                     .setSpreadMod(-0.25f)
     ));
 
+    public static final DeferredHolder<SpellEffect, SpellEffect> HEAVY_SPREAD = SPELL_EFFECTS.register("heavy_spread", () -> new StatusModifierSpellEffect(
+            new SpellStatus()
+                    .setManaDrain(10)
+                    .setSpreadMod(1.1f)
+                    .setCastDelayMod(-0.5f)
+                    .setRechargeTimeMod(-0.75f)
+    ));
+
+    public static final DeferredHolder<SpellEffect, SpellEffect> DECREASE_RECHARGE_TIME = SPELL_EFFECTS.register("decrease_recharge_time", () -> new StatusModifierSpellEffect(
+            new SpellStatus()
+                    .setManaDrain(10)
+                    .setCastDelayMod(-0.6f)
+                    .setRechargeTimeMod(-0.75f)
+    ));
+
     public static final DeferredHolder<SpellEffect, SpellEffect> HOMING = SPELL_EFFECTS.register("homing", () -> new MoverSpellEffect(SpellMoverRegister.HOMING));
     public static final DeferredHolder<SpellEffect, SpellEffect> BOOMERANG = SPELL_EFFECTS.register("boomerang", () -> new MoverSpellEffect(SpellMoverRegister.BOOMERANG));
 
@@ -157,25 +178,73 @@ public class SpellRegister {
     public static final DeferredHolder<SpellEffect, SpellEffect> CONJURE_BLOCK = SPELL_EFFECTS.register("conjure_block", () -> new SummonConjuredBlockSpellEffect(BlockRegister.CONJURED_BLOCK.get().defaultBlockState(), 20));
     public static final DeferredHolder<SpellEffect, SpellEffect> CONJURE_WEBS = SPELL_EFFECTS.register("conjure_webs", SummonWebbingSpellEffect::new);
 
-    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_CURSE_HUNGER = SPELL_EFFECTS.register("curse_hunger",() -> new BestowSpellEffect(MobEffects.HUNGER));
-    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_CURSE_DARKNESS = SPELL_EFFECTS.register("curse_darkness",() -> new BestowSpellEffect(MobEffects.DARKNESS));
-    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_CURSE_WEAKNESS = SPELL_EFFECTS.register("curse_weakness",() -> new BestowSpellEffect(MobEffects.WEAKNESS));
-    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_CURSE_NAUSEA = SPELL_EFFECTS.register("curse_nausea",() -> new BestowSpellEffect(MobEffects.CONFUSION));
-    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_CURSE_GLOW = SPELL_EFFECTS.register("curse_glow",() -> new BestowSpellEffect(MobEffects.GLOWING));
-    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_CURSE_LEVITATE = SPELL_EFFECTS.register("curse_levitate",() -> new BestowSpellEffect(MobEffects.LEVITATION));
-    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_CURSE_SLOWNESS = SPELL_EFFECTS.register("curse_slowness",() -> new BestowSpellEffect(MobEffects.MOVEMENT_SLOWDOWN));
-    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_CURSE_MINING_FATIGUE = SPELL_EFFECTS.register("curse_fatigue",() -> new BestowSpellEffect(MobEffects.DIG_SLOWDOWN));
+    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_CURSE_HUNGER = SPELL_EFFECTS.register("bestow_curse_hunger", () -> new BestowSpellEffect(MobEffects.HUNGER));
+    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_CURSE_DARKNESS = SPELL_EFFECTS.register("bestow_curse_darkness", () -> new BestowSpellEffect(MobEffects.DARKNESS));
+    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_CURSE_WEAKNESS = SPELL_EFFECTS.register("bestow_curse_weakness", () -> new BestowSpellEffect(MobEffects.WEAKNESS));
+    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_CURSE_NAUSEA = SPELL_EFFECTS.register("bestow_curse_nausea", () -> new BestowSpellEffect(MobEffects.CONFUSION));
+    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_CURSE_GLOW = SPELL_EFFECTS.register("bestow_curse_glow", () -> new BestowSpellEffect(MobEffects.GLOWING));
+    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_CURSE_LEVITATE = SPELL_EFFECTS.register("bestow_curse_levitate", () -> new BestowSpellEffect(MobEffects.LEVITATION));
+    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_CURSE_SLOWNESS = SPELL_EFFECTS.register("bestow_curse_slowness", () -> new BestowSpellEffect(MobEffects.MOVEMENT_SLOWDOWN));
+    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_CURSE_MINING_FATIGUE = SPELL_EFFECTS.register("bestow_curse_fatigue", () -> new BestowSpellEffect(MobEffects.DIG_SLOWDOWN));
+    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_CURSE_POISON = SPELL_EFFECTS.register("bestow_curse_poison", () -> new BestowSpellEffect(MobEffects.POISON));
+    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_CURSE_OF_SMALL = SPELL_EFFECTS.register("bestow_curse_of_small", () -> new BestowSpellEffect(EffectRegister.SCALE_DOWN));
+    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_CURSE_OF_BIG = SPELL_EFFECTS.register("bestow_curse_of_big", () -> new BestowSpellEffect(EffectRegister.SCALE_UP));
 
-    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_BLESSING_HASTE = SPELL_EFFECTS.register("blessing_haste",() -> new BestowSpellEffect(MobEffects.DIG_SPEED));
-    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_BLESSING_REGENERATION = SPELL_EFFECTS.register("blessing_regeneration",() -> new BestowSpellEffect(MobEffects.REGENERATION));
-    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_BLESSING_SATURATION = SPELL_EFFECTS.register("blessing_saturation",() -> new BestowSpellEffect(MobEffects.SATURATION));
-    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_BLESSING_BOOST_HEALTH = SPELL_EFFECTS.register("blessing_boost_health",() -> new BestowSpellEffect(MobEffects.HEALTH_BOOST));
-    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_BLESSING_RESISTANCE = SPELL_EFFECTS.register("blessing_resist",() -> new BestowSpellEffect(MobEffects.DAMAGE_RESISTANCE));
-    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_BLESSING_NIGHT_VISION = SPELL_EFFECTS.register("blessing_night_vision",() -> new BestowSpellEffect(MobEffects.NIGHT_VISION));
-    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_BLESSING_RESIST_FIRE = SPELL_EFFECTS.register("blessing_resist_fire",() -> new BestowSpellEffect(MobEffects.FIRE_RESISTANCE));
-    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_BLESSING_SPEED = SPELL_EFFECTS.register("blessing_speed",() -> new BestowSpellEffect(MobEffects.MOVEMENT_SPEED));
+    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_BLESSING_HASTE = SPELL_EFFECTS.register("bestow_blessing_haste", () -> new BestowSpellEffect(MobEffects.DIG_SPEED));
+    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_BLESSING_REGENERATION = SPELL_EFFECTS.register("bestow_blessing_regeneration", () -> new BestowSpellEffect(MobEffects.REGENERATION));
+    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_BLESSING_SATURATION = SPELL_EFFECTS.register("bestow_blessing_saturation", () -> new BestowSpellEffect(MobEffects.SATURATION));
+    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_BLESSING_BOOST_HEALTH = SPELL_EFFECTS.register("bestow_blessing_boost_health", () -> new BestowSpellEffect(MobEffects.HEALTH_BOOST));
+    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_BLESSING_RESISTANCE = SPELL_EFFECTS.register("bestow_blessing_resist", () -> new BestowSpellEffect(MobEffects.DAMAGE_RESISTANCE));
+    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_BLESSING_NIGHT_VISION = SPELL_EFFECTS.register("bestow_blessing_night_vision", () -> new BestowSpellEffect(MobEffects.NIGHT_VISION));
+    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_BLESSING_RESIST_FIRE = SPELL_EFFECTS.register("bestow_blessing_resist_fire", () -> new BestowSpellEffect(MobEffects.FIRE_RESISTANCE));
+    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_BLESSING_SPEED = SPELL_EFFECTS.register("bestow_blessing_speed", () -> new BestowSpellEffect(MobEffects.MOVEMENT_SPEED));
+    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_BLESSING_STRENGTH = SPELL_EFFECTS.register("bestow_blessing_strength", () -> new BestowSpellEffect(MobEffects.DAMAGE_BOOST));
+
+    public static final DeferredHolder<SpellEffect, SpellEffect> GREEK_LETTER_DELTA = SPELL_EFFECTS.register("delta", () -> new GreekLetterSpellEffect(
+            (spellStackNode, castingUtils, spellStackList) -> {
+                if(spellStackNode.getData().getEffect().hasAnyOf(SpellEffect.TIMER, SpellEffect.MODIFIER, SpellEffect.TRIGGER)){
+                    try {
+                        return new CastingUtils().makeCastingTree(spellStackList.stream().filter(spellStack -> !(spellStack.getEffect() instanceof GreekLetterSpellEffect)).map(spellStack -> spellStack.setCopy(true)).toList(),spellStackList);
+                    } catch (Exception e) {
+
+                    }
+                }
+                return null;
+            }
+    ));
+    public static final DeferredHolder<SpellEffect, SpellEffect> GREEK_LETTER_LAMBDA = SPELL_EFFECTS.register("lambda", () -> new GreekLetterSpellEffect(
+            (spellStackNode, castingUtils, spellStackList) -> {
+                if (spellStackNode.getData().getEffect().hasAnyOf(SpellEffect.TIMER, SpellEffect.MODIFIER, SpellEffect.TRIGGER)) {
+                    try{
+                        if(!spellStackList.isEmpty()){
+                            return new CastingUtils().makeCastingTree(
+                                    List.of(spellStackList.stream().filter(spellStack -> !(spellStack.getEffect() instanceof GreekLetterSpellEffect)).toList().getLast().setCopy(true)),spellStackList);
+                        }
+                    }catch (Exception e){
+
+                    }
+                }
+                return null;
+            }
+    ));
+    public static final DeferredHolder<SpellEffect, SpellEffect> GREEK_LETTER_KAPPA = SPELL_EFFECTS.register("kappa", () -> new GreekLetterSpellEffect(
+            (spellStackNode, castingUtils, spellStackList) -> {
+                if (spellStackNode.getData().getEffect().hasAnyOf(SpellEffect.TIMER, SpellEffect.MODIFIER, SpellEffect.TRIGGER)) {
+                    try {
+                        return new CastingUtils().makeCastingTree(spellStackList.stream().filter(spellStack ->
+                                spellStack.getEffect().hasKind(SpellEffect.MODIFIER)
+                                && !(spellStack.getEffect() instanceof GreekLetterSpellEffect)).map(spellStack -> spellStack.setCopy(true)).toList(),spellStackList);
+                    } catch (Exception e) {
+
+                    }
+                }
+                return null;
+            }
+    ));
+
 
     public static void register(IEventBus bus) {
         SPELL_EFFECTS.register(bus);
+        Wandrous.LOGGER.info("Registered %s spell effects".formatted(SPELL_EFFECTS.getEntries().size()));
     }
 }

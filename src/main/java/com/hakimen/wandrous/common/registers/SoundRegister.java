@@ -13,6 +13,7 @@ public class SoundRegister {
 
     public static final DeferredHolder<SoundEvent, SoundEvent> TIMER_SPELL = SOUNDS.register("timer", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "timer")));
     public static final DeferredHolder<SoundEvent, SoundEvent> NUKE = SOUNDS.register("nuke", () -> SoundEvent.createFixedRangeEvent(ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "nuke"), 256));
+    public static final DeferredHolder<SoundEvent, SoundEvent> RECHARGE = SOUNDS.register("recharge", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "recharge")));
 
     public static void register(IEventBus bus){
         SOUNDS.register(bus);

@@ -1,5 +1,10 @@
-// 1.21	2024-06-20T17:19:31.3196449	Block Models: wandrous
+// 1.21	2024-07-19T17:42:58.5484629	Block Models: wandrous
+a90c170870a576ad9dcc21f060b1404c0755fb3f assets/wandrous/models/block/big_tealestite_bud.json
 97d35d301e19d9149851c75f31305fae5c2875d8 assets/wandrous/models/block/chiseled_chert_bricks_0.json
 3605caa27b7abb7ec4f8968632f47c459c11c82d assets/wandrous/models/block/chiseled_chert_bricks_1.json
 befa8e3a90839f06606d07dcb58bd9ba83612140 assets/wandrous/models/block/chiseled_chert_bricks_2.json
 aa70fbaa0c883a6e79c858ae7bd3255c4f0ccce9 assets/wandrous/models/block/chiseled_chert_bricks_3.json
+a414c256f0953740f5b3cd9f05480fe64d46a833 assets/wandrous/models/block/glyph_projector.json
+da78f9dedc0a4e2103545e81641fc0005fb39de4 assets/wandrous/models/block/medium_tealestite_bud.json
+be8717db819fdc8499744f0198bea32c5f5bee72 assets/wandrous/models/block/small_tealestite_bud.json
+560894a22e8f195677a0a63f846d79ca93c7915b assets/wandrous/models/block/tealestite_cluster.json

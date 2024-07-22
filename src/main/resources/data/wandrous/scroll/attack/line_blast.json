@@ -1,0 +1,16 @@
+{
+  "name": "Jyke's Scroll of Blasting",
+  "lore": [
+    "Defaces everything on its path, wherever it is used."
+  ],
+  "spells": [
+    "wandrous:long_distance_cast",
+    "wandrous:long_distance_cast",
+    "wandrous:line_cast",
+    "wandrous:major_explosion",
+    "wandrous:major_explosion",
+    "wandrous:major_explosion",
+    "wandrous:major_explosion",
+    "wandrous:major_explosion"
+  ]
+}

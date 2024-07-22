@@ -36,7 +36,7 @@ public class ConjuredBlockEntity extends BlockEntity implements BlockEntityTicke
     protected void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
         tick = pTag.getInt("Tick");
         lifeTime = pTag.getInt("LifeTime");
-        loadAdditional(pTag, pRegistries);
+        super.loadAdditional(pTag, pRegistries);
     }
 
     @Override

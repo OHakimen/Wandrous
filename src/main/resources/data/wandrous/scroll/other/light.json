@@ -1,0 +1,9 @@
+{
+  "name": "Klein's Scroll of Light",
+  "lore": [
+    "Shinning so bright, just to fade..."
+  ],
+  "spells": [
+    "wandrous:conjure_light"
+  ]
+}

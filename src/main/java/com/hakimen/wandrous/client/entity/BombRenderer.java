@@ -51,6 +51,8 @@ public class BombRenderer extends EntityRenderer<BombProjectile> {
         return super.getBlockLightLevel(pEntity, pPos);
     }
 
+
+
     private static void vertex(VertexConsumer pConsumer, Matrix4f pPose, int pLightmapUV, float pX, float pY, int pU, int pV) {
         pConsumer.addVertex(pPose, pX - 0.5F, pY - 0.25F, 0.0F).setColor(255, 255, 255, 255).setUv((float)pU, (float)pV).setOverlay(OverlayTexture.NO_OVERLAY).setUv2(pLightmapUV,pLightmapUV).setNormal( 1.0F, 1.0F, 1.0F);
     }

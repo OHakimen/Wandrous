@@ -2,6 +2,7 @@ package com.hakimen.wandrous.common.registers;
 
 import com.hakimen.wandrous.Wandrous;
 import com.hakimen.wandrous.common.block_entity.ConjuredBlockEntity;
+import com.hakimen.wandrous.common.block_entity.GlyphProjectorBlockEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
@@ -15,6 +16,10 @@ public class BlockEntityRegister {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ConjuredBlockEntity>> CONJURED_BLOCK_ENTITY = BLOCK_ENTITIES.register("conjured_light",
             () -> BlockEntityType.Builder
                     .of(ConjuredBlockEntity::new, BlockRegister.CONJURED_LIGHT_BLOCK.get(), BlockRegister.CONJURED_BLOCK.get())
+
+                    .build(null));public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<GlyphProjectorBlockEntity>> GLYPH_PROJECTOR_ENTITY = BLOCK_ENTITIES.register("glyph_projector",
+            () -> BlockEntityType.Builder
+                    .of(GlyphProjectorBlockEntity::new, BlockRegister.GLYPH_PROJECTOR.get())
                     .build(null));
 
     public static void register(IEventBus bus) {

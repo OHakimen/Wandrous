@@ -1,7 +1,7 @@
 package com.hakimen.wandrous.common.spell.effects.modifiers;
 
 import com.hakimen.wandrous.common.spell.SpellContext;
-import com.hakimen.wandrous.common.spell.SpellEffect;
+import com.hakimen.wandrous.common.spell.SpellStack;
 import com.hakimen.wandrous.common.spell.SpellStatus;
 import com.hakimen.wandrous.common.utils.data.Node;
 import net.minecraft.world.phys.Vec3;
@@ -25,18 +25,17 @@ public class LineCastEffect extends MultiCastEffect {
 
         Vec3 location = context.getLocation();
 
-        for (Node<SpellEffect> child : context.getNode().getChildren()) {
-            SpellContext clone = context.clone();
+        for (Node<SpellStack> child : context.getNode().getChildren()) {
             castDistance += context.getStatus().getRadius();
             Vec3 lookAngle = context.getCaster().getLookAngle();
 
             Vec3 newLocation = new Vec3(location.x + castDistance * lookAngle.x, location.y + castDistance * lookAngle.y, location.z + castDistance * lookAngle.z);
-            clone.setCastPositionModified(true);
+            context.setCastPositionModified(true);
 
-            clone.setCastPositionModified(true);
-            clone.setLocation(newLocation);
+            context.setCastPositionModified(true);
+            context.setLocation(newLocation);
             location = newLocation;
-            child.getData().cast(clone.setNode(child));
+            child.getData().getEffect().cast(context.setNode(child));
         }
     }
 }

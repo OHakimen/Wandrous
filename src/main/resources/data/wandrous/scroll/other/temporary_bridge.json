@@ -1,0 +1,15 @@
+{
+  "name": "Klein's Scroll of Arcane Platform",
+  "lore": [
+    "We make the paths we don't have"
+  ],
+  "spells": [
+    "wandrous:trigger_glimmering_bolt",
+    "wandrous:divide_by_4",
+    "wandrous:divide_by_4",
+    "wandrous:divide_by_4",
+    "wandrous:divide_by_4",
+    "wandrous:spread_cast",
+    "wandrous:conjure_block"
+  ]
+}

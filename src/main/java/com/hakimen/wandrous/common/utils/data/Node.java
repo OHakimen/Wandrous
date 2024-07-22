@@ -2,6 +2,7 @@ package com.hakimen.wandrous.common.utils.data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 public class Node<T> implements Cloneable{
     Node<T> parent;
@@ -46,8 +47,13 @@ public class Node<T> implements Cloneable{
         return this;
     }
 
+    public static <X> void print(int depth, Node<X> node, Function<Node<X>, String> transformer) {
+        System.out.println("\t".repeat(depth) + transformer.apply(node));
+        node.children.forEach((e) -> print(depth + 1, e));
+    }
+
     public static void print(int depth, Node<?> node) {
-        System.out.println("\t".repeat(depth) + node.parent);
+        System.out.println("\t".repeat(depth) + node.getData());
         node.children.forEach((e) -> print(depth + 1, e));
     }
 

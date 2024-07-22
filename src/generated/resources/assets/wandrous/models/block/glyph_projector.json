@@ -1,0 +1,9 @@
+{
+  "parent": "wandrous:block/cube_bottom_top_no_cull",
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "bottom": "wandrous:block/projectors/projector_bottom",
+    "side": "wandrous:block/projectors/projector_side",
+    "top": "wandrous:block/projectors/projector_top"
+  }
+}

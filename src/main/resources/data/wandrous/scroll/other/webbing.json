@@ -1,0 +1,10 @@
+{
+  "name": "Mydia's Scroll of Webbing",
+  "lore": [
+    "Trapped like a fly"
+  ],
+  "spells": [
+    "wandrous:trigger_glimmering_bolt",
+    "wandrous:conjure_webs"
+  ]
+}

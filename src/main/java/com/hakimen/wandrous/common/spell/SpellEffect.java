@@ -1,15 +1,5 @@
 package com.hakimen.wandrous.common.spell;
 
-import com.hakimen.wandrous.common.utils.CastingUtils;
-import com.hakimen.wandrous.common.utils.WandUtils;
-import com.hakimen.wandrous.common.utils.data.Node;
-import jdk.jshell.Snippet;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
-import org.intellij.lang.annotations.MagicConstant;
-
 public class SpellEffect {
 
     public static final int TRIGGER = 1;
@@ -27,6 +17,15 @@ public class SpellEffect {
 
     public boolean hasKind(int kind){
         return (this.getKind() & kind) == kind;
+    }
+
+    public boolean hasAnyOf(int... kinds){
+        for (int i = 0; i < kinds.length; i++) {
+            if((this.getKind() & kinds[i]) == kinds[i]){
+                return true;
+            }
+        }
+        return false;
     }
 
 

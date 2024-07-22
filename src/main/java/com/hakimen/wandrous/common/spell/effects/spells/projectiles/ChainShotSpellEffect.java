@@ -17,6 +17,7 @@ public class ChainShotSpellEffect extends SpellEffect {
                 .setDamage(4)
                 .setSpeed(0.2f)
                 .setLifeTime(100)
+                .setSpread(0.3f)
                 .setRadius(8));
     }
 
@@ -26,7 +27,7 @@ public class ChainShotSpellEffect extends SpellEffect {
 
         Level level = context.getLevel();
         Vec3 location = context.getLocation();
-        ChainShotProjectile chainShot = new ChainShotProjectile(location.x, location.y, location.z,level, context.clone());
+        ChainShotProjectile chainShot = new ChainShotProjectile(location.x, location.y, location.z,level, context);
         chainShot.setHitCount(5);
         shootProjectile(chainShot, context);
         level.addFreshEntity(chainShot);

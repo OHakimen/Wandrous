@@ -12,8 +12,6 @@ import net.minecraft.world.phys.Vec3;
 import java.util.List;
 
 public class CollectEffect extends SpellEffect {
-
-
     public CollectEffect() {
         this.setKind(SpellEffect.SPELL);
         this.setStatus(new SpellStatus()

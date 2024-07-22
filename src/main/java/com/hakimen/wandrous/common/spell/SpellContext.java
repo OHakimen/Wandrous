@@ -14,11 +14,12 @@ public class SpellContext implements Cloneable {
 
 
     Entity originalCaster;
+    List<SpellEffect> spells;
     Entity caster;
     ItemStack wand;
     Level level;
     Vec3 location;
-    Node<SpellEffect> node;
+    Node<SpellStack> node;
     SpellStatus status;
     List<LivingEntity> hit;
     LivingEntity homingTarget;
@@ -31,6 +32,15 @@ public class SpellContext implements Cloneable {
 
     public SpellContext setOriginalCaster(Entity originalCaster) {
         this.originalCaster = originalCaster;
+        return this;
+    }
+
+    public List<SpellEffect> getSpells() {
+        return spells;
+    }
+
+    public SpellContext setSpells(List<SpellEffect> spells) {
+        this.spells = spells;
         return this;
     }
 
@@ -70,11 +80,11 @@ public class SpellContext implements Cloneable {
         return this;
     }
 
-    public Node<SpellEffect> getNode() {
+    public Node<SpellStack> getNode() {
         return node;
     }
 
-    public SpellContext setNode(Node<SpellEffect> node) {
+    public SpellContext setNode(Node<SpellStack> node) {
         this.node = node;
         return this;
     }
