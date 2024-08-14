@@ -6,7 +6,6 @@ public class Registration {
 
     public static void register(IEventBus bus){
 
-
         //Init these earlier
         GlyphRegister.register(bus);
         SpellMoverRegister.register(bus);
@@ -25,6 +24,7 @@ public class Registration {
         ParticleRegister.register(bus);
 
         LootModRegistry.register(bus);
+        RecipeRegister.register(bus);
 
     }
 }

@@ -17,7 +17,7 @@ public class GlimmeringBoltSpellEffect extends ProjectileSpellEffect {
                 .setManaDrain(20)
                 .setSpeed(1.5f)
                 .setSpread(0.2f)
-                .setLifeTime(100)
+                .setLifeTime(50)
         );
     }
 

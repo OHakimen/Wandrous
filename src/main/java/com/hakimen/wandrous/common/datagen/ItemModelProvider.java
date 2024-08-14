@@ -70,6 +70,7 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         block(BlockRegister.BUDDING_TEALESTITE.get());
 
         block(BlockRegister.GLYPH_PROJECTOR.get());
+        block(BlockRegister.ARCANE_INSCRIBER.get());
 
         singleTexture("small_tealestite_bud", mcLoc("generated"),"layer0", ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/small_tealestite_bud"));
         singleTexture("medium_tealestite_bud", mcLoc("generated"),"layer0", ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/medium_tealestite_bud"));

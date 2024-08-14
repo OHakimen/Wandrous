@@ -107,6 +107,8 @@ public class ItemRegister {
     public static final DeferredHolder<Item, SpellEffectItem> CHAIN_PRISON_SPELL = ITEMS.register("chain_prison", () -> new SpellEffectItem(SpellRegister.CHAIN_PRISON, 5));
     public static final DeferredHolder<Item, SpellEffectItem> GUST_SPELL = ITEMS.register("gust", () -> new SpellEffectItem(SpellRegister.GUST));
 
+    public static final DeferredHolder<Item, SpellEffectItem> FLAME_BURST_SPELL = ITEMS.register("flame_burst", () -> new SpellEffectItem(SpellRegister.FLAME_BURST));
+
     public static final DeferredHolder<Item, SpellEffectItem> CONJURE_LIGHT_SPELL = ITEMS.register("conjure_light", () -> new SpellEffectItem(SpellRegister.CONJURE_LIGHT));
     public static final DeferredHolder<Item, SpellEffectItem> CONJURE_BLOCK_SPELL = ITEMS.register("conjure_block", () -> new SpellEffectItem(SpellRegister.CONJURE_BLOCK));
     public static final DeferredHolder<Item, SpellEffectItem> CONJURE_WEBS_SPELL = ITEMS.register("conjure_webs", () -> new SpellEffectItem(SpellRegister.CONJURE_WEBS, 10));
@@ -182,6 +184,7 @@ public class ItemRegister {
     public static final DeferredHolder<Item, InscribedLensItem> INSCRIBED_LENS = ITEMS.register("inscribed_lens", () -> new InscribedLensItem());
 
     public static final DeferredHolder<Item, BlockItem> GLYPH_PROJECTOR = ITEMS.register("glyph_projector", () -> new BlockItem(BlockRegister.GLYPH_PROJECTOR.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, BlockItem> ARCANE_INSCRIBER = ITEMS.register("arcane_inscriber", () -> new BlockItem(BlockRegister.ARCANE_INSCRIBER.get(), new Item.Properties()));
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> TAB = ItemRegister.TABS.register("wandrous", () -> CreativeModeTab.builder()
             .icon(() -> new ItemStack(WAND.get()))

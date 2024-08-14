@@ -1,5 +1,6 @@
 package com.hakimen.wandrous.common.utils;
 
+import com.hakimen.wandrous.common.registers.SpellRegister;
 import com.hakimen.wandrous.common.spell.SpellContext;
 import com.hakimen.wandrous.common.spell.SpellEffect;
 import com.hakimen.wandrous.common.spell.SpellStack;
@@ -18,27 +19,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CastingUtils {
-
-    public static SpellEffect DUMMY = new SpellEffect() {
-        @Override
-        public void cast(SpellContext context) {
-            for (Node<SpellStack> child : context.getNode().getChildren()) {
-                child.getData().getEffect().cast(context.setNode(child));
-            }
-        }
-    }.setKind(SpellEffect.MODIFIER).setStatus(new SpellStatus());
-
     public int idx;
+
+    public List<ItemStack> toConsumeCharges = new ArrayList<>();
 
     public Node<SpellStack> makeCastingTree(List<SpellStack> effects, List<SpellStack> alleffects) {
         if (idx > effects.size() - 1) {
-            return new Node<>(null);
+            return new Node<SpellStack>(null);
         }
 
-        Node<SpellStack> tree = new Node<>(effects.get(idx++));
+        Node<SpellStack> tree = new Node<SpellStack>(effects.get(idx++));
 
         if(tree.getData().getCharges() == 0 && tree.getData().hasCharges() && !tree.getData().isCopy()){
-            tree = new Node<>(new SpellStack(DUMMY, 0));
+            tree = new Node<SpellStack>(new SpellStack(SpellRegister.DUMMY.get(), 0));
         }
 
         if (tree.getData().getEffect() instanceof MultiCastEffect effect) {
@@ -66,7 +59,7 @@ public class CastingUtils {
                 cast.setParent(tree);
                 tree.addChild(cast);
             } else {
-                Node<SpellStack> thing = new Node<>(new SpellStack(DUMMY, 0));
+                Node<SpellStack> thing = new Node<SpellStack>(new SpellStack(SpellRegister.DUMMY.get(), 0));
                 thing.setParent(tree);
                 tree.addChild(thing);
             }
@@ -80,7 +73,7 @@ public class CastingUtils {
 
         if((tree.getData().hasCharges() && tree.getData().getCharges() != 0) || !tree.getData().hasCharges() || !tree.getData().isCopy()) {
             if (tree.getData().hasCharges()) {
-                ChargesUtils.loseCharge(tree.getData().getReferenceStack());
+                toConsumeCharges.add(tree.getData().getReferenceStack());
             }
         }
         return tree;
@@ -124,8 +117,11 @@ public class CastingUtils {
                 .setLocation(location)
                 .setStatus(new SpellStatus())
                 .setNode(toCast)
+                .setSplit(0)
                 .setOriginalCaster(entity)
+                .setCastPositionModified(false)
                 .setHit(new ArrayList<>());
+
 
         if (entity instanceof LivingEntity livingEntity) {
             if (livingEntity.hasEffect(MobEffects.DAMAGE_BOOST)) {

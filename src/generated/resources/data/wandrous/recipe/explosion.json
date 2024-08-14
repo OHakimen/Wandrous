@@ -1,0 +1,17 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:power",
+    "wandrous:power",
+    "wandrous:power",
+    "wandrous:new"
+  ],
+  "on_slate": {
+    "item": "minecraft:tnt"
+  },
+  "output": {
+    "id": "wandrous:explosion"
+  },
+  "ticks": 100,
+  "tier": 1
+}

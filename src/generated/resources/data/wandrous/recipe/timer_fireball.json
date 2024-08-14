@@ -1,0 +1,15 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:destiny",
+    "wandrous:focus"
+  ],
+  "on_slate": {
+    "item": "wandrous:fireball"
+  },
+  "output": {
+    "id": "wandrous:timer_fireball"
+  },
+  "ticks": 100,
+  "tier": 2
+}

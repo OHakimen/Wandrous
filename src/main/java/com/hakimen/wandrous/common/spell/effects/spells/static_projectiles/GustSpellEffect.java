@@ -40,7 +40,7 @@ public class GustSpellEffect extends SpellEffect {
                         context.getLocation().z(),
                         context.getStatus().getRadius(),
                         false,
-                        Level.ExplosionInteraction.TRIGGER,
+                        Level.ExplosionInteraction.NONE,
                         ParticleTypes.GUST,
                         ParticleTypes.GUST_EMITTER_LARGE,
                         SoundEvents.WIND_CHARGE_BURST

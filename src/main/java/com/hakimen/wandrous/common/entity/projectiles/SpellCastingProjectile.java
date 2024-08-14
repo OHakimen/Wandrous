@@ -7,6 +7,7 @@ import com.hakimen.wandrous.common.spell.effects.modifiers.MoverSpellEffect;
 import com.hakimen.wandrous.common.spell.effects.modifiers.ProjectileHitEffect;
 import com.hakimen.wandrous.common.spell.mover.ISpellMover;
 import com.hakimen.wandrous.common.utils.data.Node;
+import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -52,6 +53,7 @@ public class SpellCastingProjectile extends ThrowableProjectile {
 
         if (context.getNode().getData().getEffect().hasKind(SpellEffect.TRIGGER)) {
             self.setDeltaMovement(new Vec3(self.getDeltaMovement().toVector3f().reflect(Vec3.atLowerCornerOf(pResult.getDirection().getNormal()).toVector3f())));
+            self.lookAt(EntityAnchorArgument.Anchor.EYES, self.getEyePosition().add(self.getDeltaMovement()));
             context.getNode().getChildren().forEach(
                     (child) -> child.getData().getEffect().cast(context.setNode(child).setLocation(pResult.getLocation()))
             );
@@ -73,6 +75,7 @@ public class SpellCastingProjectile extends ThrowableProjectile {
 
         if (context.getNode().getData().getEffect().hasKind(SpellEffect.TRIGGER)) {
             self.setDeltaMovement(self.getDeltaMovement().multiply(1, -1, 1));
+            self.lookAt(EntityAnchorArgument.Anchor.EYES, self.getEyePosition().add(self.getDeltaMovement()));
             context.getNode().getChildren().forEach(
                     (child) -> child.getData().getEffect().cast(context.setNode(child).setLocation(pResult.getLocation()))
             );
@@ -171,7 +174,10 @@ public class SpellCastingProjectile extends ThrowableProjectile {
         this.setDeltaMovement(vec3.scale((double)f));
         this.applyGravity();
         this.setPos(d0, d1, d2);
+
+        this.lookAt(EntityAnchorArgument.Anchor.EYES, this.getEyePosition().add(this.getDeltaMovement()));
     }
+
 
     public int getMaxTicks() {
         return maxTicks;

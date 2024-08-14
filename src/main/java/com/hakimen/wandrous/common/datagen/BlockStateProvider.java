@@ -61,6 +61,8 @@ public class BlockStateProvider extends net.neoforged.neoforge.client.model.gene
 
         simpleBlock(BlockRegister.GLYPH_PROJECTOR.get(), new ModelFile.ExistingModelFile(ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/glyph_projector"), existingFileHelper));
 
+        simpleBlock(BlockRegister.ARCANE_INSCRIBER.get(), new ModelFile.ExistingModelFile(ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/arcane_inscriber"), existingFileHelper));
+
         directionalBlock(BlockRegister.SMALL_TEALESTITE_BUD.get(),
                 new ModelFile.ExistingModelFile(ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/small_tealestite_bud"), existingFileHelper));
         directionalBlock(BlockRegister.MEDIUM_TEALESTITE_BUD.get(),

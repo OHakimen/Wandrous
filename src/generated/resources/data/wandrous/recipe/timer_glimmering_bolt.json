@@ -1,0 +1,15 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:destiny",
+    "wandrous:focus"
+  ],
+  "on_slate": {
+    "item": "wandrous:glimmering_bolt"
+  },
+  "output": {
+    "id": "wandrous:timer_glimmering_bolt"
+  },
+  "ticks": 100,
+  "tier": 1
+}

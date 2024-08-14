@@ -19,9 +19,7 @@ public class VertexProcessorBuilder {
         float stepU = (endU - startU) / longs;
         float stepV = (endV - startV) / lats;
         for (int i = 0; i < longs; ++i) {
-            // U-points
             for (int j = 0; j < lats; ++j) {
-                // V-points
                 float u = i * stepU + startU;
                 float v = j * stepV + startV;
                 float un = (i + 1 == longs) ? endU : (i + 1) * stepU + startU;
@@ -67,4 +65,5 @@ public class VertexProcessorBuilder {
         RenderUtils.makeVertexPosUVLightNormalColor(vertexConsumer, matrix4f, xOff + 1.0F, yOff + 1f, 0, 1, 0, pPackedLight, matrix3f,r,g,b,a);
         RenderUtils.makeVertexPosUVLightNormalColor(vertexConsumer, matrix4f, 0.0F, yOff + 1f, 0, 0, 0, pPackedLight, matrix3f,r,g,b,a);
     }
+
 }

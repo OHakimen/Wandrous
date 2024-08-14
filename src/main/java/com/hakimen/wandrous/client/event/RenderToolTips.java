@@ -34,35 +34,42 @@ public class RenderToolTips {
 
         ItemStack stack = e.getItemStack();
 
-        if(stack.getItem() instanceof WandItem) {
-            int wandCapacity = stack.get(DataComponentsRegister.WAND_COMPONENT.get()).getCapacity();
-            if (wandCapacity == 0) return;
-
-            List<ItemStack> spells = new ArrayList<>();
-
-            List<String> keys = stack.get(DataComponentsRegister.WAND_COMPONENT.get()).getInventory().getList("Items", Tag.TAG_COMPOUND).stream().map(tag -> ((CompoundTag)tag).getString("id")).toList();
-            for (String spell :keys) {
-                Item effect = ItemRegister.ITEMS.getRegistry().get().get(ResourceLocation.parse(spell));
-                if (effect != null && effect instanceof SpellEffectItem sei) {
-                    spells.add(sei.getDefaultInstance());
-                }
-            }
-            render(e, spells);
-        }else if(stack.getItem() instanceof ScrollItem) {
-
-            List<ItemStack> spells = new ArrayList<>();
-
-            ScrollDataComponent.ScrollData data = stack.get(DataComponentsRegister.SCROLL_COMPONENT.get());
-
-            for (String spell : data.getSpells()) {
-                Item effect = ItemRegister.ITEMS.getRegistry().get().get(ResourceLocation.parse(spell));
-                if (effect != null && effect instanceof SpellEffectItem sei) {
-                    spells.add(sei.getDefaultInstance());
-                }
-            }
-
-            render(e, spells);
+        if (stack.getItem() instanceof WandItem) {
+            renderForWand(e, stack);
+        } else if (stack.getItem() instanceof ScrollItem) {
+            renderForScroll(e, stack);
         }
+    }
+    private static void renderForWand(RenderTooltipEvent.GatherComponents e, ItemStack stack) {
+        int wandCapacity = stack.get(DataComponentsRegister.WAND_COMPONENT.get()).getCapacity();
+        if (wandCapacity == 0) return;
+
+        List<ItemStack> spells = new ArrayList<>();
+
+        List<String> keys = stack.get(DataComponentsRegister.WAND_COMPONENT.get()).getInventory().getList("Items", Tag.TAG_COMPOUND).stream().map(tag -> ((CompoundTag) tag).getString("id")).toList();
+        for (String spell : keys) {
+            Item effect = ItemRegister.ITEMS.getRegistry().get().get(ResourceLocation.parse(spell));
+            if (effect != null && effect instanceof SpellEffectItem sei) {
+                spells.add(sei.getDefaultInstance());
+            }
+        }
+        render(e, spells);
+    }
+
+    private static void renderForScroll(RenderTooltipEvent.GatherComponents e, ItemStack stack) {
+
+        List<ItemStack> spells = new ArrayList<>();
+
+        ScrollDataComponent.ScrollData data = stack.get(DataComponentsRegister.SCROLL_COMPONENT.get());
+
+        for (String spell : data.getSpells()) {
+            Item effect = ItemRegister.ITEMS.getRegistry().get().get(ResourceLocation.parse(spell));
+            if (effect != null && effect instanceof SpellEffectItem sei) {
+                spells.add(sei.getDefaultInstance());
+            }
+        }
+
+        render(e, spells);
     }
 
     private static boolean render(RenderTooltipEvent.GatherComponents e, List<ItemStack> spells) {
@@ -79,7 +86,7 @@ public class RenderToolTips {
             }
         }
         if (rmvIdx == -1) return true;
-        if(spells.isEmpty()) return true;
+        if (spells.isEmpty()) return true;
         e.getTooltipElements().add(rmvIdx, Either.right(new SpellTooltipRenderer.SpellTooltipComponent(spells.stream().limit(16).toList(), spells.size() > 16)));
         return false;
     }

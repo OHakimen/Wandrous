@@ -1,5 +1,6 @@
 package com.hakimen.wandrous;
 
+import com.hakimen.wandrous.client.ber.ArcaneInscriberRenderer;
 import com.hakimen.wandrous.client.ber.GlyphProjectorRenderer;
 import com.hakimen.wandrous.client.entity.*;
 import com.hakimen.wandrous.client.screens.WandTinkerScreen;
@@ -27,6 +28,7 @@ public class WandrousClient {
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event){
         event.registerBlockEntityRenderer(BlockEntityRegister.GLYPH_PROJECTOR_ENTITY.get(), GlyphProjectorRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityRegister.ARCANE_INSCRIBER.get(), ArcaneInscriberRenderer::new);
 
         event.registerEntityRenderer(EntityRegister.TIMER_ENTITY.get(), TimerEntityRenderer::new);
         event.registerEntityRenderer(EntityRegister.NUKE_ENTITY.get(), NukeRenderer::new);

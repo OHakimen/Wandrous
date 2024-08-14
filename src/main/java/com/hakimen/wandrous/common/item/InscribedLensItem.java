@@ -30,6 +30,7 @@ public class InscribedLensItem extends Item {
     public static void makeGlyphStack(ItemStack stack, Glyph data) {
         stack.update(DataComponentsRegister.GLYPH_COMPONENT.get(), InscribedLensDataComponent.DEFAULT, glyphData ->
             new InscribedLensDataComponent.GlyphDataBuilder(glyphData)
+                    .setId(data.getId())
                     .setTextureName(data.getTexture())
                     .setColor(data.getColor())
                     .build()

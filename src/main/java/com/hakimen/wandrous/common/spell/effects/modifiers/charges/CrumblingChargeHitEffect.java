@@ -1,14 +1,17 @@
 package com.hakimen.wandrous.common.spell.effects.modifiers.charges;
 
+import com.hakimen.wandrous.common.events.payloads.PositionalScreenShakePacket;
 import com.hakimen.wandrous.common.spell.SpellContext;
 import com.hakimen.wandrous.common.spell.effects.modifiers.ProjectileHitEffect;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.PushReaction;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.Iterator;
 
@@ -28,6 +31,14 @@ public class CrumblingChargeHitEffect extends ProjectileHitEffect {
 
         int radius = (int) context.getStatus().getRadius();
         Iterator<BlockPos> positions = BlockPos.betweenClosed(pos.offset(-radius, -radius, -radius), pos.offset(radius, radius, radius)).iterator();
+
+        PacketDistributor.sendToPlayersNear((ServerLevel)level, null, pos.getX(), pos.getY(), pos.getZ(), 50, new PositionalScreenShakePacket(
+                1,
+                20,
+                40,
+                pos.getCenter().toVector3f(),
+                30
+        ));
 
         while (positions.hasNext()) {
             BlockPos blockpos = positions.next();

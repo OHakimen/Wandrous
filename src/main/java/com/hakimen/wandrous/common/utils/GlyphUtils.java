@@ -18,10 +18,15 @@ public class GlyphUtils {
         return stack.get(DataComponentsRegister.GLYPH_COMPONENT.get()).getTextureName().toLanguageKey("glyph");
     }
 
-    public static ResourceLocation getGlyphFromTextureName(ItemStack stack){
+    public static ResourceLocation getGlyphTextureFromStack(ItemStack stack){
         ResourceLocation location = stack.get(DataComponentsRegister.GLYPH_COMPONENT.get()).getTextureName();
         return ResourceLocation.fromNamespaceAndPath(location.getNamespace(), "textures/glyph/" + location.getPath() + ".png");
     }
+
+    public static ResourceLocation getGlyphTextureFromResourceLocation(ResourceLocation location){
+        return ResourceLocation.fromNamespaceAndPath(location.getNamespace(), "textures/glyph/" + location.getPath() + ".png");
+    }
+
 
     public static float[] getColorFromGlyph(ItemStack stack){
         return stack.get(DataComponentsRegister.GLYPH_COMPONENT.get()).getColor();

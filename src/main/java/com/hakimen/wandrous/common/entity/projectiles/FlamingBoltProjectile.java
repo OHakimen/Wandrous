@@ -1,17 +1,20 @@
 package com.hakimen.wandrous.common.entity.projectiles;
 
+import com.hakimen.wandrous.common.events.payloads.PositionalScreenShakePacket;
 import com.hakimen.wandrous.common.registers.EntityRegister;
 import com.hakimen.wandrous.common.spell.SpellContext;
 import com.hakimen.wandrous.common.spell.SpellEffect;
 import com.hakimen.wandrous.common.spell.mover.ISpellMover;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -64,6 +67,13 @@ public class FlamingBoltProjectile extends SpellCastingProjectile {
     @Override
     protected void onHitBlock(BlockHitResult pResult) {
         if(this.context != null){
+            PacketDistributor.sendToPlayersNear((ServerLevel) level(), null, getX(),getY(),getZ(), 50,new PositionalScreenShakePacket(
+                    1.5f,
+                    20,
+                    40,
+                    getPosition(0).toVector3f(),
+                    35
+            ));
             SpellCastingProjectile.onHitBlock(this, pResult, this.context);
         }
     }
@@ -71,6 +81,13 @@ public class FlamingBoltProjectile extends SpellCastingProjectile {
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
         if(this.context != null){
+            PacketDistributor.sendToPlayersNear((ServerLevel) level(), null, getX(),getY(),getZ(), 50,new PositionalScreenShakePacket(
+                    1.5f,
+                    20,
+                    40,
+                    getPosition(0).toVector3f(),
+                    35
+            ));
             SpellCastingProjectile.onHitEntity(this, pResult, this.context);
         }
     }

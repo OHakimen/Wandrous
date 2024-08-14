@@ -1,0 +1,21 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:weave",
+    "wandrous:power",
+    "wandrous:power",
+    "wandrous:power",
+    "wandrous:power",
+    "wandrous:focus",
+    "wandrous:control",
+    "wandrous:control"
+  ],
+  "on_slate": {
+    "item": "minecraft:fire_charge"
+  },
+  "output": {
+    "id": "wandrous:fireball"
+  },
+  "ticks": 100,
+  "tier": 2
+}

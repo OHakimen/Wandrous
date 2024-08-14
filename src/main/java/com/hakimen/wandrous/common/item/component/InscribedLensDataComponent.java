@@ -11,18 +11,20 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class InscribedLensDataComponent {
-    public static GlyphData DEFAULT = new GlyphData(ResourceLocation.fromNamespaceAndPath("minecraft", "empty"), 0, 0, 0, 0);
+    public static GlyphData DEFAULT = new GlyphData(ResourceLocation.fromNamespaceAndPath("minecraft", "empty"),ResourceLocation.fromNamespaceAndPath("minecraft", "empty"),0, 0, 0, 0);
 
     public static class GlyphData {
+        private final ResourceLocation id;
         private final ResourceLocation textureName;
         private final float[] color = new float[4];
 
-        public GlyphData(ResourceLocation textureName, float r, float g, float b, float a) {
+        public GlyphData(ResourceLocation id, ResourceLocation textureName, float r, float g, float b, float a) {
+            this.id = id;
             this.textureName = textureName;
-            color[0] = r;
-            color[1] = g;
-            color[2] = b;
-            color[3] = a;
+            this.color[0] = r;
+            this.color[1] = g;
+            this.color[2] = b;
+            this.color[3] = a;
         }
 
         public ResourceLocation getTextureName() {
@@ -31,6 +33,10 @@ public class InscribedLensDataComponent {
 
         public float[] getColor() {
             return color;
+        }
+
+        public ResourceLocation getId() {
+            return id;
         }
 
         @Override
@@ -49,6 +55,7 @@ public class InscribedLensDataComponent {
 
     public static class GlyphDataBuilder {
 
+        private ResourceLocation id;
         private ResourceLocation textureName;
         private float[] color = new float[4];
 
@@ -56,6 +63,7 @@ public class InscribedLensDataComponent {
         }
 
         public GlyphDataBuilder(GlyphData glyphData) {
+            this.id = glyphData.id;
             this.textureName = glyphData.textureName;
             this.color = glyphData.color;
         }
@@ -80,15 +88,24 @@ public class InscribedLensDataComponent {
             return this;
         }
 
+        public ResourceLocation getId() {
+            return id;
+        }
+
+        public GlyphDataBuilder setId(ResourceLocation id) {
+            this.id = id;
+            return this;
+        }
 
         public GlyphData build() {
-            return new GlyphData(textureName, color[0], color[1], color[2], color[3]);
+            return new GlyphData(textureName, id, color[0], color[1], color[2], color[3]);
         }
 
     }
 
     public static Codec<GlyphData> CODEC = RecordCodecBuilder.create(
             instance -> instance.group(
+                    ResourceLocation.CODEC.fieldOf("id").forGetter(GlyphData::getId),
                     ResourceLocation.CODEC.fieldOf("glyph").forGetter(GlyphData::getTextureName),
                     Codec.FLOAT.fieldOf("r").validate(val -> val >= 0 && val <= 1 ? DataResult.success(val) : DataResult.error(() -> "Invalid float range (0..1) for color channel r")).forGetter(glyphData -> glyphData.color[0]),
                     Codec.FLOAT.fieldOf("g").validate(val -> val >= 0 && val <= 1 ? DataResult.success(val) : DataResult.error(() -> "Invalid float range (0..1) for color channel g")).forGetter(glyphData -> glyphData.color[1]),
@@ -102,6 +119,7 @@ public class InscribedLensDataComponent {
         public GlyphData decode(RegistryFriendlyByteBuf pBuffer) {
             GlyphDataBuilder builder = new GlyphDataBuilder();
 
+            builder.setId(pBuffer.readResourceLocation());
             builder.setTextureName(pBuffer.readResourceLocation());
             float r = pBuffer.readFloat();
             float g = pBuffer.readFloat();
@@ -114,6 +132,7 @@ public class InscribedLensDataComponent {
 
         @Override
         public void encode(RegistryFriendlyByteBuf pBuffer, GlyphData pValue) {
+            pBuffer.writeResourceLocation(pValue.getId());
             pBuffer.writeResourceLocation(pValue.getTextureName());
             pBuffer.writeFloat(pValue.getColor()[0]);
             pBuffer.writeFloat(pValue.getColor()[1]);

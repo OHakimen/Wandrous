@@ -1,0 +1,15 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:destiny",
+    "wandrous:focus"
+  ],
+  "on_slate": {
+    "item": "wandrous:black_hole"
+  },
+  "output": {
+    "id": "wandrous:timer_black_hole"
+  },
+  "ticks": 100,
+  "tier": 4
+}

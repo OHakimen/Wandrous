@@ -1,0 +1,15 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:destiny",
+    "wandrous:focus"
+  ],
+  "on_slate": {
+    "item": "wandrous:sonic_boom"
+  },
+  "output": {
+    "id": "wandrous:timer_sonic_boom"
+  },
+  "ticks": 100,
+  "tier": 4
+}

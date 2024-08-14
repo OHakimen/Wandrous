@@ -1,0 +1,25 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:control",
+    "wandrous:control",
+    "wandrous:power",
+    "wandrous:power",
+    "wandrous:power",
+    "wandrous:power",
+    "wandrous:weave",
+    "wandrous:new",
+    "wandrous:new",
+    "wandrous:knowledge",
+    "wandrous:knowledge",
+    "wandrous:vitality"
+  ],
+  "on_slate": {
+    "item": "minecraft:echo_shard"
+  },
+  "output": {
+    "id": "wandrous:sonic_boom"
+  },
+  "ticks": 100,
+  "tier": 4
+}

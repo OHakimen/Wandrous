@@ -1,0 +1,25 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:control",
+    "wandrous:control",
+    "wandrous:weave",
+    "wandrous:weave",
+    "wandrous:knowledge",
+    "wandrous:knowledge",
+    "wandrous:knowledge",
+    "wandrous:knowledge",
+    "wandrous:focus",
+    "wandrous:focus",
+    "wandrous:new",
+    "wandrous:new"
+  ],
+  "on_slate": {
+    "item": "minecraft:ender_eye"
+  },
+  "output": {
+    "id": "wandrous:black_hole"
+  },
+  "ticks": 100,
+  "tier": 4
+}

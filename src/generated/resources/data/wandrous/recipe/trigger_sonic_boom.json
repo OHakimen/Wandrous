@@ -1,0 +1,15 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:tinker",
+    "wandrous:control"
+  ],
+  "on_slate": {
+    "item": "wandrous:sonic_boom"
+  },
+  "output": {
+    "id": "wandrous:trigger_sonic_boom"
+  },
+  "ticks": 100,
+  "tier": 4
+}

@@ -1,0 +1,15 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:tinker",
+    "wandrous:control"
+  ],
+  "on_slate": {
+    "item": "wandrous:glimmering_bolt"
+  },
+  "output": {
+    "id": "wandrous:trigger_glimmering_bolt"
+  },
+  "ticks": 100,
+  "tier": 1
+}

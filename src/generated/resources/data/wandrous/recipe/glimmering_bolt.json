@@ -1,0 +1,15 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:new",
+    "wandrous:control"
+  ],
+  "on_slate": {
+    "item": "minecraft:amethyst_shard"
+  },
+  "output": {
+    "id": "wandrous:glimmering_bolt"
+  },
+  "ticks": 100,
+  "tier": 1
+}

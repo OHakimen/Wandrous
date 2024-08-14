@@ -1,0 +1,21 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:guidance",
+    "wandrous:guidance",
+    "wandrous:weave",
+    "wandrous:weave",
+    "wandrous:focus",
+    "wandrous:focus",
+    "wandrous:control",
+    "wandrous:control"
+  ],
+  "on_slate": {
+    "item": "minecraft:ender_eye"
+  },
+  "output": {
+    "id": "wandrous:homing"
+  },
+  "ticks": 100,
+  "tier": 2
+}

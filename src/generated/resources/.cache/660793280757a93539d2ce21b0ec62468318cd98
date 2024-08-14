@@ -1,6 +1,7 @@
-// 1.21	2024-07-21T14:44:07.8230554	Item Models: wandrous
+// 1.21	2024-08-05T12:32:58.1434089	Item Models: wandrous
 70cc88c4158ff94537dbcc51580cc8b905d06269 assets/wandrous/models/item/accelerate_cast.json
 4e5e8e3d5579e5375b8bd695ed36e8cb66c1382c assets/wandrous/models/item/add_mana.json
+3ce45c3b3482a88d09ded62455e12e9db6cddf89 assets/wandrous/models/item/arcane_inscriber.json
 d77a6fbdccd523590be943b001f617020984100a assets/wandrous/models/item/bestow_blessing_boost_health.json
 5a276b1a7c9ce538afed9891ce06655e63325ab4 assets/wandrous/models/item/bestow_blessing_haste.json
 44ef2e3beefc602ae7383c4d21f6e7ecb97d2548 assets/wandrous/models/item/bestow_blessing_night_vision.json

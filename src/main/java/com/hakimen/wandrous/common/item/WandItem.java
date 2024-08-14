@@ -7,6 +7,7 @@ import com.hakimen.wandrous.common.registers.ContainerRegister;
 import com.hakimen.wandrous.common.registers.DataComponentsRegister;
 import com.hakimen.wandrous.common.spell.SpellStack;
 import com.hakimen.wandrous.common.utils.CastingUtils;
+import com.hakimen.wandrous.common.utils.ChargesUtils;
 import com.hakimen.wandrous.common.utils.WandUtils;
 import com.hakimen.wandrous.common.utils.data.Node;
 import net.minecraft.client.model.HumanoidModel;
@@ -134,7 +135,7 @@ public class WandItem extends Item implements DynamicModelled {
 
     @Override
     public void onUseTick(Level pLevel, LivingEntity pLivingEntity, ItemStack wand, int pRemainingUseDuration) {
-        if (pLivingEntity instanceof Player pPlayer) {
+        if (pLivingEntity instanceof Player pPlayer && !pLevel.isClientSide) {
             if (wand.getItem() instanceof WandItem) {
                 if (!pPlayer.hasContainerOpen() && !pPlayer.getCooldowns().isOnCooldown(wand.getItem())) {
                     CastingUtils castingUtils = new CastingUtils();
@@ -169,10 +170,6 @@ public class WandItem extends Item implements DynamicModelled {
                     float rechargeSpeed =  wand.get(DataComponentsRegister.WAND_COMPONENT.get()).getRechargeSpeed();
                     float castDelay =  wand.get(DataComponentsRegister.WAND_COMPONENT.get()).getCastDelay();
 
-                    handler.ifPresent(iItemHandler -> {
-                        wand.update(DataComponentsRegister.WAND_COMPONENT.get(), DEFAULT_STAT, wandStat -> new WandDataComponent.WandStatBuilder(wandStat).
-                                setInventory(iItemHandler.serializeNBT(pLevel.registryAccess())).build());
-                    });
 
 
                     if (cast.getData() != null && cast.getData().getEffect() != null) {
@@ -183,9 +180,14 @@ public class WandItem extends Item implements DynamicModelled {
                         int cost = CastingUtils.calculateManaCost(cast); //TODO: make a gamerule for making the cast cost nothing in creative
                         float delayMod = CastingUtils.calculateCastDelayMod(cast);
                         float rechargeSpeedMod = CastingUtils.calculateRechargeSpeedMod(cast);
-                        int currentMana =  wand.get(DataComponentsRegister.WAND_COMPONENT.get()).getMana();
+                        int currentMana = wand.get(DataComponentsRegister.WAND_COMPONENT.get()).getMana();
 
                         if (cost <= currentMana) {
+                            castingUtils.toConsumeCharges.forEach(ChargesUtils::loseCharge);
+                            handler.ifPresent(iItemHandler -> {
+                                wand.update(DataComponentsRegister.WAND_COMPONENT.get(), DEFAULT_STAT, wandStat -> new WandDataComponent.WandStatBuilder(wandStat).
+                                        setInventory(iItemHandler.serializeNBT(pLevel.registryAccess())).build());
+                            });
                             CastingUtils.castSpells(pPlayer, wand, pLevel, pPlayer.getEyePosition(), cast);
                             wand.update(DataComponentsRegister.WAND_COMPONENT.get(), DEFAULT_STAT, wandStat -> new WandDataComponent.WandStatBuilder(wandStat).setMana(currentMana - Math.max(cost, 0)).build());
                             pPlayer.getCooldowns().addCooldown(wand.getItem(), (int) ((current == 0 ? rechargeSpeed + rechargeSpeedMod : castDelay + delayMod) * 20));
@@ -204,6 +206,8 @@ public class WandItem extends Item implements DynamicModelled {
         if (pStack.get(DataComponentsRegister.WAND_COMPONENT.get()).equals(DEFAULT_STAT)) {
             WandUtils.makeWand(pStack);
         }
+
+
         WandDataComponent.WandStat stat = pStack.get(DataComponentsRegister.WAND_COMPONENT.get());
         int mana = stat.getMana();
         int maxMana = stat.getMaxMana();

@@ -15,6 +15,8 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import org.joml.Quaternionf;
 
 public class GlyphProjectorRenderer implements BlockEntityRenderer<GlyphProjectorBlockEntity> {
@@ -62,7 +64,7 @@ public class GlyphProjectorRenderer implements BlockEntityRenderer<GlyphProjecto
             float[] rgba = GlyphUtils.getColorFromGlyph(stack);
             pPoseStack.pushPose();
             pPoseStack.translate(0.5, 2 + Math.sin((pBlockEntity.hashCode() / 3.14159 + Minecraft.getInstance().level.getGameTime() + pPartialTick) / 16f) / 8f, 0.5);
-            if (pBlockEntity.getLevel().getRandom().nextFloat() < 0.05f) {
+            if (pBlockEntity.getLevel().getRandom().nextFloat() < 0.05f && !Minecraft.getInstance().isPaused()) {
                 pBlockEntity.getLevel().addParticle(
                         new ArcaneKnowledgeParticle.ArcaneKnowledgeParticleOptions(rgba[0],rgba[1],rgba[2]),
                         pBlockEntity.getBlockPos().getX() + 0f + pBlockEntity.getLevel().getRandom().nextFloat(),
@@ -73,7 +75,7 @@ public class GlyphProjectorRenderer implements BlockEntityRenderer<GlyphProjecto
             }
             pPoseStack.rotateAround(new Quaternionf().rotateXYZ(0, (float) Math.toRadians(Minecraft.getInstance().cameraEntity.getYRot() * -1f), 0), 0, 0, 0);
             pPoseStack.mulPose(Axis.YP.rotationDegrees(180.0F));
-            VertexConsumer vertexconsumer = pBuffer.getBuffer(RenderType.entityTranslucent(GlyphUtils.getGlyphFromTextureName(stack)));
+            VertexConsumer vertexconsumer = pBuffer.getBuffer(RenderType.entityTranslucent(GlyphUtils.getGlyphTextureFromStack(stack)));
 
             vertex(vertexconsumer, pPoseStack, 0xf000e0, 0, 0, 0, 1, rgba[0], rgba[1], rgba[2], rgba[3]);
             vertex(vertexconsumer, pPoseStack, 0xf000e0, 1, 0, 1, 1, rgba[0], rgba[1], rgba[2], rgba[3]);
@@ -84,7 +86,20 @@ public class GlyphProjectorRenderer implements BlockEntityRenderer<GlyphProjecto
         }
     }
 
+    @Override
+    public boolean shouldRenderOffScreen(GlyphProjectorBlockEntity pBlockEntity) {
+        return true;
+    }
 
+    @Override
+    public boolean shouldRender(GlyphProjectorBlockEntity pBlockEntity, Vec3 pCameraPos) {
+        return true;
+    }
+
+    @Override
+    public AABB getRenderBoundingBox(GlyphProjectorBlockEntity blockEntity) {
+        return BlockEntityRenderer.super.getRenderBoundingBox(blockEntity).inflate(0,2,0);
+    }
 
     private static void vertex(VertexConsumer pConsumer, PoseStack poseStack, int pLightmapUV, float pX, float pY, float pU, float pV, float r, float g, float b, float alpha) {
         pConsumer.addVertex(poseStack.last().pose(), pX - 0.5F, pY - 0.25F, 0.0F).setColor(r, g, b, alpha).setUv((float) pU, (float) pV).setOverlay(OverlayTexture.NO_OVERLAY).setUv2(pLightmapUV, pLightmapUV).setNormal(poseStack.last(), 0, 1, 0);

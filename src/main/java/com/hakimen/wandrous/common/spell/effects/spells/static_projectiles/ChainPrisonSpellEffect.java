@@ -7,8 +7,8 @@ import com.hakimen.wandrous.common.spell.SpellStatus;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 
-public class ChainPrisonSpell extends SpellEffect {
-    public ChainPrisonSpell() {
+public class ChainPrisonSpellEffect extends SpellEffect {
+    public ChainPrisonSpellEffect() {
         setKind(SPELL);
         setStatus(
                 new SpellStatus()

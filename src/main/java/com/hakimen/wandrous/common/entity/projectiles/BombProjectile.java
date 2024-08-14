@@ -1,11 +1,13 @@
 package com.hakimen.wandrous.common.entity.projectiles;
 
+import com.hakimen.wandrous.common.events.payloads.PositionalScreenShakePacket;
 import com.hakimen.wandrous.common.registers.EntityRegister;
 import com.hakimen.wandrous.common.spell.SpellContext;
 import com.hakimen.wandrous.common.spell.mover.ISpellMover;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.level.Level;
@@ -14,6 +16,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.EventHooks;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -117,6 +120,13 @@ public class BombProjectile extends SpellCastingProjectile {
         Level level = level();
         if (EventHooks.canEntityGrief(level, this)) {
             float radius = this.damage;
+            PacketDistributor.sendToPlayersNear((ServerLevel) level, null, position().x, position().y, position().z, 50, new PositionalScreenShakePacket(
+                    1.5f,
+                    20,
+                    40,
+                    this.getPosition(0).toVector3f(),
+                    50
+            ));
             level.explode(this, getX(), getY(), getZ(), radius, Level.ExplosionInteraction.NONE);
         }
     }

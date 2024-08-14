@@ -2,7 +2,9 @@ package com.hakimen.wandrous.common.registers;
 
 import com.hakimen.wandrous.Wandrous;
 import com.hakimen.wandrous.common.custom.register.WandrousRegistries;
+import com.hakimen.wandrous.common.spell.SpellContext;
 import com.hakimen.wandrous.common.spell.SpellEffect;
+import com.hakimen.wandrous.common.spell.SpellStack;
 import com.hakimen.wandrous.common.spell.SpellStatus;
 import com.hakimen.wandrous.common.spell.effects.modifiers.*;
 import com.hakimen.wandrous.common.spell.effects.modifiers.charges.CrumblingChargeHitEffect;
@@ -14,6 +16,7 @@ import com.hakimen.wandrous.common.spell.effects.modifiers.location.TeleportCast
 import com.hakimen.wandrous.common.spell.effects.spells.BestowSpellEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.GreekLetterSpellEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.projectiles.*;
+import com.hakimen.wandrous.common.spell.effects.spells.raycast.FlameBurstSpellEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.static_projectiles.*;
 import com.hakimen.wandrous.common.spell.effects.spells.summon_spells.SummonConjuredBlockSpellEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.summon_spells.SummonEntityEffect;
@@ -23,6 +26,7 @@ import com.hakimen.wandrous.common.spell.effects.spells.teleports.HomebringerTel
 import com.hakimen.wandrous.common.spell.effects.spells.teleports.SwapTeleportEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.teleports.TeleportEffect;
 import com.hakimen.wandrous.common.utils.CastingUtils;
+import com.hakimen.wandrous.common.utils.data.Node;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;
@@ -35,13 +39,23 @@ import java.util.List;
 public class SpellRegister {
     public static final DeferredRegister<SpellEffect> SPELL_EFFECTS = DeferredRegister.create(WandrousRegistries.SPELLS_REGISTER, Wandrous.MODID);
 
+    public static final DeferredHolder<SpellEffect, SpellEffect> DUMMY = SPELL_EFFECTS.register("dummy", () -> new SpellEffect() {
+        @Override
+        public void cast(SpellContext context) {
+            for (Node<SpellStack> child : context.getNode().getChildren()) {
+                child.getData().getEffect().cast(context.setNode(child));
+            }
+        }
+    }.setKind(SpellEffect.MODIFIER).setStatus(new SpellStatus()));
+
     public static final DeferredHolder<SpellEffect, SpellEffect> EXPLOSION = SPELL_EFFECTS.register("explosion", () -> new ExplosionSpellEffect(2));
     public static final DeferredHolder<SpellEffect, SpellEffect> MAJOR_EXPLOSION = SPELL_EFFECTS.register("major_explosion", () -> new ExplosionSpellEffect(5));
     public static final DeferredHolder<SpellEffect, SpellEffect> BOMB = SPELL_EFFECTS.register("bomb", BombSpellEffect::new);
     public static final DeferredHolder<SpellEffect, SpellEffect> NUKE = SPELL_EFFECTS.register("nuke", NukeSpellEffect::new);
 
-    public static final DeferredHolder<SpellEffect, SpellEffect> CHAIN_PRISON = SPELL_EFFECTS.register("chain_prison", ChainPrisonSpell::new);
+    public static final DeferredHolder<SpellEffect, SpellEffect> CHAIN_PRISON = SPELL_EFFECTS.register("chain_prison", ChainPrisonSpellEffect::new);
     public static final DeferredHolder<SpellEffect, SpellEffect> GUST = SPELL_EFFECTS.register("gust", GustSpellEffect::new);
+    public static final DeferredHolder<SpellEffect, SpellEffect> FLAME_BURST = SPELL_EFFECTS.register("flame_burst", FlameBurstSpellEffect::new);
 
     public static final DeferredHolder<SpellEffect, SpellEffect> GLIMMERING_BOLT = SPELL_EFFECTS.register("glimmering_bolt", () -> new GlimmeringBoltSpellEffect(SpellEffect.SPELL));
     public static final DeferredHolder<SpellEffect, SpellEffect> TRIGGER_GLIMMERING_BOLT = SPELL_EFFECTS.register("trigger_glimmering_bolt", () -> new GlimmeringBoltSpellEffect(SpellEffect.TRIGGER));

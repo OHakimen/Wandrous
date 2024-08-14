@@ -1,10 +1,7 @@
 package com.hakimen.wandrous.common.registers;
 
 import com.hakimen.wandrous.Wandrous;
-import com.hakimen.wandrous.common.block.BuddingTealestiteBlock;
-import com.hakimen.wandrous.common.block.ConjuredBlock;
-import com.hakimen.wandrous.common.block.ConjuredLightBlock;
-import com.hakimen.wandrous.common.block.GlyphProjectorBlock;
+import com.hakimen.wandrous.common.block.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -85,9 +82,18 @@ public class BlockRegister {
                     .pushReaction(PushReaction.DESTROY)
     ));
 
-    public static final DeferredHolder<Block, GlyphProjectorBlock> GLYPH_PROJECTOR = BLOCKS.register("glyph_projector", () -> new GlyphProjectorBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)
+    public static final DeferredHolder<Block, GlyphProjectorBlock> GLYPH_PROJECTOR = BLOCKS.register("glyph_projector", () -> new GlyphProjectorBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)
             .noOcclusion()
             .lightLevel(state -> 5)
+            .isValidSpawn((pState, pLevel, pPos, entityType) -> false)
+            .isRedstoneConductor((pState, pLevel, pPos) -> false)
+            .isSuffocating((pState, pLevel, pPos) -> false)
+            .isViewBlocking((pState, pLevel, pPos) -> false)
+    ));
+
+    public static final DeferredHolder<Block, ArcaneInscriberBlock> ARCANE_INSCRIBER = BLOCKS.register("arcane_inscriber", () -> new ArcaneInscriberBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)
+            .noOcclusion()
+            .lightLevel(state -> 15)
             .isValidSpawn((pState, pLevel, pPos, entityType) -> false)
             .isRedstoneConductor((pState, pLevel, pPos) -> false)
             .isSuffocating((pState, pLevel, pPos) -> false)
