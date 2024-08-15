@@ -4,6 +4,7 @@ import com.hakimen.wandrous.common.item.component.WandDataComponent;
 import com.hakimen.wandrous.common.registers.DataComponentsRegister;
 import com.hakimen.wandrous.common.registers.SoundRegister;
 import com.hakimen.wandrous.common.utils.ChargesUtils;
+import com.hakimen.wandrous.config.ServerConfig;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -26,7 +27,6 @@ import static com.hakimen.wandrous.common.item.component.WandDataComponent.DEFAU
 public class RechargeItem extends Item {
 
     public enum RechargeTier {
-        SHARD,
         CRYSTAL,
         GREATER_CRYSTAL
     };
@@ -35,12 +35,10 @@ public class RechargeItem extends Item {
 
     public RechargeItem(int uses) {
         super(new Item.Properties().durability(uses));
-        tier = RechargeTier.SHARD;
     }
 
     public RechargeItem(Properties props) {
         super(props);
-        tier = RechargeTier.SHARD;
     }
 
     public RechargeItem(int uses, RechargeTier tier) {
@@ -55,17 +53,16 @@ public class RechargeItem extends Item {
 
     @Override
     public int getUseDuration(ItemStack pStack, LivingEntity p_344979_) {
-        return switch (tier){   //TODO make these config values
-            case SHARD -> 80;
-            case CRYSTAL -> 60;
-            case GREATER_CRYSTAL -> 40;
+        return switch (tier){
+            case CRYSTAL -> ServerConfig.RECHARGE_CRYSTAL.get();
+            case GREATER_CRYSTAL -> ServerConfig.GREATER_RECHARGE_CRYSTAL.get();
         };
     }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pUsedHand);
-        if(getDamage(itemstack) != getMaxDamage(itemstack) || tier.equals(RechargeTier.SHARD)){
+        if(getDamage(itemstack) != getMaxDamage(itemstack)){
             pPlayer.startUsingItem(pUsedHand);
         } else {
             pPlayer.displayClientMessage(Component.literal("Out of charges"), true);
@@ -96,17 +93,11 @@ public class RechargeItem extends Item {
             player.getInventory().items.stream().filter(stack ->  stack.getItem() instanceof SpellEffectItem && ChargesUtils.hasCharge(stack) && ChargesUtils.hasSpentCharges(stack))
                     .forEach(ChargesUtils::regainAllCharges);
 
-            if(tier.equals(RechargeTier.SHARD)){
-                pStack.shrink(1);
-                pLevel.broadcastEntityEvent(pLivingEntity, (byte) (player.getUsedItemHand().equals(InteractionHand.MAIN_HAND) ? 47 : 48));
-            }else{
-                pLevel.playSound(player, player.getOnPos(), SoundRegister.RECHARGE.get(), SoundSource.PLAYERS, 1f, (switch (tier) {
-                    case SHARD -> 1.25f;
-                    case CRYSTAL -> 1f;
-                    case GREATER_CRYSTAL -> 0.75f;
-                }) + new Random().nextFloat(-0.15f,0.15f));
-                pStack.setDamageValue(pStack.getDamageValue() + 1);
-            }
+            pLevel.playSound(player, player.getOnPos(), SoundRegister.RECHARGE.get(), SoundSource.PLAYERS, 1f, (switch (tier) {
+                case CRYSTAL -> 1f;
+                case GREATER_CRYSTAL -> 0.75f;
+            }) + new Random().nextFloat(-0.15f,0.15f));
+            pStack.setDamageValue(pStack.getDamageValue() + 1);
         }
         return super.finishUsingItem(pStack, pLevel, pLivingEntity);
     }

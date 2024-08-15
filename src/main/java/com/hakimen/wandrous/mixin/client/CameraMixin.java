@@ -18,13 +18,6 @@ public abstract class CameraMixin {
 
     @Shadow public abstract Entity getEntity();
 
-    @Shadow public abstract float getXRot();
-
-    @Shadow public abstract float getYRot();
-
-    @Shadow protected abstract void setRotation(float pYRot, float pXRot, float roll);
-
-
     @Inject(at = @At("RETURN"), method = "setup", cancellable = true)
     public void setup(BlockGetter pLevel, Entity pEntity, boolean pDetached, boolean pThirdPersonReverse, float pPartialTick, CallbackInfo ci) {
         CameraHandler.cameraTick(((Camera)(Object)this), getEntity().getRandom());

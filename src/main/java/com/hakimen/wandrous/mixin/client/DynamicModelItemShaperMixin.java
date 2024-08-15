@@ -18,8 +18,6 @@ public abstract class DynamicModelItemShaperMixin {
 
     @Shadow @Final private ModelManager modelManager;
 
-    @Shadow public abstract ModelManager getModelManager();
-
     @Inject(method="getItemModel(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/client/resources/model/BakedModel;",
             at=@At("HEAD"), cancellable=true)
     private void getDynamicModel(ItemStack pItem, CallbackInfoReturnable<BakedModel> cir){

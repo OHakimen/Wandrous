@@ -1,6 +1,7 @@
 package com.hakimen.wandrous.client.utils;
 
 import com.hakimen.wandrous.client.utils.camera.CameraShakeAffector;
+import com.hakimen.wandrous.config.ClientConfig;
 import net.minecraft.client.Camera;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -35,7 +36,7 @@ public class CameraHandler {
         }
         totalIntensity = intensity;
 
-        totalIntensity = Math.clamp(totalIntensity, 0, 10);
+        totalIntensity = Math.clamp(totalIntensity, 0, ClientConfig.SCREEN_SHAKE_THRESHOLD.get());
         SHAKERS.removeIf(shaker -> shaker.getTicks() >= shaker.getMaxTicks());
     }
 

@@ -5,6 +5,7 @@ import com.hakimen.wandrous.client.model.DynamicTextureModel;
 import com.hakimen.wandrous.common.item.component.WandDataComponent;
 import com.hakimen.wandrous.common.registers.ContainerRegister;
 import com.hakimen.wandrous.common.registers.DataComponentsRegister;
+import com.hakimen.wandrous.common.registers.GameRuleRegister;
 import com.hakimen.wandrous.common.spell.SpellStack;
 import com.hakimen.wandrous.common.utils.CastingUtils;
 import com.hakimen.wandrous.common.utils.ChargesUtils;
@@ -177,7 +178,7 @@ public class WandItem extends Item implements DynamicModelled {
                         int current = (getOldIdx + castingUtils.idx) % effect.size();
                         wand.update(DataComponentsRegister.WAND_COMPONENT.get(), DEFAULT_STAT, wandStat -> new WandDataComponent.WandStatBuilder(wandStat).setCurrentIdx(current).build());
 
-                        int cost = CastingUtils.calculateManaCost(cast); //TODO: make a gamerule for making the cast cost nothing in creative
+                        int cost = pPlayer.isCreative() && pLevel.getGameRules().getBoolean(GameRuleRegister.RULE_CREATIVE_CASTING) ?  0 : CastingUtils.calculateManaCost(cast);
                         float delayMod = CastingUtils.calculateCastDelayMod(cast);
                         float rechargeSpeedMod = CastingUtils.calculateRechargeSpeedMod(cast);
                         int currentMana = wand.get(DataComponentsRegister.WAND_COMPONENT.get()).getMana();

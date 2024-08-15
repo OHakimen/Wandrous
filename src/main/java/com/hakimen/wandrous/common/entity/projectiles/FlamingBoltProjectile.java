@@ -52,8 +52,8 @@ public class FlamingBoltProjectile extends SpellCastingProjectile {
     protected void onHit(HitResult pResult) {
         super.onHit(pResult);
         if (!this.level().isClientSide) {
-            level().explode(this,getX(),getY(),getZ(), context != null ? context.getStatus().getDamage() : 4, true, Level.ExplosionInteraction.MOB);
-            this.level().broadcastEntityEvent(this, (byte)3);
+            level().explode(this, getX(), getY(), getZ(), context != null ? context.getStatus().getDamage() : 4, true, Level.ExplosionInteraction.MOB);
+            this.level().broadcastEntityEvent(this, (byte) 3);
             this.discard();
         }
     }
@@ -66,13 +66,13 @@ public class FlamingBoltProjectile extends SpellCastingProjectile {
 
     @Override
     protected void onHitBlock(BlockHitResult pResult) {
-        if(this.context != null){
-            PacketDistributor.sendToPlayersNear((ServerLevel) level(), null, getX(),getY(),getZ(), 50,new PositionalScreenShakePacket(
-                    1.5f,
+        if (this.context != null) {
+            PacketDistributor.sendToPlayersNear((ServerLevel) level(), null, getX(), getY(), getZ(), context.getStatus().getDamage(), new PositionalScreenShakePacket(
+                    context.getStatus().getDamage() / 8f,
                     20,
                     40,
                     getPosition(0).toVector3f(),
-                    35
+                    context.getStatus().getDamage()
             ));
             SpellCastingProjectile.onHitBlock(this, pResult, this.context);
         }
@@ -80,13 +80,13 @@ public class FlamingBoltProjectile extends SpellCastingProjectile {
 
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
-        if(this.context != null){
-            PacketDistributor.sendToPlayersNear((ServerLevel) level(), null, getX(),getY(),getZ(), 50,new PositionalScreenShakePacket(
-                    1.5f,
+        if (this.context != null) {
+            PacketDistributor.sendToPlayersNear((ServerLevel) level(), null, getX(), getY(), getZ(), context.getStatus().getDamage() / 2f, new PositionalScreenShakePacket(
+                    context.getStatus().getDamage() / 8f,
                     20,
                     40,
                     getPosition(0).toVector3f(),
-                    35
+                    context.getStatus().getDamage() / 2f
             ));
             SpellCastingProjectile.onHitEntity(this, pResult, this.context);
         }
@@ -97,16 +97,16 @@ public class FlamingBoltProjectile extends SpellCastingProjectile {
     public void tick() {
         super.tick();
 
-        if(this.context != null){
+        if (this.context != null) {
             List<ISpellMover> movers = getMovers(context.getNode());
             for (ISpellMover mover : movers) {
-                mover.move(context,this);
+                mover.move(context, this);
             }
         }
 
-        if(!level().isClientSide){
-            if(this.tickCount > maxTicks){
-                if(this.context != null && this.context.getNode().getData().getEffect().hasKind(SpellEffect.TIMER)){
+        if (!level().isClientSide) {
+            if (this.tickCount > maxTicks) {
+                if (this.context != null && this.context.getNode().getData().getEffect().hasKind(SpellEffect.TIMER)) {
                     this.context.getStatus().setLifetimeMod(0);
                     SpellCastingProjectile.onTimeEnd(this, this.context);
                 }
@@ -114,7 +114,6 @@ public class FlamingBoltProjectile extends SpellCastingProjectile {
             }
         }
     }
-
 
 
     @Override

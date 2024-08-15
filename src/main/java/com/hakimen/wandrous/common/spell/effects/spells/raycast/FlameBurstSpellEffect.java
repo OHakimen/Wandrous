@@ -28,7 +28,9 @@ public class FlameBurstSpellEffect extends SpellEffect {
         Entity caster = context.getCaster();
         context.getLevel().playSound(null, context.getCaster().getOnPos(), SoundEvents.FIRECHARGE_USE, SoundSource.PLAYERS, 1f, (float) context.getLevel().getRandom().nextInt(80,120)/100f);
         for (int i = 0; i < context.getStatus().getRadius() * 2; i++) {
-            HitResult result = RaycastUtils.raycastWithOffset(caster, new Vec3(0, Math.sin(i), 0), context.getStatus().getRadius(), 0);
+            HitResult result = RaycastUtils.raycastRotatedAtPos(caster,
+                    context.isCastPositionModified() ? context.getLocation() : caster.getEyePosition(),
+                    new Vec3(0, Math.sin(i), 0), context.getStatus().getRadius(), 0);
             ServerLevel level = (ServerLevel) context.getLevel();
 
             for (int j = 2; j < context.getStatus().getRadius() ; j++) {

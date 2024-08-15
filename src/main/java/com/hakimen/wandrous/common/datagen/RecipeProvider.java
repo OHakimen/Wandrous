@@ -172,6 +172,36 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 ItemRegister.TIMER_SONIC_BOOM_SPELL.get().getDefaultInstance(),
                 100,
                 4);
+
+        inscriberRecipe(pRecipeOutput, "chain_shot",
+                List.of(
+                        GlyphRegister.CONTROL.get(),
+                        GlyphRegister.CONTROL.get(),
+                        GlyphRegister.POWER.get(),
+                        GlyphRegister.POWER.get(),
+                        GlyphRegister.TINKER.get(),
+                        GlyphRegister.WEAVE.get(),
+                        GlyphRegister.WEAVE.get(),
+                        GlyphRegister.NEW.get()
+                ),
+                Ingredient.of(ItemRegister.TEALESTITE_SHARD.get()),
+                ItemRegister.CHAIN_SHOT_SPELL.get().getDefaultInstance(),
+                100,
+                3);
+
+        inscriberRecipe(pRecipeOutput, "trigger_sonic_boom",
+                TRIGGER,
+                Ingredient.of(ItemRegister.CHAIN_SHOT_SPELL.get()),
+                ItemRegister.TRIGGER_CHAIN_SHOT_SPELL.get().getDefaultInstance(),
+                100,
+                3);
+
+        inscriberRecipe(pRecipeOutput, "timer_chain_shot",
+                TIMER,
+                Ingredient.of(ItemRegister.CHAIN_SHOT_SPELL.get()),
+                ItemRegister.TIMER_CHAIN_SHOT_SPELL.get().getDefaultInstance(),
+                100,
+                3);
     }
 
     private void staticProjectiles(RecipeOutput pRecipeOutput) {
@@ -200,6 +230,22 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 ItemRegister.EXPLOSION_SPELL.get().getDefaultInstance(),
                 100,
                 2);
+
+        inscriberRecipe(pRecipeOutput, "gust", List.of(
+                        GlyphRegister.GUIDANCE.get(),
+                        GlyphRegister.GUIDANCE.get(),
+                        GlyphRegister.WEAVE.get(),
+                        GlyphRegister.WEAVE.get(),
+                        GlyphRegister.POWER.get(),
+                        GlyphRegister.POWER.get(),
+                        GlyphRegister.FOCUS.get(),
+                        GlyphRegister.NEW.get()
+                ),
+                Ingredient.of(Items.WIND_CHARGE),
+                ItemRegister.GUST_SPELL.get().getDefaultInstance(),
+                100,
+                2);
+
 
         inscriberRecipe(pRecipeOutput, "lighting_bolt", List.of(
                         GlyphRegister.POWER.get(),
@@ -332,6 +378,43 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 ),
                 Ingredient.of(Items.ENDER_PEARL),
                 ItemRegister.HOME_BRINGER_TELEPORT_SPELL.get().getDefaultInstance(),
+                100,
+                2);
+
+        inscriberRecipe(pRecipeOutput, "drill", List.of(
+                    GlyphRegister.FOCUS.get(),
+                    GlyphRegister.NEW.get(),
+                    GlyphRegister.GUIDANCE.get(),
+                    GlyphRegister.TINKER.get()
+                ),
+                Ingredient.of(Items.IRON_PICKAXE),
+                ItemRegister.DRILL_SPELL.get().getDefaultInstance(),
+                100,
+                1);
+
+        inscriberRecipe(pRecipeOutput, "chainsaw", List.of(
+                        GlyphRegister.FOCUS.get(),
+                        GlyphRegister.NEW.get(),
+                        GlyphRegister.GUIDANCE.get(),
+                        GlyphRegister.TINKER.get()
+                ),
+                Ingredient.of(Items.IRON_AXE),
+                ItemRegister.CHAINSAW_SPELL.get().getDefaultInstance(),
+                100,
+                1);
+
+        inscriberRecipe(pRecipeOutput, "giga_drill", List.of(
+                        GlyphRegister.FOCUS.get(),
+                        GlyphRegister.NEW.get(),
+                        GlyphRegister.GUIDANCE.get(),
+                        GlyphRegister.GUIDANCE.get(),
+                        GlyphRegister.CONTROL.get(),
+                        GlyphRegister.CONTROL.get(),
+                        GlyphRegister.TINKER.get(),
+                        GlyphRegister.TINKER.get()
+                ),
+                Ingredient.of(Items.DIAMOND_PICKAXE),
+                ItemRegister.GIGA_DRILL_SPELL.get().getDefaultInstance(),
                 100,
                 2);
     }

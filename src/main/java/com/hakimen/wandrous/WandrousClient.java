@@ -20,6 +20,7 @@ import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 @EventBusSubscriber(value = Dist.CLIENT, modid = Wandrous.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class WandrousClient {
 
+
     @SubscribeEvent
     public static void clientInit(RegisterMenuScreensEvent event){
         event.register(ContainerRegister.WAND_TINKER_MENU.get(), WandTinkerScreen::new);
