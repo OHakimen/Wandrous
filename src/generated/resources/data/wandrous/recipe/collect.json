@@ -1,0 +1,21 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:control",
+    "wandrous:control",
+    "wandrous:weave",
+    "wandrous:weave",
+    "wandrous:tinker",
+    "wandrous:guidance",
+    "wandrous:guidance",
+    "wandrous:new"
+  ],
+  "on_slate": {
+    "item": "minecraft:hopper"
+  },
+  "output": {
+    "id": "wandrous:collect"
+  },
+  "ticks": 100,
+  "tier": 2
+}

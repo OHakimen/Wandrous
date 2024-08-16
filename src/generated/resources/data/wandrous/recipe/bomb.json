@@ -1,0 +1,25 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:new",
+    "wandrous:new",
+    "wandrous:weave",
+    "wandrous:knowledge",
+    "wandrous:control",
+    "wandrous:control",
+    "wandrous:power",
+    "wandrous:power",
+    "wandrous:power",
+    "wandrous:power",
+    "wandrous:tinker",
+    "wandrous:tinker"
+  ],
+  "on_slate": {
+    "item": "minecraft:gunpowder"
+  },
+  "output": {
+    "id": "wandrous:bomb"
+  },
+  "ticks": 100,
+  "tier": 3
+}

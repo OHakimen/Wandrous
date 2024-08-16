@@ -1,0 +1,15 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:destiny",
+    "wandrous:focus"
+  ],
+  "on_slate": {
+    "item": "wandrous:chain_shot"
+  },
+  "output": {
+    "id": "wandrous:timer_chain_shot"
+  },
+  "ticks": 100,
+  "tier": 3
+}

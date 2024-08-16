@@ -1,0 +1,21 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:focus",
+    "wandrous:new",
+    "wandrous:guidance",
+    "wandrous:guidance",
+    "wandrous:control",
+    "wandrous:control",
+    "wandrous:tinker",
+    "wandrous:tinker"
+  ],
+  "on_slate": {
+    "item": "minecraft:diamond_pickaxe"
+  },
+  "output": {
+    "id": "wandrous:giga_drill"
+  },
+  "ticks": 100,
+  "tier": 2
+}

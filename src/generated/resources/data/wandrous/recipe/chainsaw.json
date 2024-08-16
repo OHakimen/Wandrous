@@ -1,0 +1,17 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:focus",
+    "wandrous:new",
+    "wandrous:guidance",
+    "wandrous:tinker"
+  ],
+  "on_slate": {
+    "item": "minecraft:iron_axe"
+  },
+  "output": {
+    "id": "wandrous:chainsaw"
+  },
+  "ticks": 100,
+  "tier": 1
+}

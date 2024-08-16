@@ -40,6 +40,9 @@ public class RenderToolTips {
             renderForScroll(e, stack);
         }
     }
+
+
+
     private static void renderForWand(RenderTooltipEvent.GatherComponents e, ItemStack stack) {
         int wandCapacity = stack.get(DataComponentsRegister.WAND_COMPONENT.get()).getCapacity();
         if (wandCapacity == 0) return;

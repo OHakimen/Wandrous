@@ -1,0 +1,21 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:destiny",
+    "wandrous:control",
+    "wandrous:control",
+    "wandrous:guidance",
+    "wandrous:guidance",
+    "wandrous:mind",
+    "wandrous:mind",
+    "wandrous:new"
+  ],
+  "on_slate": {
+    "item": "minecraft:ender_pearl"
+  },
+  "output": {
+    "id": "wandrous:home_bringer_teleport"
+  },
+  "ticks": 100,
+  "tier": 2
+}

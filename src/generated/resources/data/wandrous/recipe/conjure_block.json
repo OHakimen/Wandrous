@@ -1,0 +1,17 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:control",
+    "wandrous:bind",
+    "wandrous:tinker",
+    "wandrous:new"
+  ],
+  "on_slate": {
+    "tag": "c:glass_blocks"
+  },
+  "output": {
+    "id": "wandrous:conjure_block"
+  },
+  "ticks": 100,
+  "tier": 1
+}

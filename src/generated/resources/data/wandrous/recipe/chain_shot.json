@@ -1,0 +1,21 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:control",
+    "wandrous:control",
+    "wandrous:power",
+    "wandrous:power",
+    "wandrous:tinker",
+    "wandrous:weave",
+    "wandrous:weave",
+    "wandrous:new"
+  ],
+  "on_slate": {
+    "item": "wandrous:tealestite_shard"
+  },
+  "output": {
+    "id": "wandrous:chain_shot"
+  },
+  "ticks": 100,
+  "tier": 3
+}

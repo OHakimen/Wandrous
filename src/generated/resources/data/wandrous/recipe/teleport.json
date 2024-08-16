@@ -1,0 +1,21 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:control",
+    "wandrous:control",
+    "wandrous:weave",
+    "wandrous:weave",
+    "wandrous:guidance",
+    "wandrous:guidance",
+    "wandrous:guidance",
+    "wandrous:new"
+  ],
+  "on_slate": {
+    "item": "minecraft:ender_pearl"
+  },
+  "output": {
+    "id": "wandrous:teleport"
+  },
+  "ticks": 100,
+  "tier": 2
+}

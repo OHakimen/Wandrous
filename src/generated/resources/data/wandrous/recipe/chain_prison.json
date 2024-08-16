@@ -1,0 +1,24 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:bind",
+    "wandrous:bind",
+    "wandrous:bind",
+    "wandrous:bind",
+    "wandrous:control",
+    "wandrous:control",
+    "wandrous:control",
+    "wandrous:control",
+    "wandrous:focus",
+    "wandrous:focus",
+    "wandrous:new"
+  ],
+  "on_slate": {
+    "item": "minecraft:chain"
+  },
+  "output": {
+    "id": "wandrous:chain_prison"
+  },
+  "ticks": 100,
+  "tier": 3
+}

@@ -189,7 +189,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 100,
                 3);
 
-        inscriberRecipe(pRecipeOutput, "trigger_sonic_boom",
+        inscriberRecipe(pRecipeOutput, "trigger_chain_shot",
                 TRIGGER,
                 Ingredient.of(ItemRegister.CHAIN_SHOT_SPELL.get()),
                 ItemRegister.TRIGGER_CHAIN_SHOT_SPELL.get().getDefaultInstance(),
@@ -227,7 +227,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                         GlyphRegister.NEW.get()
                 ),
                 Ingredient.of(Items.TNT),
-                ItemRegister.EXPLOSION_SPELL.get().getDefaultInstance(),
+                ItemRegister.MAJOR_EXPLOSION_SPELL.get().getDefaultInstance(),
                 100,
                 2);
 
@@ -330,7 +330,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                         GlyphRegister.GUIDANCE.get(),
                         GlyphRegister.NEW.get()
                 ),
-                Ingredient.of(Items.ENDER_PEARL),
+                Ingredient.of(Items.HOPPER),
                 ItemRegister.COLLECT_SPELL.get().getDefaultInstance(),
                 100,
                 2);
@@ -382,10 +382,10 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 2);
 
         inscriberRecipe(pRecipeOutput, "drill", List.of(
-                    GlyphRegister.FOCUS.get(),
-                    GlyphRegister.NEW.get(),
-                    GlyphRegister.GUIDANCE.get(),
-                    GlyphRegister.TINKER.get()
+                        GlyphRegister.FOCUS.get(),
+                        GlyphRegister.NEW.get(),
+                        GlyphRegister.GUIDANCE.get(),
+                        GlyphRegister.TINKER.get()
                 ),
                 Ingredient.of(Items.IRON_PICKAXE),
                 ItemRegister.DRILL_SPELL.get().getDefaultInstance(),
@@ -419,7 +419,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 2);
     }
 
-    private void movers(RecipeOutput pRecipeOutput){
+    private void movers(RecipeOutput pRecipeOutput) {
         inscriberRecipe(pRecipeOutput, "homing", List.of(
                 GlyphRegister.GUIDANCE.get(),
                 GlyphRegister.GUIDANCE.get(),
@@ -442,6 +442,126 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 GlyphRegister.DESTINY.get()
         ), Ingredient.of(Items.SLIME_BALL), ItemRegister.BOOMERANG_SPELL.get().getDefaultInstance(), 100, 2);
 
+    }
+
+    public void modifiers(RecipeOutput pRecipeOutput) {
+        inscriberRecipe(pRecipeOutput,
+                "small_delay_cast",
+                List.of(
+                        GlyphRegister.BIND.get(),
+                        GlyphRegister.BIND.get(),
+                        GlyphRegister.TINKER.get(),
+                        GlyphRegister.WEAVE.get(),
+                        GlyphRegister.WEAVE.get(),
+                        GlyphRegister.KNOWLEDGE.get(),
+                        GlyphRegister.KNOWLEDGE.get(),
+                        GlyphRegister.DESTINY.get()
+                ),
+                Ingredient.of(Items.CLOCK),
+                ItemRegister.SMALL_DELAY_CAST_SPELL.get().getDefaultInstance(),
+                100,
+                2
+        );
+
+        inscriberRecipe(pRecipeOutput,
+                "medium_delay_cast",
+                List.of(
+                        GlyphRegister.BIND.get(),
+                        GlyphRegister.TINKER.get(),
+                        GlyphRegister.WEAVE.get(),
+                        GlyphRegister.DESTINY.get()
+                ),
+                Ingredient.of(ItemRegister.SMALL_DELAY_CAST_SPELL.get()),
+                ItemRegister.MEDIUM_DELAY_CAST_SPELL.get().getDefaultInstance(),
+                100,
+                2
+        );
+
+        inscriberRecipe(pRecipeOutput,
+                "big_delay_cast",
+                List.of(
+                        GlyphRegister.POWER.get(),
+                        GlyphRegister.TINKER.get(),
+                        GlyphRegister.WEAVE.get(),
+                        GlyphRegister.DESTINY.get()
+                ),
+                Ingredient.of(ItemRegister.MEDIUM_DELAY_CAST_SPELL.get()),
+                ItemRegister.BIG_DELAY_CAST_SPELL.get().getDefaultInstance(),
+                100,
+                2
+        );
+
+        inscriberRecipe(pRecipeOutput,
+                "freezing_charge",
+                List.of(
+                        GlyphRegister.POWER.get(),
+                        GlyphRegister.POWER.get(),
+                        GlyphRegister.FOCUS.get(),
+                        GlyphRegister.FOCUS.get(),
+                        GlyphRegister.TINKER.get(),
+                        GlyphRegister.TINKER.get(),
+                        GlyphRegister.KNOWLEDGE.get(),
+                        GlyphRegister.MIND.get()
+                ),
+                Ingredient.of(Items.PACKED_ICE),
+                ItemRegister.FREEZING_CHARGE_SPELL.get().getDefaultInstance(),
+                100,
+                2
+        );
+
+        inscriberRecipe(pRecipeOutput,
+                "igneous_charge",
+                List.of(
+                        GlyphRegister.POWER.get(),
+                        GlyphRegister.POWER.get(),
+                        GlyphRegister.FOCUS.get(),
+                        GlyphRegister.FOCUS.get(),
+                        GlyphRegister.TINKER.get(),
+                        GlyphRegister.TINKER.get(),
+                        GlyphRegister.KNOWLEDGE.get(),
+                        GlyphRegister.MIND.get()
+                ),
+                Ingredient.of(Items.MAGMA_BLOCK),
+                ItemRegister.IGNEOUS_CHARGE_SPELL.get().getDefaultInstance(),
+                100,
+                2
+        );
+
+        inscriberRecipe(pRecipeOutput,
+                "poison_charge",
+                List.of(
+                        GlyphRegister.POWER.get(),
+                        GlyphRegister.POWER.get(),
+                        GlyphRegister.FOCUS.get(),
+                        GlyphRegister.FOCUS.get(),
+                        GlyphRegister.TINKER.get(),
+                        GlyphRegister.TINKER.get(),
+                        GlyphRegister.KNOWLEDGE.get(),
+                        GlyphRegister.MIND.get()
+                ),
+                Ingredient.of(Items.POISONOUS_POTATO),
+                ItemRegister.POISON_CHARGE_SPELL.get().getDefaultInstance(),
+                100,
+                2
+        );
+
+        inscriberRecipe(pRecipeOutput,
+                "crumbling_charge",
+                List.of(
+                        GlyphRegister.POWER.get(),
+                        GlyphRegister.POWER.get(),
+                        GlyphRegister.FOCUS.get(),
+                        GlyphRegister.FOCUS.get(),
+                        GlyphRegister.TINKER.get(),
+                        GlyphRegister.TINKER.get(),
+                        GlyphRegister.KNOWLEDGE.get(),
+                        GlyphRegister.MIND.get()
+                ),
+                Ingredient.of(Items.GUNPOWDER),
+                ItemRegister.CRUMBLING_CHARGE_SPELL.get().getDefaultInstance(),
+                100,
+                2
+        );
     }
 
     private void arcaneInscriberRecipes(RecipeOutput pRecipeOutput) {

@@ -2,19 +2,19 @@
   "type": "wandrous:arcane_inscribing",
   "glyphs": [
     "wandrous:power",
+    "wandrous:weave",
+    "wandrous:weave",
     "wandrous:power",
     "wandrous:power",
-    "wandrous:power",
-    "wandrous:power",
-    "wandrous:power",
+    "wandrous:focus",
     "wandrous:power",
     "wandrous:new"
   ],
   "on_slate": {
-    "item": "minecraft:tnt"
+    "item": "minecraft:lightning_rod"
   },
   "output": {
-    "id": "wandrous:major_explosion"
+    "id": "wandrous:lighting_bolt"
   },
   "ticks": 100,
   "tier": 2

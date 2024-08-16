@@ -1,20 +1,20 @@
 {
   "type": "wandrous:arcane_inscribing",
   "glyphs": [
+    "wandrous:guidance",
+    "wandrous:guidance",
+    "wandrous:weave",
+    "wandrous:weave",
     "wandrous:power",
     "wandrous:power",
-    "wandrous:power",
-    "wandrous:power",
-    "wandrous:power",
-    "wandrous:power",
-    "wandrous:power",
+    "wandrous:focus",
     "wandrous:new"
   ],
   "on_slate": {
-    "item": "minecraft:tnt"
+    "item": "minecraft:wind_charge"
   },
   "output": {
-    "id": "wandrous:major_explosion"
+    "id": "wandrous:gust"
   },
   "ticks": 100,
   "tier": 2

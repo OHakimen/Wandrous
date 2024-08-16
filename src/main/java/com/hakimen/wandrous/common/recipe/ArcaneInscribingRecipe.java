@@ -64,8 +64,6 @@ public class ArcaneInscribingRecipe implements Recipe<ArcaneInscriberRecipeInput
     }
     @Override
     public boolean matches(ArcaneInscriberRecipeInput input, Level level) {
-
-
         if (input.tier < tier) return false;
 
         if (!onSlate.test(input.getOnSlate())) return false;
@@ -112,6 +110,7 @@ public class ArcaneInscribingRecipe implements Recipe<ArcaneInscriberRecipeInput
     public boolean canCraftInDimensions(int pWidth, int pHeight) {
         return true;
     }
+
 
     @Override
     public ItemStack getResultItem(HolderLookup.Provider pRegistries) {

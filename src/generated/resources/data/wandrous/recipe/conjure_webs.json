@@ -1,0 +1,21 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:bind",
+    "wandrous:bind",
+    "wandrous:weave",
+    "wandrous:weave",
+    "wandrous:vitality",
+    "wandrous:focus",
+    "wandrous:focus",
+    "wandrous:new"
+  ],
+  "on_slate": {
+    "item": "minecraft:spider_eye"
+  },
+  "output": {
+    "id": "wandrous:conjure_webs"
+  },
+  "ticks": 100,
+  "tier": 2
+}
