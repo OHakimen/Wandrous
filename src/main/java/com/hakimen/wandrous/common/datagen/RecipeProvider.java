@@ -3,11 +3,14 @@ package com.hakimen.wandrous.common.datagen;
 import com.hakimen.wandrous.Wandrous;
 import com.hakimen.wandrous.common.data.Glyph;
 import com.hakimen.wandrous.common.datagen.recipes.ArcaneInscriberRecipeBuilder;
+import com.hakimen.wandrous.common.item.InscribedLensItem;
 import com.hakimen.wandrous.common.registers.GlyphRegister;
 import com.hakimen.wandrous.common.registers.ItemRegister;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -25,6 +28,132 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
     @Override
     protected void buildRecipes(RecipeOutput pRecipeOutput) {
         arcaneInscriberRecipes(pRecipeOutput);
+        craftingTableRecipes(pRecipeOutput);
+    }
+
+    public void craftingTableRecipes(RecipeOutput pRecipeOutput) {
+        ItemStack stack = ItemRegister.INSCRIBED_LENS.get().getDefaultInstance();
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, InscribedLensItem.makeGlyphStack(stack.copy(), GlyphRegister.BIND.get()))
+                .pattern(" - ")
+                .pattern("+x+")
+                .pattern(" - ")
+                .define('+', ItemRegister.TEALESTITE_SHARD::get)
+                .define('-', Items.CHAIN)
+                .define('x', Tags.Items.GLASS_PANES)
+                .unlockedBy(getHasName(Items.GLASS_PANE), has(Tags.Items.GLASS_PANES))
+                .save(pRecipeOutput, "bind_lens");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, InscribedLensItem.makeGlyphStack(stack.copy(), GlyphRegister.CONTROL.get()))
+                .pattern(" - ")
+                .pattern("+x+")
+                .pattern(" - ")
+                .define('+', ItemRegister.TEALESTITE_SHARD::get)
+                .define('-', Items.AMETHYST_SHARD)
+                .define('x', Tags.Items.GLASS_PANES)
+                .unlockedBy(getHasName(Items.GLASS_PANE), has(Tags.Items.GLASS_PANES))
+                .save(pRecipeOutput, "control_lens");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, InscribedLensItem.makeGlyphStack(stack.copy(), GlyphRegister.DESTINY.get()))
+                .pattern(" - ")
+                .pattern("+x+")
+                .pattern(" - ")
+                .define('+', ItemRegister.TEALESTITE_SHARD::get)
+                .define('-', Items.ENDER_EYE)
+                .define('x', Tags.Items.GLASS_PANES)
+                .unlockedBy(getHasName(Items.GLASS_PANE), has(Tags.Items.GLASS_PANES))
+                .save(pRecipeOutput, "destiny_lens");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, InscribedLensItem.makeGlyphStack(stack.copy(), GlyphRegister.FOCUS.get()))
+                .pattern(" - ")
+                .pattern("+x+")
+                .pattern(" - ")
+
+                .define('+', ItemRegister.TEALESTITE_SHARD::get)
+                .define('-', Items.GLOWSTONE_DUST)
+                .define('x', Tags.Items.GLASS_PANES)
+                .unlockedBy(getHasName(Items.GLASS_PANE), has(Tags.Items.GLASS_PANES))
+                .save(pRecipeOutput, "focus_lens");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, InscribedLensItem.makeGlyphStack(stack.copy(), GlyphRegister.GUIDANCE.get()))
+                .pattern(" - ")
+                .pattern("+x+")
+                .pattern(" - ")
+                .define('+', ItemRegister.TEALESTITE_SHARD::get)
+                .define('-', Items.REDSTONE)
+                .define('x', Tags.Items.GLASS_PANES)
+                .unlockedBy(getHasName(Items.GLASS_PANE), has(Tags.Items.GLASS_PANES))
+                .save(pRecipeOutput, "guidance_lens");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, InscribedLensItem.makeGlyphStack(stack.copy(), GlyphRegister.KNOWLEDGE.get()))
+                .pattern(" - ")
+                .pattern("+x+")
+                .pattern(" - ")
+                .define('+', ItemRegister.TEALESTITE_SHARD::get)
+                .define('-', Items.BOOK)
+                .define('x', Tags.Items.GLASS_PANES)
+                .unlockedBy(getHasName(Items.GLASS_PANE), has(Tags.Items.GLASS_PANES))
+                .save(pRecipeOutput, "knowledge_lens");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, InscribedLensItem.makeGlyphStack(stack.copy(), GlyphRegister.MIND.get()))
+                .pattern(" - ")
+                .pattern("+x+")
+                .pattern(" - ")
+                .define('+', ItemRegister.TEALESTITE_SHARD::get)
+                .define('-', Items.GOLD_NUGGET)
+                .define('x', Tags.Items.GLASS_PANES)
+                .unlockedBy(getHasName(Items.GLASS_PANE), has(Tags.Items.GLASS_PANES))
+                .save(pRecipeOutput, "mind_lens");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, InscribedLensItem.makeGlyphStack(stack.copy(), GlyphRegister.NEW.get()))
+                .pattern(" - ")
+                .pattern("+x+")
+                .pattern(" - ")
+                .define('+', ItemRegister.TEALESTITE_SHARD::get)
+                .define('-', Items.PAPER)
+                .define('x', Tags.Items.GLASS_PANES)
+                .unlockedBy(getHasName(Items.GLASS_PANE), has(Tags.Items.GLASS_PANES))
+                .save(pRecipeOutput, "new_lens");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, InscribedLensItem.makeGlyphStack(stack.copy(), GlyphRegister.POWER.get()))
+                .pattern(" - ")
+                .pattern("+x+")
+                .pattern(" - ")
+                .define('+', ItemRegister.TEALESTITE_SHARD::get)
+                .define('-', Items.GUNPOWDER)
+                .define('x', Tags.Items.GLASS_PANES)
+                .unlockedBy(getHasName(Items.GLASS_PANE), has(Tags.Items.GLASS_PANES))
+                .save(pRecipeOutput, "power_lens");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, InscribedLensItem.makeGlyphStack(stack.copy(), GlyphRegister.TINKER.get()))
+                .pattern(" - ")
+                .pattern("+x+")
+                .pattern(" - ")
+                .define('+', ItemRegister.TEALESTITE_SHARD::get)
+                .define('-', Items.REPEATER)
+                .define('x', Tags.Items.GLASS_PANES)
+                .unlockedBy(getHasName(Items.GLASS_PANE), has(Tags.Items.GLASS_PANES))
+                .save(pRecipeOutput, "tinker_lens");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, InscribedLensItem.makeGlyphStack(stack.copy(), GlyphRegister.VITALITY.get()))
+                .pattern(" - ")
+                .pattern("+x+")
+                .pattern(" - ")
+                .define('+', ItemRegister.TEALESTITE_SHARD::get)
+                .define('-', Items.GOLDEN_CARROT)
+                .define('x', Tags.Items.GLASS_PANES)
+                .unlockedBy(getHasName(Items.GLASS_PANE), has(Tags.Items.GLASS_PANES))
+                .save(pRecipeOutput, "vitality_lens");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, InscribedLensItem.makeGlyphStack(stack.copy(), GlyphRegister.WEAVE.get()))
+                .pattern(" - ")
+                .pattern("+x+")
+                .pattern(" - ")
+                .define('+', ItemRegister.TEALESTITE_SHARD::get)
+                .define('-', Items.STRING)
+                .define('x', Tags.Items.GLASS_PANES)
+                .unlockedBy(getHasName(Items.GLASS_PANE), has(Tags.Items.GLASS_PANES))
+                .save(pRecipeOutput, "weave_lens");
     }
 
     static List<Glyph> TRIGGER = List.of(
@@ -36,7 +165,6 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
             GlyphRegister.DESTINY.get(),
             GlyphRegister.FOCUS.get()
     );
-
 
     private void projectiles(RecipeOutput pRecipeOutput) {
         inscriberRecipe(pRecipeOutput, "glimmering_bolt", List.of(

@@ -32,7 +32,7 @@ public class SpellStatus {
 
     public float getDamage() {
         Random random = new Random();
-        return (Math.max(0,damage) * (1f + getDamageMod())) * (random.nextFloat(0, 1) < getCritChance() ? 5f : 1f) * (getCritChance() > 1 ? getCritChance() : 1);
+        return Math.max(0, (Math.max(0,damage) * (1f + getDamageMod())) * (random.nextFloat(0, 1) < getCritChance() ? 5f : 1f) * (getCritChance() > 1 ? getCritChance() : 1));
     }
 
     public float getRawDamage() {
@@ -45,7 +45,7 @@ public class SpellStatus {
     }
 
     public float getRadius() {
-        return Math.max(0,radius) * (1 + getRadiusMod());
+        return Math.max(0, Math.max(0,radius) * (1 + getRadiusMod()));
     }
 
     public SpellStatus setRadius(float radius) {
@@ -54,7 +54,7 @@ public class SpellStatus {
     }
 
     public float getSpread() {
-        return Math.max(0,spread) * (1 + getSpreadMod());
+        return Math.max(0, Math.max(0,spread) * (1 + getSpreadMod()));
     }
 
     public float getRawSpread() {
@@ -67,7 +67,7 @@ public class SpellStatus {
     }
 
     public float getSpeed() {
-        return Math.max(0,speed) * (1 + getSpeedMod());
+        return Math.max(0, Math.max(0,speed) * (1 + getSpeedMod()));
     }
 
     public float getRawSpeed() {
@@ -80,7 +80,7 @@ public class SpellStatus {
     }
 
     public int getLifeTime() {
-        return (int) (Math.max(0,lifeTime) * (1 + getLifetimeMod()));
+        return (int) Math.max(0, (Math.max(0,lifeTime) * (1 + getLifetimeMod())));
     }
 
     public float getRawLifeTime() {

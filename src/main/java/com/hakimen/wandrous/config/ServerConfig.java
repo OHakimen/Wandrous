@@ -13,6 +13,10 @@ public class ServerConfig {
             .comment("The reload time for the greater recharge crystal")
             .defineInRange("greater_recharge_crystal", 40, 0, 200);
 
+    public static final ModConfigSpec.DoubleValue STRENGTH_DAMAGE_MODIFIER = BUILDER
+            .comment("The damage modifier of having the Strength effect on the caster")
+            .defineInRange("strength_damage_modifier", 0.5, 0, 2);
+
     public static final ModConfigSpec SPEC = BUILDER.build();
 
 }

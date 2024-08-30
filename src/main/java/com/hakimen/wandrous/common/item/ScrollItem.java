@@ -4,6 +4,7 @@ import com.hakimen.wandrous.common.data.Scroll;
 import com.hakimen.wandrous.common.data.ScrollDataListener;
 import com.hakimen.wandrous.common.item.component.ScrollDataComponent;
 import com.hakimen.wandrous.common.registers.DataComponentsRegister;
+import com.hakimen.wandrous.common.registers.EffectRegister;
 import com.hakimen.wandrous.common.registers.ItemRegister;
 import com.hakimen.wandrous.common.spell.SpellStack;
 import com.hakimen.wandrous.common.utils.CastingUtils;
@@ -49,8 +50,11 @@ public class ScrollItem extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
-        if(!pPlayer.getCooldowns().isOnCooldown(this)){
-
+        if(!pPlayer.getCooldowns().isOnCooldown(this) && !pLevel.isClientSide){
+            if(pPlayer.hasEffect(EffectRegister.SILENCE)) {
+                pPlayer.displayClientMessage(Component.translatable("item.wandrous.wand.silenced"), true);
+                return InteractionResultHolder.fail(pPlayer.getItemInHand(pUsedHand));
+            }
             ItemStack stack = pPlayer.getItemInHand(pUsedHand);
 
             ScrollDataComponent.ScrollData data = stack.get(DataComponentsRegister.SCROLL_COMPONENT.get());

@@ -27,7 +27,7 @@ public class InscribedLensItem extends Item {
         super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
     }
 
-    public static void makeGlyphStack(ItemStack stack, Glyph data) {
+    public static ItemStack makeGlyphStack(ItemStack stack, Glyph data) {
         stack.update(DataComponentsRegister.GLYPH_COMPONENT.get(), InscribedLensDataComponent.DEFAULT, glyphData ->
             new InscribedLensDataComponent.GlyphDataBuilder(glyphData)
                     .setId(data.getId())
@@ -35,5 +35,6 @@ public class InscribedLensItem extends Item {
                     .setColor(data.getColor())
                     .build()
         );
+        return stack;
     }
 }

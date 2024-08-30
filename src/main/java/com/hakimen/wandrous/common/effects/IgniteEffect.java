@@ -18,7 +18,7 @@ public class IgniteEffect extends MobEffect {
 
     @Override
     public boolean applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
-        pLivingEntity.setRemainingFireTicks(2);
+        pLivingEntity.setRemainingFireTicks(20);
         return true;
     }
 

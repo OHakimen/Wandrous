@@ -15,9 +15,14 @@ public class LangProvider extends LanguageProvider {
 
     @Override
     protected void addTranslations() {
-        add("itemGroup.wandrous", "Wandrous");
-        add("itemGroup.wandrous.scrolls", "Scrolls");
-        add("itemGroup.wandrous.glyphs", "Glyphs");
+        add("itemGroup.wandrous.main", "Wandrous");
+        add("itemGroup.wandrous.spells", "Wandrous: Spells");
+
+        add("item.wandrous.wand.silenced", "Silenced");
+        add("item.wandrous.wand.empty_wand", "No spells to cast");
+        add("item.wandrous.wand.no_mana", "Not enough mana to cast spells");
+
+        add("jei.wandrous.category.arcane_inscribing", "Arcane Inscribing");
 
         addSpells();
         addGlyphs();
@@ -85,6 +90,9 @@ public class LangProvider extends LanguageProvider {
         add(ItemRegister.TEALESTITE_SHARD.get(), "Tealestite Shard");
         add(ItemRegister.TEALESTITE_RECHARGE_CRYSTAL.get(), "Tealestite Recharging Crystal");
         add(ItemRegister.TEALESTITE_GREATER_RECHARGE_CRYSTAL.get(), "Greater Tealestite Recharging Crystal");
+
+        add(ItemRegister.ARCANE_INSCRIBER.get(), "Arcane Inscriber");
+        add(ItemRegister.GLYPH_PROJECTOR.get(), "Glyph Projector");
     }
 
     public void addSpells(){
@@ -202,9 +210,12 @@ public class LangProvider extends LanguageProvider {
         addSpell(ItemRegister.GREEK_LETTER_DELTA_SPELL.get(), "Delta", "Casts a copy of the first spell in the wand");
         addSpell(ItemRegister.GREEK_LETTER_KAPPA_SPELL.get(), "Kappa", "Copies all the modifiers in the wand");
 
-        addSpell(ItemRegister.HEALTH_TO_POWER_SPELL.get(), "Health to Power", "Consumes the caster's lifeforce to make spells stronger");
+        addSpell(ItemRegister.HEALTH_TO_POWER_SPELL.get(), "Health to Power", "Consumes the caster's life force to make spells stronger");
         addSpell(ItemRegister.HEAVY_SPREAD_SPELL.get(), "Heavy Spread", "Increases the spread on spells, but reduces de cast and recharge times");
         addSpell(ItemRegister.DECREASE_RECHARGE_TIME_SPELL.get(), "Decrease Recharge Time", "Reduces the cast and recharge times");
+
+        addSpell(ItemRegister.IGNEOUS_GAZE_SPELL.get(), "Igneous Gaze", "Spread flames and ignites entities in a cone");
+        addSpell(ItemRegister.FREEZING_GAZE_SPELL.get(), "Freezing Gaze", "Creates ice walls and freeze entities in a cone");
     }
 
     private void addSpell(SpellEffectItem item, String name, String description){

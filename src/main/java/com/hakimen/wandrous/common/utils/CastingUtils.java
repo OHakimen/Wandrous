@@ -18,6 +18,8 @@ import net.minecraft.world.phys.Vec3;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.hakimen.wandrous.config.ServerConfig.STRENGTH_DAMAGE_MODIFIER;
+
 public class CastingUtils {
     public int idx;
 
@@ -45,8 +47,6 @@ public class CastingUtils {
             }
         } else if (tree.getData().getEffect() instanceof GreekLetterSpellEffect greekLetterSpellEffect) {
             Node<SpellStack> cast = greekLetterSpellEffect.apply(tree, this, alleffects);
-
-
 
             if (cast != null) {
                 if (cast.getData().getEffect().hasKind(SpellEffect.TRIGGER) || cast.getData().getEffect().hasKind(SpellEffect.MODIFIER) || cast.getData().getEffect().hasKind(SpellEffect.TIMER)) {
@@ -109,7 +109,6 @@ public class CastingUtils {
     }
 
     public static void castSpells(Entity entity, ItemStack wand, Level pLevel, Vec3 location, Node<SpellStack> toCast) {
-
         SpellContext context = new SpellContext()
                 .setCaster(entity)
                 .setWand(wand)
@@ -119,14 +118,13 @@ public class CastingUtils {
                 .setNode(toCast)
                 .setSplit(0)
                 .setOriginalCaster(entity)
+                .setPiercing(false)
                 .setCastPositionModified(false)
                 .setHit(new ArrayList<>());
 
-
         if (entity instanceof LivingEntity livingEntity) {
             if (livingEntity.hasEffect(MobEffects.DAMAGE_BOOST)) {
-                //TODO make this a config.
-                context.getStatus().setDamageMod((livingEntity.getEffect(MobEffects.DAMAGE_BOOST).getAmplifier() + 1) / 2f);
+                context.getStatus().setDamageMod((float) ((livingEntity.getEffect(MobEffects.DAMAGE_BOOST).getAmplifier() + 1) * STRENGTH_DAMAGE_MODIFIER.get()));
             }
         }
 
@@ -149,9 +147,17 @@ public class CastingUtils {
         status.setRadiusMod(first.getRadiusMod() + second.getRadiusMod());
         status.setLifetimeMod(first.getLifetimeMod() + second.getLifetimeMod());
 
-        status.setSpeed(first.getSpeed() + second.getSpeed());
-        status.setSpread(first.getSpread() + second.getSpread());
+        status.setSpeed(first.getRawSpeed() + second.getRawSpeed());
+        status.setSpread(first.getRawSpread() + second.getRawSpread());
 
         return status;
+    }
+
+    public static void clearMods(SpellContext spellContext){
+        spellContext
+                .setStatus(new SpellStatus())
+                .setSplit(0)
+                .setPiercing(false)
+                .setCastPositionModified(false);
     }
 }

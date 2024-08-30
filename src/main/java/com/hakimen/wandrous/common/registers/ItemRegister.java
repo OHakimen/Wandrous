@@ -1,7 +1,6 @@
 package com.hakimen.wandrous.common.registers;
 
 import com.hakimen.wandrous.Wandrous;
-import com.hakimen.wandrous.common.data.ScrollDataListener;
 import com.hakimen.wandrous.common.item.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -26,6 +25,7 @@ public class ItemRegister {
 
     public static final DeferredHolder<Item, SpellEffectItem> HOMING_SPELL = ITEMS.register("homing", () -> new SpellEffectItem(SpellRegister.HOMING));
     public static final DeferredHolder<Item, SpellEffectItem> BOOMERANG_SPELL = ITEMS.register("boomerang", () -> new SpellEffectItem(SpellRegister.BOOMERANG));
+    public static final DeferredHolder<Item, SpellEffectItem> GUIDE_SPELL = ITEMS.register("guide", () -> new SpellEffectItem(SpellRegister.GUIDE));
 
     public static final DeferredHolder<Item, SpellEffectItem> TELEPORT_CAST_SPELL = ITEMS.register("teleport_cast", () -> new SpellEffectItem(SpellRegister.TELEPORT_CAST));
     public static final DeferredHolder<Item, SpellEffectItem> LONG_DISTANCE_CAST_SPELL = ITEMS.register("long_distance_cast", () -> new SpellEffectItem(SpellRegister.LONG_DISTANCE_CAST));
@@ -52,9 +52,12 @@ public class ItemRegister {
     public static final DeferredHolder<Item, SpellEffectItem> MEDIUM_DELAY_CAST_SPELL = ITEMS.register("medium_delay_cast", () -> new SpellEffectItem(SpellRegister.MEDIUM_DELAY_CAST));
     public static final DeferredHolder<Item, SpellEffectItem> BIG_DELAY_CAST_SPELL = ITEMS.register("big_delay_cast", () -> new SpellEffectItem(SpellRegister.BIG_DELAY_CAST));
 
-    public static final DeferredHolder<Item, SpellEffectItem> ACCELERATE_SPELL = ITEMS.register("accelerate_cast", () -> new SpellEffectItem(SpellRegister.ACCELERATE_CAST));
+    public static final DeferredHolder<Item, SpellEffectItem> ACCELERATE_SPELL = ITEMS.register("accelerate_cast", () -> new SpellEffectItem(SpellRegister.INCREASE_SPEED));
     public static final DeferredHolder<Item, SpellEffectItem> ADD_MANA_SPELL = ITEMS.register("add_mana", () -> new SpellEffectItem(SpellRegister.ADD_MANA));
     public static final DeferredHolder<Item, SpellEffectItem> CRITICAL_PLUS_SPELL = ITEMS.register("critical_plus", () -> new SpellEffectItem(SpellRegister.CRITICAL_PLUS));
+    public static final DeferredHolder<Item, SpellEffectItem> DAMAGE_PLUS_SPELL = ITEMS.register("damage_plus", () -> new SpellEffectItem(SpellRegister.DAMAGE_PLUS));
+    public static final DeferredHolder<Item, SpellEffectItem> LIGHT_SHOT_SPELL = ITEMS.register("light_shot", () -> new SpellEffectItem(SpellRegister.LIGHT_SHOT));
+    public static final DeferredHolder<Item, SpellEffectItem> HEAVY_SHOT_SPELL = ITEMS.register("heavy_shot", () -> new SpellEffectItem(SpellRegister.HEAVY_SHOT));
     public static final DeferredHolder<Item, SpellEffectItem> INCREASE_LIFETIME_SPELL = ITEMS.register("increase_lifetime", () -> new SpellEffectItem(SpellRegister.INCREASE_LIFETIME));
     public static final DeferredHolder<Item, SpellEffectItem> DECREASE_LIFETIME_SPELL = ITEMS.register("decrease_lifetime", () -> new SpellEffectItem(SpellRegister.DECREASE_LIFETIME));
     public static final DeferredHolder<Item, SpellEffectItem> INCREASE_RANGE_SPELL = ITEMS.register("increase_range", () -> new SpellEffectItem(SpellRegister.INCREASE_RANGE));
@@ -65,6 +68,8 @@ public class ItemRegister {
     public static final DeferredHolder<Item, SpellEffectItem> DECREASE_RECHARGE_TIME_SPELL = ITEMS.register("decrease_recharge_time", () -> new SpellEffectItem(SpellRegister.DECREASE_RECHARGE_TIME));
 
     public static final DeferredHolder<Item, SpellEffectItem> HEALTH_TO_POWER_SPELL = ITEMS.register("health_to_power", () -> new SpellEffectItem(SpellRegister.HEALTH_TO_POWER));
+    public static final DeferredHolder<Item, SpellEffectItem> FRIENDS_TO_POWER_SPELL = ITEMS.register("friends_to_power", () -> new SpellEffectItem(SpellRegister.FRIENDS_TO_POWER));
+    public static final DeferredHolder<Item, SpellEffectItem> PIERCING_SPELL = ITEMS.register("piercing", () -> new SpellEffectItem(SpellRegister.PIERCING));
 
     public static final DeferredHolder<Item, SpellEffectItem> TELEPORT_SPELL = ITEMS.register("teleport", () -> new SpellEffectItem(SpellRegister.TELEPORT));
     public static final DeferredHolder<Item, SpellEffectItem> SWAP_TELEPORT_SPELL = ITEMS.register("swap_teleport", () -> new SpellEffectItem(SpellRegister.SWAP_TELEPORT));
@@ -107,11 +112,16 @@ public class ItemRegister {
     public static final DeferredHolder<Item, SpellEffectItem> CHAIN_PRISON_SPELL = ITEMS.register("chain_prison", () -> new SpellEffectItem(SpellRegister.CHAIN_PRISON, 5));
     public static final DeferredHolder<Item, SpellEffectItem> GUST_SPELL = ITEMS.register("gust", () -> new SpellEffectItem(SpellRegister.GUST));
 
-    public static final DeferredHolder<Item, SpellEffectItem> FLAME_BURST_SPELL = ITEMS.register("flame_burst", () -> new SpellEffectItem(SpellRegister.FLAME_BURST));
+    public static final DeferredHolder<Item, SpellEffectItem> IGNEOUS_GAZE_SPELL = ITEMS.register("igneous_gaze", () -> new SpellEffectItem(SpellRegister.IGNEOUS_GAZE));
+    public static final DeferredHolder<Item, SpellEffectItem> FREEZING_GAZE_SPELL = ITEMS.register("freezing_gaze", () -> new SpellEffectItem(SpellRegister.FREEZING_GAZE));
 
     public static final DeferredHolder<Item, SpellEffectItem> CONJURE_LIGHT_SPELL = ITEMS.register("conjure_light", () -> new SpellEffectItem(SpellRegister.CONJURE_LIGHT));
     public static final DeferredHolder<Item, SpellEffectItem> CONJURE_BLOCK_SPELL = ITEMS.register("conjure_block", () -> new SpellEffectItem(SpellRegister.CONJURE_BLOCK));
     public static final DeferredHolder<Item, SpellEffectItem> CONJURE_WEBS_SPELL = ITEMS.register("conjure_webs", () -> new SpellEffectItem(SpellRegister.CONJURE_WEBS, 10));
+
+    public static final DeferredHolder<Item, SpellEffectItem> SUMMON_BEE_SWARM_SPELL = ITEMS.register("summon_bee_swarm", () -> new SpellEffectItem(SpellRegister.SUMMON_BEE_SWARM, 10));
+
+    public static final DeferredHolder<Item, SpellEffectItem> BESTOW_CURSE_SILENCE_SPELL = ITEMS.register("bestow_curse_silence", () -> new SpellEffectItem(SpellRegister.BESTOW_CURSE_SILENCE, 20));
 
     public static final DeferredHolder<Item, SpellEffectItem> BESTOW_CURSE_HUNGER_SPELL = ITEMS.register("bestow_curse_hunger", () -> new SpellEffectItem(SpellRegister.BESTOW_CURSE_HUNGER, 20));
     public static final DeferredHolder<Item, SpellEffectItem> BESTOW_CURSE_DARKNESS_SPELL = ITEMS.register("bestow_curse_darkness", () -> new SpellEffectItem(SpellRegister.BESTOW_CURSE_DARKNESS, 20));
@@ -188,36 +198,31 @@ public class ItemRegister {
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> TAB = ItemRegister.TABS.register("wandrous", () -> CreativeModeTab.builder()
             .icon(() -> new ItemStack(WAND.get()))
-            .title(Component.translatable("itemGroup.wandrous"))
+            .title(Component.translatable("itemGroup.wandrous.main"))
             .displayItems((flags, out) -> {
                 ItemRegister.ITEMS.getEntries().forEach(x -> {
                     if (x.get() instanceof WandItem wandItem) {
                         out.accept(wandItem.getNonInitializedInstance());
-                    } else {
+                    } else if (x.get() instanceof InscribedLensItem) {
+                        GlyphRegister.GLYPHS.getEntries().forEach(glyph -> {
+                            ItemStack lens = new ItemStack(INSCRIBED_LENS.get());
+                            InscribedLensItem.makeGlyphStack(lens, glyph.get());
+                            out.accept(lens);
+                        });
+                    } else if (!(x.get() instanceof SpellEffectItem)) {
                         out.accept(x.get());
                     }
                 });
             }).build());
 
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> SCROLLS = ItemRegister.TABS.register("scrolls", () -> CreativeModeTab.builder()
-            .icon(() -> new ItemStack(SCROLL.get()))
-            .title(Component.translatable("itemGroup.wandrous.scrolls"))
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> SPELLS = ItemRegister.TABS.register("spells", () -> CreativeModeTab.builder()
+            .icon(() -> TRIGGER_GLIMMERING_BOLT_SPELL.get().getDefaultInstance())
+            .title(Component.translatable("itemGroup.wandrous.spells"))
             .displayItems((flags, out) -> {
-                ScrollDataListener.getAllScrolls().forEach(scroll -> {
-                    ItemStack scrl = new ItemStack(SCROLL.get());
-                    ScrollItem.makeScroll(scrl, scroll);
-                    out.accept(scrl);
-                });
-            }).build());
-
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> GLYPHS = ItemRegister.TABS.register("glyphs", () -> CreativeModeTab.builder()
-            .icon(() -> new ItemStack(INSCRIBED_LENS.get()))
-            .title(Component.translatable("itemGroup.wandrous.glyphs"))
-            .displayItems((flags, out) -> {
-                GlyphRegister.GLYPHS.getEntries().forEach(glyph -> {
-                    ItemStack lens = new ItemStack(INSCRIBED_LENS.get());
-                    InscribedLensItem.makeGlyphStack(lens, glyph.get());
-                    out.accept(lens);
+                ItemRegister.ITEMS.getEntries().forEach(x -> {
+                    if (x.get() instanceof SpellEffectItem) {
+                        out.accept(x.get());
+                    }
                 });
             }).build());
 

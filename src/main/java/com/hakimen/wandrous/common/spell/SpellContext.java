@@ -141,6 +141,14 @@ public class SpellContext implements Cloneable {
         return this;
     }
 
+    public boolean isPiercing(){
+        return (boolean) properties.get("piercing");
+    }
+    public SpellContext setPiercing(boolean piercing) {
+        properties.put("piercing", piercing);
+        return this;
+    }
+
 
     public SpellContext clone() {
         return new SpellContext().setProperties((HashMap<String, Object>) properties.clone());

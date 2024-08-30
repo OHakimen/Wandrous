@@ -2,14 +2,13 @@ package com.hakimen.wandrous.common.spell.mover;
 
 import com.hakimen.wandrous.common.entity.projectiles.SpellCastingProjectile;
 import com.hakimen.wandrous.common.spell.SpellContext;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
-import java.util.Random;
 
 public class HomingMover implements ISpellMover {
     @Override
@@ -17,10 +16,18 @@ public class HomingMover implements ISpellMover {
         if(projectile.tickCount > 2){
             if (context.getHomingTarget() == null) {
                 Level level = context.getLevel();
-                Vec3 pos = projectile.getPosition(0);
-                List<Entity> entities = level.getEntities(context.getCaster(), AABB.ofSize(pos, 32, 32, 32), (entity) -> entity instanceof LivingEntity && !entity.equals(context.getOriginalCaster()));
+                Vec3 pos = projectile.getEyePosition();
+                List<LivingEntity> entities = level.getNearbyEntities(LivingEntity.class, TargetingConditions.DEFAULT, (LivingEntity) context.getOriginalCaster(), AABB.ofSize(pos, 32, 32, 32));
 
-                LivingEntity closest = !entities.isEmpty() ? (LivingEntity) entities.get(new Random().nextInt(0, entities.size())) : null ;
+                LivingEntity closest = null;
+
+                for (LivingEntity entity : entities) {
+                    if(closest == null){
+                        closest = entity;
+                    }else if(entity.getPosition(0).distanceTo(projectile.getPosition(0)) < closest.getPosition(0).distanceTo(projectile.getPosition(0))){
+                        closest = entity;
+                    }
+                }
 
                 if (closest != null) {
                     context.setHomingTarget(closest);
@@ -28,10 +35,13 @@ public class HomingMover implements ISpellMover {
 
             } else if (context.getHomingTarget() != null) {
                 LivingEntity target = context.getHomingTarget();
-                if(target.isAlive()){
-                    projectile.setDeltaMovement(target.getEyePosition().subtract(projectile.getPosition(0).subtract(0,-target.getBbHeight()/2f, 0)).normalize().scale(0.9f));
-                }else{
+                if(target.getHealth() > 0){
+                    projectile.setNoGravity(true);
+                    projectile.setDeltaMovement(target.getPosition(0).subtract(projectile.getPosition(0).subtract(0,+target.getBbHeight()/2f, 0)).normalize()
+                            .scale(Math.clamp(target.getPosition(0).distanceTo(projectile.getPosition(0))/4f,0f, context.getStatus().getSpeed() > 0 ? context.getStatus().getSpeed() : 0.1f)));
+                }else {
                     context.setHomingTarget(null);
+                    projectile.setNoGravity(false);
                 }
             }
         }

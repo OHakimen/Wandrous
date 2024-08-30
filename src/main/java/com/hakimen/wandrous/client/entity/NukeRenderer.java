@@ -34,7 +34,11 @@ public class NukeRenderer extends EntityRenderer<NukeEntity> {
         int maxTick = pEntity.getEntityData().get(NukeEntity.MAX_TICK_TIME);
         float tickPlusPartial = pPartialTick + pEntity.tickCount;
 
-        float scale = (tickPlusPartial / maxTick) * 4.5f;
+
+//        float x = (tickPlusPartial / (maxTick * 0.25f));
+//        float scale = (float) ((tickPlusPartial / maxTick) > 0.25f ? (Math.sin(((tickPlusPartial - ( maxTick * 0.25f)) / maxTick * 1.30f) * Math.PI)) : (Math.sin(x * Math.PI)));
+
+        float scale = Math.max((float) Math.sin((tickPlusPartial / maxTick) * Math.PI) * 2f,0);
 
         pPoseStack.pushPose();
         pPoseStack.scale(scale,scale,scale);

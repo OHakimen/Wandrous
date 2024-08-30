@@ -22,6 +22,9 @@ public class ParticleRegister {
     public static final DeferredHolder<ParticleType<?>, ArcaneKnowledgeParticleType> KNOWLEDGE =
             PARTICLE_TYPES.register("arcane_knowledge", ArcaneKnowledgeParticleType::new);
 
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> SHOCKWAVE =
+            PARTICLE_TYPES.register("shockwave", () -> new SimpleParticleType(true));
+
 
     public static void register(IEventBus eventBus) {
         PARTICLE_TYPES.register(eventBus);

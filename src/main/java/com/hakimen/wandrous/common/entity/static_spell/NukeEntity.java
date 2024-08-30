@@ -1,12 +1,17 @@
 package com.hakimen.wandrous.common.entity.static_spell;
 
+import com.hakimen.wandrous.common.entity.projectiles.SpellCastingProjectile;
+import com.hakimen.wandrous.common.registers.EntityRegister;
+import com.hakimen.wandrous.common.registers.ParticleRegister;
+import com.hakimen.wandrous.common.spell.SpellContext;
+import com.hakimen.wandrous.common.spell.mover.ISpellMover;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
@@ -22,13 +27,36 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-public class NukeEntity extends Entity {
+public class NukeEntity extends SpellCastingProjectile {
 
     public static final EntityDataAccessor<Integer> MAX_TICK_TIME = SynchedEntityData.defineId(NukeEntity.class, EntityDataSerializers.INT);
     public int maxTickTime;
+    public SpellContext context;
 
-    public NukeEntity(EntityType<?> pEntityType, Level pLevel, int maxTickTime, Vec3 location) {
-        super(pEntityType, pLevel);
+
+    public NukeEntity(Level pLevel, int maxTickTime, Vec3 location, SpellContext context) {
+        super(EntityRegister.NUKE_ENTITY.get(), pLevel);
+        this.maxTickTime = maxTickTime;
+        this.setDeltaMovement(new Vec3(0, 0, 0));
+        this.setNoGravity(true);
+        this.context = context.clone();
+        this.setPos(location);
+        this.entityData.set(MAX_TICK_TIME, maxTickTime);
+        ServerLevel lvl = ((ServerLevel) context.getLevel());
+        for (ServerPlayer player : lvl.players()) {
+            if(player.distanceTo(this) <= 512){
+                lvl.sendParticles(player, ParticleRegister.SHOCKWAVE.get(),
+                        true,
+                        getX(),
+                        getY(),
+                        getZ(),
+                        1,0,0,0,0);
+            }
+        }
+    }
+
+    public NukeEntity(Level pLevel, int maxTickTime, Vec3 location) {
+        super(EntityRegister.NUKE_ENTITY.get(), pLevel);
         this.maxTickTime = maxTickTime;
         this.setDeltaMovement(new Vec3(0, 0, 0));
         this.setNoGravity(true);
@@ -60,11 +88,17 @@ public class NukeEntity extends Entity {
     public void tick() {
         super.tick();
 
-        if (!level().isClientSide) {
+        if(context != null){
+            for (ISpellMover mover : getMovers(context.getNode())) {
+                mover.move(context, this);
+            }
+        }
+
+        if (!level().isClientSide && (tickCount / (float)maxTickTime) >= 0.25f) {
             Level level = level();
             BlockPos pos = this.getOnPos();
             Vec3 location = this.getPosition(0);
-            float radius = ((float) tickCount / maxTickTime * 50f);
+            float radius = ((tickCount / (float)maxTickTime) - 0.25f) * 50f;
 
             Random r = new Random();
 
@@ -101,6 +135,7 @@ public class NukeEntity extends Entity {
                     }
 
                 }
+
                 discard();
             } else if (EventHooks.canEntityGrief(level, this)) {
                 while (positions.hasNext()) {
@@ -111,7 +146,6 @@ public class NukeEntity extends Entity {
             }
         }
     }
-
 
     public boolean tickedEnough() {
         return maxTickTime != -1 && tickCount > maxTickTime;

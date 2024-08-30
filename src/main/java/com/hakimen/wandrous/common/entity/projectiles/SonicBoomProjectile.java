@@ -62,8 +62,6 @@ public class SonicBoomProjectile extends SpellCastingProjectile {
     protected void onHitBlock(BlockHitResult pResult) {
         if (context != null) {
             SpellCastingProjectile.onHitBlock(this, pResult, context);
-            this.level().broadcastEntityEvent(this, (byte) 3);
-            discard();
         }
     }
 
@@ -71,9 +69,7 @@ public class SonicBoomProjectile extends SpellCastingProjectile {
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
         if (context != null) {
-            SpellCastingProjectile.onHitEntity(this, pResult, context);
-            this.level().broadcastEntityEvent(this, (byte) 3);
-            discard();
+            SpellCastingProjectile.onHitEntity(this, pResult, context.clone());
         }
     }
 
@@ -87,7 +83,6 @@ public class SonicBoomProjectile extends SpellCastingProjectile {
                 mover.move(context, this);
             }
         }
-
         if (!level().isClientSide) {
             if (this.tickCount > maxTicks) {
                 if (this.context != null && this.context.getNode().getData().getEffect().hasKind(SpellEffect.TIMER)) {

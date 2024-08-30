@@ -25,6 +25,7 @@ public class SpreadCastSpellEffect extends SpellEffect {
         Random r = new Random();
         context.getNode().getChildren().forEach(child -> {
             context.setLocation(context.getLocation().add(r.nextDouble(-1,1) * radius,0,r.nextDouble(-1,1) * radius));
+            context.setCastPositionModified(true);
             child.getData().getEffect().cast(context.setNode(child));
         });
 

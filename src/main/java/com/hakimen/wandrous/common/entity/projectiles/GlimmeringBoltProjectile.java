@@ -51,10 +51,6 @@ public class GlimmeringBoltProjectile extends SpellCastingProjectile {
     @Override
     protected void onHit(HitResult pResult) {
         super.onHit(pResult);
-        if (!this.level().isClientSide) {
-            this.level().broadcastEntityEvent(this, (byte)3);
-            this.discard();
-        }
     }
 
     @Override
@@ -67,7 +63,7 @@ public class GlimmeringBoltProjectile extends SpellCastingProjectile {
                         getX(),
                         getY(),
                         getZ(),
-                        r.nextFloat(-1f, 1f),1f,r.nextFloat(-1f, 1f)
+                        r.nextFloat(-1f, 1f), 1f, r.nextFloat(-1f, 1f)
                 );
             }
         }
@@ -75,14 +71,14 @@ public class GlimmeringBoltProjectile extends SpellCastingProjectile {
 
     @Override
     protected void onHitBlock(BlockHitResult pResult) {
-        if(this.context != null){
+        if (this.context != null) {
             SpellCastingProjectile.onHitBlock(this, pResult, this.context);
         }
     }
 
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
-        if(this.context != null){
+        if (this.context != null) {
             SpellCastingProjectile.onHitEntity(this, pResult, this.context);
         }
     }
@@ -92,6 +88,7 @@ public class GlimmeringBoltProjectile extends SpellCastingProjectile {
     public void tick() {
         super.tick();
 
+
         if(this.context != null){
             List<ISpellMover> movers = getMovers(context.getNode());
             for (ISpellMover mover : movers) {
@@ -99,9 +96,9 @@ public class GlimmeringBoltProjectile extends SpellCastingProjectile {
             }
         }
 
-        if(!level().isClientSide){
-            if(this.tickCount > maxTicks){
-                if(this.context != null && this.context.getNode().getData().getEffect().hasKind(SpellEffect.TIMER)){
+        if (!level().isClientSide) {
+            if (this.tickCount > maxTicks) {
+                if (this.context != null && this.context.getNode().getData().getEffect().hasKind(SpellEffect.TIMER)) {
                     this.context.getStatus().setLifetimeMod(0);
                     SpellCastingProjectile.onTimeEnd(this, this.context);
                 }
@@ -109,7 +106,6 @@ public class GlimmeringBoltProjectile extends SpellCastingProjectile {
             }
         }
     }
-
 
 
     @Override

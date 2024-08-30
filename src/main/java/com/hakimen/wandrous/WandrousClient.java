@@ -6,6 +6,7 @@ import com.hakimen.wandrous.client.entity.*;
 import com.hakimen.wandrous.client.screens.WandTinkerScreen;
 import com.hakimen.wandrous.common.particle.ArcaneKnowledgeParticle;
 import com.hakimen.wandrous.common.particle.GlimmeringBoltParticle;
+import com.hakimen.wandrous.common.particle.ShockwaveParticle;
 import com.hakimen.wandrous.common.registers.BlockEntityRegister;
 import com.hakimen.wandrous.common.registers.ContainerRegister;
 import com.hakimen.wandrous.common.registers.EntityRegister;
@@ -50,5 +51,8 @@ public class WandrousClient {
 
         Minecraft.getInstance().particleEngine.register(ParticleRegister.KNOWLEDGE.get(),
                 ArcaneKnowledgeParticle.ArcaneKnowledgeParticleProvider::new);
+
+        Minecraft.getInstance().particleEngine.register(ParticleRegister.SHOCKWAVE.get(),
+                ShockwaveParticle.ShockwaveProvider::new);
     }
 }

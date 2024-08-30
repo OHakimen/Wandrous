@@ -5,13 +5,13 @@ import com.hakimen.wandrous.client.model.DynamicTextureModel;
 import com.hakimen.wandrous.common.item.component.WandDataComponent;
 import com.hakimen.wandrous.common.registers.ContainerRegister;
 import com.hakimen.wandrous.common.registers.DataComponentsRegister;
+import com.hakimen.wandrous.common.registers.EffectRegister;
 import com.hakimen.wandrous.common.registers.GameRuleRegister;
 import com.hakimen.wandrous.common.spell.SpellStack;
 import com.hakimen.wandrous.common.utils.CastingUtils;
 import com.hakimen.wandrous.common.utils.ChargesUtils;
 import com.hakimen.wandrous.common.utils.WandUtils;
 import com.hakimen.wandrous.common.utils.data.Node;
-import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
@@ -27,15 +27,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.items.ItemStackHandler;
-import org.jetbrains.annotations.Nullable;
 import org.joml.Math;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 import static com.hakimen.wandrous.common.item.component.WandDataComponent.DEFAULT_STAT;
 
@@ -46,17 +43,6 @@ public class WandItem extends Item implements DynamicModelled {
                 .component(DataComponentsRegister.WAND_COMPONENT.get(), DEFAULT_STAT));
     }
 
-
-    @Override
-    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        consumer.accept(new IClientItemExtensions() {
-            @Nullable
-            @Override
-            public HumanoidModel.ArmPose getArmPose(LivingEntity entityLiving, InteractionHand hand, ItemStack itemStack) {
-                return entityLiving instanceof Player player && player.isUsingItem() ? HumanoidModel.ArmPose.CROSSBOW_HOLD : HumanoidModel.ArmPose.ITEM;
-            }
-        });
-    }
 
     @Override
     public boolean isBarVisible(ItemStack pStack) {
@@ -139,6 +125,11 @@ public class WandItem extends Item implements DynamicModelled {
         if (pLivingEntity instanceof Player pPlayer && !pLevel.isClientSide) {
             if (wand.getItem() instanceof WandItem) {
                 if (!pPlayer.hasContainerOpen() && !pPlayer.getCooldowns().isOnCooldown(wand.getItem())) {
+                    if(pPlayer.hasEffect(EffectRegister.SILENCE)) {
+                        pPlayer.displayClientMessage(Component.translatable("item.wandrous.wand.silenced"), true);
+                        return;
+                    }
+
                     CastingUtils castingUtils = new CastingUtils();
 
                     Optional<ItemStackHandler> handler = Optional.ofNullable((ItemStackHandler)wand.getCapability(Capabilities.ItemHandler.ITEM));

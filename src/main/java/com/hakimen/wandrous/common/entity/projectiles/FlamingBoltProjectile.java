@@ -53,8 +53,6 @@ public class FlamingBoltProjectile extends SpellCastingProjectile {
         super.onHit(pResult);
         if (!this.level().isClientSide) {
             level().explode(this, getX(), getY(), getZ(), context != null ? context.getStatus().getDamage() : 4, true, Level.ExplosionInteraction.MOB);
-            this.level().broadcastEntityEvent(this, (byte) 3);
-            this.discard();
         }
     }
 

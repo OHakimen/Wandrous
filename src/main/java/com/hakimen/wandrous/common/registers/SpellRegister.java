@@ -7,17 +7,18 @@ import com.hakimen.wandrous.common.spell.SpellEffect;
 import com.hakimen.wandrous.common.spell.SpellStack;
 import com.hakimen.wandrous.common.spell.SpellStatus;
 import com.hakimen.wandrous.common.spell.effects.modifiers.*;
-import com.hakimen.wandrous.common.spell.effects.modifiers.charges.CrumblingChargeHitEffect;
-import com.hakimen.wandrous.common.spell.effects.modifiers.charges.FreezingChargeHitEffect;
-import com.hakimen.wandrous.common.spell.effects.modifiers.charges.IgneousChargeHitEffect;
-import com.hakimen.wandrous.common.spell.effects.modifiers.charges.PoisonChargeHitEffect;
+import com.hakimen.wandrous.common.spell.effects.modifiers.charges.*;
 import com.hakimen.wandrous.common.spell.effects.modifiers.location.RelativeCastEffect;
 import com.hakimen.wandrous.common.spell.effects.modifiers.location.TeleportCastEffect;
+import com.hakimen.wandrous.common.spell.effects.modifiers.powerups.FriendshipToPowerSpellEffect;
+import com.hakimen.wandrous.common.spell.effects.modifiers.powerups.HealthToPowerSpellEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.BestowSpellEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.GreekLetterSpellEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.projectiles.*;
-import com.hakimen.wandrous.common.spell.effects.spells.raycast.FlameBurstSpellEffect;
+import com.hakimen.wandrous.common.spell.effects.spells.raycast.IgneousGazeSpellEffect;
+import com.hakimen.wandrous.common.spell.effects.spells.raycast.FreezingGazeSpellEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.static_projectiles.*;
+import com.hakimen.wandrous.common.spell.effects.spells.summon_spells.SummonBeeSwarmEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.summon_spells.SummonConjuredBlockSpellEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.summon_spells.SummonEntityEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.summon_spells.SummonWebbingSpellEffect;
@@ -55,7 +56,9 @@ public class SpellRegister {
 
     public static final DeferredHolder<SpellEffect, SpellEffect> CHAIN_PRISON = SPELL_EFFECTS.register("chain_prison", ChainPrisonSpellEffect::new);
     public static final DeferredHolder<SpellEffect, SpellEffect> GUST = SPELL_EFFECTS.register("gust", GustSpellEffect::new);
-    public static final DeferredHolder<SpellEffect, SpellEffect> FLAME_BURST = SPELL_EFFECTS.register("flame_burst", FlameBurstSpellEffect::new);
+
+    public static final DeferredHolder<SpellEffect, SpellEffect> IGNEOUS_GAZE = SPELL_EFFECTS.register("igneous_gaze", IgneousGazeSpellEffect::new);
+    public static final DeferredHolder<SpellEffect, SpellEffect> FREEZING_GAZE = SPELL_EFFECTS.register("freezing_gaze", FreezingGazeSpellEffect::new);
 
     public static final DeferredHolder<SpellEffect, SpellEffect> GLIMMERING_BOLT = SPELL_EFFECTS.register("glimmering_bolt", () -> new GlimmeringBoltSpellEffect(SpellEffect.SPELL));
     public static final DeferredHolder<SpellEffect, SpellEffect> TRIGGER_GLIMMERING_BOLT = SPELL_EFFECTS.register("trigger_glimmering_bolt", () -> new GlimmeringBoltSpellEffect(SpellEffect.TRIGGER));
@@ -117,12 +120,16 @@ public class SpellRegister {
     public static final DeferredHolder<SpellEffect, SpellEffect> HEXAGON_CAST = SPELL_EFFECTS.register("hexagon_cast", () -> new SphericalCastSpellEffect(6));
 
     public static final DeferredHolder<SpellEffect, SpellEffect> HEALTH_TO_POWER = SPELL_EFFECTS.register("health_to_power", HealthToPowerSpellEffect::new);
+    public static final DeferredHolder<SpellEffect, SpellEffect> FRIENDS_TO_POWER = SPELL_EFFECTS.register("friends_to_power", FriendshipToPowerSpellEffect::new);
+    public static final DeferredHolder<SpellEffect, SpellEffect> PIERCING = SPELL_EFFECTS.register("piercing", PiercingSpellEffect::new);
 
-    public static final DeferredHolder<SpellEffect, SpellEffect> ACCELERATE_CAST = SPELL_EFFECTS.register("accelerate_cast", () -> new StatusModifierSpellEffect(
+
+    public static final DeferredHolder<SpellEffect, SpellEffect> INCREASE_SPEED = SPELL_EFFECTS.register("accelerate_cast", () -> new StatusModifierSpellEffect(
             new SpellStatus()
                     .setManaDrain(30)
-                    .setSpeedMod(1)
+                    .setSpeedMod(0.25f)
     ));
+
 
     public static final DeferredHolder<SpellEffect, SpellEffect> ADD_MANA = SPELL_EFFECTS.register("add_mana", () -> new StatusModifierSpellEffect(
             new SpellStatus()
@@ -133,6 +140,26 @@ public class SpellRegister {
             new SpellStatus()
                     .setManaDrain(30)
                     .setCritChance(0.15f)
+    ));
+
+    public static final DeferredHolder<SpellEffect, SpellEffect> DAMAGE_PLUS = SPELL_EFFECTS.register("damage_plus", () -> new StatusModifierSpellEffect(
+            new SpellStatus()
+                    .setManaDrain(30)
+                    .setDamageMod(0.15f)
+    ));
+
+    public static final DeferredHolder<SpellEffect, SpellEffect> HEAVY_SHOT = SPELL_EFFECTS.register("heavy_shot", () -> new StatusModifierSpellEffect(
+            new SpellStatus()
+                    .setManaDrain(30)
+                    .setSpeedMod(-0.3f)
+                    .setDamageMod(1.5f)
+    ));
+
+    public static final DeferredHolder<SpellEffect, SpellEffect> LIGHT_SHOT = SPELL_EFFECTS.register("light_slot", () -> new StatusModifierSpellEffect(
+            new SpellStatus()
+                    .setManaDrain(30)
+                    .setSpeedMod(1.25f)
+                    .setDamageMod(-0.5f)
     ));
 
     public static final DeferredHolder<SpellEffect, SpellEffect> INCREASE_LIFETIME = SPELL_EFFECTS.register("increase_lifetime", () -> new StatusModifierSpellEffect(
@@ -187,10 +214,15 @@ public class SpellRegister {
 
     public static final DeferredHolder<SpellEffect, SpellEffect> HOMING = SPELL_EFFECTS.register("homing", () -> new MoverSpellEffect(SpellMoverRegister.HOMING));
     public static final DeferredHolder<SpellEffect, SpellEffect> BOOMERANG = SPELL_EFFECTS.register("boomerang", () -> new MoverSpellEffect(SpellMoverRegister.BOOMERANG));
+    public static final DeferredHolder<SpellEffect, SpellEffect> GUIDE = SPELL_EFFECTS.register("guide", () -> new MoverSpellEffect(SpellMoverRegister.GUIDE));
 
     public static final DeferredHolder<SpellEffect, SpellEffect> CONJURE_LIGHT = SPELL_EFFECTS.register("conjure_light", () -> new SummonConjuredBlockSpellEffect(BlockRegister.CONJURED_LIGHT_BLOCK.get().defaultBlockState(), 20));
     public static final DeferredHolder<SpellEffect, SpellEffect> CONJURE_BLOCK = SPELL_EFFECTS.register("conjure_block", () -> new SummonConjuredBlockSpellEffect(BlockRegister.CONJURED_BLOCK.get().defaultBlockState(), 20));
     public static final DeferredHolder<SpellEffect, SpellEffect> CONJURE_WEBS = SPELL_EFFECTS.register("conjure_webs", SummonWebbingSpellEffect::new);
+
+    public static final DeferredHolder<SpellEffect, SpellEffect> SUMMON_BEE_SWARM = SPELL_EFFECTS.register("summon_bee_swarm", SummonBeeSwarmEffect::new);
+
+    public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_CURSE_SILENCE = SPELL_EFFECTS.register("bestow_curse_silence", () -> new BestowSpellEffect(EffectRegister.SILENCE));
 
     public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_CURSE_HUNGER = SPELL_EFFECTS.register("bestow_curse_hunger", () -> new BestowSpellEffect(MobEffects.HUNGER));
     public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_CURSE_DARKNESS = SPELL_EFFECTS.register("bestow_curse_darkness", () -> new BestowSpellEffect(MobEffects.DARKNESS));

@@ -28,8 +28,8 @@ public class RelativeCastEffect extends SpellEffect {
 
         Vec3 newLocation = new Vec3(location.x + castDistance * lookAngle.x, location.y + castDistance * lookAngle.y, location.z + castDistance * lookAngle.z);
 
-        context.setCastPositionModified(true);
         context.setLocation(newLocation);
+        context.setCastPositionModified(true);
 
         for (Node<SpellStack> child : context.getNode().getChildren()) {
             child.getData().getEffect().cast(context.setNode(child));

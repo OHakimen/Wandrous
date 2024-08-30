@@ -20,7 +20,7 @@ public class SummonEntityEffect extends SpellEffect {
 
     @Override
     public void cast(SpellContext context) {
-
+        context.mergeStatus(getStatus());
         Level level = context.getLevel();
 
         Entity cast = entity.create(level);

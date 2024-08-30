@@ -27,6 +27,7 @@ public class SummonBlockEffect extends SpellEffect {
 
     @Override
     public void cast(SpellContext context) {
+        context.mergeStatus(getStatus());
         Entity caster = context.getCaster();
         Level level = context.getLevel();
 

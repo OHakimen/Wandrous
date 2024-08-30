@@ -9,6 +9,10 @@ public class ClientConfig {
             .comment("The maximun intensity of screen shakes (0 to disable)")
             .defineInRange("screen_shake_threshold", 20, 0, 100);
 
+    public static final ModConfigSpec.BooleanValue BLOOD = BUILDER
+            .comment("Entities bleed ? ")
+            .define("blood", true);
+
     public static final ModConfigSpec SPEC = BUILDER.build();
 
 

@@ -1,4 +1,28 @@
-// 1.21.1	2024-08-16T15:03:10.1726399	Recipes
+// 1.21.1	2024-08-25T16:48:53.7431321	Recipes
+7d11041f6e7d4a14871c70df363030eeeeb7526a data/minecraft/advancement/recipes/misc/bind_lens.json
+74e649e29ae53d05c89c1728926a7d74c704c35a data/minecraft/advancement/recipes/misc/control_lens.json
+8f4d07155cceb158ca5f087a118ecc6fb5b02405 data/minecraft/advancement/recipes/misc/destiny_lens.json
+7a657e4a1fa0269723bf91b43970195b60c7497e data/minecraft/advancement/recipes/misc/focus_lens.json
+00ef599bb33b80cbe1459e7dd4777c0e6e2d34c4 data/minecraft/advancement/recipes/misc/guidance_lens.json
+af7cb97f0094c118c7123a5f75c10efd674d5675 data/minecraft/advancement/recipes/misc/knowledge_lens.json
+b94d7b6de5ccf0f55ddbae8e55010cfef9e5c372 data/minecraft/advancement/recipes/misc/mind_lens.json
+2d56ab6bc24473ab2e931278f065ea5a8055d31a data/minecraft/advancement/recipes/misc/new_lens.json
+8bcffe884bb5dcc501196ea32d169c1d89294ee5 data/minecraft/advancement/recipes/misc/power_lens.json
+8d7ad00876c7cd26ad93d68c8d812ba867d27e7a data/minecraft/advancement/recipes/misc/tinker_lens.json
+3d540ee5b586063934253cf684ef6672adaa6ce0 data/minecraft/advancement/recipes/misc/vitality_lens.json
+e29a94f40b2a11e8720b51d1f902411e1aac47f5 data/minecraft/advancement/recipes/misc/weave_lens.json
+bd7cda937ab35c8cb306460e130b4886a78e0313 data/minecraft/recipe/bind_lens.json
+acd619065c6ea24e0e1c7e6c40eb02becb7c8c41 data/minecraft/recipe/control_lens.json
+674df440bb81bc17a33e53c160529d3d2dd81b92 data/minecraft/recipe/destiny_lens.json
+2eab79263fe058a7cc1c93f5c77204da319f0a72 data/minecraft/recipe/focus_lens.json
+e313bd818b9869f508e0ee029ae59e7536282f1a data/minecraft/recipe/guidance_lens.json
+a122ba459854f4a6979dba1cdad5aa7c1f31fa8e data/minecraft/recipe/knowledge_lens.json
+e86e77b6db04ca409b4c1ac95a0bf3811da7a89b data/minecraft/recipe/mind_lens.json
+49d37d7071334eb4f48337ee18fc098fdef15f10 data/minecraft/recipe/new_lens.json
+7e94430adccc62b819c040dc4f61d6e4a8a614aa data/minecraft/recipe/power_lens.json
+cfffea86857aff67a69a0c0dbc122b562acb869e data/minecraft/recipe/tinker_lens.json
+ef23f715d746a99eabb72ff76774e97c78bb0f08 data/minecraft/recipe/vitality_lens.json
+32cfa6214d282fa49c61f9ddfbdd3c09cbc06f80 data/minecraft/recipe/weave_lens.json
 a9d3fa08fc3d9eff9ef94897cebff812194819d0 data/wandrous/advancement/recipes/black_hole.json
 cde2fe80b28cb01e9ad57513ddc62eee3e78bf00 data/wandrous/advancement/recipes/bomb.json
 a263127c3345acedc1518b783931dfbb05f2c174 data/wandrous/advancement/recipes/boomerang.json

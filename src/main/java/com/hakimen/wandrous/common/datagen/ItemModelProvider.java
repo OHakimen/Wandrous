@@ -135,6 +135,9 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         makeSpell(ItemRegister.ACCELERATE_SPELL.get());
         makeSpell(ItemRegister.CRITICAL_PLUS_SPELL.get());
         makeSpell(ItemRegister.ADD_MANA_SPELL.get());
+        makeSpell(ItemRegister.DAMAGE_PLUS_SPELL.get());
+        makeSpell(ItemRegister.HEAVY_SHOT_SPELL.get());
+        makeSpell(ItemRegister.LIGHT_SHOT_SPELL.get());
         makeSpell(ItemRegister.INCREASE_LIFETIME_SPELL.get());
         makeSpell(ItemRegister.DECREASE_LIFETIME_SPELL.get());
         makeSpell(ItemRegister.INCREASE_RANGE_SPELL.get());
@@ -143,7 +146,10 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         makeSpell(ItemRegister.DECREASE_SPREAD_SPELL.get());
         makeSpell(ItemRegister.HEAVY_SPREAD_SPELL.get());
         makeSpell(ItemRegister.DECREASE_RECHARGE_TIME_SPELL.get());
+        makeSpell(ItemRegister.PIERCING_SPELL.get());
+
         makeSpell(ItemRegister.HEALTH_TO_POWER_SPELL.get());
+        makeSpell(ItemRegister.FRIENDS_TO_POWER_SPELL.get());
 
         makeSpell(ItemRegister.LIGHTING_BOLT_SPELL.get());
 
@@ -167,6 +173,7 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
 
         makeSpell(ItemRegister.HOMING_SPELL.get());
         makeSpell(ItemRegister.BOOMERANG_SPELL.get());
+        makeSpell(ItemRegister.GUIDE_SPELL.get());
 
         makeSpell(ItemRegister.CONJURE_LIGHT_SPELL.get());
         makeSpell(ItemRegister.CONJURE_BLOCK_SPELL.get());
@@ -175,6 +182,7 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         makeSpell(ItemRegister.GUST_SPELL.get());
         makeSpell(ItemRegister.CHAIN_PRISON_SPELL.get());
 
+        makeSpell(ItemRegister.BESTOW_CURSE_SILENCE_SPELL.get());
         makeSpell(ItemRegister.BESTOW_CURSE_HUNGER_SPELL.get());
         makeSpell(ItemRegister.BESTOW_CURSE_MINING_FATIGUE_SPELL.get());
         makeSpell(ItemRegister.BESTOW_CURSE_LEVITATE_SPELL.get());
@@ -197,8 +205,11 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         makeSpell(ItemRegister.BESTOW_BLESSING_SPEED_SPELL.get());
         makeSpell(ItemRegister.BESTOW_BLESSING_STRENGTH_SPELL.get());
 
-        makeSpell(ItemRegister.GREEK_LETTER_DELTA_SPELL.get());
-        makeSpell(ItemRegister.GREEK_LETTER_LAMBDA_SPELL.get());
+        makeSpell(ItemRegister.IGNEOUS_GAZE_SPELL.get());
+        makeSpell(ItemRegister.FREEZING_GAZE_SPELL.get());
+
+        makeSpellWithSpellFrame(ItemRegister.GREEK_LETTER_DELTA_SPELL.get());
+        makeSpellWithSpellFrame(ItemRegister.GREEK_LETTER_LAMBDA_SPELL.get());
         makeSpellWithSpellFrame(ItemRegister.GREEK_LETTER_KAPPA_SPELL.get());
     }
 

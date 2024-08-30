@@ -13,7 +13,7 @@ public class SonicBoomSpellEffect extends ProjectileSpellEffect {
     public SonicBoomSpellEffect(int kind) {
         this.setKind(kind);
         this.setStatus(new SpellStatus()
-                .setDamage(0)
+                .setDamage(8)
                 .setManaDrain(60)
                 .setSpeed(1f)
                 .setDamage(8f)

@@ -1,4 +1,4 @@
-// 1.21.1	2024-08-16T15:03:10.1683539	Item Models: wandrous
+// 1.21.1	2024-08-29T16:19:12.0103444	Item Models: wandrous
 70cc88c4158ff94537dbcc51580cc8b905d06269 assets/wandrous/models/item/accelerate_cast.json
 4e5e8e3d5579e5375b8bd695ed36e8cb66c1382c assets/wandrous/models/item/add_mana.json
 3ce45c3b3482a88d09ded62455e12e9db6cddf89 assets/wandrous/models/item/arcane_inscriber.json
@@ -20,6 +20,7 @@ d0afffa080cad2be10c3ba3663106ad82b8f9158 assets/wandrous/models/item/bestow_curs
 78c17bc119ef4369c5932a546011ed64947ec874 assets/wandrous/models/item/bestow_curse_of_big.json
 a1c7ca5f1c23d27f14f9b1945d1a70bfe0ecdf10 assets/wandrous/models/item/bestow_curse_of_small.json
 863a6cd66ab02b62e6f6cd6a2a430d18158cbc06 assets/wandrous/models/item/bestow_curse_poison.json
+da9d97af179dab0a6ade388f1b7c3f9dd3aa9de9 assets/wandrous/models/item/bestow_curse_silence.json
 5d066eb06ec0d029b6b589e404e89e85320a854b assets/wandrous/models/item/bestow_curse_slowness.json
 a958d8bb5c0c1f3ce7171e3cdbfe727435ba0c19 assets/wandrous/models/item/bestow_curse_weakness.json
 89e1e7afa6a8a56d72514fb87c8b8573ce177977 assets/wandrous/models/item/big_delay_cast.json
@@ -51,11 +52,12 @@ ff4197bbe10ef6c7d6ab09ab8f73e3dfd8a64a90 assets/wandrous/models/item/conjure_lig
 bfcb8c9e678beb36d4994cbeb9dc7c23c619a5ae assets/wandrous/models/item/cracked_chert_bricks.json
 6110ab028306b9afbb8ad4d59a1a8439f0eecbad assets/wandrous/models/item/critical_plus.json
 8e6c446995b5e33f5fba04bcfb642112dab20a5a assets/wandrous/models/item/crumbling_charge.json
+a9b2cd3d0c725c51d9e2e2dab48e367f2707489f assets/wandrous/models/item/damage_plus.json
 12b71e955c28a601eb3f939c5dbd0244d48e5350 assets/wandrous/models/item/decrease_lifetime.json
 7edf99384d0cdea247d85deb692e631d9b3915f2 assets/wandrous/models/item/decrease_range.json
 fdc14708b065b007f216132f1d04391da95d89ca assets/wandrous/models/item/decrease_recharge_time.json
 7e37a254f4a8ab00b2f8f6305da73a270e638ea6 assets/wandrous/models/item/decrease_spread.json
-9c561a17524e66495a79b08e8a50af7946068f56 assets/wandrous/models/item/delta.json
+914d2dd0c6075cb4b3d78c6d8bf8c3edc1aeebec assets/wandrous/models/item/delta.json
 8986aac6c0c558e25c5720fd4afe1db3a5959337 assets/wandrous/models/item/divide_by_2.json
 f49c8393aa5db4338f6ac6c4c56ec46cc0c27847 assets/wandrous/models/item/divide_by_3.json
 dfbf8f3b5c70ca4a9bbd322fe23688062e994ab6 assets/wandrous/models/item/divide_by_4.json
@@ -65,23 +67,29 @@ dfbf8f3b5c70ca4a9bbd322fe23688062e994ab6 assets/wandrous/models/item/divide_by_4
 e7c47cd148058c6662ec0c2223e1b7d2fd85093e assets/wandrous/models/item/explosion.json
 af06bdb14f372a6656b8775cfed204de0bf0658a assets/wandrous/models/item/fireball.json
 d719ed513c0bb5035331f72f1b9bed6ca541d665 assets/wandrous/models/item/freezing_charge.json
+40a6685724fe0e8534d9119354a576a08716cfbb assets/wandrous/models/item/freezing_gaze.json
+68a5cc6c08c67e25affb640a4c0a0761bba0918e assets/wandrous/models/item/friends_to_power.json
 672b1629a814c774df53a46707e906e672c50048 assets/wandrous/models/item/giga_drill.json
 53867ae09062624fd9d932366f667dc2381ff5ad assets/wandrous/models/item/glimmering_bolt.json
 59de95efb35d2a148707b81870758ba21fdad00b assets/wandrous/models/item/glyph_projector.json
+40fd239d2078fc6bee505218e0e63183d8a74977 assets/wandrous/models/item/guide.json
 6f086fb65cd94c620a307d5e5654c5e2fe35804d assets/wandrous/models/item/gust.json
 89a06d778ed9e2a12517e6819e1ccdf7f2d73f57 assets/wandrous/models/item/health_to_power.json
+8c3f9852a8d91e2e6d3b63e59ff2e2b3484098ba assets/wandrous/models/item/heavy_shot.json
 5264a25f532c997d8e295dd8cb2a9d3dae05caa4 assets/wandrous/models/item/heavy_spread.json
 334727202197d28859133525b615b08bc6bca5d4 assets/wandrous/models/item/hexagon_cast.json
 1e8f0221a76114ea2e2d655eb2641392d5b57402 assets/wandrous/models/item/home_bringer_teleport.json
 97ead081c873d26de856902f37edaa3c752360ef assets/wandrous/models/item/homing.json
 d40705945b240e1c83a37d08ef5633bfc32e2af2 assets/wandrous/models/item/igneous_charge.json
+455625f1ded45a696255034fed2f0df3d2193724 assets/wandrous/models/item/igneous_gaze.json
 098abc71509107fbc1450056e0fe22308309c28a assets/wandrous/models/item/increase_lifetime.json
 67dbd8e0ddb2931c67fe138d7a746d85dcedffe8 assets/wandrous/models/item/increase_range.json
 9f7ec06daee49bc1ab25f9dc88ff02468aff2f47 assets/wandrous/models/item/increase_spread.json
 da8d738ca4e3f7acbef880bcfdda0db179e22b23 assets/wandrous/models/item/inscribed_lens.json
 06cb2ccf72a19b14a8f83025f8e3846cc420ebe1 assets/wandrous/models/item/kappa.json
-0537416e03ebf824e10e973f4ddc248537edd3af assets/wandrous/models/item/lambda.json
+20e8198def1bbfd3a7df2c9b629b183ffcd5a4f4 assets/wandrous/models/item/lambda.json
 8b646f773a5c25ddfd157024fdd4815045181985 assets/wandrous/models/item/lighting_bolt.json
+a3bf3526cf9e05ab7785e7db3c4294a0beaaa5b5 assets/wandrous/models/item/light_shot.json
 7020848c1d67b255cac94c52c337ef9e19cbf699 assets/wandrous/models/item/line_cast.json
 c78a5222f863881da6bad94ee25797d1d28fe60f assets/wandrous/models/item/long_distance_cast.json
 6f47b9e924f224750f6402a2cbe89d901f1a92da assets/wandrous/models/item/major_explosion.json
@@ -95,6 +103,7 @@ bab0d66d11d62e416a529f7ed170cd505502aef7 assets/wandrous/models/item/mossy_chert
 990e8699bd652343cf54d167c1c0202f3acf18c7 assets/wandrous/models/item/mossy_chert_tiles_slab.json
 2793f0c41fc2a2c26c20e5fcba490eed729c5ef3 assets/wandrous/models/item/mossy_chert_tiles_stairs.json
 b1771d92f4675c6027faf5c62e91bbd3bb15c938 assets/wandrous/models/item/nuke.json
+f24b80febc280448e9c00b5ec39f0f23487cedda assets/wandrous/models/item/piercing.json
 600cb299ece669ef48270aa62b3f4c05a50a51fe assets/wandrous/models/item/poison_charge.json
 1b4fdf6cb7976627b64cf1b719873b27581112c3 assets/wandrous/models/item/polished_chert.json
 dfc507e38d1fd9dece8c33a2a2ec589b3a5db4a0 assets/wandrous/models/item/polished_chert_slab.json

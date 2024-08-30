@@ -22,7 +22,7 @@ public class EntityRegister {
             (entityType, level) -> new TimerEntity(entityType, level, -1), MobCategory.MISC).sized(0.5f,0.5f).build(ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "timer").toString()));
 
     public static final DeferredHolder<EntityType<?>, EntityType<NukeEntity>> NUKE_ENTITY = ENTITIES.register("nuke", () -> EntityType.Builder.<NukeEntity>of(
-            (entityType, level) -> new NukeEntity(entityType, level, -1, new Vec3(0,0,0)), MobCategory.MISC).sized(0.5f,0.5f).build(ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "nuke").toString()));
+            (entityType, level) -> new NukeEntity(level, -1, new Vec3(0,0,0)), MobCategory.MISC).sized(0.5f,0.5f).build(ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "nuke").toString()));
 
     public static final DeferredHolder<EntityType<?>, EntityType<ChainPrisonEntity>> CHAIN_PRISON = ENTITIES.register("chain_prison", () -> EntityType.Builder.<ChainPrisonEntity>of(
             ChainPrisonEntity::new, MobCategory.MISC).sized(0.5f,0.5f).build(ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "chain_prison").toString()));

@@ -18,8 +18,9 @@ public class AddItemDecorator {
                 event.register(toRender.get(), (guiGraphics, font, stack, xOffset, yOffset) -> {
                     guiGraphics.pose().pushPose();
                     guiGraphics.pose().translate(0, 0, 200);
-                    guiGraphics.pose().scale(0.5f,0.5f,0.5f);
-                    guiGraphics.drawString(font, "" + ChargesUtils.currentCharges(stack), xOffset * 2 + 30 - font.width("" + ChargesUtils.currentCharges(stack)), yOffset * 2 + 22, ChargesUtils.currentCharges(stack) == 0 ? 0xff5555 : 0xffffff);
+                    guiGraphics.pose().scale(0.5f, 0.5f, 0.5f);
+                    guiGraphics.drawString(font,
+                            "" + ChargesUtils.currentCharges(stack), xOffset * 2 + 30 - font.width("" + ChargesUtils.currentCharges(stack)), yOffset * 2 + 22, ChargesUtils.currentCharges(stack) == 0 ? 0xff5555 : 0xffffff);
                     guiGraphics.pose().popPose();
                     return false;
                 })
