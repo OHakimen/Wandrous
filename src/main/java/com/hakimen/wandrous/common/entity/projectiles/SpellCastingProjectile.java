@@ -59,11 +59,7 @@ public class SpellCastingProjectile extends ThrowableProjectile {
                     (child) -> child.getData().getEffect().cast(context.clone().setNode(child).setLocation(pResult.getLocation()))
             );
         }
-
-        self.discard();
-        context.getLevel().broadcastEntityEvent(self, (byte) 3);
     }
-
 
     protected static void onHitEntity(Projectile self, EntityHitResult pResult, SpellContext context) {
 
@@ -91,11 +87,6 @@ public class SpellCastingProjectile extends ThrowableProjectile {
         }
 
         pResult.getEntity().hurt(self.damageSources().source(DamageTypes.MAGIC, context.getOriginalCaster()), context.getStatus().getDamage());
-
-        if(!context.isPiercing()){
-            context.getLevel().broadcastEntityEvent(self, (byte) 3);
-            self.discard();
-        }
     }
 
 

@@ -13,7 +13,6 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
-import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 
 public class TimerEntityRenderer extends EntityRenderer<TimerEntity> {
@@ -73,7 +72,6 @@ public class TimerEntityRenderer extends EntityRenderer<TimerEntity> {
         pPoseStack.scale(scale,scale,scale);
         pPoseStack.translate(0,0,offset);
         Matrix4f matrix4f = posestack$pose.pose();
-        Matrix3f matrix3f = posestack$pose.normal();
         VertexConsumer vertexconsumer = pBuffer.getBuffer(RenderType.entityTranslucent(extra));
         vertex(vertexconsumer, matrix4f, pPackedLight, 0.0F, -0.25f, 0, 1, 0,255,200);
         vertex(vertexconsumer, matrix4f, pPackedLight, 1.0F, -0.25f, 1, 1, 0,255,200);
@@ -93,7 +91,6 @@ public class TimerEntityRenderer extends EntityRenderer<TimerEntity> {
         pPoseStack.scale(scale,scale,scale);
         pPoseStack.translate(-0.005f,-0.01f,0.03f);
         Matrix4f matrix4f = posestack$pose.pose();
-        Matrix3f matrix3f = posestack$pose.normal();
         VertexConsumer vertexconsumer = pBuffer.getBuffer(RenderType.entityTranslucent(BIG_ARM));
         vertex(vertexconsumer, matrix4f, pPackedLight, 0.0F, -0.25f, 0, 1, 0,255,200);
         vertex(vertexconsumer, matrix4f, pPackedLight, 1.0F, -0.25f, 1, 1, 0,255,200);

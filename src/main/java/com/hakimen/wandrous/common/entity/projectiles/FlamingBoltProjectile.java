@@ -73,6 +73,8 @@ public class FlamingBoltProjectile extends SpellCastingProjectile {
                     context.getStatus().getDamage()
             ));
             SpellCastingProjectile.onHitBlock(this, pResult, this.context);
+            context.getLevel().broadcastEntityEvent(this, (byte) 3);
+            this.discard();
         }
     }
 
@@ -86,7 +88,13 @@ public class FlamingBoltProjectile extends SpellCastingProjectile {
                     getPosition(0).toVector3f(),
                     context.getStatus().getDamage() / 2f
             ));
-            SpellCastingProjectile.onHitEntity(this, pResult, this.context);
+            if(!context.isPiercing()){
+                context.getLevel().broadcastEntityEvent(this, (byte) 3);
+                SpellCastingProjectile.onHitEntity(this, pResult, this.context);
+                this.discard();
+            }else{
+                SpellCastingProjectile.onHitEntity(this, pResult, this.context);
+            }
         }
     }
 

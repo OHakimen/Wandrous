@@ -5,7 +5,6 @@ import com.hakimen.wandrous.common.registers.EntityRegister;
 import com.hakimen.wandrous.common.spell.SpellContext;
 import com.hakimen.wandrous.common.spell.SpellEffect;
 import com.hakimen.wandrous.common.spell.SpellStatus;
-import net.minecraft.world.entity.player.Player;
 
 public class DelayCastEffect extends SpellEffect {
     int time;
@@ -36,11 +35,7 @@ public class DelayCastEffect extends SpellEffect {
                 }
             }
         };
-        if(context.getCaster() instanceof Player player){
-            timer.setPos(player.getPosition(0));
-        }else{
-            timer.setPos(context.getLocation());
-        }
+        timer.setPos(context.isCastPositionModified() ? context.getLocation() : context.getCaster().getPosition(0));
         context.getLevel().addFreshEntity(timer);
     }
 }

@@ -70,18 +70,26 @@ public class BombProjectile extends SpellCastingProjectile {
 
     @Override
     protected void onHitBlock(BlockHitResult pResult) {
-
         if (this.context != null) {
             SpellCastingProjectile.onHitBlock(this, pResult, this.context);
             consume();
+            this.discard();
         }
     }
 
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
         if (this.context != null) {
-            SpellCastingProjectile.onHitEntity(this, pResult, this.context);
-            consume();
+            if(!context.isPiercing()){
+                context.getLevel().broadcastEntityEvent(this, (byte) 3);
+                SpellCastingProjectile.onHitEntity(this, pResult, this.context);
+                consume();
+                this.discard();
+            }else{
+                SpellCastingProjectile.onHitEntity(this, pResult, this.context);
+                consume();
+            }
+
         }
     }
 

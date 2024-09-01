@@ -124,12 +124,11 @@ public class WandItem extends Item implements DynamicModelled {
     public void onUseTick(Level pLevel, LivingEntity pLivingEntity, ItemStack wand, int pRemainingUseDuration) {
         if (pLivingEntity instanceof Player pPlayer && !pLevel.isClientSide) {
             if (wand.getItem() instanceof WandItem) {
-                if (!pPlayer.hasContainerOpen() && !pPlayer.getCooldowns().isOnCooldown(wand.getItem())) {
+                if (!pPlayer.hasContainerOpen() && wand.get(DataComponentsRegister.WAND_COMPONENT.get()).getWandCooldown() <= 0) {
                     if(pPlayer.hasEffect(EffectRegister.SILENCE)) {
                         pPlayer.displayClientMessage(Component.translatable("item.wandrous.wand.silenced"), true);
                         return;
                     }
-
                     CastingUtils castingUtils = new CastingUtils();
 
                     Optional<ItemStackHandler> handler = Optional.ofNullable((ItemStackHandler)wand.getCapability(Capabilities.ItemHandler.ITEM));
@@ -145,11 +144,12 @@ public class WandItem extends Item implements DynamicModelled {
                     });
 
 
-                    if (effect.size() - 1 != wand.get(DataComponentsRegister.WAND_COMPONENT.get()).getCastableSize()) {
+                    if (effect.size() != wand.get(DataComponentsRegister.WAND_COMPONENT.get()).getCastableSize()) {
                         wand.update(DataComponentsRegister.WAND_COMPONENT.get(), DEFAULT_STAT, wandStat -> new WandDataComponent.WandStatBuilder(wandStat).setCurrentIdx(0).setCastableSize(effect.size()).build());
                     }
 
-                    int getOldIdx =  wand.get(DataComponentsRegister.WAND_COMPONENT.get()).getCurrentIdx();
+                    int getOldIdx = wand.get(DataComponentsRegister.WAND_COMPONENT.get()).getCurrentIdx();
+
 
                     if(effect.isEmpty()){
                         pPlayer.displayClientMessage(Component.translatable("item.wandrous.wand.empty_wand"), true);
@@ -165,7 +165,6 @@ public class WandItem extends Item implements DynamicModelled {
 
 
                     if (cast.getData() != null && cast.getData().getEffect() != null) {
-
                         int current = (getOldIdx + castingUtils.idx) % effect.size();
                         wand.update(DataComponentsRegister.WAND_COMPONENT.get(), DEFAULT_STAT, wandStat -> new WandDataComponent.WandStatBuilder(wandStat).setCurrentIdx(current).build());
 
@@ -181,8 +180,13 @@ public class WandItem extends Item implements DynamicModelled {
                                         setInventory(iItemHandler.serializeNBT(pLevel.registryAccess())).build());
                             });
                             CastingUtils.castSpells(pPlayer, wand, pLevel, pPlayer.getEyePosition(), cast);
-                            wand.update(DataComponentsRegister.WAND_COMPONENT.get(), DEFAULT_STAT, wandStat -> new WandDataComponent.WandStatBuilder(wandStat).setMana(currentMana - Math.max(cost, 0)).build());
-                            pPlayer.getCooldowns().addCooldown(wand.getItem(), (int) ((current == 0 ? rechargeSpeed + rechargeSpeedMod : castDelay + delayMod) * 20));
+                            wand.update(DataComponentsRegister.WAND_COMPONENT.get(), DEFAULT_STAT, wandStat ->
+                                    new WandDataComponent.WandStatBuilder(wandStat)
+                                            .setMana(currentMana - Math.max(cost, 0))
+                                            .setWandCooldown((int) ((current == 0 ? rechargeSpeed + rechargeSpeedMod : castDelay + delayMod) * 20))
+                                            .setMaxCooldown((int) ((current == 0 ? rechargeSpeed + rechargeSpeedMod : castDelay + delayMod) * 20))
+                                            .setFromCastDelay(current != 0)
+                                            .build());
                         } else {
                             pPlayer.displayClientMessage(Component.translatable("item.wandrous.wand.no_mana"), true);
                         }
@@ -199,16 +203,22 @@ public class WandItem extends Item implements DynamicModelled {
             WandUtils.makeWand(pStack);
         }
 
+        if(pStack.get(DataComponentsRegister.WAND_COMPONENT.get()).getWandCooldown() >= 0 ){
+            pStack.update(DataComponentsRegister.WAND_COMPONENT.get(), DEFAULT_STAT, wandStat -> new WandDataComponent.WandStatBuilder(wandStat)
+                    .setWandCooldown(Math.max(0, wandStat.getWandCooldown() - 1)).build());
+        }
 
         WandDataComponent.WandStat stat = pStack.get(DataComponentsRegister.WAND_COMPONENT.get());
+
         int mana = stat.getMana();
         int maxMana = stat.getMaxMana();
         int manaRegen = stat.getManaChargeSpeed();
 
         if (mana <= maxMana) {
             int manaCost = (int) Math.clamp(0, maxMana, (mana + manaRegen / 20f));
-            pStack.update(DataComponentsRegister.WAND_COMPONENT.get(), stat, wandStat -> new WandDataComponent.WandStatBuilder(wandStat).setMana(manaCost).build());
+            pStack.update(DataComponentsRegister.WAND_COMPONENT.get(), DEFAULT_STAT, wandStat -> new WandDataComponent.WandStatBuilder(wandStat).setMana(manaCost).build());
         }
+
     }
 
     @Override

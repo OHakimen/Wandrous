@@ -2,15 +2,10 @@ package com.hakimen.wandrous.common.item.component;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.core.Holder;
-import net.minecraft.core.component.DataComponentPatch;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.ExtraCodecs;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 
 import java.util.Objects;
 
@@ -18,7 +13,7 @@ import java.util.Objects;
 public class WandDataComponent {
 
     public static WandStat DEFAULT_STAT = new WandDataComponent.WandStat(
-            0,0,0,0f,0f,0,0,0,0,0, new CompoundTag(), ""
+            0,0,0,0f,0f,0,0,0,0,0, new CompoundTag(), "", 0,0, false
     );
 
     public static class WandStatBuilder {
@@ -26,12 +21,15 @@ public class WandDataComponent {
         int maxMana;
         int mana;
         float castDelay;
+        int wandCooldown;
+        int maxCooldown;
         float rechargeSpeed;
         int manaChargeSpeed;
         int castableSize;
         int currentIdx;
         int gem;
         int wand;
+        boolean fromCastDelay;
         CompoundTag inventory;
         String wandName;
 
@@ -49,8 +47,11 @@ public class WandDataComponent {
             this.currentIdx = stat.currentIdx;
             this.gem = stat.gem;
             this.wand = stat.wand;
+            this.wandCooldown = stat.wandCooldown;
             this.inventory = stat.inventory;
             this.wandName = stat.name;
+            this.fromCastDelay = stat.fromCastDelay;
+            this.maxCooldown = stat.maxCooldown;
         }
 
         public WandStatBuilder setCapacity(int capacity) {
@@ -161,6 +162,34 @@ public class WandDataComponent {
             return wandName;
         }
 
+        public int getWandCooldown() {
+            return wandCooldown;
+        }
+
+        public WandStatBuilder setWandCooldown(int wandCooldown) {
+            this.wandCooldown = wandCooldown;
+            return this;
+        }
+
+        public boolean isFromCastDelay() {
+            return fromCastDelay;
+        }
+
+        public WandStatBuilder setFromCastDelay(boolean fromCastDelay) {
+            this.fromCastDelay = fromCastDelay;
+            return this;
+        }
+
+
+        public int getMaxCooldown() {
+            return maxCooldown;
+        }
+
+        public WandStatBuilder setMaxCooldown(int maxCooldown) {
+            this.maxCooldown = maxCooldown;
+            return this;
+        }
+
         public WandStat build() {
             return new WandStat(
                     this.capacity,
@@ -174,7 +203,10 @@ public class WandDataComponent {
                     this.gem,
                     this.wand,
                     this.inventory,
-                    this.wandName
+                    this.wandName,
+                    this.wandCooldown,
+                    this.maxCooldown,
+                    this.fromCastDelay
             );
         }
     }
@@ -190,8 +222,11 @@ public class WandDataComponent {
         final int currentIdx;
         final int gem;
         final int wand;
+        final int wandCooldown;
         final CompoundTag inventory;
         final String name;
+        final boolean fromCastDelay;
+        final int maxCooldown;
 
 
         @Override
@@ -199,15 +234,15 @@ public class WandDataComponent {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
             WandStat stat = (WandStat) o;
-            return capacity == stat.capacity && maxMana == stat.maxMana && mana == stat.mana && Float.compare(castDelay, stat.castDelay) == 0 && Float.compare(rechargeSpeed, stat.rechargeSpeed) == 0 && manaChargeSpeed == stat.manaChargeSpeed && castableSize == stat.castableSize && currentIdx == stat.currentIdx && gem == stat.gem && wand == stat.wand && Objects.equals(inventory, stat.inventory) && Objects.equals(name, stat.name);
+            return capacity == stat.capacity && maxMana == stat.maxMana && mana == stat.mana && Float.compare(castDelay, stat.castDelay) == 0 && Float.compare(rechargeSpeed, stat.rechargeSpeed) == 0 && manaChargeSpeed == stat.manaChargeSpeed && castableSize == stat.castableSize && currentIdx == stat.currentIdx && gem == stat.gem && wand == stat.wand && wandCooldown == stat.wandCooldown && fromCastDelay == stat.fromCastDelay && Objects.equals(inventory, stat.inventory) && Objects.equals(name, stat.name);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(capacity, maxMana, mana, castDelay, rechargeSpeed, manaChargeSpeed, castableSize, currentIdx, gem, wand, inventory, name);
+            return Objects.hash(capacity, maxMana, mana, castDelay, rechargeSpeed, manaChargeSpeed, castableSize, currentIdx, gem, wand, wandCooldown, inventory, name, fromCastDelay);
         }
 
-        public WandStat(Integer capacity, Integer maxMana, Integer mana, Float castDelay, Float rechargeSpeed, Integer manaChargeSpeed, Integer castableSize, Integer currentIdx, Integer gem, Integer wand, CompoundTag inventory, String name) {
+        public WandStat(Integer capacity, Integer maxMana, Integer mana, Float castDelay, Float rechargeSpeed, Integer manaChargeSpeed, Integer castableSize, Integer currentIdx, Integer gem, Integer wand, CompoundTag inventory, String name, int wandCooldown, int maxCooldown, boolean fromCastDelay) {
             this.capacity = capacity;
             this.maxMana = maxMana;
             this.mana = mana;
@@ -220,6 +255,9 @@ public class WandDataComponent {
             this.wand = wand;
             this.inventory = inventory;
             this.name = name;
+            this.wandCooldown = wandCooldown;
+            this.maxCooldown = maxCooldown;
+            this.fromCastDelay = fromCastDelay;
         }
 
         public int getCapacity() {
@@ -272,22 +310,19 @@ public class WandDataComponent {
         public String getName() {
             return name;
         }
+
+        public int getWandCooldown() {
+            return wandCooldown;
+        }
+
+        public int getMaxCooldown() {
+            return maxCooldown;
+        }
+
+        public boolean isFromCastDelay() {
+            return fromCastDelay;
+        }
     }
-
-    public static final Codec<Holder<Item>> ITEM_CODEC = Codec.lazyInitialized(BuiltInRegistries.ITEM::holderByNameCodec);
-
-    public static final Codec<ItemStack> ITEMSTACK_CODEC = Codec.lazyInitialized(
-            () -> RecordCodecBuilder.create(
-                    p_347288_ -> p_347288_.group(
-                                    ITEM_CODEC.fieldOf("id").forGetter(ItemStack::getItemHolder),
-                                    ExtraCodecs.intRange(0, 99).fieldOf("count").orElse(1).forGetter(ItemStack::getCount),
-                                    DataComponentPatch.CODEC
-                                            .optionalFieldOf("components", DataComponentPatch.EMPTY)
-                                            .forGetter(ItemStack::getComponentsPatch)
-                            )
-                            .apply(p_347288_, ItemStack::new)
-            )
-    );
 
     public static Codec<WandStat> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
@@ -302,7 +337,10 @@ public class WandDataComponent {
                     Codec.INT.fieldOf("Gem").forGetter(wandStat -> wandStat.gem),
                     Codec.INT.fieldOf("Wand").forGetter(wandStat -> wandStat.wand),
                     CompoundTag.CODEC.fieldOf("Inventory").forGetter(wandStat -> wandStat.inventory),
-                    ExtraCodecs.NON_EMPTY_STRING.fieldOf("WandName").forGetter(wandStat -> wandStat.name)
+                    ExtraCodecs.NON_EMPTY_STRING.fieldOf("WandName").forGetter(wandStat -> wandStat.name),
+                    Codec.INT.fieldOf("Cooldown").forGetter(wandStat -> wandStat.wandCooldown),
+                    Codec.INT.fieldOf("MaxCooldown").forGetter(wandStat -> wandStat.maxCooldown),
+                    Codec.BOOL.fieldOf("FromCastDelay").forGetter(wandStat -> wandStat.fromCastDelay)
             ).apply(instance, WandStat::new));
 
     public static StreamCodec<RegistryFriendlyByteBuf, WandStat> STREAM_CODEC = new StreamCodec<RegistryFriendlyByteBuf, WandStat>() {
@@ -319,11 +357,11 @@ public class WandDataComponent {
             int currentIdx = pBuffer.readInt();
             int gem = pBuffer.readInt();
             int wand = pBuffer.readInt();
-
             CompoundTag inventory = pBuffer.readNbt();
-
-
             String name = pBuffer.readUtf();
+            int wandCooldown = pBuffer.readInt();
+            int maxCooldown = pBuffer.readInt();
+            boolean fromCastDelay = pBuffer.readBoolean();
 
             WandStat stat = new WandStat(
                     capacity,
@@ -337,7 +375,11 @@ public class WandDataComponent {
                     gem,
                     wand,
                     inventory,
-                    name);
+                    name,
+                    wandCooldown,
+                    maxCooldown,
+                    fromCastDelay
+            );
             return stat;
         }
 
@@ -356,6 +398,9 @@ public class WandDataComponent {
             pBuffer.writeInt(pValue.getWand());
             pBuffer.writeNbt(pValue.getInventory());
             pBuffer.writeUtf(pValue.getName());
+            pBuffer.writeInt(pValue.getWandCooldown());
+            pBuffer.writeInt(pValue.getMaxCooldown());
+            pBuffer.writeBoolean(pValue.isFromCastDelay());
         }
     };
 }

@@ -119,6 +119,8 @@ public class ItemRegister {
     public static final DeferredHolder<Item, SpellEffectItem> CONJURE_BLOCK_SPELL = ITEMS.register("conjure_block", () -> new SpellEffectItem(SpellRegister.CONJURE_BLOCK));
     public static final DeferredHolder<Item, SpellEffectItem> CONJURE_WEBS_SPELL = ITEMS.register("conjure_webs", () -> new SpellEffectItem(SpellRegister.CONJURE_WEBS, 10));
 
+    public static final DeferredHolder<Item, SpellEffectItem> GLYPH_OF_TRIGGERING = ITEMS.register("glyph_of_triggering", () -> new SpellEffectItem(SpellRegister.GLYPH_OF_TRIGGERING));
+
     public static final DeferredHolder<Item, SpellEffectItem> SUMMON_BEE_SWARM_SPELL = ITEMS.register("summon_bee_swarm", () -> new SpellEffectItem(SpellRegister.SUMMON_BEE_SWARM, 10));
 
     public static final DeferredHolder<Item, SpellEffectItem> BESTOW_CURSE_SILENCE_SPELL = ITEMS.register("bestow_curse_silence", () -> new SpellEffectItem(SpellRegister.BESTOW_CURSE_SILENCE, 20));

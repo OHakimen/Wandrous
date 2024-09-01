@@ -5,6 +5,7 @@ import com.hakimen.wandrous.common.entity.projectiles.*;
 import com.hakimen.wandrous.common.entity.static_spell.ChainPrisonEntity;
 import com.hakimen.wandrous.common.entity.static_spell.NukeEntity;
 import com.hakimen.wandrous.common.entity.static_spell.TimerEntity;
+import com.hakimen.wandrous.common.entity.static_spell.TriggeringGlyphEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
@@ -27,6 +28,8 @@ public class EntityRegister {
     public static final DeferredHolder<EntityType<?>, EntityType<ChainPrisonEntity>> CHAIN_PRISON = ENTITIES.register("chain_prison", () -> EntityType.Builder.<ChainPrisonEntity>of(
             ChainPrisonEntity::new, MobCategory.MISC).sized(0.5f,0.5f).build(ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "chain_prison").toString()));
 
+    public static final DeferredHolder<EntityType<?>, EntityType<TriggeringGlyphEntity>> TRIGGER_GLYPH = ENTITIES.register("trigger_glyph", () -> EntityType.Builder.<TriggeringGlyphEntity>of(
+            TriggeringGlyphEntity::new, MobCategory.MISC).sized(0.5f,0.5f).build(ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "trigger_glyph").toString()));
 
 
     public static final DeferredHolder<EntityType<?>, EntityType<GlimmeringBoltProjectile>> GLIMMERING_BOLT_PROJECTILE = ENTITIES.register("glimmering_bolt", () -> EntityType.Builder.<GlimmeringBoltProjectile>of(

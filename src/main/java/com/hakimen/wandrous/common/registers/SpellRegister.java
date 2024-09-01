@@ -13,6 +13,7 @@ import com.hakimen.wandrous.common.spell.effects.modifiers.location.TeleportCast
 import com.hakimen.wandrous.common.spell.effects.modifiers.powerups.FriendshipToPowerSpellEffect;
 import com.hakimen.wandrous.common.spell.effects.modifiers.powerups.HealthToPowerSpellEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.BestowSpellEffect;
+import com.hakimen.wandrous.common.spell.effects.spells.GlyphOfTriggeringSpellEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.GreekLetterSpellEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.projectiles.*;
 import com.hakimen.wandrous.common.spell.effects.spells.raycast.IgneousGazeSpellEffect;
@@ -219,6 +220,8 @@ public class SpellRegister {
     public static final DeferredHolder<SpellEffect, SpellEffect> CONJURE_LIGHT = SPELL_EFFECTS.register("conjure_light", () -> new SummonConjuredBlockSpellEffect(BlockRegister.CONJURED_LIGHT_BLOCK.get().defaultBlockState(), 20));
     public static final DeferredHolder<SpellEffect, SpellEffect> CONJURE_BLOCK = SPELL_EFFECTS.register("conjure_block", () -> new SummonConjuredBlockSpellEffect(BlockRegister.CONJURED_BLOCK.get().defaultBlockState(), 20));
     public static final DeferredHolder<SpellEffect, SpellEffect> CONJURE_WEBS = SPELL_EFFECTS.register("conjure_webs", SummonWebbingSpellEffect::new);
+
+    public static final DeferredHolder<SpellEffect, SpellEffect> GLYPH_OF_TRIGGERING = SPELL_EFFECTS.register("glyph_of_triggering", GlyphOfTriggeringSpellEffect::new);
 
     public static final DeferredHolder<SpellEffect, SpellEffect> SUMMON_BEE_SWARM = SPELL_EFFECTS.register("summon_bee_swarm", SummonBeeSwarmEffect::new);
 

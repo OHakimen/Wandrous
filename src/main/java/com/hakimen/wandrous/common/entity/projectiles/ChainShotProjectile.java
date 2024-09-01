@@ -82,7 +82,9 @@ public class ChainShotProjectile extends SpellCastingProjectile {
     @Override
     protected void onHitBlock(BlockHitResult pResult) {
         if (context != null) {
-            //SpellCastingProjectile.onHitBlock(this, pResult, context);
+            this.level().broadcastEntityEvent(this, (byte) 3);
+            SpellCastingProjectile.onHitBlock(this, pResult, context);
+            discard();
         }
     }
 

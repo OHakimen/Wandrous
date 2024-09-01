@@ -17,6 +17,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import static com.hakimen.wandrous.config.ServerConfig.STRENGTH_DAMAGE_MODIFIER;
 
@@ -79,6 +80,15 @@ public class CastingUtils {
         return tree;
     }
 
+    public static List<SpellStack> getSpellsFromTree(Node<SpellStack> tree) {
+        List<SpellStack> spells = new ArrayList<>();
+        spells.add(tree.getData());
+        for (Node<SpellStack> spell: tree.getChildren()) {
+            spells.addAll(getSpellsFromTree(spell));
+        }
+        return spells;
+    }
+
     public static int calculateManaCost(Node<SpellStack> castTree) {
         int cost = castTree.getData().getEffect().getStatus().getManaDrain();
 
@@ -108,7 +118,7 @@ public class CastingUtils {
         return rechargeTimeMod;
     }
 
-    public static void castSpells(Entity entity, ItemStack wand, Level pLevel, Vec3 location, Node<SpellStack> toCast) {
+    public static void castSpells(Entity entity, ItemStack wand, Level pLevel, Vec3 location, Node<SpellStack> toCast, Consumer<SpellContext> contextConsumer) {
         SpellContext context = new SpellContext()
                 .setCaster(entity)
                 .setWand(wand)
@@ -122,6 +132,8 @@ public class CastingUtils {
                 .setCastPositionModified(false)
                 .setHit(new ArrayList<>());
 
+        contextConsumer.accept(context);
+
         if (entity instanceof LivingEntity livingEntity) {
             if (livingEntity.hasEffect(MobEffects.DAMAGE_BOOST)) {
                 context.getStatus().setDamageMod((float) ((livingEntity.getEffect(MobEffects.DAMAGE_BOOST).getAmplifier() + 1) * STRENGTH_DAMAGE_MODIFIER.get()));
@@ -129,6 +141,10 @@ public class CastingUtils {
         }
 
         toCast.getData().getEffect().cast(context);
+    }
+
+    public static void castSpells(Entity entity, ItemStack wand, Level pLevel, Vec3 location, Node<SpellStack> toCast) {
+        castSpells(entity, wand, pLevel, location, toCast, context -> {});
     }
 
     public static SpellStatus mergeStatus(SpellStatus first, SpellStatus second) {
