@@ -190,7 +190,9 @@ public class ArcaneInscriberBlockEntity extends BlockEntity implements BlockEnti
     @Override
     public void setChanged() {
         super.setChanged();
-        level.setBlockAndUpdate(this.getBlockPos(), this.getBlockState());
+        if(level != null){
+            level.setBlockAndUpdate(this.getBlockPos(), this.getBlockState());
+        }
     }
 
     public List<BlockPos> getOffsets() {

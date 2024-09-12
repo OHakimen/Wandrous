@@ -1,6 +1,7 @@
 package com.hakimen.wandrous.common.spell;
 
 import com.hakimen.wandrous.common.item.SpellEffectItem;
+import com.hakimen.wandrous.common.registers.SpellRegister;
 import com.hakimen.wandrous.common.utils.ChargesUtils;
 import net.minecraft.world.item.ItemStack;
 
@@ -70,7 +71,11 @@ public class SpellStack {
 
     public static SpellStack fromItemStack(ItemStack stack){
         SpellStack spellStack = new SpellStack();
-        if(stack.getItem() instanceof SpellEffectItem sei){
+        if(stack == null || stack.isEmpty()){
+            spellStack.setEffect(SpellRegister.DUMMY.get());
+            spellStack.setCharges(0);
+            return spellStack;
+        } else if(stack.getItem() instanceof SpellEffectItem sei){
             spellStack.setEffect(sei.getSpellEffect());
         }
         if(ChargesUtils.hasCharge(stack)){

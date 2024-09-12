@@ -134,6 +134,10 @@ public class LangProvider extends LanguageProvider {
         addSpell(ItemRegister.CRUMBLING_CHARGE_SPELL.get(), "Crumbling Charge", "Caught in a landslide...");
 
         addSpell(ItemRegister.CRITICAL_PLUS_SPELL.get(), "Critical Plus", "Increases the chance to do critical damage");
+        addSpell(ItemRegister.DAMAGE_PLUS_SPELL.get(), "Damage Plus", "Increases the damage of the spells");
+
+        addSpell(ItemRegister.LIGHT_SHOT_SPELL.get(), "Light Shot", "Increases the speed of the projectile at the cost of the damage");
+        addSpell(ItemRegister.HEAVY_SHOT_SPELL.get(), "Heavy Shot", "Increases the damage of the projectile at the cost of the speed");
 
         addSpell(ItemRegister.ADD_MANA_SPELL.get(), "Add Mana", "Gives a mana boost to the next cast");
         addSpell(ItemRegister.ACCELERATE_SPELL.get(), "Accelerate", "Projectile spells gain a speed boost");
@@ -149,6 +153,7 @@ public class LangProvider extends LanguageProvider {
 
         addSpell(ItemRegister.HOMING_SPELL.get(), "Homing", "Makes a projectile move towards enemies");
         addSpell(ItemRegister.BOOMERANG_SPELL.get(), "Boomerang", "Makes a projectile return towards the caster");
+        addSpell(ItemRegister.GUIDE_SPELL.get(), "Guide", "Makes a projectile follow the caster look direction");
 
         addSpell(ItemRegister.SMALL_DELAY_CAST_SPELL.get(), "Small Delay Cast", "Casts another spell after a little time");
         addSpell(ItemRegister.MEDIUM_DELAY_CAST_SPELL.get(), "Medium Delay Cast", "Casts another spell after some time");
@@ -161,9 +166,10 @@ public class LangProvider extends LanguageProvider {
         addSpell(ItemRegister.TRIPLE_SPLIT_SPELL.get(), "Triple Split Cast", "Casts 3 spells at the same time with different directions");
         addSpell(ItemRegister.QUAD_SPLIT_SPELL.get(), "Quad Split Cast", "Casts 4 spells at the same time with different directions");
 
-
         addSpell(ItemRegister.HEXAGON_CAST_SPELL.get(), "Hexagon Cast", "Casts 6 spells in a hexagon");
         addSpell(ItemRegister.SPREAD_CAST_SPELL.get(), "Spread Cast", "Casts a spell in a random location within range");
+
+        addSpell(ItemRegister.PIERCING_SPELL.get(), "Piercing", "Makes a projectile go through other entities");
 
         addSpell(ItemRegister.TELEPORT_SPELL.get(), "Teleport", "Teleports the caster");
         addSpell(ItemRegister.SWAP_TELEPORT_SPELL.get(), "Swap", "Swaps the caster's position with another entity");
@@ -171,6 +177,7 @@ public class LangProvider extends LanguageProvider {
 
         addSpell(ItemRegister.LONG_DISTANCE_CAST_SPELL.get(), "Long Distance Cast", "Casts a spell from further away from the caster");
         addSpell(ItemRegister.TELEPORT_CAST_SPELL.get(), "Teleport Cast", "Casts a spell from another entity position");
+        addSpell(ItemRegister.LINE_CAST_SPELL.get(), "Line Cast", "Casts 5 spells in a line");
 
         addSpell(ItemRegister.DIVIDE_BY_2_SPELL.get() , "Divide by 2", "Casts 2 copies of a spell but its damage is reduced to a half");
         addSpell(ItemRegister.DIVIDE_BY_3_SPELL.get() , "Divide by 3", "Casts 3 copies of a spell but its damage is reduced to a third");
@@ -180,6 +187,9 @@ public class LangProvider extends LanguageProvider {
         addSpell(ItemRegister.CONJURE_BLOCK_SPELL.get(), "Conjure Block", "Summons a temporary block");
         addSpell(ItemRegister.CONJURE_LIGHT_SPELL.get(), "Conjure Light", "Summons a temporary light source");
         addSpell(ItemRegister.CONJURE_WEBS_SPELL.get(), "Conjure Webs", "Summons a web cocoon");
+
+        addSpell(ItemRegister.GLYPH_OF_TRIGGERING.get(), "Glyph of Triggering", "Triggers a spell once an entity steps on it, barely visible to other players");
+        addSpell(ItemRegister.SUMMON_BEE_SWARM_SPELL.get(), "Summon Bee Swarm", "Summons 4 bees that pursue the last hit target");
 
         addSpell(ItemRegister.GUST_SPELL.get(), "Gust", "Conjures a burst of air that send entities flying");
         addSpell(ItemRegister.CHAIN_PRISON_SPELL.get(), "Chain Prison", "Locks an entity into place");
@@ -194,6 +204,7 @@ public class LangProvider extends LanguageProvider {
         addSpell(ItemRegister.BESTOW_BLESSING_SATURATION_SPELL.get(), "Bestow Blessing: Saturation", "Blesses the target with saturation");
         addSpell(ItemRegister.BESTOW_BLESSING_STRENGTH_SPELL.get(), "Bestow Blessing: Strength", "Blesses the target with strength");
 
+        addSpell(ItemRegister.BESTOW_CURSE_SILENCE_SPELL.get(), "Bestow Curse: Silence", "Curses the target with silence, making it unable to cast magic");
         addSpell(ItemRegister.BESTOW_CURSE_DARKNESS_SPELL.get(), "Bestow Curse: Darkness", "Curses the target with limited vision");
         addSpell(ItemRegister.BESTOW_CURSE_GLOW_SPELL.get(), "Bestow Curse: Glow", "Curses the target making it have a shiny aura");
         addSpell(ItemRegister.BESTOW_CURSE_HUNGER_SPELL.get(), "Bestow Curse: Hunger", "Curses the target with hunger");
@@ -211,6 +222,7 @@ public class LangProvider extends LanguageProvider {
         addSpell(ItemRegister.GREEK_LETTER_KAPPA_SPELL.get(), "Kappa", "Copies all the modifiers in the wand");
 
         addSpell(ItemRegister.HEALTH_TO_POWER_SPELL.get(), "Health to Power", "Consumes the caster's life force to make spells stronger");
+        addSpell(ItemRegister.FRIENDS_TO_POWER_SPELL.get(), "Friends to Power", "Makes spells stronger the more friends you have");
         addSpell(ItemRegister.HEAVY_SPREAD_SPELL.get(), "Heavy Spread", "Increases the spread on spells, but reduces de cast and recharge times");
         addSpell(ItemRegister.DECREASE_RECHARGE_TIME_SPELL.get(), "Decrease Recharge Time", "Reduces the cast and recharge times");
 

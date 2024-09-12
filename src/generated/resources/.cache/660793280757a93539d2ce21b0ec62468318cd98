@@ -1,4 +1,4 @@
-// 1.21.1	2024-08-29T16:19:12.0103444	Item Models: wandrous
+// 1.21.1	2024-09-01T13:08:34.888415	Item Models: wandrous
 70cc88c4158ff94537dbcc51580cc8b905d06269 assets/wandrous/models/item/accelerate_cast.json
 4e5e8e3d5579e5375b8bd695ed36e8cb66c1382c assets/wandrous/models/item/add_mana.json
 3ce45c3b3482a88d09ded62455e12e9db6cddf89 assets/wandrous/models/item/arcane_inscriber.json
@@ -71,6 +71,7 @@ d719ed513c0bb5035331f72f1b9bed6ca541d665 assets/wandrous/models/item/freezing_ch
 68a5cc6c08c67e25affb640a4c0a0761bba0918e assets/wandrous/models/item/friends_to_power.json
 672b1629a814c774df53a46707e906e672c50048 assets/wandrous/models/item/giga_drill.json
 53867ae09062624fd9d932366f667dc2381ff5ad assets/wandrous/models/item/glimmering_bolt.json
+61aa45cacd10ebdc376a65f8d5fceb13583b5c64 assets/wandrous/models/item/glyph_of_triggering.json
 59de95efb35d2a148707b81870758ba21fdad00b assets/wandrous/models/item/glyph_projector.json
 40fd239d2078fc6bee505218e0e63183d8a74977 assets/wandrous/models/item/guide.json
 6f086fb65cd94c620a307d5e5654c5e2fe35804d assets/wandrous/models/item/gust.json
@@ -114,6 +115,7 @@ ed7f1cbe6aef6835f3389b0dc7cdf2d2a1f853b4 assets/wandrous/models/item/small_delay
 ac09506c1af972591dd6192a8eb316ec2cb473aa assets/wandrous/models/item/small_tealestite_bud.json
 053843c1dd314e2f0bd1f8551596fe6302226400 assets/wandrous/models/item/sonic_boom.json
 0a2c9213f860c05a6a17cfb4354a813394a920e3 assets/wandrous/models/item/spread_cast.json
+a45edc343c5dd5ef95e9ff04d9d4eca40200c6ee assets/wandrous/models/item/summon_bee_swarm.json
 44c1d2b02244f72d8bf5355087c9944aa237cc3a assets/wandrous/models/item/swap_teleport.json
 0c63c1ffa8d6174abda6fb79a69b4a4d5a8dbd59 assets/wandrous/models/item/tealestite_block.json
 787f1ffaff18a1badcc6280e9a7d9c5c96256757 assets/wandrous/models/item/tealestite_cluster.json

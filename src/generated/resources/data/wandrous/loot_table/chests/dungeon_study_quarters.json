@@ -2,73 +2,60 @@
   "type": "minecraft:chest",
   "pools": [
     {
-      "bonus_rolls": 0.0,
+      "bonus_rolls": {
+        "type": "minecraft:uniform",
+        "max": 6.0,
+        "min": 4.0
+      },
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "wandrous:explosion"
+          "name": "minecraft:book",
+          "weight": 4
         },
         {
           "type": "minecraft:item",
-          "name": "wandrous:major_explosion"
+          "name": "minecraft:copper_ingot",
+          "weight": 4
         },
         {
           "type": "minecraft:item",
-          "name": "wandrous:crumbling_charge"
+          "name": "minecraft:glass_bottle",
+          "weight": 2
         },
         {
           "type": "minecraft:item",
-          "name": "wandrous:fireball"
+          "name": "minecraft:paper",
+          "weight": 2
         },
         {
           "type": "minecraft:item",
-          "name": "wandrous:trigger_fireball"
+          "name": "minecraft:cobweb",
+          "weight": 2
         },
         {
           "type": "minecraft:item",
-          "name": "wandrous:timer_fireball"
+          "name": "minecraft:feather",
+          "weight": 2
         },
         {
           "type": "minecraft:item",
-          "name": "wandrous:black_hole"
+          "name": "minecraft:candle",
+          "weight": 2
         },
         {
           "type": "minecraft:item",
-          "name": "wandrous:timer_black_hole"
+          "name": "wandrous:tealestite_shard"
         },
         {
           "type": "minecraft:item",
-          "name": "wandrous:hexagon_cast"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "wandrous:line_cast"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "wandrous:conjure_webs"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "wandrous:add_mana"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "wandrous:small_delay_cast"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "wandrous:medium_delay_cast"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "wandrous:big_delay_cast"
+          "name": "minecraft:amethyst_shard"
         }
       ],
       "rolls": {
         "type": "minecraft:uniform",
-        "max": 16.0,
-        "min": 6.0
+        "max": 24.0,
+        "min": 16.0
       }
     }
   ],

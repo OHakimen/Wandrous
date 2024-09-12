@@ -6,6 +6,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
@@ -18,62 +19,62 @@ public class ChestLootProvider implements LootTableSubProvider {
 
     ResourceKey<LootTable> DUNGEON = ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "chests/dungeon_cell"));
     ResourceKey<LootTable> STUDY_QUARTERS = ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "chests/dungeon_study_quarters"));
+    ResourceKey<LootTable> BOOKCASE = ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "chests/bookcase"));
 
     @Override
     public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> registry) {
-        registry.accept(DUNGEON, LootTable
-                .lootTable()
-                .withPool(
-                        LootPool.lootPool()
-                                .setRolls(new UniformGenerator(ConstantValue.exactly(6), ConstantValue.exactly(16)))
-                                .add(LootItem.lootTableItem(ItemRegister.GLIMMERING_BOLT_SPELL.get()).setWeight(8))
-                                .add(LootItem.lootTableItem(ItemRegister.TIMER_GLIMMERING_BOLT_SPELL.get()).setWeight(2))
-                                .add(LootItem.lootTableItem(ItemRegister.TRIGGER_GLIMMERING_BOLT_SPELL.get()).setWeight(4))
-                                .add(LootItem.lootTableItem(ItemRegister.CHAIN_SHOT_SPELL.get()).setWeight(2))
-                                .add(LootItem.lootTableItem(ItemRegister.TIMER_CHAIN_SHOT_SPELL.get()).setWeight(1))
-                                .add(LootItem.lootTableItem(ItemRegister.TRIGGER_CHAIN_SHOT_SPELL.get()).setWeight(2))
-                                .add(LootItem.lootTableItem(ItemRegister.BOMB_SPELL.get()).setWeight(4))
-                                .add(LootItem.lootTableItem(ItemRegister.ACCELERATE_SPELL.get()).setWeight(1))
-                                .add(LootItem.lootTableItem(ItemRegister.DECREASE_SPREAD_SPELL.get()).setWeight(1))
-                                .add(LootItem.lootTableItem(ItemRegister.HOMING_SPELL.get()).setWeight(1))
-                                .add(LootItem.lootTableItem(ItemRegister.BESTOW_CURSE_GLOW_SPELL.get()).setWeight(1))
-                                .add(LootItem.lootTableItem(ItemRegister.BESTOW_BLESSING_NIGHT_VISION_SPELL.get()).setWeight(1))
-                                .add(LootItem.lootTableItem(ItemRegister.COLLECT_SPELL.get()).setWeight(1))
-                                .add(LootItem.lootTableItem(ItemRegister.DRILL_SPELL.get()).setWeight(1))
-                                .add(LootItem.lootTableItem(ItemRegister.TELEPORT_CAST_SPELL.get()).setWeight(1))
-                                .add(LootItem.lootTableItem(ItemRegister.LONG_DISTANCE_CAST_SPELL.get()).setWeight(1))
-                                .add(LootItem.lootTableItem(ItemRegister.POISON_CHARGE_SPELL.get()).setWeight(1))
-                                .add(LootItem.lootTableItem(ItemRegister.FREEZING_CHARGE_SPELL.get()).setWeight(1))
-                                .add(LootItem.lootTableItem(ItemRegister.IGNEOUS_CHARGE_SPELL.get()).setWeight(1))
-                                .add(LootItem.lootTableItem(ItemRegister.SWAP_TELEPORT_SPELL.get()).setWeight(1))
-                                .add(LootItem.lootTableItem(ItemRegister.TELEPORT_SPELL.get()).setWeight(1))
-                                .add(LootItem.lootTableItem(ItemRegister.CONJURE_BLOCK_SPELL.get()).setWeight(1))
-                                .add(LootItem.lootTableItem(ItemRegister.CONJURE_LIGHT_SPELL.get()).setWeight(1))
-                ));
-
-
-        registry.accept(STUDY_QUARTERS, LootTable
-                .lootTable()
-                .withPool(
-                        LootPool.lootPool()
-                                .setRolls(new UniformGenerator(ConstantValue.exactly(6), ConstantValue.exactly(16)))
-                                .add(LootItem.lootTableItem(ItemRegister.EXPLOSION_SPELL.get()).setWeight(1))
-                                .add(LootItem.lootTableItem(ItemRegister.MAJOR_EXPLOSION_SPELL.get()).setWeight(1))
-                                .add(LootItem.lootTableItem(ItemRegister.CRUMBLING_CHARGE_SPELL.get()).setWeight(1))
-                                .add(LootItem.lootTableItem(ItemRegister.FIREBALL_SPELL.get()).setWeight(1))
-                                .add(LootItem.lootTableItem(ItemRegister.TRIGGER_FIREBALL_SPELL.get()).setWeight(1))
-                                .add(LootItem.lootTableItem(ItemRegister.TIMER_FIREBALL_SPELL.get()).setWeight(1))
-                                .add(LootItem.lootTableItem(ItemRegister.BLACK_HOLE_SPELL.get()).setWeight(1))
-                                .add(LootItem.lootTableItem(ItemRegister.TIMER_BLACK_HOLE_SPELL.get()).setWeight(1))
-                                .add(LootItem.lootTableItem(ItemRegister.HEXAGON_CAST_SPELL.get()).setWeight(1))
-                                .add(LootItem.lootTableItem(ItemRegister.LINE_CAST_SPELL.get()).setWeight(1))
-                                .add(LootItem.lootTableItem(ItemRegister.CONJURE_WEBS_SPELL.get()).setWeight(1))
-                                .add(LootItem.lootTableItem(ItemRegister.ADD_MANA_SPELL.get()).setWeight(1))
-                                .add(LootItem.lootTableItem(ItemRegister.SMALL_DELAY_CAST_SPELL.get()).setWeight(1))
-                                .add(LootItem.lootTableItem(ItemRegister.MEDIUM_DELAY_CAST_SPELL.get()).setWeight(1))
-                                .add(LootItem.lootTableItem(ItemRegister.BIG_DELAY_CAST_SPELL.get()).setWeight(1))
-                ));
+        registry.accept(DUNGEON, dungeonCell());
+        registry.accept(STUDY_QUARTERS, studyQuarters());
+        registry.accept(BOOKCASE, bookCase());
     }
 
+    public LootTable.Builder dungeonCell(){
+        return LootTable
+                .lootTable()
+                .withPool(
+                        LootPool.lootPool()
+                                .setRolls(new UniformGenerator(ConstantValue.exactly(16), ConstantValue.exactly(24)))
+                                .add(LootItem.lootTableItem(Items.COBWEB).setWeight(8))
+                                .add(LootItem.lootTableItem(Items.BONE).setWeight(6)).setBonusRolls(UniformGenerator.between(1,2))
+                                .add(LootItem.lootTableItem(Items.IRON_NUGGET).setWeight(5)).setBonusRolls(UniformGenerator.between(1,8))
+                                .add(LootItem.lootTableItem(Items.GOLD_NUGGET).setWeight(5)).setBonusRolls(UniformGenerator.between(1,8))
+                                .add(LootItem.lootTableItem(Items.POISONOUS_POTATO).setWeight(4))
+                                .add(LootItem.lootTableItem(Items.IRON_INGOT).setWeight(3)).setBonusRolls(UniformGenerator.between(1,4))
+                                .add(LootItem.lootTableItem(Items.GOLD_INGOT).setWeight(3)).setBonusRolls(UniformGenerator.between(1,4))
+                                .add(LootItem.lootTableItem(Items.BAKED_POTATO).setWeight(2)).setBonusRolls(UniformGenerator.between(1,8))
+                                .add(LootItem.lootTableItem(Items.TORCH).setWeight(2)).setBonusRolls(UniformGenerator.between(1,12))
+                                .add(LootItem.lootTableItem(ItemRegister.TEALESTITE_SHARD.get()).setWeight(1))
+                                .add(LootItem.lootTableItem(Items.AMETHYST_SHARD).setWeight(1))
+                );
+    }
+    public LootTable.Builder studyQuarters(){
+        return LootTable
+                .lootTable()
+                .withPool(
+                        LootPool.lootPool()
+                                .setRolls(new UniformGenerator(ConstantValue.exactly(16), ConstantValue.exactly(24)))
+                                .add(LootItem.lootTableItem(Items.BOOK).setWeight(4)).setBonusRolls(UniformGenerator.between(1,4))
+                                .add(LootItem.lootTableItem(Items.COPPER_INGOT).setWeight(4)).setBonusRolls(UniformGenerator.between(2,8))
+                                .add(LootItem.lootTableItem(Items.GLASS_BOTTLE).setWeight(2)).setBonusRolls(UniformGenerator.between(1,4))
+                                .add(LootItem.lootTableItem(Items.PAPER).setWeight(2)).setBonusRolls(UniformGenerator.between(1,3))
+                                .add(LootItem.lootTableItem(Items.COBWEB).setWeight(2)).setBonusRolls(UniformGenerator.between(1,3))
+                                .add(LootItem.lootTableItem(Items.FEATHER).setWeight(2)).setBonusRolls(UniformGenerator.between(1,3))
+                                .add(LootItem.lootTableItem(Items.CANDLE).setWeight(2))
+                                .add(LootItem.lootTableItem(ItemRegister.TEALESTITE_SHARD.get()).setWeight(1)).setBonusRolls(UniformGenerator.between(4,6))
+                                .add(LootItem.lootTableItem(Items.AMETHYST_SHARD).setWeight(1)).setBonusRolls(UniformGenerator.between(4,6))
+                );
+    }
 
+    public LootTable.Builder bookCase(){
+        return LootTable
+                .lootTable()
+                .withPool(
+                        LootPool.lootPool()
+                                .setRolls(new UniformGenerator(ConstantValue.exactly(16), ConstantValue.exactly(24)))
+                                .add(LootItem.lootTableItem(Items.COBWEB).setWeight(12)).setBonusRolls(UniformGenerator.between(1,3))
+                                .add(LootItem.lootTableItem(Items.BOOK).setWeight(4)).setBonusRolls(UniformGenerator.between(4,8))
+                                .add(LootItem.lootTableItem(Items.PAPER).setWeight(2)).setBonusRolls(UniformGenerator.between(4,8))
+                                .add(LootItem.lootTableItem(Items.INK_SAC).setWeight(1)).setBonusRolls(UniformGenerator.between(1,4))
+                );
+    }
 }

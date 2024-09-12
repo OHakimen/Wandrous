@@ -1,3 +1,4 @@
-// 1.21.1	2024-08-16T15:03:10.1714164	Loot Tables
-3a3177d031b73b231accdd842773b91ab0f3bf2b data/wandrous/loot_table/chests/dungeon_cell.json
-fadd6a385cb81e43af316698e1447c0fff818102 data/wandrous/loot_table/chests/dungeon_study_quarters.json
+// 1.21.1	2024-09-12T15:40:06.1488962	Loot Tables
+43d5568d25797397c32c39f12af896f8cd8a023b data/wandrous/loot_table/chests/bookcase.json
+db3e54d38aae9b5e8eae93107a37bd1c0add1486 data/wandrous/loot_table/chests/dungeon_cell.json
+4775fa0dbdfdddae54511f64eb7b22eb2426e5e9 data/wandrous/loot_table/chests/dungeon_study_quarters.json

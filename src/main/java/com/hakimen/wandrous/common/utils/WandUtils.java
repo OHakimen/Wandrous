@@ -154,7 +154,7 @@ public class WandUtils {
     );
 
 
-    public static void makeWand(ItemStack stack){
+    public static void makeWand(ItemStack stack) {
 
         Random r = new Random(stack.hashCode() ^ System.nanoTime());
 
@@ -205,5 +205,4 @@ public class WandUtils {
 
         return toReturn;
     }
-
 }
