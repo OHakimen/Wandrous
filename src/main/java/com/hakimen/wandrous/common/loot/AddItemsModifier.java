@@ -1,7 +1,5 @@
 package com.hakimen.wandrous.common.loot;
 
-import com.google.common.base.Supplier;
-import com.google.common.base.Suppliers;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -19,12 +17,11 @@ import java.util.Map;
 
 public class AddItemsModifier extends LootModifier {
 
-    public static final Supplier<Codec<AddItemsModifier>> CODEC = Suppliers.memoize(()
-            -> RecordCodecBuilder.create(inst -> codecStart(inst)
+    public static final MapCodec<AddItemsModifier> CODEC = RecordCodecBuilder.mapCodec(inst -> codecStart(inst)
             .and(Codec.unboundedMap(Codec.STRING, ExtraCodecs.POSITIVE_FLOAT)
                     .fieldOf("items")
                     .forGetter(addItemModifier -> addItemModifier.addItems)
-            ).apply(inst, AddItemsModifier::new)));
+            ).apply(inst, AddItemsModifier::new));
 
 
     Map<String, Float> addItems;
@@ -57,6 +54,6 @@ public class AddItemsModifier extends LootModifier {
 
     @Override
     public MapCodec<? extends IGlobalLootModifier> codec() {
-        return MapCodec.assumeMapUnsafe(CODEC.get());
+        return CODEC;
     }
 }

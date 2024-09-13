@@ -27,6 +27,7 @@ public class DataGeneration {
         gen.addProvider(true, (DataProvider.Factory<ItemModelProvider>) (packOutput) -> new ItemModelProvider(packOutput, existingFileHelper));
 
         gen.addProvider(true, (DataProvider.Factory<LootTableProvider>) pOutput -> LootProvider.create(pOutput, provider));
+        gen.addProvider(true, (DataProvider.Factory<GlobalLootModProvider>) pOutput -> new GlobalLootModProvider(pOutput, provider));
         gen.addProvider(true, (DataProvider.Factory<LangProvider>) LangProvider::new);
         gen.addProvider(true, (DataProvider.Factory<RecipeProvider>) pOutput -> new RecipeProvider(pOutput, provider));
     }

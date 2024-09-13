@@ -1,11 +1,8 @@
 package com.hakimen.wandrous.common.loot;
 
-import com.google.common.base.Supplier;
-import com.google.common.base.Suppliers;
 import com.hakimen.wandrous.common.item.SpellEffectItem;
 import com.hakimen.wandrous.common.registers.ItemRegister;
 import com.hakimen.wandrous.common.spell.effects.spells.BestowSpellEffect;
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -22,19 +19,17 @@ import java.util.List;
 
 public class AppendBestowSpellsModifier extends LootModifier {
 
-    public static final Supplier<Codec<AppendBestowSpellsModifier>> CODEC = Suppliers.memoize(()
-            -> RecordCodecBuilder.create(inst -> codecStart(inst)
-            .and(
-                    ExtraCodecs.POSITIVE_INT.fieldOf("quantity")
+    public static final MapCodec<AppendBestowSpellsModifier> CODEC = RecordCodecBuilder.mapCodec(inst ->
+            LootModifier.codecStart(inst)
+                    .and(ExtraCodecs.POSITIVE_INT.fieldOf("quantity")
                             .forGetter(quant -> quant.maxQuantity)
-            ).apply(inst, AppendBestowSpellsModifier::new)));
+                    ).apply(inst, AppendBestowSpellsModifier::new));
 
 
-    int maxQuantity;
+    public int maxQuantity;
 
 
-    public AppendBestowSpellsModifier(LootItemCondition[] conditionsIn, int maxQuantity)
-    {
+    public AppendBestowSpellsModifier(LootItemCondition[] conditionsIn, int maxQuantity) {
         super(conditionsIn);
         this.maxQuantity = maxQuantity;
     }
@@ -52,11 +47,11 @@ public class AppendBestowSpellsModifier extends LootModifier {
         List<? extends Item> bestowSpells = ItemRegister.ITEMS.getEntries().stream().filter(itemDeferredHolder -> itemDeferredHolder.get() instanceof SpellEffectItem effect && effect.getSpellEffect() instanceof BestowSpellEffect).map(DeferredHolder::get).toList();
 
         for (Item bestowSpell : bestowSpells) {
-            if(context.getRandom().nextFloat() < 0.25f){
+            if (context.getRandom().nextFloat() < 0.25f) {
                 generatedLoot.add(bestowSpell.getDefaultInstance());
-                 qtn++;
+                qtn++;
             }
-            if(qtn >= maxQuantity){
+            if (qtn >= maxQuantity) {
                 break;
             }
         }
@@ -65,8 +60,7 @@ public class AppendBestowSpellsModifier extends LootModifier {
     }
 
     @Override
-    public MapCodec<? extends IGlobalLootModifier> codec()
-    {
-        return MapCodec.assumeMapUnsafe(CODEC.get());
+    public MapCodec<? extends IGlobalLootModifier> codec() {
+        return CODEC;
     }
 }

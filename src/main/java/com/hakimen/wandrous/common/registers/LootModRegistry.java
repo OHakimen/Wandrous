@@ -16,13 +16,13 @@ public class LootModRegistry {
             DeferredRegister.create(NeoForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, Wandrous.MODID);
 
     public static final DeferredHolder<MapCodec<? extends IGlobalLootModifier>, MapCodec<? extends IGlobalLootModifier>> GENERATE_WAND =
-            LOOT_MODIFIER_SERIALIZERS.register("generate_wand", () -> MapCodec.assumeMapUnsafe(WandLootModifier.CODEC.get()));
+            LOOT_MODIFIER_SERIALIZERS.register("generate_wand", () -> WandLootModifier.CODEC);
 
     public static final DeferredHolder<MapCodec<? extends IGlobalLootModifier>, MapCodec<? extends IGlobalLootModifier>> GENERATE_BESTOW_SPELL =
-            LOOT_MODIFIER_SERIALIZERS.register("bestow_spell", () -> MapCodec.assumeMapUnsafe(AppendBestowSpellsModifier.CODEC.get()));
+            LOOT_MODIFIER_SERIALIZERS.register("bestow_spell", () -> AppendBestowSpellsModifier.CODEC);
 
     public static final DeferredHolder<MapCodec<? extends IGlobalLootModifier>, MapCodec<? extends IGlobalLootModifier>> ADD_ITEMS =
-            LOOT_MODIFIER_SERIALIZERS.register("add_items", () -> MapCodec.assumeMapUnsafe(AddItemsModifier.CODEC.get()));
+            LOOT_MODIFIER_SERIALIZERS.register("add_items", () -> AddItemsModifier.CODEC);
 
 
 

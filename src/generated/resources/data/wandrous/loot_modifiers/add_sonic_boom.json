@@ -1,0 +1,14 @@
+{
+  "type": "wandrous:add_items",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:chests/ancient_city"
+    }
+  ],
+  "items": {
+    "wandrous:sonic_boom": 0.25,
+    "wandrous:timer_sonic_boom": 0.15,
+    "wandrous:trigger_sonic_boom": 0.2
+  }
+}

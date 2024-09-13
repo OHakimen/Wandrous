@@ -1,0 +1,13 @@
+{
+  "type": "wandrous:generate_wand",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "wandrous:chests/dungeon_cell"
+    },
+    {
+      "chance": 0.25,
+      "condition": "minecraft:random_chance"
+    }
+  ]
+}

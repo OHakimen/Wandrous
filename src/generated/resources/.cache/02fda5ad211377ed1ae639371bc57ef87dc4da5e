@@ -1,0 +1,7 @@
+// 1.21.1	2024-09-13T12:51:59.5123667	Global Loot Modifiers : wandrous
+3b5b563d0d68c20562d5ccdf8d76222c3446ddbf data/neoforge/loot_modifiers/global_loot_modifiers.json
+5818d807fd9eda86bfe41193cb99c4b8ffe29c79 data/wandrous/loot_modifiers/add_sonic_boom.json
+756df7699799e02bdb4e57e2ae213e2456ae4bae data/wandrous/loot_modifiers/bestow_spell_in_desert_temple_chest.json
+09746deb868be6b530f043e57a06ee30fccd6849 data/wandrous/loot_modifiers/bestow_spell_in_village_temple_chest.json
+f9c91bbb182fb7216959d6510444fdbc6fdf8914 data/wandrous/loot_modifiers/wand_in_dungeon_cell_chest.json
+a327d3746152a977b535b66641cdd6258ef88631 data/wandrous/loot_modifiers/wand_in_dungeon_study_quarters_chest.json

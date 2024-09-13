@@ -3,6 +3,7 @@ package com.hakimen.wandrous.common.datagen;
 import com.hakimen.wandrous.Wandrous;
 import com.hakimen.wandrous.common.data.Glyph;
 import com.hakimen.wandrous.common.item.SpellEffectItem;
+import com.hakimen.wandrous.common.registers.EffectRegister;
 import com.hakimen.wandrous.common.registers.GlyphRegister;
 import com.hakimen.wandrous.common.registers.ItemRegister;
 import net.minecraft.data.PackOutput;
@@ -24,9 +25,18 @@ public class LangProvider extends LanguageProvider {
 
         add("jei.wandrous.category.arcane_inscribing", "Arcane Inscribing");
 
+        addEffects();
         addSpells();
         addGlyphs();
         addItems();
+    }
+
+    public void addEffects(){
+        add(EffectRegister.FREEZING.get(), "Freeze");
+        add(EffectRegister.IGNITE.get(), "Ignite");
+        add(EffectRegister.SCALE_DOWN.get(), "Scale down");
+        add(EffectRegister.SCALE_UP.get(), "Scale up");
+        add(EffectRegister.SILENCE.get(), "Silence");
     }
 
     public void addGlyphs(){

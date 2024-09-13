@@ -26,34 +26,34 @@ public class GlobalLootModProvider extends GlobalLootModifierProvider {
         add("wand_in_dungeon_cell_chest", new WandLootModifier(
                 new LootItemCondition[]{
                         new LootTableIdCondition.Builder(ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "chests/dungeon_cell")).build(),
-                        LootItemRandomChanceCondition.randomChance(0.75f).build()
+                        LootItemRandomChanceCondition.randomChance(0.25f).build()
                 }
         ));
 
         add("wand_in_dungeon_study_quarters_chest", new WandLootModifier(
                 new LootItemCondition[]{
                         new LootTableIdCondition.Builder(ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "chests/dungeon_study_quarters")).build(),
-                        LootItemRandomChanceCondition.randomChance(0.75f).build()
+                        LootItemRandomChanceCondition.randomChance(0.5f).build()
                 }
         ));
 
         add("bestow_spell_in_village_temple_chest", new AppendBestowSpellsModifier(
                 new LootItemCondition[]{
-                        new LootTableIdCondition.Builder(ResourceLocation.fromNamespaceAndPath("minecraft","chests/village/village_temple")).build(),
+                        new LootTableIdCondition.Builder(ResourceLocation.fromNamespaceAndPath("minecraft", "chests/village/village_temple")).build(),
                 },
                 4
         ));
 
         add("bestow_spell_in_desert_temple_chest", new AppendBestowSpellsModifier(
                 new LootItemCondition[]{
-                        new LootTableIdCondition.Builder(ResourceLocation.fromNamespaceAndPath("minecraft","chests/desert_pyramid")).build(),
+                        new LootTableIdCondition.Builder(ResourceLocation.fromNamespaceAndPath("minecraft", "chests/desert_pyramid")).build(),
                 },
                 4
         ));
 
         add("add_sonic_boom", new AddItemsModifier(
                 new LootItemCondition[]{
-                        new LootTableIdCondition.Builder(ResourceLocation.fromNamespaceAndPath("minecraft","chests/ancient_city")).build()
+                        new LootTableIdCondition.Builder(ResourceLocation.fromNamespaceAndPath("minecraft", "chests/ancient_city")).build()
                 },
                 Map.of(
                         ItemRegister.SONIC_BOOM_SPELL.getId().toString(), 0.25f,
@@ -62,5 +62,11 @@ public class GlobalLootModProvider extends GlobalLootModifierProvider {
                 )
         ));
 
+        add("wand_in_ancient_city", new WandLootModifier(
+                new LootItemCondition[]{
+                        new LootTableIdCondition.Builder(ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "chests/ancient_city")).build(),
+                        LootItemRandomChanceCondition.randomChance(0.25f).build()
+                }
+        ));
     }
 }

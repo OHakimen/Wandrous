@@ -1,9 +1,6 @@
 package com.hakimen.wandrous.common.loot;
 
-import com.google.common.base.Supplier;
-import com.google.common.base.Suppliers;
 import com.hakimen.wandrous.common.registers.ItemRegister;
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -15,8 +12,9 @@ import net.neoforged.neoforge.common.loot.LootModifier;
 
 public class WandLootModifier extends LootModifier {
 
-    public static final Supplier<Codec<WandLootModifier>> CODEC = Suppliers.memoize(()
-            -> RecordCodecBuilder.create(inst -> codecStart(inst).apply(inst, WandLootModifier::new)));
+    public static final MapCodec<WandLootModifier> CODEC = RecordCodecBuilder.mapCodec(
+            instance -> LootModifier.codecStart(instance).apply(instance, WandLootModifier::new)
+    );
 
     public WandLootModifier(LootItemCondition[] conditionsIn) {
         super(conditionsIn);
@@ -37,6 +35,6 @@ public class WandLootModifier extends LootModifier {
 
     @Override
     public MapCodec<? extends IGlobalLootModifier> codec() {
-        return MapCodec.assumeMapUnsafe(CODEC.get());
+        return CODEC;
     }
 }
