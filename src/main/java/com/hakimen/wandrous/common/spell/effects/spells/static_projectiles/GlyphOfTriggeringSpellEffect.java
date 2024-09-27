@@ -1,4 +1,4 @@
-package com.hakimen.wandrous.common.spell.effects.spells;
+package com.hakimen.wandrous.common.spell.effects.spells.static_projectiles;
 
 import com.hakimen.wandrous.common.entity.static_spell.TriggeringGlyphEntity;
 import com.hakimen.wandrous.common.registers.EntityRegister;

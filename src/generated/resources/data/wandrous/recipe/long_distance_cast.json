@@ -1,0 +1,21 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:weave",
+    "wandrous:weave",
+    "wandrous:destiny",
+    "wandrous:destiny",
+    "wandrous:knowledge",
+    "wandrous:knowledge",
+    "wandrous:tinker",
+    "wandrous:tinker"
+  ],
+  "on_slate": {
+    "item": "wandrous:teleport_cast"
+  },
+  "output": {
+    "id": "wandrous:long_distance_cast"
+  },
+  "ticks": 100,
+  "tier": 2
+}

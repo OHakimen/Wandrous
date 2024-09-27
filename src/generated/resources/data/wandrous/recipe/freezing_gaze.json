@@ -1,0 +1,21 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:weave",
+    "wandrous:weave",
+    "wandrous:focus",
+    "wandrous:focus",
+    "wandrous:mind",
+    "wandrous:mind",
+    "wandrous:tinker",
+    "wandrous:tinker"
+  ],
+  "on_slate": {
+    "item": "minecraft:snowball"
+  },
+  "output": {
+    "id": "wandrous:freezing_gaze"
+  },
+  "ticks": 100,
+  "tier": 2
+}

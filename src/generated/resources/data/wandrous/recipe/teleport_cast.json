@@ -1,0 +1,21 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:weave",
+    "wandrous:weave",
+    "wandrous:destiny",
+    "wandrous:destiny",
+    "wandrous:knowledge",
+    "wandrous:knowledge",
+    "wandrous:mind",
+    "wandrous:mind"
+  ],
+  "on_slate": {
+    "item": "minecraft:chorus_fruit"
+  },
+  "output": {
+    "id": "wandrous:teleport_cast"
+  },
+  "ticks": 100,
+  "tier": 2
+}

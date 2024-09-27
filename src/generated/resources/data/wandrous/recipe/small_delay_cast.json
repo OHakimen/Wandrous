@@ -1,0 +1,21 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:bind",
+    "wandrous:bind",
+    "wandrous:tinker",
+    "wandrous:weave",
+    "wandrous:weave",
+    "wandrous:knowledge",
+    "wandrous:knowledge",
+    "wandrous:destiny"
+  ],
+  "on_slate": {
+    "item": "minecraft:clock"
+  },
+  "output": {
+    "id": "wandrous:small_delay_cast"
+  },
+  "ticks": 100,
+  "tier": 2
+}

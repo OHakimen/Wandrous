@@ -4,7 +4,6 @@ import com.hakimen.wandrous.common.entity.projectiles.SpellCastingProjectile;
 import com.hakimen.wandrous.common.registers.EntityRegister;
 import com.hakimen.wandrous.common.registers.ParticleRegister;
 import com.hakimen.wandrous.common.spell.SpellContext;
-import com.hakimen.wandrous.common.spell.mover.ISpellMover;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -87,12 +86,6 @@ public class NukeEntity extends SpellCastingProjectile {
     @Override
     public void tick() {
         super.tick();
-
-        if(context != null){
-            for (ISpellMover mover : getMovers(context.getNode())) {
-                mover.move(context, this);
-            }
-        }
 
         if (!level().isClientSide && (tickCount / (float)maxTickTime) >= 0.25f) {
             Level level = level();

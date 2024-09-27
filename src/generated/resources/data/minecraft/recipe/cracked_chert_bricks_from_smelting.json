@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "blocks",
+  "cookingtime": 100,
+  "experience": 0.1,
+  "ingredient": {
+    "item": "wandrous:chert_bricks"
+  },
+  "result": {
+    "count": 1,
+    "id": "wandrous:cracked_chert_bricks"
+  }
+}

@@ -16,14 +16,9 @@ import net.minecraft.world.phys.HitResult;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 public class GlimmeringBoltProjectile extends SpellCastingProjectile {
-
-    SpellContext context;
-    List<ISpellMover> movers;
-
 
     public GlimmeringBoltProjectile(EntityType<? extends ThrowableProjectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -44,8 +39,7 @@ public class GlimmeringBoltProjectile extends SpellCastingProjectile {
         this.context = context.clone();
         this.context.setCaster(this);
         this.maxTicks = this.context.getStatus().getLifeTime();
-        this.movers = new ArrayList<>();
-
+        this.movers = getMovers(this.context.getNode());
     }
 
     @Override
@@ -85,7 +79,8 @@ public class GlimmeringBoltProjectile extends SpellCastingProjectile {
                 context.getLevel().broadcastEntityEvent(this, (byte) 3);
                 SpellCastingProjectile.onHitEntity(this, pResult, this.context);
                 discard();
-            }else{
+            }
+            else{
                 SpellCastingProjectile.onHitEntity(this, pResult, this.context);
             }
         }
@@ -96,11 +91,9 @@ public class GlimmeringBoltProjectile extends SpellCastingProjectile {
     public void tick() {
         super.tick();
 
-
-        if(this.context != null){
-            List<ISpellMover> movers = getMovers(context.getNode());
+        if (this.context != null) {
             for (ISpellMover mover : movers) {
-                mover.move(context,this);
+                mover.move(context, this);
             }
         }
 

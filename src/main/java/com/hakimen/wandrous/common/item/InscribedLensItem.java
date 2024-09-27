@@ -21,6 +21,7 @@ public class InscribedLensItem extends Item {
     public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
 
         if(GlyphUtils.hasGlyph(pStack) && !GlyphUtils.isDefault(pStack)){
+            pTooltipComponents.add(Component.literal("GLYPH_MARKER"));
             pTooltipComponents.add(Component.translatable(GlyphUtils.getLangKey(pStack)).withStyle(ChatFormatting.DARK_GRAY));
         }
 

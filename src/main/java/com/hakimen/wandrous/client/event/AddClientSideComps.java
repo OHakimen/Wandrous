@@ -1,6 +1,7 @@
 package com.hakimen.wandrous.client.event;
 
 import com.hakimen.wandrous.Wandrous;
+import com.hakimen.wandrous.client.tooltip.GlyphTooltipRenderer;
 import com.hakimen.wandrous.client.tooltip.SpellTooltipRenderer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -13,6 +14,7 @@ public class AddClientSideComps {
     @SubscribeEvent
     public static void addTooltipTypes(RegisterClientTooltipComponentFactoriesEvent e) {
         e.register(SpellTooltipRenderer.SpellTooltipComponent.class, SpellTooltipRenderer::new);
+        e.register(GlyphTooltipRenderer.GlyphTooltipComponent.class, GlyphTooltipRenderer::new);
     }
 
 }

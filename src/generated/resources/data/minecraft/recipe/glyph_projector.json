@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "+": {
+      "tag": "c:ingots/iron"
+    },
+    ",": {
+      "item": "wandrous:tealestite_shard"
+    },
+    "-": {
+      "tag": "c:glass_panes"
+    },
+    "y": {
+      "item": "wandrous:tealestite_cluster"
+    }
+  },
+  "pattern": [
+    "+-+",
+    "+y+",
+    "+,+"
+  ],
+  "result": {
+    "count": 1,
+    "id": "wandrous:glyph_projector"
+  }
+}

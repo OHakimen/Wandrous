@@ -23,8 +23,6 @@ import java.util.Random;
 
 public class ChainShotProjectile extends SpellCastingProjectile {
 
-    SpellContext context;
-    List<ISpellMover> movers;
     int hitCount;
     List<LivingEntity> hit;
 
@@ -52,7 +50,7 @@ public class ChainShotProjectile extends SpellCastingProjectile {
         this.setNoGravity(true);
         this.maxTicks = this.context.getStatus().getLifeTime();
         this.movers = new ArrayList<>();
-        this.hit = new ArrayList<>();
+        this.movers = getMovers(this.context.getNode());
     }
 
     public int getHitCount() {

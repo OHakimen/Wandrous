@@ -1,5 +1,6 @@
 package com.hakimen.wandrous.common.datagen;
 
+import com.hakimen.wandrous.common.datagen.loots.BlockLootProvider;
 import com.hakimen.wandrous.common.datagen.loots.ChestLootProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -13,7 +14,8 @@ import java.util.concurrent.CompletableFuture;
 public class LootProvider {
     public static LootTableProvider create(PackOutput output, CompletableFuture<HolderLookup.Provider> holder) {
         return new LootTableProvider(output, Set.of(), List.of(
-                new LootTableProvider.SubProviderEntry(provider -> new ChestLootProvider(), LootContextParamSets.CHEST)
+                new LootTableProvider.SubProviderEntry(provider -> new ChestLootProvider(), LootContextParamSets.CHEST),
+                new LootTableProvider.SubProviderEntry(BlockLootProvider::new, LootContextParamSets.BLOCK)
         ), holder);
     }
 

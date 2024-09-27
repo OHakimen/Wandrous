@@ -28,6 +28,8 @@ import java.util.List;
 public class SpellCastingProjectile extends ThrowableProjectile {
 
     int maxTicks;
+    SpellContext context;
+    List<ISpellMover> movers;
 
     protected SpellCastingProjectile(EntityType<? extends ThrowableProjectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -54,9 +56,10 @@ public class SpellCastingProjectile extends ThrowableProjectile {
         if (context.getNode().getData().getEffect().hasAnyOf(SpellEffect.TRIGGER, SpellEffect.TIMER)) {
             self.setDeltaMovement(new Vec3(self.getDeltaMovement().toVector3f().reflect(Vec3.atLowerCornerOf(pResult.getDirection().getNormal()).toVector3f())));
             self.lookAt(EntityAnchorArgument.Anchor.EYES, self.getEyePosition().add(self.getDeltaMovement()));
-            CastingUtils.clearMods(context);
+            SpellContext context1 = context.clone();
+            CastingUtils.clearMods(context1);
             context.getNode().getChildren().forEach(
-                    (child) -> child.getData().getEffect().cast(context.clone().setNode(child).setLocation(pResult.getLocation()))
+                    (child) -> child.getData().getEffect().cast(context1.setNode(child).setLocation(pResult.getLocation()))
             );
         }
     }
@@ -67,7 +70,6 @@ public class SpellCastingProjectile extends ThrowableProjectile {
             context.getHit().add(entity);
         }
 
-
         List<ProjectileHitEffect> effects = addProjectileEffects(context.getNode());
 
         effects.forEach(projectileHitEffect -> {
@@ -75,12 +77,11 @@ public class SpellCastingProjectile extends ThrowableProjectile {
             projectileHitEffect.onHitEntity(context, pResult.getEntity());
         });
 
-
-
         if (context.getNode().getData().getEffect().hasAnyOf(SpellEffect.TRIGGER, SpellEffect.TIMER)) {
             self.setDeltaMovement(self.getDeltaMovement().multiply(1, -1, 1));
             self.lookAt(EntityAnchorArgument.Anchor.EYES, self.getEyePosition().add(self.getDeltaMovement()));
-            CastingUtils.clearMods(context);
+            SpellContext context1 = context.clone();
+            CastingUtils.clearMods(context1);
             context.getNode().getChildren().forEach(
                     (child) -> child.getData().getEffect().cast(context.clone().setNode(child).setLocation(pResult.getLocation()))
             );

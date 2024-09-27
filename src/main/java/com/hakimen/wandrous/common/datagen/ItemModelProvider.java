@@ -153,6 +153,7 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
 
         makeSpell(ItemRegister.LIGHTING_BOLT_SPELL.get());
         makeSpell(ItemRegister.SUMMON_BEE_SWARM_SPELL.get());
+        makeSpell(ItemRegister.SUMMON_WOLF_PACK_SPELL.get());
         makeTriggerSpell(ItemRegister.GLYPH_OF_TRIGGERING.get(), "wandrous:item/spell/glyph_of_triggering");
 
         makeSpell(ItemRegister.CHAINSAW_SPELL.get());

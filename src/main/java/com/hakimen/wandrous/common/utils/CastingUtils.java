@@ -6,7 +6,7 @@ import com.hakimen.wandrous.common.spell.SpellEffect;
 import com.hakimen.wandrous.common.spell.SpellStack;
 import com.hakimen.wandrous.common.spell.SpellStatus;
 import com.hakimen.wandrous.common.spell.effects.modifiers.MultiCastEffect;
-import com.hakimen.wandrous.common.spell.effects.spells.GreekLetterSpellEffect;
+import com.hakimen.wandrous.common.spell.effects.spells.CastingTreeModifierSpellEffect;
 import com.hakimen.wandrous.common.utils.data.Node;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -46,7 +46,7 @@ public class CastingUtils {
                     tree.addChild(cast);
                 }
             }
-        } else if (tree.getData().getEffect() instanceof GreekLetterSpellEffect greekLetterSpellEffect) {
+        } else if (tree.getData().getEffect() instanceof CastingTreeModifierSpellEffect greekLetterSpellEffect) {
             Node<SpellStack> cast = greekLetterSpellEffect.apply(tree, this, alleffects);
 
             if (cast != null) {

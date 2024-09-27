@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "+": {
+      "tag": "c:nuggets/gold"
+    },
+    "x": {
+      "item": "wandrous:tealestite_shard"
+    },
+    "y": {
+      "item": "wandrous:tealestite_recharge_crystal"
+    }
+  },
+  "pattern": [
+    "x+ ",
+    "+y+",
+    " +x"
+  ],
+  "result": {
+    "count": 1,
+    "id": "wandrous:tealestite_greater_recharge_crystal"
+  }
+}

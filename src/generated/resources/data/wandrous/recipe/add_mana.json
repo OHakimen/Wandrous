@@ -1,0 +1,27 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:knowledge",
+    "wandrous:knowledge",
+    "wandrous:knowledge",
+    "wandrous:knowledge",
+    "wandrous:bind",
+    "wandrous:bind",
+    "wandrous:weave",
+    "wandrous:weave",
+    "wandrous:vitality",
+    "wandrous:vitality",
+    "wandrous:power",
+    "wandrous:power",
+    "wandrous:tinker",
+    "wandrous:tinker"
+  ],
+  "on_slate": {
+    "item": "minecraft:heart_of_the_sea"
+  },
+  "output": {
+    "id": "wandrous:add_mana"
+  },
+  "ticks": 100,
+  "tier": 4
+}

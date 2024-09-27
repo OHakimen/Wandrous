@@ -146,7 +146,7 @@ public class ArcaneInscribingRecipe implements Recipe<ArcaneInscriberRecipeInput
                     arcaneInscribingRecipeInstance.group(
                             ResourceLocation.CODEC.fieldOf("type").forGetter(recipe -> ID),
                             NonNullList.codecOf(ResourceLocation.CODEC).fieldOf("glyphs")
-                                    .validate(resourceLocations -> resourceLocations.size() >= 16 ?
+                                    .validate(resourceLocations -> resourceLocations.size() > 16 ?
                                                     DataResult.error(() -> "Invalid amount of glyphs, expected to be in range 1..16, got" + resourceLocations.size()) :
                                                     DataResult.success(resourceLocations))
                                             .forGetter(ArcaneInscribingRecipe::getRequiredGlyphs),

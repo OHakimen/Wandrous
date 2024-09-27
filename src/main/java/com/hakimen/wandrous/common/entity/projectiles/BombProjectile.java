@@ -20,12 +20,9 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 public class BombProjectile extends SpellCastingProjectile {
-    SpellContext context;
-    List<ISpellMover> movers;
 
     float damage;
 
@@ -51,14 +48,12 @@ public class BombProjectile extends SpellCastingProjectile {
         this.context.setCaster(this);
         this.maxTicks = this.context.getStatus().getLifeTime();
         this.damage = this.context.getStatus().getDamage();
-        this.movers = new ArrayList<>();
-
+        this.movers = getMovers(context.getNode());
     }
 
     @Override
     protected void onHit(HitResult pResult) {
         super.onHit(pResult);
-        discard();
     }
 
     @Override
@@ -98,12 +93,10 @@ public class BombProjectile extends SpellCastingProjectile {
         super.tick();
 
         if (this.context != null) {
-            List<ISpellMover> movers = getMovers(context.getNode());
             for (ISpellMover mover : movers) {
                 mover.move(context, this);
             }
         }
-
 
         Level level = this.level();
         if (level.isClientSide) {

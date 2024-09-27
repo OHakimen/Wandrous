@@ -1,0 +1,21 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:power",
+    "wandrous:bind",
+    "wandrous:weave",
+    "wandrous:weave",
+    "wandrous:vitality",
+    "wandrous:vitality",
+    "wandrous:tinker",
+    "wandrous:control"
+  ],
+  "on_slate": {
+    "item": "minecraft:feather"
+  },
+  "output": {
+    "id": "wandrous:light_shot"
+  },
+  "ticks": 100,
+  "tier": 2
+}

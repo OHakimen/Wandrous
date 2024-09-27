@@ -1,0 +1,21 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:new",
+    "wandrous:new",
+    "wandrous:new",
+    "wandrous:new",
+    "wandrous:focus",
+    "wandrous:bind",
+    "wandrous:vitality",
+    "wandrous:tinker"
+  ],
+  "on_slate": {
+    "item": "minecraft:honey_block"
+  },
+  "output": {
+    "id": "wandrous:summon_bee_swarm"
+  },
+  "ticks": 100,
+  "tier": 2
+}

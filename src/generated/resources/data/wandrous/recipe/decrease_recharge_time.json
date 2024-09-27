@@ -1,0 +1,29 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:weave",
+    "wandrous:weave",
+    "wandrous:weave",
+    "wandrous:weave",
+    "wandrous:control",
+    "wandrous:control",
+    "wandrous:bind",
+    "wandrous:bind",
+    "wandrous:knowledge",
+    "wandrous:knowledge",
+    "wandrous:mind",
+    "wandrous:mind",
+    "wandrous:weave",
+    "wandrous:weave",
+    "wandrous:weave",
+    "wandrous:weave"
+  ],
+  "on_slate": {
+    "item": "minecraft:clock"
+  },
+  "output": {
+    "id": "wandrous:decrease_recharge_time"
+  },
+  "ticks": 100,
+  "tier": 4
+}

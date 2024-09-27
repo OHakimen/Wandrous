@@ -1,0 +1,25 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:weave",
+    "wandrous:weave",
+    "wandrous:destiny",
+    "wandrous:destiny",
+    "wandrous:vitality",
+    "wandrous:vitality",
+    "wandrous:vitality",
+    "wandrous:vitality",
+    "wandrous:knowledge",
+    "wandrous:knowledge",
+    "wandrous:mind",
+    "wandrous:mind"
+  ],
+  "on_slate": {
+    "item": "minecraft:bone"
+  },
+  "output": {
+    "id": "wandrous:friends_to_power"
+  },
+  "ticks": 100,
+  "tier": 3
+}

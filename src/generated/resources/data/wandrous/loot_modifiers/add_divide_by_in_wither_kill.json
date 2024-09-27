@@ -1,0 +1,14 @@
+{
+  "type": "wandrous:add_items",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:entities/wither"
+    }
+  ],
+  "items": {
+    "wandrous:divide_by_2": 0.25,
+    "wandrous:divide_by_3": 0.25,
+    "wandrous:divide_by_4": 0.25
+  }
+}

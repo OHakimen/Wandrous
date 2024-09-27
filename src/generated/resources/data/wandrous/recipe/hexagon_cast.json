@@ -1,0 +1,25 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:vitality",
+    "wandrous:vitality",
+    "wandrous:power",
+    "wandrous:power",
+    "wandrous:focus",
+    "wandrous:focus",
+    "wandrous:tinker",
+    "wandrous:tinker",
+    "wandrous:knowledge",
+    "wandrous:knowledge",
+    "wandrous:knowledge",
+    "wandrous:mind"
+  ],
+  "on_slate": {
+    "item": "minecraft:honeycomb"
+  },
+  "output": {
+    "id": "wandrous:hexagon_cast"
+  },
+  "ticks": 100,
+  "tier": 3
+}

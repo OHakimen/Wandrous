@@ -1,0 +1,17 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:power",
+    "wandrous:tinker",
+    "wandrous:weave",
+    "wandrous:destiny"
+  ],
+  "on_slate": {
+    "item": "wandrous:medium_delay_cast"
+  },
+  "output": {
+    "id": "wandrous:big_delay_cast"
+  },
+  "ticks": 100,
+  "tier": 2
+}

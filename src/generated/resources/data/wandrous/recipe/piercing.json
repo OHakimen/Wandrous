@@ -1,0 +1,25 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:weave",
+    "wandrous:weave",
+    "wandrous:destiny",
+    "wandrous:destiny",
+    "wandrous:tinker",
+    "wandrous:tinker",
+    "wandrous:guidance",
+    "wandrous:guidance",
+    "wandrous:knowledge",
+    "wandrous:knowledge",
+    "wandrous:mind",
+    "wandrous:mind"
+  ],
+  "on_slate": {
+    "item": "minecraft:arrow"
+  },
+  "output": {
+    "id": "wandrous:piercing"
+  },
+  "ticks": 100,
+  "tier": 3
+}

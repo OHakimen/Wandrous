@@ -27,7 +27,7 @@ public class FireboltSpellEffect extends ProjectileSpellEffect {
 
         Level level = context.getLevel();
         Vec3 location = context.getLocation();
-        FlamingBoltProjectile fireball = new FlamingBoltProjectile(location.x, location.y, location.z,level, context);
+        FlamingBoltProjectile fireball = new FlamingBoltProjectile(location.x, location.y, location.z,level, context.clone());
         level.playSound(null, context.getCaster().getOnPos(), SoundEvents.FIRECHARGE_USE, SoundSource.PLAYERS, 1f,1f);
         shootProjectile(fireball, context);
         level.addFreshEntity(fireball);

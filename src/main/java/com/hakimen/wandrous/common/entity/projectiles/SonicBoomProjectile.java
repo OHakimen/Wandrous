@@ -15,13 +15,8 @@ import net.minecraft.world.phys.HitResult;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class SonicBoomProjectile extends SpellCastingProjectile {
-
-    SpellContext context;
-    List<ISpellMover> movers;
-
     public SonicBoomProjectile(EntityType<? extends ThrowableProjectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.movers = new ArrayList<>();
@@ -43,8 +38,7 @@ public class SonicBoomProjectile extends SpellCastingProjectile {
         this.context.setCaster(this);
         this.setNoGravity(true);
         this.maxTicks = this.context.getStatus().getLifeTime();
-        this.movers = new ArrayList<>();
-
+        this.movers = getMovers(this.context.getNode());
     }
 
     @Override
@@ -84,7 +78,6 @@ public class SonicBoomProjectile extends SpellCastingProjectile {
     public void tick() {
         super.tick();
         if (this.context != null) {
-            List<ISpellMover> movers = getMovers(context.getNode());
             for (ISpellMover mover : movers) {
                 mover.move(context, this);
             }

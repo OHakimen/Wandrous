@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_chert_bricks_slab": {
+      "conditions": {
+        "items": [
+          {
+            "items": "wandrous:chert_bricks_slab"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "wandrous:chiseled_chert_bricks"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_chert_bricks_slab"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wandrous:chiseled_chert_bricks"
+    ]
+  }
+}

@@ -1,2 +1,7 @@
-// 1.21.1	2024-08-16T15:03:10.1673525	Tags for minecraft:block mod id wandrous
+// 1.21.1	2024-09-26T21:09:00.0881099	Tags for minecraft:block mod id wandrous
+9e1f270b6d5871703f5599547c202a998749e0a8 data/c/tags/block/stones.json
+a53ccf57a72682726ab09943a8ba45fd6e11c56c data/minecraft/tags/block/mineable/pickaxe.json
+d039a6c0edd83d24679e663560545487da87eaaf data/minecraft/tags/block/needs_iron_tool.json
+b437ab87b4b80b29c4a38ba1449d267a49bc00c7 data/minecraft/tags/block/slabs.json
+2206d9ab709d9c38393fd57fe8cbb67b987e2ff5 data/minecraft/tags/block/stairs.json
 5f46827a1cf83060924d9c93c507a3e240c3a1b8 data/minecraft/tags/block/walls.json

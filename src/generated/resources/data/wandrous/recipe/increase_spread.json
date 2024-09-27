@@ -1,0 +1,21 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:power",
+    "wandrous:bind",
+    "wandrous:weave",
+    "wandrous:weave",
+    "wandrous:destiny",
+    "wandrous:destiny",
+    "wandrous:tinker",
+    "wandrous:control"
+  ],
+  "on_slate": {
+    "item": "minecraft:sculk_vein"
+  },
+  "output": {
+    "id": "wandrous:increase_spread"
+  },
+  "ticks": 100,
+  "tier": 2
+}

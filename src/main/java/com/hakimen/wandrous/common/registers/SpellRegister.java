@@ -7,22 +7,21 @@ import com.hakimen.wandrous.common.spell.SpellEffect;
 import com.hakimen.wandrous.common.spell.SpellStack;
 import com.hakimen.wandrous.common.spell.SpellStatus;
 import com.hakimen.wandrous.common.spell.effects.modifiers.*;
-import com.hakimen.wandrous.common.spell.effects.modifiers.charges.*;
+import com.hakimen.wandrous.common.spell.effects.modifiers.charges.CrumblingChargeHitEffect;
+import com.hakimen.wandrous.common.spell.effects.modifiers.charges.FreezingChargeHitEffect;
+import com.hakimen.wandrous.common.spell.effects.modifiers.charges.IgneousChargeHitEffect;
+import com.hakimen.wandrous.common.spell.effects.modifiers.charges.PoisonChargeHitEffect;
 import com.hakimen.wandrous.common.spell.effects.modifiers.location.RelativeCastEffect;
 import com.hakimen.wandrous.common.spell.effects.modifiers.location.TeleportCastEffect;
 import com.hakimen.wandrous.common.spell.effects.modifiers.powerups.FriendshipToPowerSpellEffect;
 import com.hakimen.wandrous.common.spell.effects.modifiers.powerups.HealthToPowerSpellEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.BestowSpellEffect;
-import com.hakimen.wandrous.common.spell.effects.spells.GlyphOfTriggeringSpellEffect;
-import com.hakimen.wandrous.common.spell.effects.spells.GreekLetterSpellEffect;
+import com.hakimen.wandrous.common.spell.effects.spells.CastingTreeModifierSpellEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.projectiles.*;
-import com.hakimen.wandrous.common.spell.effects.spells.raycast.IgneousGazeSpellEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.raycast.FreezingGazeSpellEffect;
+import com.hakimen.wandrous.common.spell.effects.spells.raycast.IgneousGazeSpellEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.static_projectiles.*;
-import com.hakimen.wandrous.common.spell.effects.spells.summon_spells.SummonBeeSwarmEffect;
-import com.hakimen.wandrous.common.spell.effects.spells.summon_spells.SummonConjuredBlockSpellEffect;
-import com.hakimen.wandrous.common.spell.effects.spells.summon_spells.SummonEntityEffect;
-import com.hakimen.wandrous.common.spell.effects.spells.summon_spells.SummonWebbingSpellEffect;
+import com.hakimen.wandrous.common.spell.effects.spells.summon_spells.*;
 import com.hakimen.wandrous.common.spell.effects.spells.teleports.CollectEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.teleports.HomebringerTeleportEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.teleports.SwapTeleportEffect;
@@ -224,6 +223,7 @@ public class SpellRegister {
     public static final DeferredHolder<SpellEffect, SpellEffect> GLYPH_OF_TRIGGERING = SPELL_EFFECTS.register("glyph_of_triggering", GlyphOfTriggeringSpellEffect::new);
 
     public static final DeferredHolder<SpellEffect, SpellEffect> SUMMON_BEE_SWARM = SPELL_EFFECTS.register("summon_bee_swarm", SummonBeeSwarmEffect::new);
+    public static final DeferredHolder<SpellEffect, SpellEffect> SUMMON_WOLF_PACK = SPELL_EFFECTS.register("summon_wolf_pack", SummonWolfPackEffect::new);
 
     public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_CURSE_SILENCE = SPELL_EFFECTS.register("bestow_curse_silence", () -> new BestowSpellEffect(EffectRegister.SILENCE));
 
@@ -249,47 +249,55 @@ public class SpellRegister {
     public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_BLESSING_SPEED = SPELL_EFFECTS.register("bestow_blessing_speed", () -> new BestowSpellEffect(MobEffects.MOVEMENT_SPEED));
     public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_BLESSING_STRENGTH = SPELL_EFFECTS.register("bestow_blessing_strength", () -> new BestowSpellEffect(MobEffects.DAMAGE_BOOST));
 
-    public static final DeferredHolder<SpellEffect, SpellEffect> GREEK_LETTER_DELTA = SPELL_EFFECTS.register("delta", () -> new GreekLetterSpellEffect(
+    public static final DeferredHolder<SpellEffect, SpellEffect> GREEK_LETTER_DELTA = SPELL_EFFECTS.register("delta", () -> new CastingTreeModifierSpellEffect(
             (spellStackNode, castingUtils, spellStackList) -> {
                 if(spellStackNode.getData().getEffect().hasAnyOf(SpellEffect.TIMER, SpellEffect.MODIFIER, SpellEffect.TRIGGER)){
-                    try {
-                        return new CastingUtils().makeCastingTree(spellStackList.stream().filter(spellStack -> !(spellStack.getEffect() instanceof GreekLetterSpellEffect)).map(spellStack -> spellStack.setCopy(true)).toList(),spellStackList);
-                    } catch (Exception e) {
-
-                    }
+                    return new CastingUtils().makeCastingTree(spellStackList.stream().filter(spellStack -> !(spellStack.getEffect().hasKind(SpellEffect.GREEK_LETTER))).map(spellStack -> spellStack.setCopy(true)).toList(),spellStackList);
                 }
                 return null;
             }
     ));
-    public static final DeferredHolder<SpellEffect, SpellEffect> GREEK_LETTER_LAMBDA = SPELL_EFFECTS.register("lambda", () -> new GreekLetterSpellEffect(
+    public static final DeferredHolder<SpellEffect, SpellEffect> GREEK_LETTER_LAMBDA = SPELL_EFFECTS.register("lambda", () -> new CastingTreeModifierSpellEffect(
             (spellStackNode, castingUtils, spellStackList) -> {
                 if (spellStackNode.getData().getEffect().hasAnyOf(SpellEffect.TIMER, SpellEffect.MODIFIER, SpellEffect.TRIGGER)) {
-                    try{
-                        if(!spellStackList.isEmpty()){
-                            return new CastingUtils().makeCastingTree(
-                                    List.of(spellStackList.stream().filter(spellStack -> !(spellStack.getEffect() instanceof GreekLetterSpellEffect)).toList().getLast().setCopy(true)),spellStackList);
-                        }
-                    }catch (Exception e){
-
+                    if(!spellStackList.isEmpty()){
+                        return new CastingUtils().makeCastingTree(
+                                List.of(spellStackList.stream().filter(spellStack -> !(spellStack.getEffect().hasKind(SpellEffect.GREEK_LETTER))).toList().getLast().setCopy(true)),spellStackList);
                     }
                 }
                 return null;
             }
     ));
-    public static final DeferredHolder<SpellEffect, SpellEffect> GREEK_LETTER_KAPPA = SPELL_EFFECTS.register("kappa", () -> new GreekLetterSpellEffect(
+    public static final DeferredHolder<SpellEffect, SpellEffect> GREEK_LETTER_KAPPA = SPELL_EFFECTS.register("kappa", () -> new CastingTreeModifierSpellEffect(
             (spellStackNode, castingUtils, spellStackList) -> {
                 if (spellStackNode.getData().getEffect().hasAnyOf(SpellEffect.TIMER, SpellEffect.MODIFIER, SpellEffect.TRIGGER)) {
-                    try {
-                        return new CastingUtils().makeCastingTree(spellStackList.stream().filter(spellStack ->
-                                spellStack.getEffect().hasKind(SpellEffect.MODIFIER)
-                                && !(spellStack.getEffect() instanceof GreekLetterSpellEffect)).map(spellStack -> spellStack.setCopy(true)).toList(),spellStackList);
-                    } catch (Exception e) {
-
-                    }
+                    return new CastingUtils().makeCastingTree(spellStackList.stream().filter(spellStack ->
+                            spellStack.getEffect().hasKind(SpellEffect.MODIFIER)
+                            && !(spellStack.getEffect().hasKind(SpellEffect.GREEK_LETTER))).map(spellStack -> spellStack.setCopy(true)).toList(),spellStackList);
                 }
                 return null;
             }
     ));
+
+//    public static final DeferredHolder<SpellEffect, SpellEffect> COPY_RANDOM_SPELL = SPELL_EFFECTS.register("copy_random", () -> new CastingTreeModifierSpellEffect(
+//            100,
+//            SpellEffect.MODIFIER,
+//            (spellStackNode, castingUtils, spellStackList) -> {
+//                if(castingUtils.idx < spellStackList.size()){
+//                    List<SpellStack> spells = spellStackList.subList(castingUtils.idx, spellStackList.size());
+//                    if(!spells.isEmpty()){
+//                        return new CastingUtils().makeCastingTree(
+//                                List.of(spells.get(new Random().nextInt(0,spells.size())).setCopy(true)),
+//                                spellStackList
+//                        );
+//                    }
+//                }
+//
+//                return null;
+//            }
+//    ));
+
+
 
 
     public static void register(IEventBus bus) {

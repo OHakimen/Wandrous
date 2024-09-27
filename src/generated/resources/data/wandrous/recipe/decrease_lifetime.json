@@ -1,0 +1,21 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:weave",
+    "wandrous:weave",
+    "wandrous:tinker",
+    "wandrous:tinker",
+    "wandrous:destiny",
+    "wandrous:destiny",
+    "wandrous:bind",
+    "wandrous:bind"
+  ],
+  "on_slate": {
+    "item": "minecraft:clock"
+  },
+  "output": {
+    "id": "wandrous:decrease_lifetime"
+  },
+  "ticks": 100,
+  "tier": 2
+}

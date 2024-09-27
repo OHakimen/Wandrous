@@ -2,6 +2,7 @@ package com.hakimen.wandrous.common.item;
 
 import com.hakimen.wandrous.common.item.component.WandDataComponent;
 import com.hakimen.wandrous.common.registers.DataComponentsRegister;
+import com.hakimen.wandrous.common.registers.ItemRegister;
 import com.hakimen.wandrous.common.registers.SoundRegister;
 import com.hakimen.wandrous.common.utils.ChargesUtils;
 import com.hakimen.wandrous.config.ServerConfig;
@@ -57,6 +58,12 @@ public class RechargeItem extends Item {
             case CRYSTAL -> ServerConfig.RECHARGE_CRYSTAL.get();
             case GREATER_CRYSTAL -> ServerConfig.GREATER_RECHARGE_CRYSTAL.get();
         };
+    }
+    
+
+    @Override
+    public boolean isValidRepairItem(ItemStack pStack, ItemStack pRepairCandidate) {
+        return pRepairCandidate.getItem().equals(ItemRegister.TEALESTITE_SHARD.get());
     }
 
     @Override

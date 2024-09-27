@@ -1,0 +1,14 @@
+{
+  "type": "wandrous:add_items",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:entities/warden"
+    }
+  ],
+  "items": {
+    "wandrous:delta": 0.25,
+    "wandrous:kappa": 0.25,
+    "wandrous:lambda": 0.25
+  }
+}

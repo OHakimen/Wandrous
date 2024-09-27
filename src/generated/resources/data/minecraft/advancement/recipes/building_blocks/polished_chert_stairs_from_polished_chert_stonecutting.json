@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_polished_chert": {
+      "conditions": {
+        "items": [
+          {
+            "items": "wandrous:polished_chert"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:polished_chert_stairs_from_polished_chert_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_polished_chert"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:polished_chert_stairs_from_polished_chert_stonecutting"
+    ]
+  }
+}

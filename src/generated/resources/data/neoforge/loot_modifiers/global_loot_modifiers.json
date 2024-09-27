@@ -1,10 +1,15 @@
 {
   "entries": [
     "wandrous:add_sonic_boom",
+    "wandrous:add_divide_by_in_wither_kill",
     "wandrous:wand_in_dungeon_study_quarters_chest",
     "wandrous:bestow_spell_in_desert_temple_chest",
+    "wandrous:wand_in_ancient_city",
+    "wandrous:bestow_spell_in_dungeon_study_quarters",
+    "wandrous:add_greek_letters_in_warden_kill",
     "wandrous:wand_in_dungeon_cell_chest",
-    "wandrous:bestow_spell_in_village_temple_chest"
+    "wandrous:bestow_spell_in_village_temple_chest",
+    "wandrous:bestow_spell_in_bookcase"
   ],
   "replace": false
 }

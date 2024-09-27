@@ -1,0 +1,17 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:power",
+    "wandrous:power",
+    "wandrous:power",
+    "wandrous:power"
+  ],
+  "on_slate": {
+    "item": "wandrous:increase_spread"
+  },
+  "output": {
+    "id": "wandrous:heavy_spread"
+  },
+  "ticks": 100,
+  "tier": 1
+}

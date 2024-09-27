@@ -1,0 +1,17 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:bind",
+    "wandrous:knowledge",
+    "wandrous:power",
+    "wandrous:tinker"
+  ],
+  "on_slate": {
+    "item": "minecraft:sculk_vein"
+  },
+  "output": {
+    "id": "wandrous:spread_cast"
+  },
+  "ticks": 100,
+  "tier": 1
+}

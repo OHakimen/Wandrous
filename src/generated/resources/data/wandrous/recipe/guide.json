@@ -1,0 +1,21 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:guidance",
+    "wandrous:guidance",
+    "wandrous:guidance",
+    "wandrous:guidance",
+    "wandrous:weave",
+    "wandrous:weave",
+    "wandrous:tinker",
+    "wandrous:destiny"
+  ],
+  "on_slate": {
+    "item": "minecraft:lead"
+  },
+  "output": {
+    "id": "wandrous:guide"
+  },
+  "ticks": 100,
+  "tier": 2
+}

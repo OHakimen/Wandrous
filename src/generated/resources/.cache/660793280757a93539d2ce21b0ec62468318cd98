@@ -1,4 +1,4 @@
-// 1.21.1	2024-09-01T13:08:34.888415	Item Models: wandrous
+// 1.21.1	2024-09-17T18:17:41.4446135	Item Models: wandrous
 70cc88c4158ff94537dbcc51580cc8b905d06269 assets/wandrous/models/item/accelerate_cast.json
 4e5e8e3d5579e5375b8bd695ed36e8cb66c1382c assets/wandrous/models/item/add_mana.json
 3ce45c3b3482a88d09ded62455e12e9db6cddf89 assets/wandrous/models/item/arcane_inscriber.json
@@ -116,6 +116,7 @@ ac09506c1af972591dd6192a8eb316ec2cb473aa assets/wandrous/models/item/small_teale
 053843c1dd314e2f0bd1f8551596fe6302226400 assets/wandrous/models/item/sonic_boom.json
 0a2c9213f860c05a6a17cfb4354a813394a920e3 assets/wandrous/models/item/spread_cast.json
 a45edc343c5dd5ef95e9ff04d9d4eca40200c6ee assets/wandrous/models/item/summon_bee_swarm.json
+d7a2f1a26a36f011287c25eb4e86aba04b8983db assets/wandrous/models/item/summon_wolf_pack.json
 44c1d2b02244f72d8bf5355087c9944aa237cc3a assets/wandrous/models/item/swap_teleport.json
 0c63c1ffa8d6174abda6fb79a69b4a4d5a8dbd59 assets/wandrous/models/item/tealestite_block.json
 787f1ffaff18a1badcc6280e9a7d9c5c96256757 assets/wandrous/models/item/tealestite_cluster.json

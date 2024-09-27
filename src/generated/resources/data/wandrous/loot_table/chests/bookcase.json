@@ -11,7 +11,7 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:cobweb",
-          "weight": 12
+          "weight": 4
         },
         {
           "type": "minecraft:item",
@@ -30,8 +30,8 @@
       ],
       "rolls": {
         "type": "minecraft:uniform",
-        "max": 24.0,
-        "min": 16.0
+        "max": 16.0,
+        "min": 8.0
       }
     }
   ],

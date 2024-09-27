@@ -1,12 +1,16 @@
 package com.hakimen.wandrous.client.event;
 
 import com.hakimen.wandrous.Wandrous;
+import com.hakimen.wandrous.client.tooltip.GlyphTooltipRenderer;
 import com.hakimen.wandrous.client.tooltip.SpellTooltipRenderer;
+import com.hakimen.wandrous.common.data.Glyph;
+import com.hakimen.wandrous.common.item.InscribedLensItem;
 import com.hakimen.wandrous.common.item.ScrollItem;
 import com.hakimen.wandrous.common.item.SpellEffectItem;
 import com.hakimen.wandrous.common.item.WandItem;
 import com.hakimen.wandrous.common.item.component.ScrollDataComponent;
 import com.hakimen.wandrous.common.registers.DataComponentsRegister;
+import com.hakimen.wandrous.common.registers.GlyphRegister;
 import com.hakimen.wandrous.common.registers.ItemRegister;
 import com.mojang.datafixers.util.Either;
 import net.minecraft.nbt.CompoundTag;
@@ -38,10 +42,33 @@ public class RenderToolTips {
             renderForWand(e, stack);
         } else if (stack.getItem() instanceof ScrollItem) {
             renderForScroll(e, stack);
+        } else if (stack.getItem() instanceof InscribedLensItem){
+            renderForLens(e,stack);
         }
     }
 
+    private static void renderForLens(RenderTooltipEvent.GatherComponents e,ItemStack stack){
+        Optional.ofNullable(stack.get(DataComponentsRegister.GLYPH_COMPONENT.get())).ifPresent(
+                glyphData -> {
+                    Glyph glyph = GlyphRegister.GLYPHS.getRegistry().get().get(glyphData.getId());
 
+                    List<Either<FormattedText, TooltipComponent>> list = e.getTooltipElements();
+                    int rmvIdx = -1;
+                    for (int i = 0; i < list.size(); i++) {
+                        Optional<FormattedText> o = list.get(i).left();
+                        if (o.isPresent() && o.get() instanceof Component comp && comp.getContents() instanceof PlainTextContents.LiteralContents tc) {
+                            if ("GLYPH_MARKER".equals(tc.text())) {
+                                rmvIdx = i;
+                                list.remove(i);
+                                break;
+                            }
+                        }
+                    }
+                    if (rmvIdx == -1) return;
+                    e.getTooltipElements().add(rmvIdx, Either.right(new GlyphTooltipRenderer.GlyphTooltipComponent(glyph)));
+                }
+        );
+    }
 
     private static void renderForWand(RenderTooltipEvent.GatherComponents e, ItemStack stack) {
         int wandCapacity = stack.get(DataComponentsRegister.WAND_COMPONENT.get()).getCapacity();

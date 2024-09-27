@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "wandrous:chert"
+  },
+  "result": {
+    "count": 1,
+    "id": "wandrous:polished_chert_stairs"
+  }
+}

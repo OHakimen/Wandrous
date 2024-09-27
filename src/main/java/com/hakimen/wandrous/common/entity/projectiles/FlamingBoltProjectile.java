@@ -18,12 +18,8 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class FlamingBoltProjectile extends SpellCastingProjectile {
-
-    SpellContext context;
-    List<ISpellMover> movers;
 
     public FlamingBoltProjectile(EntityType<? extends ThrowableProjectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -44,16 +40,13 @@ public class FlamingBoltProjectile extends SpellCastingProjectile {
         this.context = context.clone();
         this.context.setCaster(this);
         this.maxTicks = this.context.getStatus().getLifeTime();
-        this.movers = new ArrayList<>();
-
+        this.movers = getMovers(this.context.getNode());
     }
 
     @Override
     protected void onHit(HitResult pResult) {
         super.onHit(pResult);
-        if (!this.level().isClientSide) {
-            level().explode(this, getX(), getY(), getZ(), context != null ? context.getStatus().getDamage() : 4, true, Level.ExplosionInteraction.MOB);
-        }
+        level().explode(this, getX(), getY(), getZ(), context != null ? context.getStatus().getDamage() : 4, true, Level.ExplosionInteraction.TNT);
     }
 
     @Override
@@ -74,6 +67,7 @@ public class FlamingBoltProjectile extends SpellCastingProjectile {
             ));
             SpellCastingProjectile.onHitBlock(this, pResult, this.context);
             context.getLevel().broadcastEntityEvent(this, (byte) 3);
+
             this.discard();
         }
     }
@@ -104,7 +98,6 @@ public class FlamingBoltProjectile extends SpellCastingProjectile {
         super.tick();
 
         if (this.context != null) {
-            List<ISpellMover> movers = getMovers(context.getNode());
             for (ISpellMover mover : movers) {
                 mover.move(context, this);
             }

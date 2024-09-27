@@ -122,6 +122,7 @@ public class ItemRegister {
     public static final DeferredHolder<Item, SpellEffectItem> GLYPH_OF_TRIGGERING = ITEMS.register("glyph_of_triggering", () -> new SpellEffectItem(SpellRegister.GLYPH_OF_TRIGGERING));
 
     public static final DeferredHolder<Item, SpellEffectItem> SUMMON_BEE_SWARM_SPELL = ITEMS.register("summon_bee_swarm", () -> new SpellEffectItem(SpellRegister.SUMMON_BEE_SWARM, 10));
+    public static final DeferredHolder<Item, SpellEffectItem> SUMMON_WOLF_PACK_SPELL = ITEMS.register("summon_wolf_pack", () -> new SpellEffectItem(SpellRegister.SUMMON_WOLF_PACK, 10));
 
     public static final DeferredHolder<Item, SpellEffectItem> BESTOW_CURSE_SILENCE_SPELL = ITEMS.register("bestow_curse_silence", () -> new SpellEffectItem(SpellRegister.BESTOW_CURSE_SILENCE, 20));
 
@@ -150,6 +151,7 @@ public class ItemRegister {
     public static final DeferredHolder<Item, SpellEffectItem> GREEK_LETTER_DELTA_SPELL = ITEMS.register("delta", () -> new SpellEffectItem(SpellRegister.GREEK_LETTER_DELTA));
     public static final DeferredHolder<Item, SpellEffectItem> GREEK_LETTER_KAPPA_SPELL = ITEMS.register("kappa", () -> new SpellEffectItem(SpellRegister.GREEK_LETTER_KAPPA));
     public static final DeferredHolder<Item, SpellEffectItem> GREEK_LETTER_LAMBDA_SPELL = ITEMS.register("lambda", () -> new SpellEffectItem(SpellRegister.GREEK_LETTER_LAMBDA));
+   // public static final DeferredHolder<Item, SpellEffectItem> COPY_RANDOM_SPELL = ITEMS.register("copy_random", () -> new SpellEffectItem(SpellRegister.COPY_RANDOM_SPELL));
 
     public static final DeferredHolder<Item, BlockItem> CHERT = ITEMS.register("chert", () -> new BlockItem(BlockRegister.CHERT.get(), new Item.Properties()));
     public static final DeferredHolder<Item, BlockItem> CHERT_STAIRS = ITEMS.register("chert_stairs", () -> new BlockItem(BlockRegister.CHERT_STAIRS.get(), new Item.Properties()));

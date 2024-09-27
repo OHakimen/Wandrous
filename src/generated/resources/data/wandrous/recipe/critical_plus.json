@@ -1,0 +1,27 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:power",
+    "wandrous:power",
+    "wandrous:power",
+    "wandrous:power",
+    "wandrous:bind",
+    "wandrous:bind",
+    "wandrous:weave",
+    "wandrous:weave",
+    "wandrous:vitality",
+    "wandrous:vitality",
+    "wandrous:power",
+    "wandrous:power",
+    "wandrous:tinker",
+    "wandrous:tinker"
+  ],
+  "on_slate": {
+    "item": "wandrous:damage_plus"
+  },
+  "output": {
+    "id": "wandrous:critical_plus"
+  },
+  "ticks": 100,
+  "tier": 4
+}

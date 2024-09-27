@@ -1,0 +1,17 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:focus",
+    "wandrous:tinker",
+    "wandrous:knowledge",
+    "wandrous:mind"
+  ],
+  "on_slate": {
+    "item": "wandrous:double_cast"
+  },
+  "output": {
+    "id": "wandrous:triple_cast"
+  },
+  "ticks": 100,
+  "tier": 2
+}

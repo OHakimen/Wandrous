@@ -200,6 +200,7 @@ public class LangProvider extends LanguageProvider {
 
         addSpell(ItemRegister.GLYPH_OF_TRIGGERING.get(), "Glyph of Triggering", "Triggers a spell once an entity steps on it, barely visible to other players");
         addSpell(ItemRegister.SUMMON_BEE_SWARM_SPELL.get(), "Summon Bee Swarm", "Summons 4 bees that pursue the last hit target");
+        addSpell(ItemRegister.SUMMON_WOLF_PACK_SPELL.get(), "Summon Wolf Pack", "Summons 4 wolves that pursue the last hit target");
 
         addSpell(ItemRegister.GUST_SPELL.get(), "Gust", "Conjures a burst of air that send entities flying");
         addSpell(ItemRegister.CHAIN_PRISON_SPELL.get(), "Chain Prison", "Locks an entity into place");

@@ -10,14 +10,22 @@ import org.apache.commons.lang3.function.TriFunction;
 
 import java.util.List;
 
-public class GreekLetterSpellEffect extends SpellEffect {
+public class CastingTreeModifierSpellEffect extends SpellEffect {
 
     TriFunction<Node<SpellStack>, CastingUtils, List<SpellStack>, Node<SpellStack>> apply;
-    public GreekLetterSpellEffect(TriFunction<Node<SpellStack>, CastingUtils, List<SpellStack>, Node<SpellStack>> apply) {
+    public CastingTreeModifierSpellEffect(TriFunction<Node<SpellStack>, CastingUtils, List<SpellStack>, Node<SpellStack>> apply) {
         this.apply = apply;
-        setKind(MODIFIER);
+        setKind(MODIFIER | GREEK_LETTER);
         setStatus(new SpellStatus()
                 .setManaDrain(100)
+        );
+    }
+
+    public CastingTreeModifierSpellEffect(int manaCost, int kinds,TriFunction<Node<SpellStack>, CastingUtils, List<SpellStack>, Node<SpellStack>> apply) {
+        this.apply = apply;
+        setKind(kinds);
+        setStatus(new SpellStatus()
+                .setManaDrain(manaCost)
         );
     }
 
@@ -29,7 +37,6 @@ public class GreekLetterSpellEffect extends SpellEffect {
     public void cast(SpellContext context) {
         context.mergeStatus(getStatus());
         for (Node<SpellStack> child : context.getNode().getChildren()) {
-
             child.getData().getEffect().cast(context.setNode(child));
         }
     }

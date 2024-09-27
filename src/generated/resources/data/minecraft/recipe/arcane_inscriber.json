@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "+": {
+      "tag": "c:ingots/iron"
+    },
+    "-": {
+      "item": "wandrous:tealestite_shard"
+    }
+  },
+  "pattern": [
+    "+-+",
+    "+++"
+  ],
+  "result": {
+    "count": 1,
+    "id": "wandrous:arcane_inscriber"
+  }
+}

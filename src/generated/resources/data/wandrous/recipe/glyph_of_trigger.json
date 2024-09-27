@@ -1,0 +1,21 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:focus",
+    "wandrous:new",
+    "wandrous:new",
+    "wandrous:guidance",
+    "wandrous:control",
+    "wandrous:control",
+    "wandrous:focus",
+    "wandrous:tinker"
+  ],
+  "on_slate": {
+    "item": "minecraft:sculk_sensor"
+  },
+  "output": {
+    "id": "wandrous:glyph_of_triggering"
+  },
+  "ticks": 100,
+  "tier": 2
+}

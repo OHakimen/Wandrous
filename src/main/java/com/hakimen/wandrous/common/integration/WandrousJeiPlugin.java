@@ -2,6 +2,7 @@ package com.hakimen.wandrous.common.integration;
 
 import com.hakimen.wandrous.Wandrous;
 import com.hakimen.wandrous.common.recipe.ArcaneInscribingRecipe;
+import com.hakimen.wandrous.common.registers.DataComponentsRegister;
 import com.hakimen.wandrous.common.registers.ItemRegister;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -9,6 +10,7 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.registration.ISubtypeRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -43,5 +45,12 @@ public class WandrousJeiPlugin implements IModPlugin {
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addRecipeCatalyst(ItemRegister.ARCANE_INSCRIBER.get().getDefaultInstance(), ARCANE_INSCRIBING);
         registration.addRecipeCatalyst(ItemRegister.GLYPH_PROJECTOR.get().getDefaultInstance(), ARCANE_INSCRIBING);
+    }
+
+    @Override
+    public void registerItemSubtypes(ISubtypeRegistration registration) {
+        registration.registerSubtypeInterpreter(ItemRegister.INSCRIBED_LENS.get(), (ingredient, context) -> {
+            return ingredient.get(DataComponentsRegister.GLYPH_COMPONENT.get()).getId().getPath();
+        });
     }
 }

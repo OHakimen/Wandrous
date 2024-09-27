@@ -149,7 +149,6 @@ public class SpellContext implements Cloneable {
         return this;
     }
 
-
     public SpellContext clone() {
         return new SpellContext().setProperties((HashMap<String, Object>) properties.clone());
     }

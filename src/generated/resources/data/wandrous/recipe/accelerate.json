@@ -1,0 +1,21 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:power",
+    "wandrous:power",
+    "wandrous:focus",
+    "wandrous:focus",
+    "wandrous:tinker",
+    "wandrous:tinker",
+    "wandrous:knowledge",
+    "wandrous:mind"
+  ],
+  "on_slate": {
+    "item": "minecraft:sugar"
+  },
+  "output": {
+    "id": "wandrous:accelerate_cast"
+  },
+  "ticks": 100,
+  "tier": 3
+}
