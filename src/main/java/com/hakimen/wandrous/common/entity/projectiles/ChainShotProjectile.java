@@ -153,8 +153,8 @@ public class ChainShotProjectile extends SpellCastingProjectile {
                     this.context.getStatus().setLifetimeMod(0);
                     this.context.getHit().addAll(hit);
                     SpellCastingProjectile.onTimeEnd(this, this.context);
+                    level().playSound(null, context.getCaster().getOnPos(), SoundEvents.AMETHYST_CLUSTER_HIT, SoundSource.PLAYERS, 1,1f);
                 }
-                level().playSound(null, context.getCaster().getOnPos(), SoundEvents.AMETHYST_CLUSTER_HIT, SoundSource.PLAYERS, 1,1f);
                 discard();
             }
         }
