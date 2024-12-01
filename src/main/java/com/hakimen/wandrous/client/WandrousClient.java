@@ -6,6 +6,7 @@ import com.hakimen.wandrous.client.ber.GlyphProjectorRenderer;
 import com.hakimen.wandrous.client.entity.*;
 import com.hakimen.wandrous.client.screens.WandTinkerScreen;
 import com.hakimen.wandrous.common.particle.ArcaneKnowledgeParticle;
+import com.hakimen.wandrous.common.particle.FieryParticle;
 import com.hakimen.wandrous.common.particle.GlimmeringBoltParticle;
 import com.hakimen.wandrous.common.particle.ShockwaveParticle;
 import com.hakimen.wandrous.common.registers.BlockEntityRegister;
@@ -48,8 +49,17 @@ public class WandrousClient {
         Minecraft.getInstance().particleEngine.register(ParticleRegister.GLIMMERING_BOLT.get(),
                 GlimmeringBoltParticle.GlimmeringProvider::new);
 
+        Minecraft.getInstance().particleEngine.register(ParticleRegister.CHAIN_SHOT.get(),
+                GlimmeringBoltParticle.ChainShotProvider::new);
+
         Minecraft.getInstance().particleEngine.register(ParticleRegister.GLIMMERING_BOLT_HIT.get(),
                 GlimmeringBoltParticle.GlimmeringHitProvider::new);
+
+        Minecraft.getInstance().particleEngine.register(ParticleRegister.FIERY_PARTICLES.get(),
+                FieryParticle.FieryProvider::new);
+
+        Minecraft.getInstance().particleEngine.register(ParticleRegister.FREEZING_GAZE.get(),
+                FieryParticle.FreezingGazeProvider::new);
 
         Minecraft.getInstance().particleEngine.register(ParticleRegister.KNOWLEDGE.get(),
                 ArcaneKnowledgeParticle.ArcaneKnowledgeParticleProvider::new);

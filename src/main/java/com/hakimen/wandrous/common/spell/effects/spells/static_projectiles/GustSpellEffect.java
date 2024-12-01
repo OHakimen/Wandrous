@@ -7,6 +7,9 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.item.FallingBlockEntity;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.SimpleExplosionDamageCalculator;
 
@@ -25,13 +28,19 @@ public class GustSpellEffect extends SpellEffect {
     @Override
     public void cast(SpellContext context) {
         context.mergeStatus(getStatus());
+        
 
         context.getLevel()
                 .explode(context.getCaster(),
                         null,
                         new SimpleExplosionDamageCalculator(
                                 true, false, Optional.of(context.getStatus().getRadius()/4f), BuiltInRegistries.BLOCK.getTag(BlockTags.BLOCKS_WIND_CHARGE_EXPLOSIONS).map(Function.identity())
-                        ),
+                        ){
+                            @Override
+                            public boolean shouldDamageEntity(Explosion p_346248_, Entity pEntity) {
+                                return pEntity instanceof FallingBlockEntity;
+                            }
+                        },
                         context.getLocation().x(),
                         context.getLocation().y(),
                         context.getLocation().z(),

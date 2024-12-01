@@ -17,7 +17,7 @@
     "wandrous:tinker"
   ],
   "on_slate": {
-    "item": "minecraft:potion"
+    "item": "minecraft:blaze_powder"
   },
   "output": {
     "id": "wandrous:damage_plus"

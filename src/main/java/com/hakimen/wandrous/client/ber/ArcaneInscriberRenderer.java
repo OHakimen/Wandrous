@@ -31,6 +31,7 @@ public class ArcaneInscriberRenderer implements BlockEntityRenderer<ArcaneInscri
     @Override
     public void render(ArcaneInscriberBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
         ItemStack stack = pBlockEntity.getInventory().getStackInSlot(0);
+        
         pPoseStack.pushPose();
 
         pPoseStack.translate(0.5, 0.55 - Math.cos((pBlockEntity.getLevel().getGameTime() + pPartialTick) / 20f) / 20f, 0.5);

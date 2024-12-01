@@ -36,11 +36,11 @@ public class VertexProcessorBuilder {
                 float textureVN = vn / endV * radius;
 
                 RenderUtils.makeVertexPosColorUVLight(consumer, last, p0.x(), p0.y(), p0.z(), r, g, b, a, textureU, textureV, light);
-                RenderUtils.makeVertexPosColorUVLight(consumer, last, p1.x(), p1.y(), p1.z(), r, g, b, a, textureU, textureVN, light);
                 RenderUtils.makeVertexPosColorUVLight(consumer, last, p2.x(), p2.y(), p2.z(), r, g, b, a, textureUN, textureV, light);
+                RenderUtils.makeVertexPosColorUVLight(consumer, last, p1.x(), p1.y(), p1.z(), r, g, b, a, textureU, textureVN, light);
 
-                RenderUtils.makeVertexPosColorUVLight(consumer, last, p1.x(), p1.y(), p1.z(), r, g, b, a, textureU, textureVN, light);
                 RenderUtils.makeVertexPosColorUVLight(consumer, last, p2.x(), p2.y(), p2.z(), r, g, b, a, textureUN, textureV, light);
+                RenderUtils.makeVertexPosColorUVLight(consumer, last, p1.x(), p1.y(), p1.z(), r, g, b, a, textureU, textureVN, light);
                 RenderUtils.makeVertexPosColorUVLight(consumer, last, p3.x(), p3.y(), p3.z(), r, g, b, a, textureUN, textureVN, light);
             }
         }

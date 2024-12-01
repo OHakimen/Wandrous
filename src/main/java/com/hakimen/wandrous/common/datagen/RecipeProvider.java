@@ -15,8 +15,6 @@ import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.PotionContents;
-import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
@@ -540,7 +538,22 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                         GlyphRegister.NEW.get()
                 ),
                 Ingredient.of(Items.LIGHTNING_ROD),
-                ItemRegister.LIGHTING_BOLT_SPELL.get().getDefaultInstance(),
+                ItemRegister.SUMMON_LIGHTING_BOLT_SPELL.get().getDefaultInstance(),
+                100,
+                2);
+
+        inscriberRecipe(pRecipeOutput, "tnt_minecart", List.of(
+                        GlyphRegister.WEAVE.get(),
+                        GlyphRegister.CONTROL.get(),
+                        GlyphRegister.POWER.get(),
+                        GlyphRegister.POWER.get(),
+                        GlyphRegister.POWER.get(),
+                        GlyphRegister.POWER.get(),
+                        GlyphRegister.TINKER.get(),
+                        GlyphRegister.NEW.get()
+                ),
+                Ingredient.of(Items.TNT_MINECART),
+                ItemRegister.SUMMON_TNT_MINECART_SPELL.get().getDefaultInstance(),
                 100,
                 2);
 
@@ -614,6 +627,21 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 ),
                 Ingredient.of(Items.HOPPER),
                 ItemRegister.COLLECT_SPELL.get().getDefaultInstance(),
+                100,
+                2);
+
+        inscriberRecipe(pRecipeOutput, "smelt", List.of(
+                        GlyphRegister.CONTROL.get(),
+                        GlyphRegister.CONTROL.get(),
+                        GlyphRegister.WEAVE.get(),
+                        GlyphRegister.WEAVE.get(),
+                        GlyphRegister.TINKER.get(),
+                        GlyphRegister.TINKER.get(),
+                        GlyphRegister.POWER.get(),
+                        GlyphRegister.NEW.get()
+                ),
+                Ingredient.of(Items.FURNACE),
+                ItemRegister.SMELT_SPELL.get().getDefaultInstance(),
                 100,
                 2);
 
@@ -1011,7 +1039,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                         GlyphRegister.MIND.get()
                 ),
                 Ingredient.of(ItemRegister.DOUBLE_SPLIT_SPELL.get()),
-                ItemRegister.TRIPLE_CAST_SPELL.get().getDefaultInstance(),
+                ItemRegister.TRIPLE_SPLIT_SPELL.get().getDefaultInstance(),
                 100,
                 2
         );
@@ -1032,7 +1060,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                         GlyphRegister.TINKER.get(),
                         GlyphRegister.CONTROL.get()
                 ),
-                Ingredient.of(ItemRegister.TRIPLE_CAST_SPELL.get()),
+                Ingredient.of(ItemRegister.TRIPLE_SPLIT_SPELL.get()),
                 ItemRegister.QUAD_SPLIT_SPELL.get().getDefaultInstance(),
                 100,
                 3
@@ -1102,7 +1130,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                         GlyphRegister.TINKER.get()
 
                 ),
-                Ingredient.of(PotionContents.createItemStack(Items.POTION, Potions.STRENGTH)),
+                Ingredient.of(Items.BLAZE_POWDER),
                 ItemRegister.DAMAGE_PLUS_SPELL.get().getDefaultInstance(),
                 100,
                 4

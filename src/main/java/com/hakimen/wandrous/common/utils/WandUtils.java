@@ -160,11 +160,17 @@ public class WandUtils {
 
         WandDataComponent.WandStatBuilder builder = new WandDataComponent.WandStatBuilder();
 
-        builder.setCapacity(r.nextInt(3, 54));
-        builder.setMaxMana(r.nextInt(64, 2048));
-        builder.setManaChargeSpeed(r.nextInt(64, 2048));
-        builder.setCastDelay(r.nextFloat(-2f, 5f));
-        builder.setRechargeSpeed(r.nextFloat(-2f, 5f));
+        int tier = r.nextInt(1,11);
+
+        int capacityPerTier = r.nextInt(3 + tier, tier * 5);
+        int maxManaPerTier = r.nextInt(64 + tier, tier * 200 + r.nextInt(-5 + tier,5 + tier));
+        int chargeSpeedPerTier = r.nextInt(64 + tier, 64 + tier * 125 + r.nextInt(-2 + tier,2 + tier));
+
+        builder.setCapacity(capacityPerTier);
+        builder.setMaxMana(maxManaPerTier);
+        builder.setManaChargeSpeed(chargeSpeedPerTier);
+        builder.setCastDelay(r.nextFloat(-2f - (tier/10f), 5f - (tier/10f)));
+        builder.setRechargeSpeed(r.nextFloat(-2f - (tier/10f), 5f - (tier/10f)));
         builder.setMana(builder.getMaxMana());
 
         builder.setWand(r.nextInt(0, 6));

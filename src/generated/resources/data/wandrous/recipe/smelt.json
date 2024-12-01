@@ -1,0 +1,21 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:control",
+    "wandrous:control",
+    "wandrous:weave",
+    "wandrous:weave",
+    "wandrous:tinker",
+    "wandrous:tinker",
+    "wandrous:power",
+    "wandrous:new"
+  ],
+  "on_slate": {
+    "item": "minecraft:furnace"
+  },
+  "output": {
+    "id": "wandrous:smelt"
+  },
+  "ticks": 100,
+  "tier": 2
+}

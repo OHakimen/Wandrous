@@ -8,14 +8,15 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.*;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -90,15 +91,6 @@ public class BlackHoleProjectile extends SpellCastingProjectile {
             Vec3 location = getPosition(0);
             Level level = level();
             float radius = this.context.getStatus().getRadius();
-
-            if(tickCount % 2 == 0){
-                for (Entity entity : level.getEntitiesOfClass(Entity.class, AABB.ofSize(location, radius, radius, radius), EntitySelector
-                        .withinDistance(getX(), getY(), getZ(), radius))) {
-                    if(!(entity instanceof BlackHoleProjectile && entity.equals(context.getOriginalCaster()))){
-                        entity.addDeltaMovement(location.subtract(entity.getPosition(0)).normalize().scale(location.distanceTo(entity.getPosition(0))/radius));
-                    }
-                }
-            }
 
             Iterator<BlockPos> positions = BlockPos.betweenClosed(pos.offset((int) -radius, (int) -radius, (int) -radius), pos.offset((int) radius, (int) radius, (int) radius)).iterator();
 

@@ -14,7 +14,7 @@
     "item": "wandrous:double_split_cast"
   },
   "output": {
-    "id": "wandrous:triple_cast"
+    "id": "wandrous:triple_split_cast"
   },
   "ticks": 100,
   "tier": 2

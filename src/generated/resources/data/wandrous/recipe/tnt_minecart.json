@@ -1,0 +1,21 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:weave",
+    "wandrous:control",
+    "wandrous:power",
+    "wandrous:power",
+    "wandrous:power",
+    "wandrous:power",
+    "wandrous:tinker",
+    "wandrous:new"
+  ],
+  "on_slate": {
+    "item": "minecraft:tnt_minecart"
+  },
+  "output": {
+    "id": "wandrous:tnt_minecart"
+  },
+  "ticks": 100,
+  "tier": 2
+}

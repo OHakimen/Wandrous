@@ -36,6 +36,10 @@ public class BlackHoleProjectileRenderer extends EntityRenderer<BlackHoleProject
 
         VertexProcessorBuilder.drawSphere(vertexconsumer, pPoseStack, 1,32, 32, 0,0,0.4f,1,15);
 
+        VertexConsumer borderConsumer = pBuffer.getBuffer(RenderType.debugFilledBox());
+        VertexProcessorBuilder.drawSphere(borderConsumer, pPoseStack, 1.1f,32, 32, 0.255f, 0.439f, 0.5f,0.05f,15);
+        VertexProcessorBuilder.drawSphere(borderConsumer, pPoseStack, 1.2f,32, 32, 0.255f, 0.118f, 0.569f,0.1f,15);
+
         pPoseStack.popPose();
         super.render(pEntity, pEntityYaw, pPartialTick, pPoseStack, pBuffer, pPackedLight);
     }

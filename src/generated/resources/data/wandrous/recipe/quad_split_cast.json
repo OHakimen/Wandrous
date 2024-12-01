@@ -13,7 +13,7 @@
     "wandrous:control"
   ],
   "on_slate": {
-    "item": "wandrous:triple_cast"
+    "item": "wandrous:triple_split_cast"
   },
   "output": {
     "id": "wandrous:quad_split_cast"

@@ -50,6 +50,7 @@ public class ChainShotProjectile extends SpellCastingProjectile {
         this.setNoGravity(true);
         this.maxTicks = this.context.getStatus().getLifeTime();
         this.movers = new ArrayList<>();
+        this.hit = new ArrayList<>();
         this.movers = getMovers(this.context.getNode());
     }
 
@@ -91,8 +92,8 @@ public class ChainShotProjectile extends SpellCastingProjectile {
     protected void onHitEntity(EntityHitResult pResult) {
         if (context != null) {
             SpellCastingProjectile.onHitEntity(this, pResult, context);
-            this.level().broadcastEntityEvent(this, (byte) 3);
             if (hitCount > 0 && pResult.getEntity() instanceof LivingEntity livingEntity && !hit.contains(livingEntity)) {
+                this.level().broadcastEntityEvent(this, (byte) 3);
                 hit.add(livingEntity);
                 level().playSound(null, context.getCaster().getOnPos(), SoundEvents.AMETHYST_BLOCK_HIT, SoundSource.PLAYERS, 1,1f + (hit.size() / 10f));
                 context.setHomingTarget(null);

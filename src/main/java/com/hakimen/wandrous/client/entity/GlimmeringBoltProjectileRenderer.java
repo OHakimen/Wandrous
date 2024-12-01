@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.phys.Vec3;
 
 public class GlimmeringBoltProjectileRenderer extends EntityRenderer<GlimmeringBoltProjectile> {
 
@@ -25,12 +26,13 @@ public class GlimmeringBoltProjectileRenderer extends EntityRenderer<GlimmeringB
     @Override
     public void render(GlimmeringBoltProjectile pEntity, float pEntityYaw, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
        if(pEntity.tickCount >=1) {
-           for (int i = 0; i < 2; i++) {
+           for (int i = 0; i < 4; i++) {
+               Vec3 pos = pEntity.getPosition(pPartialTick);
                pEntity.level().addParticle(
                        ParticleRegister.GLIMMERING_BOLT.get(),
-                       pEntity.getX(),
-                       pEntity.getY(),
-                       pEntity.getZ(),
+                       pos.x(),
+                       pos.y(),
+                       pos.z(),
                        0,0,0
                );
            }

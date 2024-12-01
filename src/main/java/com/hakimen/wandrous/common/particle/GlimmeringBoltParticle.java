@@ -1,15 +1,7 @@
 package com.hakimen.wandrous.common.particle;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Tesselator;
-import com.mojang.blaze3d.vertex.VertexFormat;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
-import net.minecraft.client.renderer.texture.TextureAtlas;
-import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -46,7 +38,7 @@ public class GlimmeringBoltParticle extends TextureSheetParticle {
 
     @Override
     public ParticleRenderType getRenderType() {
-        return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+        return ParticleRenderTypes.ADDITIVE;
     }
 
 
@@ -96,6 +88,38 @@ public class GlimmeringBoltParticle extends TextureSheetParticle {
             particle.xd *= 0.05f;
             particle.yd *= 0.05f;
             particle.zd *= 0.05f;
+            return particle;
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static class ChainShotProvider implements ParticleProvider<SimpleParticleType> {
+        private final SpriteSet sprites;
+
+        public ChainShotProvider(SpriteSet sprites) {
+            this.sprites = sprites;
+        }
+
+        @Nullable
+        @Override
+        public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double x, double y, double z, double vX, double vY, double vZ) {
+            Random r = new Random();
+
+            GlimmeringBoltParticle particle =  new GlimmeringBoltParticle(clientLevel,
+                    x + r.nextFloat(-0.1f,0.1f),
+                    y + r.nextFloat(-0.1f,0.1f),
+                    z + r.nextFloat(-0.1f,0.1f), sprites,
+                    vX + r.nextFloat(-0.1f,0.1f),
+                    vY + r.nextFloat(-0.1f,0.1f),
+                    vZ + r.nextFloat(-0.1f,0.1f) );
+
+            float g = r.nextFloat(0.2f,1);
+            float b = r.nextFloat(0.137f,0.686f);
+            particle.setColor(0,g,b);
+
+            particle.xd *= 0.1f;
+            particle.yd *= 0.1f;
+            particle.zd *= 0.1f;
             return particle;
         }
     }

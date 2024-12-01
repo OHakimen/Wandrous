@@ -76,14 +76,15 @@ public class ItemRegister {
     public static final DeferredHolder<Item, SpellEffectItem> HOME_BRINGER_TELEPORT_SPELL = ITEMS.register("home_bringer_teleport", () -> new SpellEffectItem(SpellRegister.HOME_BRINGER_TELEPORT));
 
     public static final DeferredHolder<Item, SpellEffectItem> COLLECT_SPELL = ITEMS.register("collect", () -> new SpellEffectItem(SpellRegister.COLLECT));
+    public static final DeferredHolder<Item, SpellEffectItem> SMELT_SPELL = ITEMS.register("smelt", () -> new SpellEffectItem(SpellRegister.SMELT));
 
     public static final DeferredHolder<Item, SpellEffectItem> DRILL_SPELL = ITEMS.register("drill", () -> new SpellEffectItem(SpellRegister.DRILL));
     public static final DeferredHolder<Item, SpellEffectItem> GIGA_DRILL_SPELL = ITEMS.register("giga_drill", () -> new SpellEffectItem(SpellRegister.GIGA_DRILL));
 
     public static final DeferredHolder<Item, SpellEffectItem> CHAINSAW_SPELL = ITEMS.register("chainsaw", () -> new SpellEffectItem(SpellRegister.CHAINSAW));
 
-    public static final DeferredHolder<Item, SpellEffectItem> LIGHTING_BOLT_SPELL = ITEMS.register("lighting_bolt", () -> new SpellEffectItem(SpellRegister.LIGHTNING_BOLT));
-
+    public static final DeferredHolder<Item, SpellEffectItem> SUMMON_LIGHTING_BOLT_SPELL = ITEMS.register("lighting_bolt", () -> new SpellEffectItem(SpellRegister.LIGHTNING_BOLT));
+    public static final DeferredHolder<Item, SpellEffectItem> SUMMON_TNT_MINECART_SPELL = ITEMS.register("tnt_minecart", () -> new SpellEffectItem(SpellRegister.TNT_MINECART, 10));
     public static final DeferredHolder<Item, SpellEffectItem> GLIMMERING_BOLT_SPELL = ITEMS.register("glimmering_bolt", () -> new SpellEffectItem(SpellRegister.GLIMMERING_BOLT));
     public static final DeferredHolder<Item, SpellEffectItem> TRIGGER_GLIMMERING_BOLT_SPELL = ITEMS.register("trigger_glimmering_bolt", () -> new SpellEffectItem(SpellRegister.TRIGGER_GLIMMERING_BOLT));
     public static final DeferredHolder<Item, SpellEffectItem> TIMER_GLIMMERING_BOLT_SPELL = ITEMS.register("timer_glimmering_bolt", () -> new SpellEffectItem(SpellRegister.TIMER_GLIMMERING_BOLT));

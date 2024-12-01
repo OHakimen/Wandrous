@@ -21,6 +21,9 @@ import com.hakimen.wandrous.common.spell.effects.spells.projectiles.*;
 import com.hakimen.wandrous.common.spell.effects.spells.raycast.FreezingGazeSpellEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.raycast.IgneousGazeSpellEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.static_projectiles.*;
+import com.hakimen.wandrous.common.spell.effects.spells.static_projectiles.utility.ChainsawSpellEffect;
+import com.hakimen.wandrous.common.spell.effects.spells.static_projectiles.utility.DrillSpellEffect;
+import com.hakimen.wandrous.common.spell.effects.spells.static_projectiles.utility.SmeltSpellEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.summon_spells.*;
 import com.hakimen.wandrous.common.spell.effects.spells.teleports.CollectEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.teleports.HomebringerTeleportEffect;
@@ -84,13 +87,14 @@ public class SpellRegister {
     public static final DeferredHolder<SpellEffect, SpellEffect> HOME_BRINGER_TELEPORT = SPELL_EFFECTS.register("home_bringer_teleport", HomebringerTeleportEffect::new);
 
     public static final DeferredHolder<SpellEffect, SpellEffect> COLLECT = SPELL_EFFECTS.register("collect", CollectEffect::new);
+    public static final DeferredHolder<SpellEffect, SpellEffect> SMELT = SPELL_EFFECTS.register("smelt", SmeltSpellEffect::new);
 
     public static final DeferredHolder<SpellEffect, SpellEffect> DOUBLE_SPLIT = SPELL_EFFECTS.register("double_split", () -> new SplitCastEffect(2));
     public static final DeferredHolder<SpellEffect, SpellEffect> TRIPLE_SPLIT = SPELL_EFFECTS.register("triple_split", () -> new SplitCastEffect(3));
     public static final DeferredHolder<SpellEffect, SpellEffect> QUAD_SPLIT = SPELL_EFFECTS.register("quad_split", () -> new SplitCastEffect(4));
 
-    public static final DeferredHolder<SpellEffect, SpellEffect> LIGHTNING_BOLT = SPELL_EFFECTS.register("lightning_bolt", () -> new SummonEntityEffect(EntityType.LIGHTNING_BOLT, 70));
-
+    public static final DeferredHolder<SpellEffect, SpellEffect> LIGHTNING_BOLT = SPELL_EFFECTS.register("lightning_bolt", () -> new SummonEntityEffect(EntityType.LIGHTNING_BOLT, 100));
+    public static final DeferredHolder<SpellEffect, SpellEffect> TNT_MINECART = SPELL_EFFECTS.register("tnt_minecart", () -> new SummonEntityEffect(EntityType.TNT_MINECART, 70));
     public static final DeferredHolder<SpellEffect, SpellEffect> FREEZING_CHARGE = SPELL_EFFECTS.register("freezing_charge", () -> new FreezingChargeHitEffect(35));
     public static final DeferredHolder<SpellEffect, SpellEffect> IGNEOUS_CHARGE = SPELL_EFFECTS.register("igneous_charge", () -> new IgneousChargeHitEffect(35));
     public static final DeferredHolder<SpellEffect, SpellEffect> POISON_CHARGE = SPELL_EFFECTS.register("poison_charge", () -> new PoisonChargeHitEffect(35));
@@ -278,27 +282,6 @@ public class SpellRegister {
                 return null;
             }
     ));
-
-//    public static final DeferredHolder<SpellEffect, SpellEffect> COPY_RANDOM_SPELL = SPELL_EFFECTS.register("copy_random", () -> new CastingTreeModifierSpellEffect(
-//            100,
-//            SpellEffect.MODIFIER,
-//            (spellStackNode, castingUtils, spellStackList) -> {
-//                if(castingUtils.idx < spellStackList.size()){
-//                    List<SpellStack> spells = spellStackList.subList(castingUtils.idx, spellStackList.size());
-//                    if(!spells.isEmpty()){
-//                        return new CastingUtils().makeCastingTree(
-//                                List.of(spells.get(new Random().nextInt(0,spells.size())).setCopy(true)),
-//                                spellStackList
-//                        );
-//                    }
-//                }
-//
-//                return null;
-//            }
-//    ));
-
-
-
 
     public static void register(IEventBus bus) {
         SPELL_EFFECTS.register(bus);

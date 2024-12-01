@@ -1,4 +1,4 @@
-package com.hakimen.wandrous.common.spell.effects.spells.static_projectiles;
+package com.hakimen.wandrous.common.spell.effects.spells.static_projectiles.utility;
 
 import com.hakimen.wandrous.common.spell.SpellContext;
 import com.hakimen.wandrous.common.spell.SpellEffect;
@@ -20,11 +20,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ChainsawSpellEffect extends SpellEffect {
+public class DrillSpellEffect extends SpellEffect {
 
     ItemStack mineAs;
-
-    public ChainsawSpellEffect(int cost, float radius) {
+    public DrillSpellEffect(int cost, int radius) {
         setKind(SPELL);
         setStatus(new SpellStatus()
                 .setManaDrain(cost)
@@ -36,15 +35,13 @@ public class ChainsawSpellEffect extends SpellEffect {
     public void cast(SpellContext context) {
         context.mergeStatus(this.getStatus());
 
-        float radius = context.getStatus().getRadius();
-        context.getStatus().setRadiusMod(0);
+        int radius = (int) context.getStatus().getRadius();
         Vec3 location = context.getLocation();
         BlockPos pos = new BlockPos((int) Math.round(location.x), (int) Math.round(location.y), (int) Math.round(location.z));
 
         Level level = context.getLevel();
 
-        Iterator<BlockPos> positions = BlockPos.betweenClosed(pos.offset((int) -radius, (int) -radius, (int) -radius), pos.offset((int) radius, (int) radius, (int) radius)).iterator();
-
+        Iterator<BlockPos> positions = BlockPos.betweenClosed(pos.offset(-radius, -radius, -radius), pos.offset(radius, radius, radius)).iterator();
 
         List<ItemStack> stacksList = new ArrayList<>();
 
@@ -53,7 +50,7 @@ public class ChainsawSpellEffect extends SpellEffect {
             if (blockpos.closerToCenterThan(location, radius)) {
                 BlockState state = level.getBlockState(blockpos);
                 if (!level.isClientSide) {
-                    if (state.is(BlockTags.MINEABLE_WITH_AXE) || state.is(BlockTags.LEAVES)) {
+                    if (state.is(BlockTags.MINEABLE_WITH_PICKAXE) || state.is(BlockTags.MINEABLE_WITH_SHOVEL)) {
                         List<ItemStack> stackList = state.getDrops(new LootParams.Builder((ServerLevel) context.getLevel())
                                 .withParameter(LootContextParams.TOOL, getMineAs())
                                 .withParameter(LootContextParams.ORIGIN, pos.getCenter()));
@@ -64,8 +61,8 @@ public class ChainsawSpellEffect extends SpellEffect {
             }
         }
 
-        stacksList.stream().reduce((i1, i2) -> {
-            if (i1.getCount() + i2.getCount() <= i1.getMaxStackSize()) {
+        stacksList.stream().reduce((i1,i2)-> {
+            if(i1.getCount() + i2.getCount() <= i1.getMaxStackSize()){
                 i1.setCount(i1.getCount() + i2.getCount());
             }
             return i1;
@@ -82,7 +79,7 @@ public class ChainsawSpellEffect extends SpellEffect {
         return mineAs;
     }
 
-    public ChainsawSpellEffect setMineAs(ItemStack mineAs) {
+    public DrillSpellEffect setMineAs(ItemStack mineAs) {
         this.mineAs = mineAs;
         return this;
     }

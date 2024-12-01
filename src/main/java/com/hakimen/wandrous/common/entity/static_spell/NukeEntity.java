@@ -104,9 +104,9 @@ public class NukeEntity extends SpellCastingProjectile {
 
             Iterator<BlockPos> positions = BlockPos.betweenClosedStream(pos.offset((int) radius, (int) radius, (int) radius), pos.offset((int) -radius, (int) -radius, (int) -radius)).filter(blockPos ->
                     !level.getBlockState(blockPos).is(Blocks.AIR)
-                            && blockPos.closerToCenterThan(location, radius + r.nextFloat(-1,1))
-                            && level.getBlockState(blockPos).getDestroySpeed(level, blockPos) != Block.INDESTRUCTIBLE
-                            && level.getBlockState(blockPos).getPistonPushReaction() != PushReaction.BLOCK
+                    && blockPos.closerToCenterThan(location, radius + r.nextFloat(-1,1))
+                    && level.getBlockState(blockPos).getDestroySpeed(level, blockPos) != Block.INDESTRUCTIBLE
+                    && level.getBlockState(blockPos).getPistonPushReaction() != PushReaction.BLOCK
             ).iterator();
 
             if (tickedEnough()) {

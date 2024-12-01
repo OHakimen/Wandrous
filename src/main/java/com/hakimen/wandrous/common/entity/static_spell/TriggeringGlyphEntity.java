@@ -72,10 +72,13 @@ public class TriggeringGlyphEntity extends Entity {
                         CastingUtils utils = new CastingUtils();
                         List<SpellStack> stackList = effects.stream().map(SpellStack::fromItemStack).toList();
                         Node<SpellStack> cast = utils.makeCastingTree(stackList, stackList);
-                        CastingUtils.castSpells(owner, wand, level(), didTrigger.get(i).getPosition(0), cast, context ->
-                                context.setCastPositionModified(true)
-                                        .getHit().add(entity)
-                        );
+
+                        if(cast.getData() != null) {
+                            CastingUtils.castSpells(owner, wand, level(), didTrigger.get(i).getPosition(0), cast, context ->
+                                    context.setCastPositionModified(true)
+                                            .getHit().add(entity)
+                            );
+                        }
                         discard();
                         break;
                     }

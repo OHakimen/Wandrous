@@ -114,6 +114,7 @@ public class LangProvider extends LanguageProvider {
         addSpell(ItemRegister.DRILL_SPELL.get(), "Drill", "It drills!");
         addSpell(ItemRegister.CHAINSAW_SPELL.get(), "Chainsaw", "A good way to get rid of trees");
         addSpell(ItemRegister.COLLECT_SPELL.get(), "Collect", "Collects items and teleports them to the caster");
+        addSpell(ItemRegister.SMELT_SPELL.get(), "Smelt", "Smelts an item");
 
         addSpell(ItemRegister.EXPLOSION_SPELL.get(), "Explosion", "A small explosion");
         addSpell(ItemRegister.MAJOR_EXPLOSION_SPELL.get(), "Major Explosion", "A large explosion");
@@ -193,7 +194,8 @@ public class LangProvider extends LanguageProvider {
         addSpell(ItemRegister.DIVIDE_BY_3_SPELL.get() , "Divide by 3", "Casts 3 copies of a spell but its damage is reduced to a third");
         addSpell(ItemRegister.DIVIDE_BY_4_SPELL.get() , "Divide by 4", "Casts 4 copies of a spell but its damage is reduced to a forth");
 
-        addSpell(ItemRegister.LIGHTING_BOLT_SPELL.get(), "Summon Lightning", "An electrifying experience !");
+        addSpell(ItemRegister.SUMMON_LIGHTING_BOLT_SPELL.get(), "Summon Lightning", "An electrifying experience !");
+        addSpell(ItemRegister.SUMMON_TNT_MINECART_SPELL.get(), "Summon TNT Minecart", "Summons a minecart that can unleash a explosion");
         addSpell(ItemRegister.CONJURE_BLOCK_SPELL.get(), "Conjure Block", "Summons a temporary block");
         addSpell(ItemRegister.CONJURE_LIGHT_SPELL.get(), "Conjure Light", "Summons a temporary light source");
         addSpell(ItemRegister.CONJURE_WEBS_SPELL.get(), "Conjure Webs", "Summons a web cocoon");

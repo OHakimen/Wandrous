@@ -2,14 +2,13 @@ package com.hakimen.wandrous.client.entity;
 
 import com.hakimen.wandrous.Wandrous;
 import com.hakimen.wandrous.common.entity.projectiles.FlamingBoltProjectile;
+import com.hakimen.wandrous.common.registers.ParticleRegister;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.core.particles.DustParticleOptions;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
-import org.joml.Vector3f;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.Random;
 
@@ -30,46 +29,19 @@ public class FlamingBoltProjectileRenderer extends EntityRenderer<FlamingBoltPro
     @Override
     public void render(FlamingBoltProjectile pEntity, float pEntityYaw, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
 
-        float tickPlusPartial = pPartialTick + pEntity.tickCount;
-
         Random r = new Random();
+        Vec3 pos = pEntity.getPosition(pPartialTick);
+        for (int i = 0; i < 16; i++) {
+            float scale = (0.25f * ((1 + i))) / 6f;
 
-        if (pEntity.tickCount >= 2) {
-
-
-            if (pEntity.tickCount % 4 == 0) {
-                pEntity.level().addParticle(
-                        ParticleTypes.LAVA,
-                        true,
-                        pEntity.getX() + r.nextFloat(-0.25f, 0.25f),
-                        pEntity.getY() + r.nextFloat(-0.25f, 0.25f),
-                        pEntity.getZ() + r.nextFloat(-0.25f, 0.25f),
-                        0, 0, 0
-                );
-            }
-
-            for (int i = 0; i < 8; i++) {
-                float scale = (0.25f * ((1 + i))) / 3f;
-                pEntity.level().addParticle(
-                        ParticleTypes.FLAME,
-                        true,
-                        pEntity.getX() + r.nextFloat(-scale, scale),
-                        pEntity.getY() + r.nextFloat(-scale, scale),
-                        pEntity.getZ() + r.nextFloat(-scale, scale),
-                        pEntity.getDeltaMovement().x / 4, pEntity.getDeltaMovement().y / 4, pEntity.getDeltaMovement().z / 4
-                );
-
-                float color = r.nextFloat(0, 0.65f);
-
-                pEntity.level().addParticle(
-                        new DustParticleOptions(new Vector3f(color, color, color), 2),
-                        true,
-                        pEntity.getX() + r.nextFloat(-scale, scale),
-                        pEntity.getY() + r.nextFloat(-scale, scale),
-                        pEntity.getZ() + r.nextFloat(-scale, scale),
-                        pEntity.getDeltaMovement().x / 4, pEntity.getDeltaMovement().y / 4, pEntity.getDeltaMovement().z / 4
-                );
-            }
+            pEntity.level().addParticle(
+                    ParticleRegister.FIERY_PARTICLES.get(),
+                    true,
+                    pos.x() + r.nextFloat(-scale,scale),
+                    pos.y() + r.nextFloat(-scale,scale),
+                    pos.z() + r.nextFloat(-scale,scale),
+                    0,0,0
+            );
         }
 
         super.render(pEntity, pEntityYaw, pPartialTick, pPoseStack, pBuffer, pPackedLight);

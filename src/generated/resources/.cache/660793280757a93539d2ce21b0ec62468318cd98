@@ -1,4 +1,4 @@
-// 1.21.1	2024-09-17T18:17:41.4446135	Item Models: wandrous
+// 1.21.1	2024-10-19T16:52:15.6615504	Item Models: wandrous
 70cc88c4158ff94537dbcc51580cc8b905d06269 assets/wandrous/models/item/accelerate_cast.json
 4e5e8e3d5579e5375b8bd695ed36e8cb66c1382c assets/wandrous/models/item/add_mana.json
 3ce45c3b3482a88d09ded62455e12e9db6cddf89 assets/wandrous/models/item/arcane_inscriber.json
@@ -113,6 +113,7 @@ fd79a8b6c69993a64d5b14de0185c297677b2ff0 assets/wandrous/models/item/quad_split_
 d50cafa6f198fa339a274bd107326dcb3c45354d assets/wandrous/models/item/scroll.json
 ed7f1cbe6aef6835f3389b0dc7cdf2d2a1f853b4 assets/wandrous/models/item/small_delay_cast.json
 ac09506c1af972591dd6192a8eb316ec2cb473aa assets/wandrous/models/item/small_tealestite_bud.json
+3ddc8e71fb0541dfd2affb64613b5da5a94d90c7 assets/wandrous/models/item/smelt.json
 053843c1dd314e2f0bd1f8551596fe6302226400 assets/wandrous/models/item/sonic_boom.json
 0a2c9213f860c05a6a17cfb4354a813394a920e3 assets/wandrous/models/item/spread_cast.json
 a45edc343c5dd5ef95e9ff04d9d4eca40200c6ee assets/wandrous/models/item/summon_bee_swarm.json
@@ -130,6 +131,7 @@ af40211b979fa7a16ab39120649dc7cba1bbaa4a assets/wandrous/models/item/teleport_ca
 fcafb8deea0ba8495228ab7d59f424d9372de30e assets/wandrous/models/item/timer_fireball.json
 ecb1f97b70ffdbb644e25fb924f6d78aea290b21 assets/wandrous/models/item/timer_glimmering_bolt.json
 b6282631b944ed6f57fc103f9d5099dd7b3b246d assets/wandrous/models/item/timer_sonic_boom.json
+56673ab8b9537b0db84e8ad1a33194dba534d275 assets/wandrous/models/item/tnt_minecart.json
 8d5fefb108578905529f667d2c7596f58e2d405f assets/wandrous/models/item/trigger_chain_shot.json
 5a5bff7da96931a2d42614ffd01b9daba93bfa3b assets/wandrous/models/item/trigger_fireball.json
 9c1e239990fd178a12fae459763c8918f2b2806b assets/wandrous/models/item/trigger_glimmering_bolt.json

@@ -1,12 +1,12 @@
 package com.hakimen.wandrous.common.spell.effects.spells.raycast;
 
 import com.hakimen.wandrous.common.registers.EffectRegister;
+import com.hakimen.wandrous.common.registers.ParticleRegister;
 import com.hakimen.wandrous.common.spell.SpellContext;
 import com.hakimen.wandrous.common.spell.SpellEffect;
 import com.hakimen.wandrous.common.spell.SpellStatus;
 import com.hakimen.wandrous.common.utils.RaycastUtils;
 import net.minecraft.core.Holder;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -45,7 +45,7 @@ public class FreezingGazeSpellEffect extends SpellEffect {
                 if (AABB.ofSize(loc, 1, 1, 1).contains(result.getLocation())) {
                     break;
                 } else {
-                    level.sendParticles(ParticleTypes.SNOWFLAKE, loc.x, loc.y, loc.z, 1, 0.06125, 0.06125, 0.06125, 0.002);
+                    level.sendParticles(ParticleRegister.FREEZING_GAZE.get(), loc.x, loc.y, loc.z, 2, 0.1f,0.1f,0.1f, 0.1);
                     if (result instanceof BlockHitResult bhr && result.getType() != HitResult.Type.MISS) {
                         for (int k = 1; k <= 3; k++) {
                             BlockState state = context.getLevel().getBlockState(bhr.getBlockPos().above(k));

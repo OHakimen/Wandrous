@@ -3,7 +3,8 @@ package com.hakimen.wandrous.common.spell.effects.spells.teleports;
 import com.hakimen.wandrous.common.spell.SpellContext;
 import com.hakimen.wandrous.common.spell.SpellEffect;
 import com.hakimen.wandrous.common.spell.SpellStatus;
-import net.minecraft.world.entity.projectile.ThrownEnderpearl;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.phys.Vec3;
 
 public class TeleportEffect extends SpellEffect {
@@ -20,6 +21,11 @@ public class TeleportEffect extends SpellEffect {
     public void cast(SpellContext context) {
         context.mergeStatus(this.getStatus());
         Vec3 location = context.getLocation();
+        if(context.getLevel() instanceof ServerLevel level){
+            Vec3 loc = context.getOriginalCaster().getPosition(0);
+            level.sendParticles(ParticleTypes.PORTAL, loc.x, loc.y + 1f, loc.z, 20, 1f,1f,1f, 0f);
+        }
         context.getOriginalCaster().teleportTo(location.x, location.y, location.z);
+
     }
 }

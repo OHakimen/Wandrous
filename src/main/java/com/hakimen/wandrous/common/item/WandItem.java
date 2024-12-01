@@ -249,7 +249,14 @@ public class WandItem extends Item implements DynamicModelled {
                         ),
                         ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "wand")
                 )
-                .setDisplay("{ \"ground\": {\"rotation\": [0, 0, 0],\"translation\": [0, 3, 0],\"scale\":[ 1,1,1 ]}, \"thirdperson_righthand\":{\"rotation\":[0,90,50],\"translation\":[0,10,2.5],\"scale\":[2,2,2]},\"thirdperson_lefthand\":{\"rotation\":[0,-90,-50],\"translation\":[0,10,2.5],\"scale\":[2,2,2]},\"firstperson_righthand\":{\"rotation\":[0,90,35],\"translation\":[0,5,0],\"scale\":[1.25,1.25,1.25]},\"firstperson_lefthand\":{\"rotation\":[0,-90,-35],\"translation\":[0,5,0],\"scale\":[1.25,1.25,1.25]}}")
+                .setDisplay("{ \"ground\": " +
+                            "{\"rotation\": [0, 0, 0]," +
+                            "\"translation\": [0, 3, 0]," +
+                            "\"scale\":[ 1,1,1 ]}, " +
+                            "\"thirdperson_righthand\":{\"rotation\":[0,90,50],\"translation\":[0,10,2.5],\"scale\":[2,2,1]}," +
+                            "\"thirdperson_lefthand\":{\"rotation\":[0,-90,-50],\"translation\":[0,10,2.5],\"scale\":[2,2,1]}," +
+                            "\"firstperson_righthand\":{\"rotation\":[0,90,35],\"translation\":[0,5,0],\"scale\":[1.25,1.25,0.8]}," +
+                            "\"firstperson_lefthand\":{\"rotation\":[0,-90,-35],\"translation\":[0,5,0],\"scale\":[1.25,1.25,0.8]}}")
                 .setStack(stack);
         return model;
     }

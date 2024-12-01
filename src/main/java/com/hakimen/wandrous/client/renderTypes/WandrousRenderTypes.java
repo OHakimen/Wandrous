@@ -62,7 +62,7 @@ public class WandrousRenderTypes {
                     .setTextureState(new RenderStateShard.TextureStateShard(locationIn, true, false))
                     .setLightmapState(RenderStateShard.NO_LIGHTMAP)
                     .setTransparencyState(RenderStateShard.TRANSLUCENT_TRANSPARENCY)
-                    .setLayeringState(RenderStateShard.VIEW_OFFSET_Z_LAYERING)
+                    .setCullState(RenderStateShard.NO_CULL)
                     .createCompositeState(false);
             return create("wandrous_triangle", DefaultVertexFormat.POSITION_COLOR_TEX_LIGHTMAP, VertexFormat.Mode.TRIANGLE_STRIP, 1536, false, true, rendertype$state);
         }

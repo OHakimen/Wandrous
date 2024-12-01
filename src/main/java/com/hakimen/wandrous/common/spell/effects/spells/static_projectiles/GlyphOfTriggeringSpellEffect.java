@@ -9,6 +9,8 @@ import com.hakimen.wandrous.common.utils.CastingUtils;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.List;
+
 public class GlyphOfTriggeringSpellEffect extends SpellEffect {
 
     public GlyphOfTriggeringSpellEffect() {
@@ -26,7 +28,7 @@ public class GlyphOfTriggeringSpellEffect extends SpellEffect {
 
         Vec3 location = context.getLocation();
         Level level = context.getLevel();
-        TriggeringGlyphEntity triggeringGlyph = new TriggeringGlyphEntity(EntityRegister.TRIGGER_GLYPH.get(),level, CastingUtils.getSpellsFromTree(context.getNode().getChildren().get(0)),
+        TriggeringGlyphEntity triggeringGlyph = new TriggeringGlyphEntity(EntityRegister.TRIGGER_GLYPH.get(),level, !context.getNode().getChildren().isEmpty() ? CastingUtils.getSpellsFromTree(context.getNode().getChildren().get(0)) : List.of(),
                 context.getStatus().getLifeTime(),
                 context.getStatus().getRadius(),
                 context.getOriginalCaster().getUUID(),

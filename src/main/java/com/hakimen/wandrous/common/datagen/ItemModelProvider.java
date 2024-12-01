@@ -151,7 +151,8 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         makeSpell(ItemRegister.HEALTH_TO_POWER_SPELL.get());
         makeSpell(ItemRegister.FRIENDS_TO_POWER_SPELL.get());
 
-        makeSpell(ItemRegister.LIGHTING_BOLT_SPELL.get());
+        makeSpell(ItemRegister.SUMMON_LIGHTING_BOLT_SPELL.get());
+        makeVanillaBasedSpell(ItemRegister.SUMMON_TNT_MINECART_SPELL.get(),"minecraft:item/tnt_minecart");
         makeSpell(ItemRegister.SUMMON_BEE_SWARM_SPELL.get());
         makeSpell(ItemRegister.SUMMON_WOLF_PACK_SPELL.get());
         makeTriggerSpell(ItemRegister.GLYPH_OF_TRIGGERING.get(), "wandrous:item/spell/glyph_of_triggering");
@@ -165,6 +166,7 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         makeSpell(ItemRegister.HOME_BRINGER_TELEPORT_SPELL.get());
 
         makeSpell(ItemRegister.COLLECT_SPELL.get());
+        makeSpell(ItemRegister.SMELT_SPELL.get());
 
         makeSpell(ItemRegister.SMALL_DELAY_CAST_SPELL.get());
         makeSpell(ItemRegister.MEDIUM_DELAY_CAST_SPELL.get());
