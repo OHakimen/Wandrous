@@ -19,6 +19,9 @@ public class LangProvider extends LanguageProvider {
         add("itemGroup.wandrous.main", "Wandrous");
         add("itemGroup.wandrous.spells", "Wandrous: Spells");
 
+        add("wandrous.filled_map.dungeon", "Dungeon Explorer Map");
+        add("wandrous.map.dungeon.lore", "A map to a ancient dungeon told to hold some arcane secrets");
+
         add("item.wandrous.wand.silenced", "Silenced");
         add("item.wandrous.wand.empty_wand", "No spells to cast");
         add("item.wandrous.wand.no_mana", "Not enough mana to cast spells");

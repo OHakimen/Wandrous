@@ -263,5 +263,7 @@
   "item.wandrous.wand.silenced": "Silenced",
   "itemGroup.wandrous.main": "Wandrous",
   "itemGroup.wandrous.spells": "Wandrous: Spells",
-  "jei.wandrous.category.arcane_inscribing": "Arcane Inscribing"
+  "jei.wandrous.category.arcane_inscribing": "Arcane Inscribing",
+  "wandrous.filled_map.dungeon": "Dungeon Explorer Map",
+  "wandrous.map.dungeon.lore": "A map to a ancient dungeon told to hold some arcane secrets"
 }
