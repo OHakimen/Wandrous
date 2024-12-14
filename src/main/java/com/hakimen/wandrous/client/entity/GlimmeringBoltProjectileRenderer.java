@@ -5,6 +5,7 @@ import com.hakimen.wandrous.common.entity.projectiles.GlimmeringBoltProjectile;
 import com.hakimen.wandrous.common.registers.ParticleRegister;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
@@ -40,5 +41,10 @@ public class GlimmeringBoltProjectileRenderer extends EntityRenderer<GlimmeringB
 
 
         //super.render(pEntity, pEntityYaw, pPartialTick, pPoseStack, pBuffer, pPackedLight);
+    }
+
+    @Override
+    public boolean shouldRender(GlimmeringBoltProjectile pLivingEntity, Frustum pCamera, double pCamX, double pCamY, double pCamZ) {
+        return true;
     }
 }

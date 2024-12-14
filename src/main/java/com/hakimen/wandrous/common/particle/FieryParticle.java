@@ -9,8 +9,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-import static com.hakimen.wandrous.common.particle.ParticleRenderTypes.ADDITIVE;
-
 public class FieryParticle extends TextureSheetParticle {
 
 
@@ -40,9 +38,8 @@ public class FieryParticle extends TextureSheetParticle {
 
     @Override
     public ParticleRenderType getRenderType() {
-        return ADDITIVE;
+        return ParticleRenderTypes.ADDITIVE;
     }
-
 
     @OnlyIn(Dist.CLIENT)
     public static class FieryProvider implements ParticleProvider<SimpleParticleType> {

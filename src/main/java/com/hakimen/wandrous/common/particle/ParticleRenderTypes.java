@@ -10,22 +10,21 @@ import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureManager;
 import org.jetbrains.annotations.Nullable;
-import org.lwjgl.opengl.GL11;
 
 public class ParticleRenderTypes {
     public static ParticleRenderType ADDITIVE = new ParticleRenderType() {
+
         @Nullable
         @Override
         public BufferBuilder begin(Tesselator tesselator, TextureManager textureManager) {
-            RenderSystem.depthMask(true);
-            RenderSystem.depthFunc(GL11.GL_NOTEQUAL);
+            RenderSystem.depthMask(false);
             RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
             RenderSystem.enableBlend();
             RenderSystem.blendFuncSeparate(
-                    GlStateManager.SourceFactor.SRC_ALPHA,
+                    GlStateManager.SourceFactor.ONE,
                     GlStateManager.DestFactor.ONE,
-                    GlStateManager.SourceFactor.ONE_MINUS_SRC_ALPHA,
-                    GlStateManager.DestFactor.ZERO
+                    GlStateManager.SourceFactor.ONE,
+                    GlStateManager.DestFactor.ONE
             );
             return tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
         }
