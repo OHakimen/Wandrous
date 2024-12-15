@@ -37,7 +37,9 @@ public class CastingTreeModifierSpellEffect extends SpellEffect {
     public void cast(SpellContext context) {
         context.mergeStatus(getStatus());
         for (Node<SpellStack> child : context.getNode().getChildren()) {
-            child.getData().getEffect().cast(context.setNode(child));
+           if(child.getData() != null){
+               child.getData().getEffect().cast(context.setNode(child));
+           }
         }
     }
 }

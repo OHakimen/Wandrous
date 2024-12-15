@@ -255,8 +255,8 @@ public class SpellRegister {
 
     public static final DeferredHolder<SpellEffect, SpellEffect> GREEK_LETTER_DELTA = SPELL_EFFECTS.register("delta", () -> new CastingTreeModifierSpellEffect(
             (spellStackNode, castingUtils, spellStackList) -> {
-                if(spellStackNode.getData().getEffect().hasAnyOf(SpellEffect.TIMER, SpellEffect.MODIFIER, SpellEffect.TRIGGER)){
-                    return new CastingUtils().makeCastingTree(spellStackList.stream().filter(spellStack -> !(spellStack.getEffect().hasKind(SpellEffect.GREEK_LETTER))).map(spellStack -> spellStack.setCopy(true)).toList(),spellStackList);
+                if (spellStackNode.getData().getEffect().hasAnyOf(SpellEffect.TIMER, SpellEffect.MODIFIER, SpellEffect.TRIGGER)) {
+                    return new CastingUtils().makeCastingTree(spellStackList.stream().filter(spellStack -> !(spellStack.getEffect().hasKind(SpellEffect.GREEK_LETTER))).map(spellStack -> spellStack.setCopy(true)).toList(), spellStackList);
                 }
                 return null;
             }
@@ -264,9 +264,14 @@ public class SpellRegister {
     public static final DeferredHolder<SpellEffect, SpellEffect> GREEK_LETTER_LAMBDA = SPELL_EFFECTS.register("lambda", () -> new CastingTreeModifierSpellEffect(
             (spellStackNode, castingUtils, spellStackList) -> {
                 if (spellStackNode.getData().getEffect().hasAnyOf(SpellEffect.TIMER, SpellEffect.MODIFIER, SpellEffect.TRIGGER)) {
-                    if(!spellStackList.isEmpty()){
-                        return new CastingUtils().makeCastingTree(
-                                List.of(spellStackList.stream().filter(spellStack -> !(spellStack.getEffect().hasKind(SpellEffect.GREEK_LETTER))).toList().getLast().setCopy(true)),spellStackList);
+                    if (!spellStackList.isEmpty()) {
+                        List<SpellStack> list = spellStackList.stream().filter(
+                                spellStack -> !(spellStack.getEffect().hasKind(SpellEffect.GREEK_LETTER))
+                        ).toList();
+                        if(!list.isEmpty()) {
+                            return new CastingUtils().makeCastingTree(List.of(list.getLast().setCopy(true))
+                                    , spellStackList);
+                        }
                     }
                 }
                 return null;
@@ -277,7 +282,7 @@ public class SpellRegister {
                 if (spellStackNode.getData().getEffect().hasAnyOf(SpellEffect.TIMER, SpellEffect.MODIFIER, SpellEffect.TRIGGER)) {
                     return new CastingUtils().makeCastingTree(spellStackList.stream().filter(spellStack ->
                             spellStack.getEffect().hasKind(SpellEffect.MODIFIER)
-                            && !(spellStack.getEffect().hasKind(SpellEffect.GREEK_LETTER))).map(spellStack -> spellStack.setCopy(true)).toList(),spellStackList);
+                            && !(spellStack.getEffect().hasKind(SpellEffect.GREEK_LETTER))).map(spellStack -> spellStack.setCopy(true)).toList(), spellStackList);
                 }
                 return null;
             }

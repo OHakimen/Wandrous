@@ -50,7 +50,7 @@ public class CastingUtils {
             Node<SpellStack> cast = greekLetterSpellEffect.apply(tree, this, alleffects);
 
             if (cast != null) {
-                if (cast.getData().getEffect().hasKind(SpellEffect.TRIGGER) || cast.getData().getEffect().hasKind(SpellEffect.MODIFIER) || cast.getData().getEffect().hasKind(SpellEffect.TIMER)) {
+                if (cast.getData() != null && (cast.getData().getEffect().hasKind(SpellEffect.TRIGGER) || cast.getData().getEffect().hasKind(SpellEffect.MODIFIER) || cast.getData().getEffect().hasKind(SpellEffect.TIMER))) {
                     Node<SpellStack> cast2 = makeCastingTree(effects, alleffects);
                     if (cast2.getData() != null) {
                         cast2.setParent(cast);
@@ -90,7 +90,7 @@ public class CastingUtils {
     }
 
     public static int calculateManaCost(Node<SpellStack> castTree) {
-        int cost = castTree.getData().getEffect().getStatus().getManaDrain();
+        int cost = castTree.getData() != null ? castTree.getData().getEffect().getStatus().getManaDrain() : 0;
 
         for (Node<SpellStack> child : castTree.getChildren()) {
             cost += calculateManaCost(child);
@@ -99,7 +99,7 @@ public class CastingUtils {
     }
 
     public static float calculateCastDelayMod(Node<SpellStack> castTree) {
-        float castDelay = castTree.getData().getEffect().getStatus().getCastDelayMod();
+        float castDelay = castTree.getData() != null ? castTree.getData().getEffect().getStatus().getCastDelayMod() : 0;
 
         for (Node<SpellStack> child : castTree.getChildren()) {
             castDelay += calculateCastDelayMod(child);
@@ -109,7 +109,7 @@ public class CastingUtils {
     }
 
     public static float calculateRechargeSpeedMod(Node<SpellStack> castTree) {
-        float rechargeTimeMod = castTree.getData().getEffect().getStatus().getRechargeTimeMod();
+        float rechargeTimeMod = castTree.getData() != null ? castTree.getData().getEffect().getStatus().getRechargeTimeMod() : 0;
 
         for (Node<SpellStack> child : castTree.getChildren()) {
             rechargeTimeMod += calculateRechargeSpeedMod(child);
