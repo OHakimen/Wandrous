@@ -30,19 +30,21 @@ public class FlamingBoltProjectileRenderer extends EntityRenderer<FlamingBoltPro
     @Override
     public void render(FlamingBoltProjectile pEntity, float pEntityYaw, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
 
-        Random r = new Random();
-        Vec3 pos = pEntity.getPosition(pPartialTick);
-        for (int i = 0; i < 16; i++) {
-            float scale = (0.25f * ((1 + i))) / 6f;
+        if(pEntity.tickCount > 2){
+            Random r = new Random();
+            Vec3 pos = pEntity.getPosition(pPartialTick);
+            for (int i = 0; i < 16; i++) {
+                float scale = (0.25f * ((1 + i))) / 6f;
 
-            pEntity.level().addParticle(
-                    ParticleRegister.FIERY_PARTICLES.get(),
-                    true,
-                    pos.x() + r.nextFloat(-scale,scale),
-                    pos.y() + r.nextFloat(-scale,scale),
-                    pos.z() + r.nextFloat(-scale,scale),
-                    0,0,0
-            );
+                pEntity.level().addParticle(
+                        ParticleRegister.FIERY_PARTICLES.get(),
+                        true,
+                        pos.x() + r.nextFloat(-scale,scale),
+                        pos.y() + r.nextFloat(-scale,scale),
+                        pos.z() + r.nextFloat(-scale,scale),
+                        0,0,0
+                );
+            }
         }
 
         super.render(pEntity, pEntityYaw, pPartialTick, pPoseStack, pBuffer, pPackedLight);
