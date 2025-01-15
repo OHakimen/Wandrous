@@ -74,13 +74,7 @@ public class WandItem extends Item implements DynamicModelled {
         WandDataComponent.WandStat stat = pStack.get(DataComponentsRegister.WAND_COMPONENT);
 
         if (!stat.equals(DEFAULT_STAT)) {
-            pTooltipComponents.add(Component.literal("Cast Delay %.2fs".formatted(stat.getCastDelay())));
-            pTooltipComponents.add(Component.literal("Recharge Speed %.2fs".formatted(stat.getRechargeSpeed())));
-            pTooltipComponents.add(Component.literal("Mana Max %s".formatted(stat.getMaxMana())));
-            pTooltipComponents.add(Component.literal("Mana %s".formatted(stat.getMana())));
-            pTooltipComponents.add(Component.literal("Mana Charge Speed %s".formatted(stat.getManaChargeSpeed())));
-            pTooltipComponents.add(Component.literal(" "));
-            pTooltipComponents.add(Component.literal("Capacity %s".formatted(stat.getCapacity())));
+            pTooltipComponents.add(Component.literal("WAND_STATS_MARKER"));
             pTooltipComponents.add(Component.literal("WAND_SPELLS_MARKER"));
         } else {
             pTooltipComponents.add(Component.literal("Put in inventory to initialize"));

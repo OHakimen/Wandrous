@@ -5,6 +5,7 @@ import com.hakimen.wandrous.common.registers.DataComponentsRegister;
 import com.hakimen.wandrous.common.spell.SpellEffect;
 import com.hakimen.wandrous.common.spell.SpellStatus;
 import com.hakimen.wandrous.common.utils.ChargesUtils;
+import com.hakimen.wandrous.config.ServerConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -90,6 +91,13 @@ public class SpellEffectItem extends Item {
 
         if (status.getRadiusMod() != 0) {
             pTooltipComponents.add(Component.literal("Radius Mod %s".formatted(status.getRadiusMod() > 0 ? "+%.2f".formatted(status.getRadiusMod()) : "%.2f".formatted(status.getRadiusMod()))));
+        }
+
+        if (status.getiFrameTimeMod() != 0) {
+            pTooltipComponents.add(
+                    Component.literal("I-Frame Mod %s".formatted(status.getiFrameTimeMod() > 0 ? "-%.2f".formatted(status.getiFrameTimeMod()) : "%.2f".formatted(status.getiFrameTimeMod())))
+            );
+            pTooltipComponents.add(Component.literal("  -  Applies to : " + ServerConfig.IFRAME_CONFIG.get().name()).withStyle(Style.EMPTY.applyFormats(ChatFormatting.GRAY)));
         }
 
         if(ChargesUtils.hasCharge(pStack)){

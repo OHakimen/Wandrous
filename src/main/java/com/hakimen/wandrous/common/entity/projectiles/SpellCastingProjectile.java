@@ -88,6 +88,7 @@ public class SpellCastingProjectile extends ThrowableProjectile {
         }
 
         pResult.getEntity().hurt(self.damageSources().source(DamageTypes.MAGIC, context.getOriginalCaster()), context.getStatus().getDamage());
+        CastingUtils.iFrameApply(pResult.getEntity(), context);
     }
 
 

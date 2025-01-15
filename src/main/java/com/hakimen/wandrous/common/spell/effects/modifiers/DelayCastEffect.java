@@ -6,7 +6,7 @@ import com.hakimen.wandrous.common.spell.SpellContext;
 import com.hakimen.wandrous.common.spell.SpellEffect;
 import com.hakimen.wandrous.common.spell.SpellStatus;
 
-public class DelayCastEffect extends SpellEffect {
+public class  DelayCastEffect extends SpellEffect {
     int time;
 
     public DelayCastEffect(int time) {

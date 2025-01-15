@@ -59,7 +59,7 @@ public class WandrousRenderTypes {
         {
             RenderType.CompositeState rendertype$state = RenderType.CompositeState.builder()
                     .setShaderState(RENDERTYPE_TRIANGLE)
-                    .setTextureState(new RenderStateShard.TextureStateShard(locationIn, true, false))
+                    .setTextureState(new RenderStateShard.TextureStateShard(locationIn, true, true))
                     .setLightmapState(RenderStateShard.NO_LIGHTMAP)
                     .setTransparencyState(RenderStateShard.TRANSLUCENT_TRANSPARENCY)
                     .setCullState(RenderStateShard.NO_CULL)

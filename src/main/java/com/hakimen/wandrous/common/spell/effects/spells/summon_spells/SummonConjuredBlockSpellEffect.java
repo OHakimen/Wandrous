@@ -16,6 +16,7 @@ public class SummonConjuredBlockSpellEffect extends SummonBlockEffect{
     @Override
     public void cast(SpellContext context) {
         context.mergeStatus(getStatus());
+
         super.cast(context);
     }
 
@@ -23,6 +24,7 @@ public class SummonConjuredBlockSpellEffect extends SummonBlockEffect{
     protected boolean placeBlockIfReplaceable(Level level, BlockPos pos, SpellContext context) {
 
         boolean did = super.placeBlockIfReplaceable(level, pos, context);
+
 
         if(did){
             ConjuredBlockEntity conjuredBlockEntity = level.getBlockEntity(pos, BlockEntityRegister.CONJURED_BLOCK_ENTITY.get()).orElse(null);

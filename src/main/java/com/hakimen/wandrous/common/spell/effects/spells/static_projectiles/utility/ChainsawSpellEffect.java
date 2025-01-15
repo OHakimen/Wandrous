@@ -1,12 +1,15 @@
 package com.hakimen.wandrous.common.spell.effects.spells.static_projectiles.utility;
 
+import com.hakimen.wandrous.common.registers.DamageTypeRegister;
 import com.hakimen.wandrous.common.spell.SpellContext;
 import com.hakimen.wandrous.common.spell.SpellEffect;
 import com.hakimen.wandrous.common.spell.SpellStatus;
+import com.hakimen.wandrous.common.utils.CastingUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -14,6 +17,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
@@ -29,6 +33,7 @@ public class ChainsawSpellEffect extends SpellEffect {
         setStatus(new SpellStatus()
                 .setManaDrain(cost)
                 .setRadius(radius)
+                .setDamage(4f)
         );
     }
 
@@ -43,8 +48,16 @@ public class ChainsawSpellEffect extends SpellEffect {
 
         Level level = context.getLevel();
 
-        Iterator<BlockPos> positions = BlockPos.betweenClosed(pos.offset((int) -radius, (int) -radius, (int) -radius), pos.offset((int) radius, (int) radius, (int) radius)).iterator();
+        List<LivingEntity> toDealDamage = context.getLevel().getEntitiesOfClass(LivingEntity.class, AABB.ofSize(location, radius,radius,radius), livingEntity -> !livingEntity.equals(context.getOriginalCaster()));
+        toDealDamage.forEach(
+                livingEntity -> {
+                    livingEntity.hurt(DamageTypeRegister.sliceDamage(context.getOriginalCaster()),getStatus().getDamage());
+                    CastingUtils.iFrameApply(livingEntity, context);
+                }
+        );
+        context.getStatus().setDamageMod(0);
 
+        Iterator<BlockPos> positions = BlockPos.betweenClosed(pos.offset((int) -radius, (int) -radius, (int) -radius), pos.offset((int) radius, (int) radius, (int) radius)).iterator();
 
         List<ItemStack> stacksList = new ArrayList<>();
 

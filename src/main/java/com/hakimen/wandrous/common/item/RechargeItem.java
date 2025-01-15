@@ -108,18 +108,20 @@ public class RechargeItem extends Item {
                 case GREATER_CRYSTAL -> 0.75f;
             }) + new Random().nextFloat(-0.15f, 0.15f));
 
-            if (pLevel.isClientSide()) {
-                for (int i = 0; i < 32; i++) {
-                    pLevel.addParticle(new ArcaneKnowledgeParticle.ArcaneKnowledgeParticleOptions(0f,1f,0.68f),
-                            (1 + player.getX()) + pLevel.random.triangle(-1, 1),
-                            (1 + player.getY()) + pLevel.random.triangle(0, 2),
-                            (1 + player.getZ()) + pLevel.random.triangle(-1, 1), 0.001, 0.001, 0.001);
-                }
-            }
 
             pStack.setDamageValue(pStack.getDamageValue() + 1);
         }
         return super.finishUsingItem(pStack, pLevel, pLivingEntity);
+    }
+
+    @Override
+    public void onUseTick(Level pLevel, LivingEntity pLivingEntity, ItemStack pStack, int pRemainingUseDuration) {
+        if (pLevel.isClientSide() ) {
+            pLevel.addParticle(new ArcaneKnowledgeParticle.ArcaneKnowledgeParticleOptions(0f,1f,0.68f),
+                    (1 + pLivingEntity.getX()) + pLevel.random.triangle(-1, 1),
+                    (1 + pLivingEntity.getY()) + pLevel.random.triangle(-1, 2),
+                    (1 + pLivingEntity.getZ()) + pLevel.random.triangle(-1, 1), 0.001, 0.001, 0.001);
+        }
     }
 
     @Override

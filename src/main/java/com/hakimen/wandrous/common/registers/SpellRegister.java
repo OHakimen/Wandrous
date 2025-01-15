@@ -110,7 +110,7 @@ public class SpellRegister {
     public static final DeferredHolder<SpellEffect, SpellEffect> DRILL = SPELL_EFFECTS.register("drill", () -> new DrillSpellEffect(40, 3).setMineAs(Items.IRON_PICKAXE.getDefaultInstance()));
     public static final DeferredHolder<SpellEffect, SpellEffect> GIGA_DRILL = SPELL_EFFECTS.register("giga_drill", () -> new DrillSpellEffect(80, 5).setMineAs(Items.DIAMOND_PICKAXE.getDefaultInstance()));
 
-    public static final DeferredHolder<SpellEffect, SpellEffect> CHAINSAW = SPELL_EFFECTS.register("chainsaw", () -> new ChainsawSpellEffect(40, 3).setMineAs(Items.IRON_AXE.getDefaultInstance()));
+    public static final DeferredHolder<SpellEffect, SpellEffect> CHAINSAW = SPELL_EFFECTS.register("chainsaw", () -> new ChainsawSpellEffect(40, 2).setMineAs(Items.IRON_AXE.getDefaultInstance()));
 
     public static final DeferredHolder<SpellEffect, SpellEffect> SMALL_DELAY_CAST = SPELL_EFFECTS.register("small_delay_cast", () -> new DelayCastEffect(1));
     public static final DeferredHolder<SpellEffect, SpellEffect> MEDIUM_DELAY_CAST = SPELL_EFFECTS.register("medium_delay_cast", () -> new DelayCastEffect(5));
@@ -215,6 +215,13 @@ public class SpellRegister {
                     .setCastDelayMod(-0.6f)
                     .setRechargeTimeMod(-0.75f)
     ));
+
+    public static final DeferredHolder<SpellEffect, SpellEffect> FALTERING = SPELL_EFFECTS.register("faltering", () -> new StatusModifierSpellEffect(
+            new SpellStatus()
+                    .setManaDrain(60)
+                    .setiFrameTimeMod(0.20f)
+    ));
+
 
     public static final DeferredHolder<SpellEffect, SpellEffect> HOMING = SPELL_EFFECTS.register("homing", () -> new MoverSpellEffect(SpellMoverRegister.HOMING));
     public static final DeferredHolder<SpellEffect, SpellEffect> BOOMERANG = SPELL_EFFECTS.register("boomerang", () -> new MoverSpellEffect(SpellMoverRegister.BOOMERANG));

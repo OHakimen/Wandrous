@@ -1,9 +1,11 @@
 package com.hakimen.wandrous.common.entity.static_spell;
 
 import com.hakimen.wandrous.common.entity.projectiles.SpellCastingProjectile;
+import com.hakimen.wandrous.common.registers.DamageTypeRegister;
 import com.hakimen.wandrous.common.registers.EntityRegister;
 import com.hakimen.wandrous.common.registers.ParticleRegister;
 import com.hakimen.wandrous.common.spell.SpellContext;
+import com.hakimen.wandrous.common.utils.CastingUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -12,7 +14,6 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -98,8 +99,9 @@ public class NukeEntity extends SpellCastingProjectile {
             List<LivingEntity> entityList = level.getEntities(EntityTypeTest.forClass(LivingEntity.class), AABB.ofSize(location,radius * 2,radius * 2,radius * 2),entity -> entity instanceof LivingEntity);
 
             for (LivingEntity livingEntity : entityList) {
-                livingEntity.hurt(Explosion.getDefaultDamageSource(level, this), 10);
+                livingEntity.hurt(DamageTypeRegister.nuke(context.getOriginalCaster()), 10);
                 livingEntity.invulnerableTime = 10;
+                CastingUtils.iFrameApply(livingEntity, context);
             }
 
             Iterator<BlockPos> positions = BlockPos.betweenClosedStream(pos.offset((int) radius, (int) radius, (int) radius), pos.offset((int) -radius, (int) -radius, (int) -radius)).filter(blockPos ->

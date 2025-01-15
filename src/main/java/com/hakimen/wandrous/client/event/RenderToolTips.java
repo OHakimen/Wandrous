@@ -2,6 +2,7 @@ package com.hakimen.wandrous.client.event;
 
 import com.hakimen.wandrous.Wandrous;
 import com.hakimen.wandrous.client.tooltip.GlyphTooltipRenderer;
+import com.hakimen.wandrous.client.tooltip.SpellStatsTooltipRenderer;
 import com.hakimen.wandrous.client.tooltip.SpellTooltipRenderer;
 import com.hakimen.wandrous.common.data.Glyph;
 import com.hakimen.wandrous.common.item.InscribedLensItem;
@@ -38,12 +39,12 @@ public class RenderToolTips {
 
         ItemStack stack = e.getItemStack();
 
-        if (stack.getItem() instanceof WandItem) {
-            renderForWand(e, stack);
-        } else if (stack.getItem() instanceof ScrollItem) {
-            renderForScroll(e, stack);
-        } else if (stack.getItem() instanceof InscribedLensItem){
-            renderForLens(e,stack);
+        switch (stack.getItem()) {
+            case WandItem wandItem -> renderForWand(e, stack);
+            case ScrollItem scrollItem -> renderForScroll(e, stack);
+            case InscribedLensItem inscribedLensItem -> renderForLens(e, stack);
+            default -> {
+            }
         }
     }
 
@@ -83,6 +84,7 @@ public class RenderToolTips {
                 spells.add(sei.getDefaultInstance());
             }
         }
+        renderStats(e, stack);
         render(e, spells);
     }
 
@@ -102,7 +104,7 @@ public class RenderToolTips {
         render(e, spells);
     }
 
-    private static boolean render(RenderTooltipEvent.GatherComponents e, List<ItemStack> spells) {
+    private static void render(RenderTooltipEvent.GatherComponents e, List<ItemStack> spells) {
         List<Either<FormattedText, TooltipComponent>> list = e.getTooltipElements();
         int rmvIdx = -1;
         for (int i = 0; i < list.size(); i++) {
@@ -115,9 +117,25 @@ public class RenderToolTips {
                 }
             }
         }
-        if (rmvIdx == -1) return true;
-        if (spells.isEmpty()) return true;
+        if (rmvIdx == -1) return;
+        if (spells.isEmpty()) return;
         e.getTooltipElements().add(rmvIdx, Either.right(new SpellTooltipRenderer.SpellTooltipComponent(spells.stream().limit(16).toList(), spells.size() > 16)));
-        return false;
+    }
+
+    private static void renderStats(RenderTooltipEvent.GatherComponents e, ItemStack stack) {
+        List<Either<FormattedText, TooltipComponent>> list = e.getTooltipElements();
+        int rmvIdx = -1;
+        for (int i = 0; i < list.size(); i++) {
+            Optional<FormattedText> o = list.get(i).left();
+            if (o.isPresent() && o.get() instanceof Component comp && comp.getContents() instanceof PlainTextContents.LiteralContents tc) {
+                if ("WAND_STATS_MARKER".equals(tc.text())) {
+                    rmvIdx = i;
+                    list.remove(i);
+                    break;
+                }
+            }
+        }
+        if (rmvIdx == -1) return;
+        e.getTooltipElements().add(rmvIdx, Either.right(new SpellStatsTooltipRenderer.SpellStatsComponent(stack)));
     }
 }

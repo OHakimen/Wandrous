@@ -32,6 +32,23 @@ public class LangProvider extends LanguageProvider {
         addSpells();
         addGlyphs();
         addItems();
+
+        addDamageTypes();
+        addToolTips();
+    }
+
+    public void addToolTips(){
+        add("tooltip.wandrous.wand.cast_delay", "Cast Delay %.2fs");
+        add("tooltip.wandrous.wand.recharge_time", "Recharge Speed %.2fs");
+        add("tooltip.wandrous.wand.mana_max", "Mana Max %s");
+        add("tooltip.wandrous.wand.current_mana", "Mana %s");
+        add("tooltip.wandrous.wand.mana_charge_speed", "Mana Charge Speed %s");
+        add("tooltip.wandrous.wand.capacatiy", "Capacity %s");
+    }
+
+    public void addDamageTypes(){
+        add("death.attack.wandrous.slice", "%s was sliced by %s");
+        add("death.attack.wandrous.nuke", "%s was nuked by %s");
     }
 
     public void addEffects(){
@@ -164,6 +181,8 @@ public class LangProvider extends LanguageProvider {
 
         addSpell(ItemRegister.INCREASE_RANGE_SPELL.get(), "Increase Range", "Makes AoE spells bigger");
         addSpell(ItemRegister.DECREASE_RANGE_SPELL.get(), "Decrease Range", "Makes AoE spells smaller");
+
+        addSpell(ItemRegister.FALTERING_SPELL.get(), "Faltering", "Reduces the invincibility frames (i-frames) given to the target after a hit");
 
         addSpell(ItemRegister.HOMING_SPELL.get(), "Homing", "Makes a projectile move towards enemies");
         addSpell(ItemRegister.BOOMERANG_SPELL.get(), "Boomerang", "Makes a projectile return towards the caster");

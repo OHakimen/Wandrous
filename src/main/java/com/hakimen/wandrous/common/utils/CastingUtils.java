@@ -8,9 +8,11 @@ import com.hakimen.wandrous.common.spell.SpellStatus;
 import com.hakimen.wandrous.common.spell.effects.modifiers.MultiCastEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.CastingTreeModifierSpellEffect;
 import com.hakimen.wandrous.common.utils.data.Node;
+import com.hakimen.wandrous.config.ServerConfig;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
+import static com.hakimen.wandrous.config.ServerConfig.IFRAME_CONFIG;
 import static com.hakimen.wandrous.config.ServerConfig.STRENGTH_DAMAGE_MODIFIER;
 
 public class CastingUtils {
@@ -165,7 +168,7 @@ public class CastingUtils {
 
         status.setSpeed(first.getRawSpeed() + second.getRawSpeed());
         status.setSpread(first.getRawSpread() + second.getRawSpread());
-
+        status.setiFrameTimeMod(first.getiFrameTimeMod() + second.getiFrameTimeMod());
         return status;
     }
 
@@ -175,5 +178,26 @@ public class CastingUtils {
                 .setSplit(0)
                 .setPiercing(false)
                 .setCastPositionModified(false);
+    }
+
+
+    public static void iFrameApply(Entity target, SpellContext context){
+        ServerConfig.IFrameConfig frameData = IFRAME_CONFIG.get();
+        switch (frameData){
+            case ALL -> {
+                target.invulnerableTime = (int) (target.invulnerableTime * (1 - context.getStatus().getiFrameTimeMod()));
+            }
+            case PLAYERS_ONLY -> {
+                if(target instanceof Player){
+                    target.invulnerableTime = (int) (target.invulnerableTime * (1 - context.getStatus().getiFrameTimeMod()));
+                }
+            }
+            case MOBS_ONLY -> {
+                if(!(target instanceof Player)){
+                    target.invulnerableTime = (int) (target.invulnerableTime * (1 - context.getStatus().getiFrameTimeMod()));
+                }
+            }
+            case NONE -> {}
+        }
     }
 }

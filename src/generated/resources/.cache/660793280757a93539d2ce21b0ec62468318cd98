@@ -1,4 +1,4 @@
-// 1.21.1	2024-10-19T16:52:15.6615504	Item Models: wandrous
+// 1.21.1	2024-12-28T14:03:07.1608595	Item Models: wandrous
 70cc88c4158ff94537dbcc51580cc8b905d06269 assets/wandrous/models/item/accelerate_cast.json
 4e5e8e3d5579e5375b8bd695ed36e8cb66c1382c assets/wandrous/models/item/add_mana.json
 3ce45c3b3482a88d09ded62455e12e9db6cddf89 assets/wandrous/models/item/arcane_inscriber.json
@@ -65,6 +65,7 @@ dfbf8f3b5c70ca4a9bbd322fe23688062e994ab6 assets/wandrous/models/item/divide_by_4
 6b63f4148110f841db71b80d0806bfb4b8c95268 assets/wandrous/models/item/double_split_cast.json
 042b8c23a860297ee8c43d86c5d01a81de7cb690 assets/wandrous/models/item/drill.json
 e7c47cd148058c6662ec0c2223e1b7d2fd85093e assets/wandrous/models/item/explosion.json
+818f8a4415aa9fe8620caf87e5dd3aff4bf1e143 assets/wandrous/models/item/faltering.json
 af06bdb14f372a6656b8775cfed204de0bf0658a assets/wandrous/models/item/fireball.json
 d719ed513c0bb5035331f72f1b9bed6ca541d665 assets/wandrous/models/item/freezing_charge.json
 40a6685724fe0e8534d9119354a576a08716cfbb assets/wandrous/models/item/freezing_gaze.json

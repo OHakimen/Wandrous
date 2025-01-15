@@ -20,6 +20,7 @@ public class Wandrous
     public Wandrous(ModContainer container) {
         container.registerConfig(ModConfig.Type.CLIENT, ClientConfig.SPEC);
         container.registerConfig(ModConfig.Type.SERVER, ServerConfig.SPEC);
+
         Registration.register(container.getEventBus());
     }
 

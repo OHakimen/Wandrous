@@ -147,6 +147,7 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         makeSpell(ItemRegister.HEAVY_SPREAD_SPELL.get());
         makeSpell(ItemRegister.DECREASE_RECHARGE_TIME_SPELL.get());
         makeSpell(ItemRegister.PIERCING_SPELL.get());
+        makeSpell(ItemRegister.FALTERING_SPELL.get());
 
         makeSpell(ItemRegister.HEALTH_TO_POWER_SPELL.get());
         makeSpell(ItemRegister.FRIENDS_TO_POWER_SPELL.get());

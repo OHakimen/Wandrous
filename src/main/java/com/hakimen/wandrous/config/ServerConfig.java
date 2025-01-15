@@ -3,6 +3,14 @@ package com.hakimen.wandrous.config;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class ServerConfig {
+
+    public enum IFrameConfig {
+        ALL,
+        PLAYERS_ONLY,
+        MOBS_ONLY,
+        NONE,
+    }
+
     static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
     public static final ModConfigSpec.IntValue RECHARGE_CRYSTAL = BUILDER
@@ -16,6 +24,9 @@ public class ServerConfig {
     public static final ModConfigSpec.DoubleValue STRENGTH_DAMAGE_MODIFIER = BUILDER
             .comment("The damage modifier of having the Strength effect on the caster")
             .defineInRange("strength_damage_modifier", 0.5, 0, 2);
+
+    public static final ModConfigSpec.EnumValue<IFrameConfig> IFRAME_CONFIG = BUILDER.comment("How to apply the reduce iframe spell")
+            .defineEnum("reduce_iframe_rule", IFrameConfig.ALL);
 
     public static final ModConfigSpec SPEC = BUILDER.build();
 

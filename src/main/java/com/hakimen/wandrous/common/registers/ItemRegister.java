@@ -66,6 +66,7 @@ public class ItemRegister {
     public static final DeferredHolder<Item, SpellEffectItem> DECREASE_SPREAD_SPELL = ITEMS.register("decrease_spread", () -> new SpellEffectItem(SpellRegister.DECREASE_SPREAD));
     public static final DeferredHolder<Item, SpellEffectItem> HEAVY_SPREAD_SPELL = ITEMS.register("heavy_spread", () -> new SpellEffectItem(SpellRegister.HEAVY_SPREAD));
     public static final DeferredHolder<Item, SpellEffectItem> DECREASE_RECHARGE_TIME_SPELL = ITEMS.register("decrease_recharge_time", () -> new SpellEffectItem(SpellRegister.DECREASE_RECHARGE_TIME));
+    public static final DeferredHolder<Item, SpellEffectItem> FALTERING_SPELL = ITEMS.register("faltering", () -> new SpellEffectItem(SpellRegister.FALTERING));
 
     public static final DeferredHolder<Item, SpellEffectItem> HEALTH_TO_POWER_SPELL = ITEMS.register("health_to_power", () -> new SpellEffectItem(SpellRegister.HEALTH_TO_POWER));
     public static final DeferredHolder<Item, SpellEffectItem> FRIENDS_TO_POWER_SPELL = ITEMS.register("friends_to_power", () -> new SpellEffectItem(SpellRegister.FRIENDS_TO_POWER));
@@ -152,7 +153,6 @@ public class ItemRegister {
     public static final DeferredHolder<Item, SpellEffectItem> GREEK_LETTER_DELTA_SPELL = ITEMS.register("delta", () -> new SpellEffectItem(SpellRegister.GREEK_LETTER_DELTA));
     public static final DeferredHolder<Item, SpellEffectItem> GREEK_LETTER_KAPPA_SPELL = ITEMS.register("kappa", () -> new SpellEffectItem(SpellRegister.GREEK_LETTER_KAPPA));
     public static final DeferredHolder<Item, SpellEffectItem> GREEK_LETTER_LAMBDA_SPELL = ITEMS.register("lambda", () -> new SpellEffectItem(SpellRegister.GREEK_LETTER_LAMBDA));
-   // public static final DeferredHolder<Item, SpellEffectItem> COPY_RANDOM_SPELL = ITEMS.register("copy_random", () -> new SpellEffectItem(SpellRegister.COPY_RANDOM_SPELL));
 
     public static final DeferredHolder<Item, BlockItem> CHERT = ITEMS.register("chert", () -> new BlockItem(BlockRegister.CHERT.get(), new Item.Properties()));
     public static final DeferredHolder<Item, BlockItem> CHERT_STAIRS = ITEMS.register("chert_stairs", () -> new BlockItem(BlockRegister.CHERT_STAIRS.get(), new Item.Properties()));

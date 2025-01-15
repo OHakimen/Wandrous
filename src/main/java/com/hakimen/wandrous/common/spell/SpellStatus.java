@@ -1,7 +1,5 @@
 package com.hakimen.wandrous.common.spell;
 
-import net.minecraft.nbt.CompoundTag;
-
 import java.util.Random;
 
 public class SpellStatus {
@@ -20,6 +18,7 @@ public class SpellStatus {
     protected float radiusMod;
     protected float damageMod;
     protected float critChance;              // Crit multiplies damage by 5
+    protected float iFrameTimeMod;
 
     public int getManaDrain() {
         return manaDrain;
@@ -164,39 +163,16 @@ public class SpellStatus {
         return this;
     }
 
-    public CompoundTag serializeNBT(){
-        CompoundTag tag = new CompoundTag();
-        tag.putInt("manaDrain", manaDrain);
-        tag.putFloat("damage", damage);
-        tag.putFloat("radius", radius);
-        tag.putFloat("spread", spread);
-        tag.putFloat("speed", speed);
-        tag.putFloat("lifetime", lifeTime);
-        tag.putFloat("castDelayMod", castDelayMod);
-        tag.putFloat("rechargeTimeMod", rechargeTimeMod);
-        tag.putFloat("spreadMod", spreadMod);
-        tag.putFloat("speedMod", speedMod);
-        tag.putFloat("lifetimeMod", lifetimeMod);
-        tag.putFloat("damageMod", damageMod);
-        tag.putFloat("critChance", critChance);
-        return tag;
+
+    public float getiFrameTimeMod() {
+        return Math.clamp(iFrameTimeMod,0,1);
     }
-    public void deserializeNBT(CompoundTag tag){
-        manaDrain = tag.getInt("manaDrain");
-        damage = tag.getFloat("damage");
-        radius = tag.getFloat("radius");
-        spread = tag.getFloat("spread");
-        speed = tag.getFloat("speed");
-        lifeTime = tag.getInt("lifetime");
-        castDelayMod = tag.getFloat("castDelayMod");
-        rechargeTimeMod = tag.getFloat("rechargeTimeMod");
-        spreadMod = tag.getFloat("spreadMod");
-        speedMod = tag.getFloat("speedMod");
-        lifetimeMod = tag.getFloat("lifetimeMod");
-        damageMod = tag.getFloat("damageMod");
-        critChance = tag.getFloat("critChance");
+
+    public SpellStatus setiFrameTimeMod(float iFrameTimeMod) {
+        this.iFrameTimeMod = iFrameTimeMod;
+        return this;
     }
-    
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("SpellStatus{");

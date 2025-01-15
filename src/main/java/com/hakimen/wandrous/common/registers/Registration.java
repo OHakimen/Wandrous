@@ -27,5 +27,6 @@ public class Registration {
         RecipeRegister.register(bus);
 
         GameRuleRegister.registerGameRules();
+        DamageTypeRegister.register();
     }
 }
