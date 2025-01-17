@@ -6,6 +6,7 @@ import com.hakimen.wandrous.common.spell.SpellContext;
 import com.hakimen.wandrous.common.spell.SpellEffect;
 import com.hakimen.wandrous.common.spell.SpellStatus;
 import com.hakimen.wandrous.common.utils.CastingUtils;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
@@ -35,7 +36,7 @@ public class GlyphOfTriggeringSpellEffect extends SpellEffect {
                 context.getWand()
         );
 
-        triggeringGlyph.setPos(location);
+        triggeringGlyph.setPos(context.getCaster() instanceof Player ? context.getCaster().getPosition(0) : location);
 
         level.addFreshEntity(triggeringGlyph);
     }
