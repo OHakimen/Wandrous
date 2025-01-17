@@ -1,0 +1,29 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:weave",
+    "wandrous:weave",
+    "wandrous:destiny",
+    "wandrous:destiny",
+    "wandrous:knowledge",
+    "wandrous:knowledge",
+    "wandrous:mind",
+    "wandrous:mind",
+    "wandrous:power",
+    "wandrous:control",
+    "wandrous:control",
+    "wandrous:control",
+    "wandrous:power",
+    "wandrous:guidance",
+    "wandrous:guidance",
+    "wandrous:guidance"
+  ],
+  "on_slate": {
+    "item": "minecraft:totem_of_undying"
+  },
+  "output": {
+    "id": "wandrous:faltering"
+  },
+  "ticks": 100,
+  "tier": 4
+}

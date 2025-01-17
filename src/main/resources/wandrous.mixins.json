@@ -9,7 +9,7 @@
   "client": [
     "client.BlockModelAccessorMixin",
     "client.CameraMixin",
-    "client.DynamicModelItemShaperMixin"
+    "client.DynamicModelItemShaperMixin",
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1486,6 +1486,36 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 100,
                 2
         );
+
+        inscriberRecipe(pRecipeOutput,
+                "faltering",
+                List.of(
+                        GlyphRegister.WEAVE.get(),
+                        GlyphRegister.WEAVE.get(),
+                        GlyphRegister.DESTINY.get(),
+                        GlyphRegister.DESTINY.get(),
+
+                        GlyphRegister.KNOWLEDGE.get(),
+                        GlyphRegister.KNOWLEDGE.get(),
+                        GlyphRegister.MIND.get(),
+                        GlyphRegister.MIND.get(),
+
+                        GlyphRegister.POWER.get(),
+                        GlyphRegister.CONTROL.get(),
+                        GlyphRegister.CONTROL.get(),
+                        GlyphRegister.CONTROL.get(),
+
+                        GlyphRegister.POWER.get(),
+                        GlyphRegister.GUIDANCE.get(),
+                        GlyphRegister.GUIDANCE.get(),
+                        GlyphRegister.GUIDANCE.get()
+                ),
+                Ingredient.of(Items.TOTEM_OF_UNDYING),
+                ItemRegister.FALTERING_SPELL.get().getDefaultInstance(),
+                100,
+                4
+        );
+
     }
 
     private void raycasts(RecipeOutput pRecipeOutput) {

@@ -1,4 +1,4 @@
-// 1.21.1	2024-11-28T14:56:41.8041565	Recipes
+// 1.21.1	2025-01-17T15:00:12.8715682	Recipes
 77e914557fa3c7a96fdf96acce5748f33fb9d431 data/minecraft/advancement/recipes/building_blocks/chert_bricks_from_chert_stonecutting.json
 7b899aaabd953055c4fbfa1bd5376c1351241ba9 data/minecraft/advancement/recipes/building_blocks/chert_bricks_slab_from_chert_bricks_stonecutting.json
 8c0f6146ce4219fb80f399eecd0f569159195099 data/minecraft/advancement/recipes/building_blocks/chert_bricks_slab_from_chert_stonecutting.json
@@ -122,6 +122,7 @@ df457395f681494eb410bfbe5aa2b111ae45fe97 data/wandrous/advancement/recipes/decre
 a3fb34d0b7842f446d78587ba382184f9adc3e1d data/wandrous/advancement/recipes/double_split_cast.json
 9b80cbc51a90a0092c576d9ace5ad6f30bb61a3e data/wandrous/advancement/recipes/drill.json
 fdcc8de15fd5b30af4dd8c8b569a4ab6336a21db data/wandrous/advancement/recipes/explosion.json
+41419e3436023ddfd2fb3375cceb00bb716aa355 data/wandrous/advancement/recipes/faltering.json
 3c35ab83f6dc404a9dd804d2386ea825ed8abbd4 data/wandrous/advancement/recipes/fireball.json
 745c4b0eac3aeea4634f49bef0bcb715c832e2ad data/wandrous/advancement/recipes/freezing_charge.json
 0abc69ae384ce788978a1d6368cab2a5d8b3b712 data/wandrous/advancement/recipes/freezing_gaze.json
@@ -206,6 +207,7 @@ f311298b5972389725a6fa1ad5bc87354ecb4a0d data/wandrous/recipe/decrease_range.jso
 526e026f61e24b19470905462e5bb38c6a97cd8d data/wandrous/recipe/double_split_cast.json
 bbaaf4712fdf4b9f1c1c3b00534c63053abe31f8 data/wandrous/recipe/drill.json
 7480b8ca5851cf0bebb12b3090e9381ed034f4e3 data/wandrous/recipe/explosion.json
+f1e5b0b04ad634daa0d0ec464ae60b3c894879db data/wandrous/recipe/faltering.json
 70710190841ef5fb2e47c8117d469eb3a87b5386 data/wandrous/recipe/fireball.json
 15a5c6ab8b803dc6e56233bf341b20ec40cd7aad data/wandrous/recipe/freezing_charge.json
 3de2dbc0904da1787b32d770f08a66d539b0eb73 data/wandrous/recipe/freezing_gaze.json
