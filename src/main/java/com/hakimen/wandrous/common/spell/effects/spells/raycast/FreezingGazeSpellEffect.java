@@ -36,17 +36,17 @@ public class FreezingGazeSpellEffect extends SpellEffect {
         context.getLevel().playSound(null, context.getCaster().getOnPos(), SoundEvents.BREEZE_WIND_CHARGE_BURST.value(), SoundSource.PLAYERS, 1f, (float) context.getLevel().getRandom().nextInt(80, 120) / 100f);
         for (int i = 0; i < context.getStatus().getRadius() * 2; i++) {
             HitResult result = RaycastUtils.raycastRotatedAtPos(caster, where,
-                    new Vec3(0, Math.sin(i), 0), context.getStatus().getRadius(), 0);
+                    new Vec3(0, Math.sin(i * context.getStatus().getRadius() / 10f), 0), context.getStatus().getRadius(), 0);
             ServerLevel level = (ServerLevel) context.getLevel();
-
             for (int j = 2; j < context.getStatus().getRadius(); j++) {
                 Vec3 off = caster.getViewVector(0).yRot((float) Math.sin(i * context.getStatus().getRadius() / 10f)).scale(j * 2f);
                 Vec3 loc = where.add(off);
-                if (AABB.ofSize(loc, 1, 1, 1).contains(result.getLocation())) {
+                if (AABB.ofSize(loc, 2, 2, 2).contains(result.getLocation())) {
                     break;
                 } else {
                     level.sendParticles(ParticleRegister.FREEZING_GAZE.get(), loc.x, loc.y, loc.z, 2, 0.1f,0.1f,0.1f, 0.1);
                     if (result instanceof BlockHitResult bhr && result.getType() != HitResult.Type.MISS) {
+
                         for (int k = 1; k <= 3; k++) {
                             BlockState state = context.getLevel().getBlockState(bhr.getBlockPos().above(k));
                             if (state.canBeReplaced())

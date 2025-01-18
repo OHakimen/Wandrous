@@ -84,10 +84,14 @@ public class FlamingBoltProjectile extends SpellCastingProjectile {
             ));
             if(!context.isPiercing()){
                 context.getLevel().broadcastEntityEvent(this, (byte) 3);
-                SpellCastingProjectile.onHitEntity(this, pResult, this.context);
-                this.discard();
+                if(SpellCastingProjectile.shouldCollide(this, pResult,this.context)) {
+                    SpellCastingProjectile.onHitEntity(this, pResult, this.context);
+                    this.discard();
+                }
             }else{
-                SpellCastingProjectile.onHitEntity(this, pResult, this.context);
+                if(SpellCastingProjectile.shouldCollide(this, pResult,this.context)) {
+                    SpellCastingProjectile.onHitEntity(this, pResult, this.context);
+                }
             }
         }
     }

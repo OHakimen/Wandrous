@@ -76,12 +76,16 @@ public class GlimmeringBoltProjectile extends SpellCastingProjectile {
     protected void onHitEntity(EntityHitResult pResult) {
         if (this.context != null) {
             if(!context.isPiercing()){
-                context.getLevel().broadcastEntityEvent(this, (byte) 3);
-                SpellCastingProjectile.onHitEntity(this, pResult, this.context);
-                discard();
+                if (SpellCastingProjectile.shouldCollide(this, pResult, this.context)) {
+                    context.getLevel().broadcastEntityEvent(this, (byte) 3);
+                    SpellCastingProjectile.onHitEntity(this, pResult, this.context);
+                    discard();
+                    }
             }
             else{
-                SpellCastingProjectile.onHitEntity(this, pResult, this.context);
+                if (SpellCastingProjectile.shouldCollide(this, pResult, this.context)) {
+                    SpellCastingProjectile.onHitEntity(this, pResult, this.context);
+                }
             }
         }
     }

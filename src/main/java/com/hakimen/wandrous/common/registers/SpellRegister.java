@@ -260,6 +260,7 @@ public class SpellRegister {
     public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_BLESSING_SPEED = SPELL_EFFECTS.register("bestow_blessing_speed", () -> new BestowSpellEffect(MobEffects.MOVEMENT_SPEED));
     public static final DeferredHolder<SpellEffect, SpellEffect> BESTOW_BLESSING_STRENGTH = SPELL_EFFECTS.register("bestow_blessing_strength", () -> new BestowSpellEffect(MobEffects.DAMAGE_BOOST));
 
+
     public static final DeferredHolder<SpellEffect, SpellEffect> GREEK_LETTER_DELTA = SPELL_EFFECTS.register("delta", () -> new CastingTreeModifierSpellEffect(
             (spellStackNode, castingUtils, spellStackList) -> {
                 if (spellStackNode.getData().getEffect().hasAnyOf(SpellEffect.TIMER, SpellEffect.MODIFIER, SpellEffect.TRIGGER)) {

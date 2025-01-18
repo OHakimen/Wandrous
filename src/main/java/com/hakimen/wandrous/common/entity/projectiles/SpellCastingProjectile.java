@@ -43,10 +43,7 @@ public class SpellCastingProjectile extends ThrowableProjectile {
         super(pEntityType, pShooter, pLevel);
     }
 
-
     protected static void onHitBlock(Projectile self, BlockHitResult pResult, SpellContext context) {
-
-
         List<ProjectileHitEffect> effects = addProjectileEffects(context.getNode());
 
         effects.forEach(projectileHitEffect -> {
@@ -65,6 +62,7 @@ public class SpellCastingProjectile extends ThrowableProjectile {
     }
 
     protected static void onHitEntity(Projectile self, EntityHitResult pResult, SpellContext context) {
+
 
         if (pResult.getEntity() instanceof LivingEntity entity) {
             context.getHit().add(entity);
@@ -91,6 +89,12 @@ public class SpellCastingProjectile extends ThrowableProjectile {
         CastingUtils.iFrameApply(pResult.getEntity(), context);
     }
 
+    protected static boolean shouldCollide(Projectile self, EntityHitResult pResult, SpellContext context){
+        if(pResult.getEntity().equals(context.getOriginalCaster()) || pResult.getEntity().getType().equals(self.getType())){
+            return false;
+        }
+        return true;
+    }
 
     protected static void onTimeEnd(Projectile self, SpellContext context) {
         if (context.getNode().getData().getEffect().hasKind(SpellEffect.TIMER)) {

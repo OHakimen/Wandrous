@@ -65,10 +65,12 @@ public class SonicBoomProjectile extends SpellCastingProjectile {
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
         if (context != null) {
-            SpellCastingProjectile.onHitEntity(this, pResult, context.clone());
-            if(!context.isPiercing()){
-                context.getLevel().broadcastEntityEvent(this, (byte) 3);
-                this.discard();
+            if (SpellCastingProjectile.shouldCollide(this, pResult, this.context)) {
+                SpellCastingProjectile.onHitEntity(this, pResult, context.clone());
+                if (!context.isPiercing()) {
+                    context.getLevel().broadcastEntityEvent(this, (byte) 3);
+                    this.discard();
+                }
             }
         }
     }

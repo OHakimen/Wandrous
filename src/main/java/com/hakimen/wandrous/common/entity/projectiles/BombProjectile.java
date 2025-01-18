@@ -77,12 +77,16 @@ public class BombProjectile extends SpellCastingProjectile {
         if (this.context != null) {
             if(!context.isPiercing()){
                 context.getLevel().broadcastEntityEvent(this, (byte) 3);
-                SpellCastingProjectile.onHitEntity(this, pResult, this.context);
-                consume();
-                this.discard();
+                if(SpellCastingProjectile.shouldCollide(this, pResult,this.context)) {
+                    SpellCastingProjectile.onHitEntity(this, pResult, this.context);
+                    consume();
+                    this.discard();
+                }
             }else{
-                SpellCastingProjectile.onHitEntity(this, pResult, this.context);
-                consume();
+                if( SpellCastingProjectile.shouldCollide(this, pResult,this.context)) {
+                    SpellCastingProjectile.onHitEntity(this, pResult, this.context);
+                    consume();
+                }
             }
 
         }
