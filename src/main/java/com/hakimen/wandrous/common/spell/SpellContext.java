@@ -106,7 +106,7 @@ public class SpellContext implements Cloneable {
     }
 
     public boolean isCastPositionModified() {
-        return (boolean) properties.get("castPositionModified");
+        return properties.containsKey("castPositionModified") &&  (boolean)properties.get("castPositionModified");
     }
 
     public SpellContext setCastPositionModified(boolean castPositionModified) {
@@ -124,7 +124,7 @@ public class SpellContext implements Cloneable {
     }
 
     public int getSplit() {
-        return (int) properties.get("split");
+        return properties.containsKey("split") ? (int) properties.get("split") : 0 ;
     }
 
     public SpellContext setSplit(int split) {
@@ -142,10 +142,18 @@ public class SpellContext implements Cloneable {
     }
 
     public boolean isPiercing(){
-        return (boolean) properties.get("piercing");
+        return properties.containsKey("piercing") && (boolean) properties.get("piercing");
     }
     public SpellContext setPiercing(boolean piercing) {
         properties.put("piercing", piercing);
+        return this;
+    }
+
+    public boolean isCanHitCaster(){
+        return properties.containsKey("hits_caster") && (boolean) properties.get("hits_caster");
+    }
+    public SpellContext setCanHitCaster(boolean hitcaster) {
+        properties.put("hits_caster", hitcaster);
         return this;
     }
 

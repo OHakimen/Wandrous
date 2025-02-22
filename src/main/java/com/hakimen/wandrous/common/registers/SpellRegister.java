@@ -93,7 +93,7 @@ public class SpellRegister {
     public static final DeferredHolder<SpellEffect, SpellEffect> TRIPLE_SPLIT = SPELL_EFFECTS.register("triple_split", () -> new SplitCastEffect(3));
     public static final DeferredHolder<SpellEffect, SpellEffect> QUAD_SPLIT = SPELL_EFFECTS.register("quad_split", () -> new SplitCastEffect(4));
 
-    public static final DeferredHolder<SpellEffect, SpellEffect> LIGHTNING_BOLT = SPELL_EFFECTS.register("lightning_bolt", () -> new SummonEntityEffect(EntityType.LIGHTNING_BOLT, 100));
+    public static final DeferredHolder<SpellEffect, SpellEffect> LIGHTNING_BOLT = SPELL_EFFECTS.register("lightning_bolt", SummonLightiningBoltSpellEffect::new);
     public static final DeferredHolder<SpellEffect, SpellEffect> TNT_MINECART = SPELL_EFFECTS.register("tnt_minecart", () -> new SummonEntityEffect(EntityType.TNT_MINECART, 70));
     public static final DeferredHolder<SpellEffect, SpellEffect> FREEZING_CHARGE = SPELL_EFFECTS.register("freezing_charge", () -> new FreezingChargeHitEffect(35));
     public static final DeferredHolder<SpellEffect, SpellEffect> IGNEOUS_CHARGE = SPELL_EFFECTS.register("igneous_charge", () -> new IgneousChargeHitEffect(35));
@@ -126,6 +126,7 @@ public class SpellRegister {
     public static final DeferredHolder<SpellEffect, SpellEffect> HEALTH_TO_POWER = SPELL_EFFECTS.register("health_to_power", HealthToPowerSpellEffect::new);
     public static final DeferredHolder<SpellEffect, SpellEffect> FRIENDS_TO_POWER = SPELL_EFFECTS.register("friends_to_power", FriendshipToPowerSpellEffect::new);
     public static final DeferredHolder<SpellEffect, SpellEffect> PIERCING = SPELL_EFFECTS.register("piercing", PiercingSpellEffect::new);
+    public static final DeferredHolder<SpellEffect, SpellEffect> BLOODLUST = SPELL_EFFECTS.register("bloodlust", BloodLustSpellEffect::new);
 
 
     public static final DeferredHolder<SpellEffect, SpellEffect> INCREASE_SPEED = SPELL_EFFECTS.register("accelerate_cast", () -> new StatusModifierSpellEffect(

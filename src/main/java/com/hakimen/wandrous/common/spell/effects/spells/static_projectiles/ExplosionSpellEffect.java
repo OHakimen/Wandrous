@@ -1,6 +1,6 @@
 package com.hakimen.wandrous.common.spell.effects.spells.static_projectiles;
 
-import com.hakimen.wandrous.common.events.payloads.PositionalScreenShakePacket;
+import com.hakimen.wandrous.common.payloads.PositionalScreenShakePacket;
 import com.hakimen.wandrous.common.spell.SpellContext;
 import com.hakimen.wandrous.common.spell.SpellEffect;
 import com.hakimen.wandrous.common.spell.SpellStatus;

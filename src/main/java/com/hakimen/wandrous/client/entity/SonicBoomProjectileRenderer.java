@@ -1,8 +1,11 @@
 package com.hakimen.wandrous.client.entity;
 
 import com.hakimen.wandrous.Wandrous;
+import com.hakimen.wandrous.client.mover.IMoverRendererRegister;
 import com.hakimen.wandrous.common.entity.projectiles.SonicBoomProjectile;
+import com.hakimen.wandrous.common.entity.projectiles.SpellCastingProjectile;
 import com.hakimen.wandrous.common.registers.ParticleRegister;
+import com.hakimen.wandrous.common.spell.mover.ISpellMover;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.culling.Frustum;
@@ -11,6 +14,8 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec3;
+
+import java.util.List;
 
 public class SonicBoomProjectileRenderer extends EntityRenderer<SonicBoomProjectile> {
 
@@ -28,7 +33,8 @@ public class SonicBoomProjectileRenderer extends EntityRenderer<SonicBoomProject
 
     @Override
     public void render(SonicBoomProjectile pEntity, float pEntityYaw, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
-
+        List<ISpellMover> movers = SpellCastingProjectile.NBTToMoverList(pEntity.getEntityData().get(SpellCastingProjectile.MOVER_DATA));
+        IMoverRendererRegister.render(movers, pEntity,pEntityYaw,pPartialTick,pPoseStack,pBuffer,pPackedLight);
         Vec3 pos = pEntity.getPosition(0);
         if(pEntity.tickCount % 2 == 0){
             pEntity.level().addParticle(ParticleTypes.SONIC_BOOM, pos.x(), pos.y(), pos.z(), 0.0D, 0.0D, 0.0D);

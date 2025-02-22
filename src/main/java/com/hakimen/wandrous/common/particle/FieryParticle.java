@@ -56,7 +56,7 @@ public class FieryParticle extends TextureSheetParticle {
 
             FieryParticle particle =  new FieryParticle(clientLevel, x, y, z, sprites, vX * 0.1, vY * 0.1, vZ * 0.1);
             if(r.nextFloat() > 0.95) {
-                particle.setColor(1f,1f,0.5f);
+                particle.setColor(1f,1f,0.7f);
             }
             else if(r.nextFloat() > 0.75){
                 particle.setColor(1f, 0.3f, 0);

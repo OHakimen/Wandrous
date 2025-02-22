@@ -32,6 +32,7 @@ public class GlimmeringBoltProjectile extends SpellCastingProjectile {
         this.maxTicks = this.context.getStatus().getLifeTime();
         this.movers = new ArrayList<>();
         this.movers.addAll(Arrays.stream(movers).toList());
+        this.entityData.set(MOVER_DATA, moverListToNBT());
     }
 
     public GlimmeringBoltProjectile(double pX, double pY, double pZ, Level level, SpellContext context) {
@@ -40,6 +41,7 @@ public class GlimmeringBoltProjectile extends SpellCastingProjectile {
         this.context.setCaster(this);
         this.maxTicks = this.context.getStatus().getLifeTime();
         this.movers = getMovers(this.context.getNode());
+        this.entityData.set(MOVER_DATA, moverListToNBT());
     }
 
     @Override
@@ -75,14 +77,13 @@ public class GlimmeringBoltProjectile extends SpellCastingProjectile {
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
         if (this.context != null) {
-            if(!context.isPiercing()){
+            if (!context.isPiercing()) {
                 if (SpellCastingProjectile.shouldCollide(this, pResult, this.context)) {
                     context.getLevel().broadcastEntityEvent(this, (byte) 3);
                     SpellCastingProjectile.onHitEntity(this, pResult, this.context);
                     discard();
-                    }
-            }
-            else{
+                }
+            } else {
                 if (SpellCastingProjectile.shouldCollide(this, pResult, this.context)) {
                     SpellCastingProjectile.onHitEntity(this, pResult, this.context);
                 }

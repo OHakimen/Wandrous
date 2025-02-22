@@ -40,6 +40,7 @@ public class ChainShotProjectile extends SpellCastingProjectile {
         this.maxTicks = this.context.getStatus().getLifeTime();
         this.movers = new ArrayList<>();
         this.movers.addAll(Arrays.stream(movers).toList());
+        this.entityData.set(MOVER_DATA, moverListToNBT());
         this.hit = new ArrayList<>();
     }
 
@@ -52,6 +53,7 @@ public class ChainShotProjectile extends SpellCastingProjectile {
         this.movers = new ArrayList<>();
         this.hit = new ArrayList<>();
         this.movers = getMovers(this.context.getNode());
+        this.entityData.set(MOVER_DATA, moverListToNBT());
     }
 
     public int getHitCount() {
@@ -73,7 +75,7 @@ public class ChainShotProjectile extends SpellCastingProjectile {
         if (pId == 3) {
             Random r = new Random();
             for (int i = 0; i < 16; i++) {
-                this.level().addParticle(ParticleTypes.SCULK_SOUL, this.getX() - 0.5f + r.nextFloat(-1,1), this.getY() - 0.5f + r.nextFloat(-1,1), this.getZ() - 0.5f + r.nextFloat(-1,1), 0, 0, 0);
+                this.level().addParticle(ParticleTypes.SCULK_SOUL, this.getX() - 0.5f + r.nextFloat(-1, 1), this.getY() - 0.5f + r.nextFloat(-1, 1), this.getZ() - 0.5f + r.nextFloat(-1, 1), 0, 0, 0);
             }
         }
     }
@@ -127,10 +129,10 @@ public class ChainShotProjectile extends SpellCastingProjectile {
                 for (Entity entity : entities) {
                     if (closest == null) {
                         closest = (LivingEntity) entity;
-                        closestDist = (float) closest.position().distanceTo(getPosition(0).subtract(0, closest.getEyeY()/2f, 0));
-                    } else if(closestDist >= entity.position().distanceTo(getPosition(0).subtract(0, closest.getEyeY()/2f, 0))){
+                        closestDist = (float) closest.position().distanceTo(getPosition(0).subtract(0, closest.getEyeY() / 2f, 0));
+                    } else if (closestDist >= entity.position().distanceTo(getPosition(0).subtract(0, closest.getEyeY() / 2f, 0))) {
                         closest = (LivingEntity) entity;
-                        closestDist = (float) closest.position().distanceTo(getPosition(0).subtract(0, closest.getEyeY()/2f, 0));
+                        closestDist = (float) closest.position().distanceTo(getPosition(0).subtract(0, closest.getEyeY() / 2f, 0));
                     }
                 }
 
@@ -144,7 +146,7 @@ public class ChainShotProjectile extends SpellCastingProjectile {
                 LivingEntity target = context.getHomingTarget();
                 if (target.isAlive()) {
                     setDeltaMovement(target.getEyePosition().subtract(getPosition(0)).normalize().scale(context.getStatus().getSpeed()));
-                }else{
+                } else {
                     context.setHomingTarget(null);
                 }
             }
@@ -156,7 +158,7 @@ public class ChainShotProjectile extends SpellCastingProjectile {
                     this.context.getStatus().setLifetimeMod(0);
                     this.context.getHit().addAll(hit);
                     SpellCastingProjectile.onTimeEnd(this, this.context);
-                    level().playSound(null, context.getCaster().getOnPos(), SoundEvents.AMETHYST_CLUSTER_HIT, SoundSource.PLAYERS, 1,1f);
+                    level().playSound(null, context.getCaster().getOnPos(), SoundEvents.AMETHYST_CLUSTER_HIT, SoundSource.PLAYERS, 1, 1f);
                 }
                 discard();
             }

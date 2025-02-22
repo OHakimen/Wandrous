@@ -1,6 +1,6 @@
 package com.hakimen.wandrous.common.spell.effects.modifiers.charges;
 
-import com.hakimen.wandrous.common.events.payloads.PositionalScreenShakePacket;
+import com.hakimen.wandrous.common.payloads.PositionalScreenShakePacket;
 import com.hakimen.wandrous.common.spell.SpellContext;
 import com.hakimen.wandrous.common.spell.effects.modifiers.ProjectileHitEffect;
 import net.minecraft.core.BlockPos;

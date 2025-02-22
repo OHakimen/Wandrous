@@ -1,5 +1,6 @@
 package com.hakimen.wandrous.common.entity.projectiles;
 
+import com.hakimen.wandrous.common.registers.SpellMoverRegister;
 import com.hakimen.wandrous.common.spell.SpellContext;
 import com.hakimen.wandrous.common.spell.SpellEffect;
 import com.hakimen.wandrous.common.spell.SpellStack;
@@ -11,7 +12,12 @@ import com.hakimen.wandrous.common.utils.data.Node;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.StringTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -27,21 +33,52 @@ import java.util.List;
 
 public class SpellCastingProjectile extends ThrowableProjectile {
 
+    public static final EntityDataAccessor<CompoundTag> MOVER_DATA = SynchedEntityData.defineId(SpellCastingProjectile.class, EntityDataSerializers.COMPOUND_TAG);
+
     int maxTicks;
     SpellContext context;
     List<ISpellMover> movers;
 
+    public CompoundTag moverListToNBT() {
+        CompoundTag tag = new CompoundTag();
+
+        if (movers == null) {
+            movers = new ArrayList<>();
+        }
+        ListTag list = new ListTag();
+        movers.forEach(iSpellMover -> {
+            list.add(StringTag.valueOf(SpellMoverRegister.MOVERS.getRegistry().get().getKey(iSpellMover).toString()));
+        });
+        tag.put("movers", list);
+        return tag;
+    }
+
+    ;
+
+    public static List<ISpellMover> NBTToMoverList(CompoundTag tag) {
+        ListTag list = tag.getList("movers", StringTag.TAG_STRING);
+        List<ISpellMover> movers = new ArrayList<>();
+        list.forEach(tag1 -> {
+            movers.add(SpellMoverRegister.MOVERS.getRegistry().get().get(ResourceLocation.parse(tag1.getAsString())));
+        });
+        return movers;
+    }
+
     protected SpellCastingProjectile(EntityType<? extends ThrowableProjectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
+
     }
 
     protected SpellCastingProjectile(EntityType<? extends ThrowableProjectile> pEntityType, double pX, double p_37458_, double pY, Level p_37460_) {
         super(pEntityType, pX, p_37458_, pY, p_37460_);
+
     }
 
     protected SpellCastingProjectile(EntityType<? extends ThrowableProjectile> pEntityType, LivingEntity pShooter, Level pLevel) {
         super(pEntityType, pShooter, pLevel);
+
     }
+
 
     protected static void onHitBlock(Projectile self, BlockHitResult pResult, SpellContext context) {
         List<ProjectileHitEffect> effects = addProjectileEffects(context.getNode());
@@ -89,8 +126,8 @@ public class SpellCastingProjectile extends ThrowableProjectile {
         CastingUtils.iFrameApply(pResult.getEntity(), context);
     }
 
-    protected static boolean shouldCollide(Projectile self, EntityHitResult pResult, SpellContext context){
-        if(pResult.getEntity().equals(context.getOriginalCaster()) || pResult.getEntity().getType().equals(self.getType())){
+    protected static boolean shouldCollide(Projectile self, EntityHitResult pResult, SpellContext context) {
+        if ((pResult.getEntity().equals(context.getOriginalCaster()) || pResult.getEntity().getType().equals(self.getType())) && !context.isCanHitCaster()) {
             return false;
         }
         return true;
@@ -118,12 +155,12 @@ public class SpellCastingProjectile extends ThrowableProjectile {
         return effects;
     }
 
-    public static List<ISpellMover> getMovers(Node<SpellStack> node){
+    public static List<ISpellMover> getMovers(Node<SpellStack> node) {
         List<ISpellMover> movers = new ArrayList<>();
 
-        if(node.getParent() != null &&  node.getParent().getData().getEffect().hasKind(SpellEffect.MODIFIER)){
+        if (node.getParent() != null && node.getParent().getData().getEffect().hasKind(SpellEffect.MODIFIER)) {
             SpellEffect effect = node.getParent().getData().getEffect();
-            if(effect instanceof MoverSpellEffect eff){
+            if (effect instanceof MoverSpellEffect eff) {
                 movers.add(eff.getMover());
             }
             movers.addAll(getMovers(node.getParent()));
@@ -153,7 +190,7 @@ public class SpellCastingProjectile extends ThrowableProjectile {
 
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder pBuilder) {
-
+        pBuilder.define(MOVER_DATA,  new CompoundTag());
     }
 
 
@@ -161,10 +198,10 @@ public class SpellCastingProjectile extends ThrowableProjectile {
     public void tick() {
         super.tick();
 
-        if(tickCount % 4 == 0) {
-            List<Entity> entities = this.level().getEntities(this, AABB.ofSize(this.getPosition(0), 1,1,1));
+        if (tickCount % 4 == 0) {
+            List<Entity> entities = this.level().getEntities(this, AABB.ofSize(this.getPosition(0), 1, 1, 1));
             for (Entity entity : entities) {
-                onHitEntity(new EntityHitResult(entity , this.getEyePosition()));
+                onHitEntity(new EntityHitResult(entity, this.getEyePosition()));
             }
         }
 

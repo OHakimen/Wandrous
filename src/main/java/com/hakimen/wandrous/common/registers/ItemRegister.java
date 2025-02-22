@@ -51,13 +51,15 @@ public class ItemRegister {
     public static final DeferredHolder<Item, SpellEffectItem> SMALL_DELAY_CAST_SPELL = ITEMS.register("small_delay_cast", () -> new SpellEffectItem(SpellRegister.SMALL_DELAY_CAST));
     public static final DeferredHolder<Item, SpellEffectItem> MEDIUM_DELAY_CAST_SPELL = ITEMS.register("medium_delay_cast", () -> new SpellEffectItem(SpellRegister.MEDIUM_DELAY_CAST));
     public static final DeferredHolder<Item, SpellEffectItem> BIG_DELAY_CAST_SPELL = ITEMS.register("big_delay_cast", () -> new SpellEffectItem(SpellRegister.BIG_DELAY_CAST));
+    
+    public static final DeferredHolder<Item, SpellEffectItem> CRITICAL_PLUS_SPELL = ITEMS.register("critical_plus", () -> new SpellEffectItem(SpellRegister.CRITICAL_PLUS));
+    public static final DeferredHolder<Item, SpellEffectItem> DAMAGE_PLUS_SPELL = ITEMS.register("damage_plus", () -> new SpellEffectItem(SpellRegister.DAMAGE_PLUS));
+    public static final DeferredHolder<Item, SpellEffectItem> BLOODLUST_SPELL = ITEMS.register("bloodlust", () -> new SpellEffectItem(SpellRegister.BLOODLUST));
+    public static final DeferredHolder<Item, SpellEffectItem> LIGHT_SHOT_SPELL = ITEMS.register("light_shot", () -> new SpellEffectItem(SpellRegister.LIGHT_SHOT));
+    public static final DeferredHolder<Item, SpellEffectItem> HEAVY_SHOT_SPELL = ITEMS.register("heavy_shot", () -> new SpellEffectItem(SpellRegister.HEAVY_SHOT));
 
     public static final DeferredHolder<Item, SpellEffectItem> ACCELERATE_SPELL = ITEMS.register("accelerate_cast", () -> new SpellEffectItem(SpellRegister.INCREASE_SPEED));
     public static final DeferredHolder<Item, SpellEffectItem> ADD_MANA_SPELL = ITEMS.register("add_mana", () -> new SpellEffectItem(SpellRegister.ADD_MANA));
-    public static final DeferredHolder<Item, SpellEffectItem> CRITICAL_PLUS_SPELL = ITEMS.register("critical_plus", () -> new SpellEffectItem(SpellRegister.CRITICAL_PLUS));
-    public static final DeferredHolder<Item, SpellEffectItem> DAMAGE_PLUS_SPELL = ITEMS.register("damage_plus", () -> new SpellEffectItem(SpellRegister.DAMAGE_PLUS));
-    public static final DeferredHolder<Item, SpellEffectItem> LIGHT_SHOT_SPELL = ITEMS.register("light_shot", () -> new SpellEffectItem(SpellRegister.LIGHT_SHOT));
-    public static final DeferredHolder<Item, SpellEffectItem> HEAVY_SHOT_SPELL = ITEMS.register("heavy_shot", () -> new SpellEffectItem(SpellRegister.HEAVY_SHOT));
     public static final DeferredHolder<Item, SpellEffectItem> INCREASE_LIFETIME_SPELL = ITEMS.register("increase_lifetime", () -> new SpellEffectItem(SpellRegister.INCREASE_LIFETIME));
     public static final DeferredHolder<Item, SpellEffectItem> DECREASE_LIFETIME_SPELL = ITEMS.register("decrease_lifetime", () -> new SpellEffectItem(SpellRegister.DECREASE_LIFETIME));
     public static final DeferredHolder<Item, SpellEffectItem> INCREASE_RANGE_SPELL = ITEMS.register("increase_range", () -> new SpellEffectItem(SpellRegister.INCREASE_RANGE));
@@ -71,6 +73,7 @@ public class ItemRegister {
     public static final DeferredHolder<Item, SpellEffectItem> HEALTH_TO_POWER_SPELL = ITEMS.register("health_to_power", () -> new SpellEffectItem(SpellRegister.HEALTH_TO_POWER));
     public static final DeferredHolder<Item, SpellEffectItem> FRIENDS_TO_POWER_SPELL = ITEMS.register("friends_to_power", () -> new SpellEffectItem(SpellRegister.FRIENDS_TO_POWER));
     public static final DeferredHolder<Item, SpellEffectItem> PIERCING_SPELL = ITEMS.register("piercing", () -> new SpellEffectItem(SpellRegister.PIERCING));
+
 
     public static final DeferredHolder<Item, SpellEffectItem> TELEPORT_SPELL = ITEMS.register("teleport", () -> new SpellEffectItem(SpellRegister.TELEPORT));
     public static final DeferredHolder<Item, SpellEffectItem> SWAP_TELEPORT_SPELL = ITEMS.register("swap_teleport", () -> new SpellEffectItem(SpellRegister.SWAP_TELEPORT));
@@ -196,7 +199,7 @@ public class ItemRegister {
     public static final DeferredHolder<Item, RechargeItem> TEALESTITE_RECHARGE_CRYSTAL = ITEMS.register("tealestite_recharge_crystal", () -> new RechargeItem(4, RechargeItem.RechargeTier.CRYSTAL));
     public static final DeferredHolder<Item, RechargeItem> TEALESTITE_GREATER_RECHARGE_CRYSTAL = ITEMS.register("tealestite_greater_recharge_crystal", () -> new RechargeItem(8, RechargeItem.RechargeTier.GREATER_CRYSTAL));
 
-    public static final DeferredHolder<Item, InscribedLensItem> INSCRIBED_LENS = ITEMS.register("inscribed_lens", () -> new InscribedLensItem());
+    public static final DeferredHolder<Item, InscribedLensItem> INSCRIBED_LENS = ITEMS.register("inscribed_lens", InscribedLensItem::new);
 
     public static final DeferredHolder<Item, BlockItem> GLYPH_PROJECTOR = ITEMS.register("glyph_projector", () -> new BlockItem(BlockRegister.GLYPH_PROJECTOR.get(), new Item.Properties()));
     public static final DeferredHolder<Item, BlockItem> ARCANE_INSCRIBER = ITEMS.register("arcane_inscriber", () -> new BlockItem(BlockRegister.ARCANE_INSCRIBER.get(), new Item.Properties()));

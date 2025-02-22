@@ -3,10 +3,7 @@ package com.hakimen.wandrous.common.item;
 import com.hakimen.wandrous.Wandrous;
 import com.hakimen.wandrous.client.model.DynamicTextureModel;
 import com.hakimen.wandrous.common.item.component.WandDataComponent;
-import com.hakimen.wandrous.common.registers.ContainerRegister;
-import com.hakimen.wandrous.common.registers.DataComponentsRegister;
-import com.hakimen.wandrous.common.registers.EffectRegister;
-import com.hakimen.wandrous.common.registers.GameRuleRegister;
+import com.hakimen.wandrous.common.registers.*;
 import com.hakimen.wandrous.common.spell.SpellStack;
 import com.hakimen.wandrous.common.utils.CastingUtils;
 import com.hakimen.wandrous.common.utils.ChargesUtils;
@@ -137,7 +134,6 @@ public class WandItem extends Item implements DynamicModelled {
                         }
                     });
 
-
                     if (effect.size() != wand.get(DataComponentsRegister.WAND_COMPONENT.get()).getCastableSize()) {
                         wand.update(DataComponentsRegister.WAND_COMPONENT.get(), DEFAULT_STAT, wandStat -> new WandDataComponent.WandStatBuilder(wandStat).setCurrentIdx(0).setCastableSize(effect.size()).build());
                     }
@@ -172,6 +168,8 @@ public class WandItem extends Item implements DynamicModelled {
                                 wand.update(DataComponentsRegister.WAND_COMPONENT.get(), DEFAULT_STAT, wandStat -> new WandDataComponent.WandStatBuilder(wandStat).
                                         setInventory(iItemHandler.serializeNBT(pLevel.registryAccess())).build());
                             });
+
+
                             CastingUtils.castSpells(pPlayer, wand, pLevel, pPlayer.getEyePosition(), cast);
                             wand.update(DataComponentsRegister.WAND_COMPONENT.get(), DEFAULT_STAT, wandStat ->
                                     new WandDataComponent.WandStatBuilder(wandStat)

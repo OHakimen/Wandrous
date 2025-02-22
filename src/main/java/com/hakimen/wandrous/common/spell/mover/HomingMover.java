@@ -8,8 +8,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.List;
-
 public class HomingMover implements ISpellMover {
     @Override
     public void move(SpellContext context, SpellCastingProjectile projectile) {
@@ -17,17 +15,9 @@ public class HomingMover implements ISpellMover {
             if (context.getHomingTarget() == null) {
                 Level level = context.getLevel();
                 Vec3 pos = projectile.getEyePosition();
-                List<LivingEntity> entities = level.getNearbyEntities(LivingEntity.class, TargetingConditions.DEFAULT, (LivingEntity) context.getOriginalCaster(), AABB.ofSize(pos, 32, 32, 32));
 
-                LivingEntity closest = null;
-
-                for (LivingEntity entity : entities) {
-                    if(closest == null){
-                        closest = entity;
-                    }else if(entity.getPosition(0).distanceTo(projectile.getPosition(0)) < closest.getPosition(0).distanceTo(projectile.getPosition(0))){
-                        closest = entity;
-                    }
-                }
+                LivingEntity target =  context.isCanHitCaster() ? null : (LivingEntity) context.getOriginalCaster();
+                LivingEntity closest = level.getNearestEntity(LivingEntity.class,TargetingConditions.DEFAULT,target, pos.x,pos.y,pos.z, AABB.ofSize(pos, 32, 32, 32));
 
                 if (closest != null) {
                     context.setHomingTarget(closest);

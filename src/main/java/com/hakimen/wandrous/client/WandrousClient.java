@@ -4,15 +4,15 @@ import com.hakimen.wandrous.Wandrous;
 import com.hakimen.wandrous.client.ber.ArcaneInscriberRenderer;
 import com.hakimen.wandrous.client.ber.GlyphProjectorRenderer;
 import com.hakimen.wandrous.client.entity.*;
+import com.hakimen.wandrous.client.mover.GuideMoverRenderer;
+import com.hakimen.wandrous.client.mover.HomingMoverRenderer;
+import com.hakimen.wandrous.client.mover.IMoverRendererRegister;
 import com.hakimen.wandrous.client.screens.WandTinkerScreen;
 import com.hakimen.wandrous.common.particle.ArcaneKnowledgeParticle;
 import com.hakimen.wandrous.common.particle.FieryParticle;
 import com.hakimen.wandrous.common.particle.GlimmeringBoltParticle;
 import com.hakimen.wandrous.common.particle.ShockwaveParticle;
-import com.hakimen.wandrous.common.registers.BlockEntityRegister;
-import com.hakimen.wandrous.common.registers.ContainerRegister;
-import com.hakimen.wandrous.common.registers.EntityRegister;
-import com.hakimen.wandrous.common.registers.ParticleRegister;
+import com.hakimen.wandrous.common.registers.*;
 import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -31,6 +31,10 @@ public class WandrousClient {
 
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event){
+
+        IMoverRendererRegister.register(SpellMoverRegister.HOMING.get(), HomingMoverRenderer::new);
+        IMoverRendererRegister.register(SpellMoverRegister.GUIDE.get(), GuideMoverRenderer::new);
+
         event.registerBlockEntityRenderer(BlockEntityRegister.GLYPH_PROJECTOR_ENTITY.get(), GlyphProjectorRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegister.ARCANE_INSCRIBER.get(), ArcaneInscriberRenderer::new);
 

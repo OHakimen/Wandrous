@@ -7,9 +7,9 @@ import net.minecraft.world.entity.Entity;
 public class BoomerangMover implements ISpellMover {
     @Override
     public void move(SpellContext context, SpellCastingProjectile projectile) {
-        if(projectile.tickCount >= projectile.getMaxTicks() / 2f){
+        if(projectile.tickCount >= projectile.getMaxTicks() / 3f){
             Entity original = context.getOriginalCaster();
-            projectile.setDeltaMovement(original.getEyePosition().subtract(projectile.getEyePosition()).normalize().scale(context.getStatus().getSpeed()));
+            projectile.addDeltaMovement(original.getEyePosition().subtract(projectile.getEyePosition()).normalize().scale(projectile.isNoGravity() ? 0.125f : 0.35f));
         }
     }
 }

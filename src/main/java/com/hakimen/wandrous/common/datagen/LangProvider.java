@@ -26,7 +26,10 @@ public class LangProvider extends LanguageProvider {
         add("item.wandrous.wand.empty_wand", "No spells to cast");
         add("item.wandrous.wand.no_mana", "Not enough mana to cast spells");
 
+        add("key.wandrous.perks", "See Perks");
+
         add("jei.wandrous.category.arcane_inscribing", "Arcane Inscribing");
+
 
         addEffects();
         addSpells();
@@ -36,6 +39,7 @@ public class LangProvider extends LanguageProvider {
         addDamageTypes();
         addToolTips();
     }
+
 
     public void addToolTips(){
         add("tooltip.wandrous.wand.cast_delay", "Cast Delay %.2fs");
@@ -203,6 +207,7 @@ public class LangProvider extends LanguageProvider {
         addSpell(ItemRegister.SPREAD_CAST_SPELL.get(), "Spread Cast", "Casts a spell in a random location within range");
 
         addSpell(ItemRegister.PIERCING_SPELL.get(), "Piercing", "Makes a projectile go through other entities");
+        addSpell(ItemRegister.BLOODLUST_SPELL.get(), "Bloodlust", "Spells gain a huge damage buff but can also hit you");
 
         addSpell(ItemRegister.TELEPORT_SPELL.get(), "Teleport", "Teleports the caster");
         addSpell(ItemRegister.SWAP_TELEPORT_SPELL.get(), "Swap", "Swaps the caster's position with another entity");

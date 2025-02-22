@@ -1,8 +1,11 @@
 package com.hakimen.wandrous.client.entity;
 
 import com.hakimen.wandrous.Wandrous;
+import com.hakimen.wandrous.client.mover.IMoverRendererRegister;
 import com.hakimen.wandrous.common.entity.projectiles.FlamingBoltProjectile;
+import com.hakimen.wandrous.common.entity.projectiles.SpellCastingProjectile;
 import com.hakimen.wandrous.common.registers.ParticleRegister;
+import com.hakimen.wandrous.common.spell.mover.ISpellMover;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.culling.Frustum;
@@ -11,6 +14,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.List;
 import java.util.Random;
 
 public class FlamingBoltProjectileRenderer extends EntityRenderer<FlamingBoltProjectile> {
@@ -29,7 +33,8 @@ public class FlamingBoltProjectileRenderer extends EntityRenderer<FlamingBoltPro
 
     @Override
     public void render(FlamingBoltProjectile pEntity, float pEntityYaw, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
-
+        List<ISpellMover> movers = SpellCastingProjectile.NBTToMoverList(pEntity.getEntityData().get(SpellCastingProjectile.MOVER_DATA));
+        IMoverRendererRegister.render(movers, pEntity,pEntityYaw,pPartialTick,pPoseStack,pBuffer,pPackedLight);
         if(pEntity.tickCount > 2){
             Random r = new Random();
             Vec3 pos = pEntity.getPosition(pPartialTick);

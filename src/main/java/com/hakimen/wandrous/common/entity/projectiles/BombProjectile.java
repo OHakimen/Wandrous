@@ -1,10 +1,9 @@
 package com.hakimen.wandrous.common.entity.projectiles;
 
-import com.hakimen.wandrous.common.events.payloads.PositionalScreenShakePacket;
+import com.hakimen.wandrous.common.payloads.PositionalScreenShakePacket;
 import com.hakimen.wandrous.common.registers.EntityRegister;
 import com.hakimen.wandrous.common.spell.SpellContext;
 import com.hakimen.wandrous.common.spell.mover.ISpellMover;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
@@ -14,13 +13,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.EventHooks;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Random;
 
 public class BombProjectile extends SpellCastingProjectile {
 
@@ -40,6 +37,7 @@ public class BombProjectile extends SpellCastingProjectile {
         this.movers = new ArrayList<>();
         this.damage = this.context.getStatus().getDamage();
         this.movers.addAll(Arrays.stream(movers).toList());
+        this.entityData.set(MOVER_DATA, moverListToNBT());
     }
 
     public BombProjectile(double pX, double pY, double pZ, Level level, SpellContext context) {
@@ -49,6 +47,7 @@ public class BombProjectile extends SpellCastingProjectile {
         this.maxTicks = this.context.getStatus().getLifeTime();
         this.damage = this.context.getStatus().getDamage();
         this.movers = getMovers(context.getNode());
+        this.entityData.set(MOVER_DATA, moverListToNBT());
     }
 
     @Override
@@ -75,15 +74,15 @@ public class BombProjectile extends SpellCastingProjectile {
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
         if (this.context != null) {
-            if(!context.isPiercing()){
+            if (!context.isPiercing()) {
                 context.getLevel().broadcastEntityEvent(this, (byte) 3);
-                if(SpellCastingProjectile.shouldCollide(this, pResult,this.context)) {
+                if (SpellCastingProjectile.shouldCollide(this, pResult, this.context)) {
                     SpellCastingProjectile.onHitEntity(this, pResult, this.context);
                     consume();
                     this.discard();
                 }
-            }else{
-                if( SpellCastingProjectile.shouldCollide(this, pResult,this.context)) {
+            } else {
+                if (SpellCastingProjectile.shouldCollide(this, pResult, this.context)) {
                     SpellCastingProjectile.onHitEntity(this, pResult, this.context);
                     consume();
                 }
@@ -102,15 +101,6 @@ public class BombProjectile extends SpellCastingProjectile {
             }
         }
 
-        Level level = this.level();
-        if (level.isClientSide) {
-            Random r = new Random();
-            Vec3 location = this.getPosition(0);
-            for (int i = 0; i < 4; i++) {
-                level.addParticle(ParticleTypes.SMOKE, location.x + r.nextFloat(-0.25f,0.25f), location.y + r.nextFloat(-0.25f,0.25f), location.z + r.nextFloat(-0.25f,0.25f), 0.0D, 0.0D, 0.0D);
-            }
-            level.addParticle(ParticleTypes.FLAME, location.x, location.y, location.z, 0.0D, 0.0D, 0.0D);
-        }
 
         if (!level().isClientSide) {
             if (this.tickCount > maxTicks) {

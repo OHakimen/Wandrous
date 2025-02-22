@@ -2,9 +2,7 @@ package com.hakimen.wandrous.common.item;
 
 import com.hakimen.wandrous.common.item.component.WandDataComponent;
 import com.hakimen.wandrous.common.particle.ArcaneKnowledgeParticle;
-import com.hakimen.wandrous.common.registers.DataComponentsRegister;
-import com.hakimen.wandrous.common.registers.ItemRegister;
-import com.hakimen.wandrous.common.registers.SoundRegister;
+import com.hakimen.wandrous.common.registers.*;
 import com.hakimen.wandrous.common.utils.ChargesUtils;
 import com.hakimen.wandrous.config.ServerConfig;
 import net.minecraft.network.chat.Component;

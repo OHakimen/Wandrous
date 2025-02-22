@@ -1,6 +1,6 @@
 package com.hakimen.wandrous.common.entity.projectiles;
 
-import com.hakimen.wandrous.common.events.payloads.PositionalScreenShakePacket;
+import com.hakimen.wandrous.common.payloads.PositionalScreenShakePacket;
 import com.hakimen.wandrous.common.registers.EntityRegister;
 import com.hakimen.wandrous.common.spell.SpellContext;
 import com.hakimen.wandrous.common.spell.SpellEffect;
@@ -33,6 +33,7 @@ public class FlamingBoltProjectile extends SpellCastingProjectile {
         this.maxTicks = this.context.getStatus().getLifeTime();
         this.movers = new ArrayList<>();
         this.movers.addAll(Arrays.stream(movers).toList());
+        this.entityData.set(MOVER_DATA, moverListToNBT());
     }
 
     public FlamingBoltProjectile(double pX, double pY, double pZ, Level level, SpellContext context) {
@@ -41,6 +42,7 @@ public class FlamingBoltProjectile extends SpellCastingProjectile {
         this.context.setCaster(this);
         this.maxTicks = this.context.getStatus().getLifeTime();
         this.movers = getMovers(this.context.getNode());
+        this.entityData.set(MOVER_DATA, moverListToNBT());
     }
 
     @Override
@@ -82,14 +84,14 @@ public class FlamingBoltProjectile extends SpellCastingProjectile {
                     getPosition(0).toVector3f(),
                     context.getStatus().getDamage() / 2f
             ));
-            if(!context.isPiercing()){
+            if (!context.isPiercing()) {
                 context.getLevel().broadcastEntityEvent(this, (byte) 3);
-                if(SpellCastingProjectile.shouldCollide(this, pResult,this.context)) {
+                if (SpellCastingProjectile.shouldCollide(this, pResult, this.context)) {
                     SpellCastingProjectile.onHitEntity(this, pResult, this.context);
                     this.discard();
                 }
-            }else{
-                if(SpellCastingProjectile.shouldCollide(this, pResult,this.context)) {
+            } else {
+                if (SpellCastingProjectile.shouldCollide(this, pResult, this.context)) {
                     SpellCastingProjectile.onHitEntity(this, pResult, this.context);
                 }
             }

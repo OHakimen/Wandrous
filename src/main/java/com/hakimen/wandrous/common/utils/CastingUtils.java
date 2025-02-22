@@ -36,7 +36,7 @@ public class CastingUtils {
 
         Node<SpellStack> tree = new Node<SpellStack>(effects.get(idx++));
 
-        if(tree.getData().getCharges() == 0 && tree.getData().hasCharges() && !tree.getData().isCopy()){
+        if (tree.getData().getCharges() == 0 && tree.getData().hasCharges() && !tree.getData().isCopy()) {
             tree = new Node<SpellStack>(new SpellStack(SpellRegister.DUMMY.get(), 0));
         }
 
@@ -75,7 +75,7 @@ public class CastingUtils {
             }
         }
 
-        if((tree.getData().hasCharges() && tree.getData().getCharges() != 0) || !tree.getData().hasCharges() || !tree.getData().isCopy()) {
+        if ((tree.getData().hasCharges() && tree.getData().getCharges() != 0) || !tree.getData().hasCharges() || !tree.getData().isCopy()) {
             if (tree.getData().hasCharges()) {
                 toConsumeCharges.add(tree.getData().getReferenceStack());
             }
@@ -86,7 +86,7 @@ public class CastingUtils {
     public static List<SpellStack> getSpellsFromTree(Node<SpellStack> tree) {
         List<SpellStack> spells = new ArrayList<>();
         spells.add(tree.getData());
-        for (Node<SpellStack> spell: tree.getChildren()) {
+        for (Node<SpellStack> spell : tree.getChildren()) {
             spells.addAll(getSpellsFromTree(spell));
         }
         return spells;
@@ -132,6 +132,7 @@ public class CastingUtils {
                 .setSplit(0)
                 .setOriginalCaster(entity)
                 .setPiercing(false)
+                .setCanHitCaster(false)
                 .setCastPositionModified(false)
                 .setHit(new ArrayList<>());
 
@@ -147,7 +148,8 @@ public class CastingUtils {
     }
 
     public static void castSpells(Entity entity, ItemStack wand, Level pLevel, Vec3 location, Node<SpellStack> toCast) {
-        castSpells(entity, wand, pLevel, location, toCast, context -> {});
+        castSpells(entity, wand, pLevel, location, toCast, context -> {
+        });
     }
 
     public static SpellStatus mergeStatus(SpellStatus first, SpellStatus second) {
@@ -172,32 +174,34 @@ public class CastingUtils {
         return status;
     }
 
-    public static void clearMods(SpellContext spellContext){
+    public static void clearMods(SpellContext spellContext) {
         spellContext
                 .setStatus(new SpellStatus())
                 .setSplit(0)
                 .setPiercing(false)
+                .setCanHitCaster(false)
                 .setCastPositionModified(false);
     }
 
 
-    public static void iFrameApply(Entity target, SpellContext context){
+    public static void iFrameApply(Entity target, SpellContext context) {
         ServerConfig.IFrameConfig frameData = IFRAME_CONFIG.get();
-        switch (frameData){
+        switch (frameData) {
             case ALL -> {
                 target.invulnerableTime = (int) (target.invulnerableTime * (1 - context.getStatus().getiFrameTimeMod()));
             }
             case PLAYERS_ONLY -> {
-                if(target instanceof Player){
+                if (target instanceof Player) {
                     target.invulnerableTime = (int) (target.invulnerableTime * (1 - context.getStatus().getiFrameTimeMod()));
                 }
             }
             case MOBS_ONLY -> {
-                if(!(target instanceof Player)){
+                if (!(target instanceof Player)) {
                     target.invulnerableTime = (int) (target.invulnerableTime * (1 - context.getStatus().getiFrameTimeMod()));
                 }
             }
-            case NONE -> {}
+            case NONE -> {
+            }
         }
     }
 }

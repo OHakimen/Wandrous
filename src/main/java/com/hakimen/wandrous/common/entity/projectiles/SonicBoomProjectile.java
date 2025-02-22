@@ -30,6 +30,7 @@ public class SonicBoomProjectile extends SpellCastingProjectile {
         this.maxTicks = this.context.getStatus().getLifeTime();
         this.movers = new ArrayList<>();
         this.movers.addAll(Arrays.stream(movers).toList());
+        this.entityData.set(MOVER_DATA, moverListToNBT());
     }
 
     public SonicBoomProjectile(double pX, double pY, double pZ, Level level, SpellContext context) {
@@ -39,6 +40,7 @@ public class SonicBoomProjectile extends SpellCastingProjectile {
         this.setNoGravity(true);
         this.maxTicks = this.context.getStatus().getLifeTime();
         this.movers = getMovers(this.context.getNode());
+        this.entityData.set(MOVER_DATA, moverListToNBT());
     }
 
     @Override

@@ -1,12 +1,11 @@
 package com.hakimen.wandrous.common.events;
 
 import com.hakimen.wandrous.Wandrous;
-import com.hakimen.wandrous.common.events.payloads.PositionalScreenShakePacket;
-import com.hakimen.wandrous.common.events.payloads.SendScreenShakePacket;
+import com.hakimen.wandrous.common.payloads.PositionalScreenShakePacket;
+import com.hakimen.wandrous.common.payloads.SendScreenShakePacket;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
-import net.neoforged.neoforge.network.handling.DirectionalPayloadHandler;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
 
@@ -16,23 +15,19 @@ public class PayloadRegistry {
     @SubscribeEvent
     public static void register(final RegisterPayloadHandlersEvent event) {
         final PayloadRegistrar registrar = event.registrar("1");
-        registrar.playBidirectional(
+
+        registrar.playToClient(
                 SendScreenShakePacket.TYPE,
                 SendScreenShakePacket.STREAM_CODEC,
-                new DirectionalPayloadHandler<>(
-                        SendScreenShakePacket::clientHandler,
-                        SendScreenShakePacket::serverHandler
-                )
+                SendScreenShakePacket::clientHandler
         );
 
-        registrar.playBidirectional(
+        registrar.playToClient(
                 PositionalScreenShakePacket.TYPE,
                 PositionalScreenShakePacket.STREAM_CODEC,
-                new DirectionalPayloadHandler<>(
-                        PositionalScreenShakePacket::clientHandler,
-                        PositionalScreenShakePacket::serverHandler
-                )
+                PositionalScreenShakePacket::clientHandler
         );
+
     }
 
 

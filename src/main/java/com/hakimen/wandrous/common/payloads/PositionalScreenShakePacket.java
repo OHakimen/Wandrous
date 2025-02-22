@@ -1,4 +1,4 @@
-package com.hakimen.wandrous.common.events.payloads;
+package com.hakimen.wandrous.common.payloads;
 
 import com.hakimen.wandrous.Wandrous;
 import com.hakimen.wandrous.client.utils.CameraHandler;

@@ -26,6 +26,8 @@ public class Registration {
         LootModRegistry.register(bus);
         RecipeRegister.register(bus);
 
+        DataAttachmentRegister.register(bus);
+
         GameRuleRegister.registerGameRules();
         DamageTypeRegister.register();
     }

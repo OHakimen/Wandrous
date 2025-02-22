@@ -39,6 +39,7 @@ public class BlackHoleProjectile extends SpellCastingProjectile {
         this.maxTicks = this.context.getStatus().getLifeTime();
         this.movers = new ArrayList<>();
         this.movers.addAll(Arrays.stream(movers).toList());
+        this.entityData.set(MOVER_DATA, moverListToNBT());
     }
 
     public BlackHoleProjectile(double pX, double pY, double pZ, Level level, SpellContext context) {
@@ -48,6 +49,7 @@ public class BlackHoleProjectile extends SpellCastingProjectile {
         this.setNoGravity(true);
         this.maxTicks = this.context.getStatus().getLifeTime();
         this.movers = getMovers(this.context.getNode());
+        this.entityData.set(MOVER_DATA, moverListToNBT());
     }
 
     @Override
@@ -82,7 +84,7 @@ public class BlackHoleProjectile extends SpellCastingProjectile {
     public void tick() {
         super.tick();
 
-        if(this.context != null){
+        if (this.context != null) {
             for (ISpellMover mover : movers) {
                 mover.move(context, this);
             }
@@ -94,30 +96,29 @@ public class BlackHoleProjectile extends SpellCastingProjectile {
 
             Iterator<BlockPos> positions = BlockPos.betweenClosed(pos.offset((int) -radius, (int) -radius, (int) -radius), pos.offset((int) radius, (int) radius, (int) radius)).iterator();
 
-            while(positions.hasNext()) {
+            while (positions.hasNext()) {
                 BlockPos blockpos = positions.next();
                 if (blockpos.closerToCenterThan(location, radius) && !level.isClientSide) {
                     BlockState state = level.getBlockState(blockpos);
-                    if(state.getDestroySpeed(level, blockpos) != -1) {
+                    if (state.getDestroySpeed(level, blockpos) != -1) {
                         level.setBlockAndUpdate(blockpos, Blocks.AIR.defaultBlockState());
                     }
                 }
             }
         }
 
-        if(!level().isClientSide){
-            if(this.tickCount > maxTicks){
-                if(this.context != null && this.context.getNode().getData().getEffect().hasKind(SpellEffect.TIMER)){
+        if (!level().isClientSide) {
+            if (this.tickCount > maxTicks) {
+                if (this.context != null && this.context.getNode().getData().getEffect().hasKind(SpellEffect.TIMER)) {
                     this.context.getStatus().setLifetimeMod(0);
                     SpellCastingProjectile.onTimeEnd(this, this.context);
                 }
-                this.level().broadcastEntityEvent(this, (byte)3);
+                this.level().broadcastEntityEvent(this, (byte) 3);
 
                 discard();
             }
         }
     }
-
 
 
     @Override

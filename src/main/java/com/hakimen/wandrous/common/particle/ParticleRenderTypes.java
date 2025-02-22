@@ -12,7 +12,7 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import org.jetbrains.annotations.Nullable;
 
 public class ParticleRenderTypes {
-    public static ParticleRenderType ADDITIVE = new ParticleRenderType() {
+    public static ParticleRenderType ADDITIVE = new ParticleRenderType () {
 
         @Nullable
         @Override
@@ -20,13 +20,11 @@ public class ParticleRenderTypes {
             RenderSystem.depthMask(false);
             RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
             RenderSystem.enableBlend();
-            RenderSystem.blendFuncSeparate(
-                    GlStateManager.SourceFactor.ONE,
-                    GlStateManager.DestFactor.ONE,
-                    GlStateManager.SourceFactor.ONE,
-                    GlStateManager.DestFactor.ONE
-            );
+            RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
+
             return tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
         }
-    } ;
+
+
+    };
 }

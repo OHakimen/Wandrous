@@ -53,6 +53,7 @@ public class NukeEntity extends SpellCastingProjectile {
                         1,0,0,0,0);
             }
         }
+        this.entityData.set(MOVER_DATA, moverListToNBT());
     }
 
     public NukeEntity(Level pLevel, int maxTickTime, Vec3 location) {
@@ -62,10 +63,12 @@ public class NukeEntity extends SpellCastingProjectile {
         this.setNoGravity(true);
         this.setPos(location);
         this.entityData.set(MAX_TICK_TIME, maxTickTime);
+        this.entityData.set(MOVER_DATA, moverListToNBT());
     }
 
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder pBuilder) {
+        super.defineSynchedData(pBuilder);
         pBuilder.define(MAX_TICK_TIME, maxTickTime);
     }
 
