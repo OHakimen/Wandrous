@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-17T15:00:12.8715682	Recipes
+// 1.21.1	2025-03-11T14:33:55.8632275	Recipes
 77e914557fa3c7a96fdf96acce5748f33fb9d431 data/minecraft/advancement/recipes/building_blocks/chert_bricks_from_chert_stonecutting.json
 7b899aaabd953055c4fbfa1bd5376c1351241ba9 data/minecraft/advancement/recipes/building_blocks/chert_bricks_slab_from_chert_bricks_stonecutting.json
 8c0f6146ce4219fb80f399eecd0f569159195099 data/minecraft/advancement/recipes/building_blocks/chert_bricks_slab_from_chert_stonecutting.json
@@ -150,6 +150,7 @@ f95cab7781a98dab94e03190dc1f714023279228 data/wandrous/advancement/recipes/incre
 59677ce0f56f09c99771bbde070ad7390c90ec47 data/wandrous/advancement/recipes/major_explosion.json
 9a06c70a38539a3fdc486a250dd469ba22dfa0d4 data/wandrous/advancement/recipes/medium_delay_cast.json
 547dca5d4bada062fb96fad09c6d61de2bc9d18b data/wandrous/advancement/recipes/piercing.json
+4b9430d45f56d53dfe91831b806fe48e57a46aa6 data/wandrous/advancement/recipes/plasma_beam.json
 c92d6ddee4664300f4d26a4e141cce00fb507b63 data/wandrous/advancement/recipes/poison_charge.json
 a22844940f4b47b63b2282547e5f10e341e4963e data/wandrous/advancement/recipes/quad_split_cast.json
 172a6c038cd5a53920a7c8d2d1c8833e20be5604 data/wandrous/advancement/recipes/small_delay_cast.json
@@ -242,6 +243,7 @@ e8134e6841cac9346b9ae788bbd94bc3613b9fc1 data/wandrous/recipe/mossy_chert_tiles.
 89d93c8bd2ee24c13fc79dbd14bc381d0322df39 data/wandrous/recipe/mossy_chert_tiles_slab.json
 a992d1e3914a91bc290ad6fd592aa75fac4bca47 data/wandrous/recipe/mossy_chert_tiles_stairs.json
 cd4b90acf26dae9f034a2636b86e044197056e60 data/wandrous/recipe/piercing.json
+4c16aacdf53d4d7c18180627d575a3617e122a5f data/wandrous/recipe/plasma_beam.json
 0be2f8e9961be6db9d2ba5cb4fb15d1e23574981 data/wandrous/recipe/poison_charge.json
 32cc3626f68282078502c99bafe76e2e7b67a149 data/wandrous/recipe/polished_chert.json
 4d0ee5b59ebf35ec0823eae82e5b577f8b83e240 data/wandrous/recipe/polished_chert_slab.json

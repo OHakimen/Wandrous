@@ -53,6 +53,7 @@ public class LangProvider extends LanguageProvider {
     public void addDamageTypes(){
         add("death.attack.wandrous.slice", "%s was sliced by %s");
         add("death.attack.wandrous.nuke", "%s was nuked by %s");
+        add("death.attack.wandrous.beam", "%s was disintegrated by %s");
     }
 
     public void addEffects(){
@@ -131,6 +132,7 @@ public class LangProvider extends LanguageProvider {
 
     public void addSpells(){
         addSpell(ItemRegister.NUKE_SPELL.get(), "Nuke", "How'd you get your hands in this...");
+        addSpell(ItemRegister.PLASMA_BEAM.get(), "Plasma Beam", "An sudden and violent beam of radiant light");
 
         addSpell(ItemRegister.BOMB_SPELL.get(), "Bomb", "Throws a bomb that damages foes");
 

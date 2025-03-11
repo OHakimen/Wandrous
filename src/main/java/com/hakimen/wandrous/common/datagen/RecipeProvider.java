@@ -542,6 +542,33 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 100,
                 2);
 
+        inscriberRecipe(pRecipeOutput, "plasma_beam", List.of(
+                        GlyphRegister.WEAVE.get(),
+                        GlyphRegister.WEAVE.get(),
+
+                        GlyphRegister.POWER.get(),
+                        GlyphRegister.POWER.get(),
+                        GlyphRegister.POWER.get(),
+                        GlyphRegister.POWER.get(),
+
+                        GlyphRegister.FOCUS.get(),
+                        GlyphRegister.FOCUS.get(),
+                        GlyphRegister.FOCUS.get(),
+                        GlyphRegister.FOCUS.get(),
+
+                        GlyphRegister.FOCUS.get(),
+                        GlyphRegister.FOCUS.get(),
+                        GlyphRegister.CONTROL.get(),
+                        GlyphRegister.CONTROL.get(),
+
+                        GlyphRegister.NEW.get(),
+                        GlyphRegister.NEW.get()
+                ),
+                Ingredient.of(Items.REDSTONE_BLOCK),
+                ItemRegister.PLASMA_BEAM.get().getDefaultInstance(),
+                100,
+                4);
+
         inscriberRecipe(pRecipeOutput, "tnt_minecart", List.of(
                         GlyphRegister.WEAVE.get(),
                         GlyphRegister.CONTROL.get(),

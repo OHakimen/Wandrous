@@ -113,6 +113,7 @@ public class ItemRegister {
     public static final DeferredHolder<Item, SpellEffectItem> EXPLOSION_SPELL = ITEMS.register("explosion", () -> new SpellEffectItem(SpellRegister.EXPLOSION));
     public static final DeferredHolder<Item, SpellEffectItem> MAJOR_EXPLOSION_SPELL = ITEMS.register("major_explosion", () -> new SpellEffectItem(SpellRegister.MAJOR_EXPLOSION));
     public static final DeferredHolder<Item, SpellEffectItem> NUKE_SPELL = ITEMS.register("nuke", () -> new SpellEffectItem(SpellRegister.NUKE, 3));
+    public static final DeferredHolder<Item, SpellEffectItem> PLASMA_BEAM = ITEMS.register("plasma_beam", () -> new SpellEffectItem(SpellRegister.PLASMA_BEAM, 3));
 
     public static final DeferredHolder<Item, SpellEffectItem> CHAIN_PRISON_SPELL = ITEMS.register("chain_prison", () -> new SpellEffectItem(SpellRegister.CHAIN_PRISON, 5));
     public static final DeferredHolder<Item, SpellEffectItem> GUST_SPELL = ITEMS.register("gust", () -> new SpellEffectItem(SpellRegister.GUST));

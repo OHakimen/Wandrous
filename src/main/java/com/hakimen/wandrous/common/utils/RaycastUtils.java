@@ -15,14 +15,14 @@ public class RaycastUtils {
 
     public static HitResult pick(Entity entity, Vec3 offset, double pHitDistance, float pPartialTicks, boolean pHitFluids) {
         Vec3 vec3 = entity.getEyePosition(pPartialTicks);
-        Vec3 vec31 = entity.getViewVector(pPartialTicks).xRot((float) offset.x).yRot((float) offset.y).zRot((float) offset.z);
+        Vec3 vec31 = entity.calculateViewVector(entity.getXRot(),entity.getYRot()).xRot((float) offset.x).yRot((float) offset.y).zRot((float) offset.z);
         Vec3 vec32 = vec3.add(vec31.x * pHitDistance, vec31.y * pHitDistance, vec31.z * pHitDistance);
         return entity.level().clip(new ClipContext(vec3, vec32, ClipContext.Block.OUTLINE, pHitFluids ? ClipContext.Fluid.ANY : ClipContext.Fluid.NONE, entity));
     }
 
     public static HitResult pick(Entity entity, Vec3 pos, Vec3 offset, double pHitDistance, float pPartialTicks, boolean pHitFluids) {
         Vec3 vec3 = pos;
-        Vec3 vec31 = entity.getViewVector(pPartialTicks).xRot((float) offset.x).yRot((float) offset.y).zRot((float) offset.z);
+        Vec3 vec31 = entity.calculateViewVector(entity.getXRot(),entity.getYRot()).xRot((float) offset.x).yRot((float) offset.y).zRot((float) offset.z);
         Vec3 vec32 = vec3.add(vec31.x * pHitDistance, vec31.y * pHitDistance, vec31.z * pHitDistance);
         return entity.level().clip(new ClipContext(vec3, vec32, ClipContext.Block.OUTLINE, pHitFluids ? ClipContext.Fluid.ANY : ClipContext.Fluid.NONE, entity));
     }
@@ -60,7 +60,7 @@ public class RaycastUtils {
             actualDist = Math.sqrt(hitDistance);
         }
 
-        Vec3 viewVector = pEntity.getViewVector(pPartialTick);
+        Vec3 viewVector = pEntity.calculateViewVector(pEntity.getXRot(), pEntity.getYRot());
         Vec3 increment = eyePosition.add(viewVector.x * actualDist, viewVector.y * actualDist, viewVector.z * actualDist);
         AABB aabb = pEntity.getBoundingBox().expandTowards(viewVector.scale(actualDist)).inflate(1.0, 1.0, 1.0);
         EntityHitResult entityhitresult = ProjectileUtil.getEntityHitResult(

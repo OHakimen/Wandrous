@@ -42,6 +42,7 @@ public class WandrousClient {
         event.registerEntityRenderer(EntityRegister.NUKE_ENTITY.get(), NukeRenderer::new);
         event.registerEntityRenderer(EntityRegister.BOMB.get(), BombRenderer::new);
         event.registerEntityRenderer(EntityRegister.TRIGGER_GLYPH.get(), TriggeringGlyphRenderer::new);
+        event.registerEntityRenderer(EntityRegister.PLASMA_BEAM.get(), PlasmaBeamEntityRenderer::new);
 
         event.registerEntityRenderer(EntityRegister.GLIMMERING_BOLT_PROJECTILE.get(), GlimmeringBoltProjectileRenderer::new);
         event.registerEntityRenderer(EntityRegister.FLAMING_BOLT_PROJECTILE.get(), FlamingBoltProjectileRenderer::new);

@@ -177,6 +177,7 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         makeSpell(ItemRegister.EXPLOSION_SPELL.get());
         makeSpell(ItemRegister.MAJOR_EXPLOSION_SPELL.get());
         makeSpell(ItemRegister.NUKE_SPELL.get());
+        makeSpell(ItemRegister.PLASMA_BEAM.get());
 
         makeSpell(ItemRegister.HOMING_SPELL.get());
         makeSpell(ItemRegister.BOOMERANG_SPELL.get());

@@ -35,9 +35,9 @@ public class SpellCastingProjectile extends ThrowableProjectile {
 
     public static final EntityDataAccessor<CompoundTag> MOVER_DATA = SynchedEntityData.defineId(SpellCastingProjectile.class, EntityDataSerializers.COMPOUND_TAG);
 
-    int maxTicks;
-    SpellContext context;
-    List<ISpellMover> movers;
+    public int maxTicks;
+    public SpellContext context;
+    public List<ISpellMover> movers;
 
     public CompoundTag moverListToNBT() {
         CompoundTag tag = new CompoundTag();
@@ -51,9 +51,7 @@ public class SpellCastingProjectile extends ThrowableProjectile {
         });
         tag.put("movers", list);
         return tag;
-    }
-
-    ;
+    };
 
     public static List<ISpellMover> NBTToMoverList(CompoundTag tag) {
         ListTag list = tag.getList("movers", StringTag.TAG_STRING);
@@ -71,7 +69,6 @@ public class SpellCastingProjectile extends ThrowableProjectile {
 
     protected SpellCastingProjectile(EntityType<? extends ThrowableProjectile> pEntityType, double pX, double p_37458_, double pY, Level p_37460_) {
         super(pEntityType, pX, p_37458_, pY, p_37460_);
-
     }
 
     protected SpellCastingProjectile(EntityType<? extends ThrowableProjectile> pEntityType, LivingEntity pShooter, Level pLevel) {

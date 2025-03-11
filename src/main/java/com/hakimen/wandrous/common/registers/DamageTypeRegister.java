@@ -15,6 +15,9 @@ public class DamageTypeRegister {
     public static final ResourceKey<DamageType> NUKE =
             ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "nuke"));
 
+    public static final ResourceKey<DamageType> BEAM =
+            ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "beam"));
+
 
     public static DamageSource sliceDamage(Entity causer) {
         return new DamageSource(
@@ -25,6 +28,12 @@ public class DamageTypeRegister {
     public static DamageSource nuke(Entity causer) {
         return new DamageSource(
                 causer.level().registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(NUKE),
+                causer);
+    }
+
+    public static DamageSource beam(Entity causer) {
+        return new DamageSource(
+                causer.level().registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(BEAM),
                 causer);
     }
 

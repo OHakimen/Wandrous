@@ -9,14 +9,16 @@ import net.minecraft.world.phys.Vec3;
 public class HomingMoverRenderer implements IMoverRenderer{
     @Override
     public <T extends SpellCastingProjectile> void render(T pEntity, float pEntityYaw, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
-        Vec3 pos = pEntity.getPosition(pPartialTick);
-        pEntity.level().addParticle(
-                ParticleTypes.END_ROD,
-                true,
-                pos.x(),
-                pos.y() + 0.25,
-                pos.z(),
-                0,0,0
-        );
+        if(pEntity.tickCount > 2){
+            Vec3 pos = pEntity.getPosition(pPartialTick);
+            pEntity.level().addParticle(
+                    ParticleTypes.END_ROD,
+                    true,
+                    pos.x(),
+                    pos.y() + 0.25,
+                    pos.z(),
+                    0,0,0
+            );
+        }
     }
 }

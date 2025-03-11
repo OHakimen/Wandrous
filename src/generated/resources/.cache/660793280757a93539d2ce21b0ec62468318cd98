@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-25T13:55:54.400336	Item Models: wandrous
+// 1.21.1	2025-03-03T00:13:33.3486863	Item Models: wandrous
 70cc88c4158ff94537dbcc51580cc8b905d06269 assets/wandrous/models/item/accelerate_cast.json
 4e5e8e3d5579e5375b8bd695ed36e8cb66c1382c assets/wandrous/models/item/add_mana.json
 3ce45c3b3482a88d09ded62455e12e9db6cddf89 assets/wandrous/models/item/arcane_inscriber.json
@@ -106,8 +106,8 @@ bab0d66d11d62e416a529f7ed170cd505502aef7 assets/wandrous/models/item/mossy_chert
 990e8699bd652343cf54d167c1c0202f3acf18c7 assets/wandrous/models/item/mossy_chert_tiles_slab.json
 2793f0c41fc2a2c26c20e5fcba490eed729c5ef3 assets/wandrous/models/item/mossy_chert_tiles_stairs.json
 b1771d92f4675c6027faf5c62e91bbd3bb15c938 assets/wandrous/models/item/nuke.json
-773b85280cdd5bb34dbc8a855eca7aa2853b4bef assets/wandrous/models/item/perk_orb.json
 f24b80febc280448e9c00b5ec39f0f23487cedda assets/wandrous/models/item/piercing.json
+2863fedf597a1ec328db89a558949367e6b311c3 assets/wandrous/models/item/plasma_beam.json
 600cb299ece669ef48270aa62b3f4c05a50a51fe assets/wandrous/models/item/poison_charge.json
 1b4fdf6cb7976627b64cf1b719873b27581112c3 assets/wandrous/models/item/polished_chert.json
 dfc507e38d1fd9dece8c33a2a2ec589b3a5db4a0 assets/wandrous/models/item/polished_chert_slab.json

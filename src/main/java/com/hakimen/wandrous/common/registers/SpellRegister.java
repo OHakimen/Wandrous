@@ -56,6 +56,7 @@ public class SpellRegister {
     public static final DeferredHolder<SpellEffect, SpellEffect> MAJOR_EXPLOSION = SPELL_EFFECTS.register("major_explosion", () -> new ExplosionSpellEffect(5));
     public static final DeferredHolder<SpellEffect, SpellEffect> BOMB = SPELL_EFFECTS.register("bomb", BombSpellEffect::new);
     public static final DeferredHolder<SpellEffect, SpellEffect> NUKE = SPELL_EFFECTS.register("nuke", NukeSpellEffect::new);
+    public static final DeferredHolder<SpellEffect, SpellEffect> PLASMA_BEAM = SPELL_EFFECTS.register("plasma_beam", PlasmaBeamSpellEffect::new);
 
     public static final DeferredHolder<SpellEffect, SpellEffect> CHAIN_PRISON = SPELL_EFFECTS.register("chain_prison", ChainPrisonSpellEffect::new);
     public static final DeferredHolder<SpellEffect, SpellEffect> GUST = SPELL_EFFECTS.register("gust", GustSpellEffect::new);

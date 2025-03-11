@@ -12,7 +12,7 @@ public class ProjectileSpellEffect extends SpellEffect {
     public ProjectileSpellEffect() {
     }
 
-    protected static void shootProjectile(Projectile self, SpellContext context){
+    public static void shootProjectile(Projectile self, SpellContext context){
         Entity caster = context.getCaster();
         SpellStatus status = context.getStatus();
 
@@ -20,13 +20,15 @@ public class ProjectileSpellEffect extends SpellEffect {
             self.setPos(self.getX(), self.getY() - self.getBbHeight()/2f, self.getZ());
         }
 
-
         if (caster instanceof LivingEntity livingEntity) {
             float yRot = livingEntity.getYRot() + Math.round(context.getSplit() / 2.0) * (10 + status.getSpread() * 10) * (context.getSplit() % 2 == 1 ? -1 : 1);
             float xRot = livingEntity.getXRot();
             self.shootFromRotation(livingEntity,xRot, yRot, 0,  status.getSpeed() < 0 ? 0.1f : status.getSpeed(), status.getSpread() * 10);
+            self.setXRot(xRot);
+            self.setYRot(yRot);
         } else {
-            float yRot = Math.round(context.getSplit() / 2.0) * (10 + status.getSpread() * 10) * (context.getSplit() % 2 == 1 ? -1 : 1);
+            float yRot = caster.getYRot() + Math.round(context.getSplit() / 2.0) * (10 + status.getSpread() * 10) * (context.getSplit() % 2 == 1 ? -1 : 1);
+            self.setYRot(yRot);
             self.setDeltaMovement(caster.getDeltaMovement().yRot((float) Math.toRadians(yRot)));
         }
     }

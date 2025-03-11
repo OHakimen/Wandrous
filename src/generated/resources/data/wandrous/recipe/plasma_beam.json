@@ -1,0 +1,29 @@
+{
+  "type": "wandrous:arcane_inscribing",
+  "glyphs": [
+    "wandrous:weave",
+    "wandrous:weave",
+    "wandrous:power",
+    "wandrous:power",
+    "wandrous:power",
+    "wandrous:power",
+    "wandrous:focus",
+    "wandrous:focus",
+    "wandrous:focus",
+    "wandrous:focus",
+    "wandrous:focus",
+    "wandrous:focus",
+    "wandrous:control",
+    "wandrous:control",
+    "wandrous:new",
+    "wandrous:new"
+  ],
+  "on_slate": {
+    "item": "minecraft:redstone_block"
+  },
+  "output": {
+    "id": "wandrous:plasma_beam"
+  },
+  "ticks": 100,
+  "tier": 4
+}

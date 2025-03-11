@@ -113,10 +113,12 @@ public class WandTinkerMenu extends AbstractContainerMenu {
 
     @Override
     public ItemStack quickMoveStack(Player player, int index) {
-        ItemStack itemstack = ItemStack.EMPTY;
-        Slot slot = this.slots.get(index);
         WandDataComponent.WandStat stat = wand.get(DataComponentsRegister.WAND_COMPONENT.get());
         int capacity = stat.getCapacity();
+
+
+        ItemStack itemstack = ItemStack.EMPTY;
+        Slot slot = this.slots.get(index);
         if (slot != null && slot.hasItem()) {
             ItemStack itemstack1 = slot.getItem();
             itemstack = itemstack1.copy();
@@ -130,8 +132,11 @@ public class WandTinkerMenu extends AbstractContainerMenu {
 
             if (itemstack1.isEmpty()) {
                 slot.setByPlayer(ItemStack.EMPTY);
+            } else {
+                slot.setChanged();
             }
         }
+
         return itemstack;
     }
 
