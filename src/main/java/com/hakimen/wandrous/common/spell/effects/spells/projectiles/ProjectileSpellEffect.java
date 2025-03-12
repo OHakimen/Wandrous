@@ -1,5 +1,6 @@
 package com.hakimen.wandrous.common.spell.effects.spells.projectiles;
 
+import com.hakimen.wandrous.common.entity.static_spell.PlasmaBeamEntity;
 import com.hakimen.wandrous.common.spell.SpellContext;
 import com.hakimen.wandrous.common.spell.SpellEffect;
 import com.hakimen.wandrous.common.spell.SpellStatus;
@@ -27,7 +28,10 @@ public class ProjectileSpellEffect extends SpellEffect {
             self.setXRot(xRot);
             self.setYRot(yRot);
         } else {
-            float yRot = caster.getYRot() + Math.round(context.getSplit() / 2.0) * (10 + status.getSpread() * 10) * (context.getSplit() % 2 == 1 ? -1 : 1);
+            float yRot = Math.round(context.getSplit() / 2.0) * (10 + status.getSpread() * 10) * (context.getSplit() % 2 == 1 ? -1 : 1);
+            if(self instanceof PlasmaBeamEntity){
+                yRot = caster.getYRot();
+            }
             self.setYRot(yRot);
             self.setDeltaMovement(caster.getDeltaMovement().yRot((float) Math.toRadians(yRot)));
         }
