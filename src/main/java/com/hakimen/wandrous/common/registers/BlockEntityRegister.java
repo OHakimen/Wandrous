@@ -1,6 +1,7 @@
 package com.hakimen.wandrous.common.registers;
 
 import com.hakimen.wandrous.Wandrous;
+import com.hakimen.wandrous.common.block_entity.ArcaneDispenserBlockEntity;
 import com.hakimen.wandrous.common.block_entity.ArcaneInscriberBlockEntity;
 import com.hakimen.wandrous.common.block_entity.ConjuredBlockEntity;
 import com.hakimen.wandrous.common.block_entity.GlyphProjectorBlockEntity;
@@ -27,6 +28,11 @@ public class BlockEntityRegister {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ArcaneInscriberBlockEntity>> ARCANE_INSCRIBER = BLOCK_ENTITIES.register("arcane_inscriber",
             () -> BlockEntityType.Builder
                     .of(ArcaneInscriberBlockEntity::new, BlockRegister.ARCANE_INSCRIBER.get())
+                    .build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ArcaneDispenserBlockEntity>> ARCANE_DISPENSER = BLOCK_ENTITIES.register("arcane_dispenser",
+            () -> BlockEntityType.Builder
+                    .of(ArcaneDispenserBlockEntity::new, BlockRegister.ARCANE_DISPENSER.get())
                     .build(null));
 
     public static void register(IEventBus bus) {

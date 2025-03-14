@@ -22,6 +22,8 @@ public class HomebringerTeleportEffect extends SpellEffect {
     public void cast(SpellContext context) {
         context.mergeStatus(this.getStatus());
         if(!context.getHit().isEmpty()){
+
+            if(context.getOriginalCaster() == null) return;
             Entity hit = context.getHit().get(context.getHit().size() - 1);
             Vec3 location = hit.getPosition(0);
             Vec3 originalCasterLocation = context.getOriginalCaster().getPosition(0);

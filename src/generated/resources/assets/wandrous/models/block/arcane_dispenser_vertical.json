@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/orientable_vertical",
+  "textures": {
+    "front": "wandrous:block/arcane_dispenser/arcane_dispenser_vertical_facing",
+    "side": "wandrous:block/arcane_dispenser/arcane_dispenser_top"
+  }
+}

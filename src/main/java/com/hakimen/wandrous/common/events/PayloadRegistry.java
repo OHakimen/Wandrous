@@ -27,7 +27,7 @@ public class PayloadRegistry {
                 PositionalScreenShakePacket.STREAM_CODEC,
                 PositionalScreenShakePacket::clientHandler
         );
-
+        
     }
 
 

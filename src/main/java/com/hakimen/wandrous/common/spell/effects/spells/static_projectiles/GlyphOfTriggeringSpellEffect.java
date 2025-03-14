@@ -29,6 +29,8 @@ public class GlyphOfTriggeringSpellEffect extends SpellEffect {
 
         Vec3 location = context.getLocation();
         Level level = context.getLevel();
+
+
         TriggeringGlyphEntity triggeringGlyph = new TriggeringGlyphEntity(EntityRegister.TRIGGER_GLYPH.get(),level, !context.getNode().getChildren().isEmpty() ? CastingUtils.getSpellsFromTree(context.getNode().getChildren().get(0)) : List.of(),
                 context.getStatus().getLifeTime(),
                 context.getStatus().getRadius(),

@@ -100,6 +100,7 @@ public class BlockRegister {
             .isViewBlocking((pState, pLevel, pPos) -> false)
     ));
 
+    public static final DeferredHolder<Block, ArcaneDispenserBlock> ARCANE_DISPENSER = BLOCKS.register("arcane_dispenser", ArcaneDispenserBlock::new);
 
 
     public static void register(IEventBus eventBus) {

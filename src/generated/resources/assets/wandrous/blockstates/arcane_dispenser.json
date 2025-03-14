@@ -1,0 +1,26 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "wandrous:block/arcane_dispenser_vertical",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "wandrous:block/arcane_dispenser",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "wandrous:block/arcane_dispenser"
+    },
+    "facing=south": {
+      "model": "wandrous:block/arcane_dispenser",
+      "y": 180
+    },
+    "facing=up": {
+      "model": "wandrous:block/arcane_dispenser_vertical"
+    },
+    "facing=west": {
+      "model": "wandrous:block/arcane_dispenser",
+      "y": 270
+    }
+  }
+}

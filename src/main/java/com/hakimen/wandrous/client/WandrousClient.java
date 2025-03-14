@@ -7,6 +7,7 @@ import com.hakimen.wandrous.client.entity.*;
 import com.hakimen.wandrous.client.mover.GuideMoverRenderer;
 import com.hakimen.wandrous.client.mover.HomingMoverRenderer;
 import com.hakimen.wandrous.client.mover.IMoverRendererRegister;
+import com.hakimen.wandrous.client.screens.ArcaneDispenserScreen;
 import com.hakimen.wandrous.client.screens.WandTinkerScreen;
 import com.hakimen.wandrous.common.particle.ArcaneKnowledgeParticle;
 import com.hakimen.wandrous.common.particle.FieryParticle;
@@ -27,6 +28,7 @@ public class WandrousClient {
     @SubscribeEvent
     public static void clientInit(RegisterMenuScreensEvent event){
         event.register(ContainerRegister.WAND_TINKER_MENU.get(), WandTinkerScreen::new);
+        event.register(ContainerRegister.ARCANE_DISPENSER.get(), ArcaneDispenserScreen::new);
     }
 
     @SubscribeEvent

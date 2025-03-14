@@ -26,7 +26,8 @@ public class LangProvider extends LanguageProvider {
         add("item.wandrous.wand.empty_wand", "No spells to cast");
         add("item.wandrous.wand.no_mana", "Not enough mana to cast spells");
 
-        add("key.wandrous.perks", "See Perks");
+        add("gui.wandrous.arcane_dispenser", "Arcane Dispenser");
+
 
         add("jei.wandrous.category.arcane_inscribing", "Arcane Inscribing");
 
@@ -128,6 +129,8 @@ public class LangProvider extends LanguageProvider {
 
         add(ItemRegister.ARCANE_INSCRIBER.get(), "Arcane Inscriber");
         add(ItemRegister.GLYPH_PROJECTOR.get(), "Glyph Projector");
+
+        add(ItemRegister.ARCANE_DISPENSER.get(), "Arcane Dispenser");
     }
 
     public void addSpells(){

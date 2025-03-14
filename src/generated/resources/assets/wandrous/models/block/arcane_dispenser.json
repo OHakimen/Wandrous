@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "wandrous:block/arcane_dispenser/arcane_dispenser_front",
+    "side": "wandrous:block/arcane_dispenser/arcane_dispenser_side",
+    "top": "wandrous:block/arcane_dispenser/arcane_dispenser_top"
+  }
+}

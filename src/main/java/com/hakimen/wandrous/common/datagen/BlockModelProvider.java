@@ -28,6 +28,16 @@ public class BlockModelProvider extends net.neoforged.neoforge.client.model.gene
                 .texture("side", ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/projectors/projector_side"))
                 .texture("bottom", ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/projectors/projector_bottom"))
                 .renderType("translucent");
+
+        orientableVertical("arcane_dispenser_vertical",
+                ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/arcane_dispenser/arcane_dispenser_top"),
+                ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/arcane_dispenser/arcane_dispenser_vertical_facing"));
+
+        orientable("arcane_dispenser",
+                ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/arcane_dispenser/arcane_dispenser_side"),
+                ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/arcane_dispenser/arcane_dispenser_front"),
+                ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/arcane_dispenser/arcane_dispenser_top")
+        );
     }
 
     private void crystal(String name, ResourceLocation resourceLocation){

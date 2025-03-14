@@ -1,9 +1,12 @@
 package com.hakimen.wandrous.common.datagen;
 
 import com.hakimen.wandrous.Wandrous;
+import com.hakimen.wandrous.common.block.ArcaneDispenserBlock;
 import com.hakimen.wandrous.common.registers.BlockRegister;
+import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -71,6 +74,26 @@ public class BlockStateProvider extends net.neoforged.neoforge.client.model.gene
                 new ModelFile.ExistingModelFile(ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/big_tealestite_bud"), existingFileHelper));
         directionalBlock(BlockRegister.TEALESTITE_CLUSTER.get(),
                 new ModelFile.ExistingModelFile(ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/tealestite_cluster"), existingFileHelper));
+
+        arcaneDispenser(BlockRegister.ARCANE_DISPENSER.get(),
+                new ModelFile.ExistingModelFile(ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/arcane_dispenser"), existingFileHelper),
+                new ModelFile.ExistingModelFile(ResourceLocation.fromNamespaceAndPath(Wandrous.MODID, "block/arcane_dispenser_vertical"), existingFileHelper));
+    }
+
+    public void arcaneDispenser(Block block, ModelFile horizontal, ModelFile vertical){
+        getVariantBuilder(block)
+                .partialState().with(ArcaneDispenserBlock.FACING, Direction.DOWN)
+                .modelForState().modelFile(vertical).rotationX(180).addModel()
+                .partialState().with(ArcaneDispenserBlock.FACING, Direction.EAST)
+                .modelForState().modelFile(horizontal).rotationY(90).addModel()
+                .partialState().with(ArcaneDispenserBlock.FACING, Direction.NORTH)
+                .modelForState().modelFile(horizontal).addModel()
+                .partialState().with(ArcaneDispenserBlock.FACING, Direction.SOUTH)
+                .modelForState().modelFile(horizontal).rotationY(180).addModel()
+                .partialState().with(ArcaneDispenserBlock.FACING, Direction.UP)
+                .modelForState().modelFile(vertical).addModel()
+                .partialState().with(ArcaneDispenserBlock.FACING, Direction.WEST)
+                .modelForState().modelFile(horizontal).rotationY(270).addModel();
 
     }
 

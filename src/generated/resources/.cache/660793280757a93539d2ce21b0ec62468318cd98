@@ -1,6 +1,7 @@
-// 1.21.1	2025-03-03T00:13:33.3486863	Item Models: wandrous
+// 1.21.1	2025-03-14T15:17:05.3763831	Item Models: wandrous
 70cc88c4158ff94537dbcc51580cc8b905d06269 assets/wandrous/models/item/accelerate_cast.json
 4e5e8e3d5579e5375b8bd695ed36e8cb66c1382c assets/wandrous/models/item/add_mana.json
+b603877865e0b66137ee067f06e83f5996ab3b2a assets/wandrous/models/item/arcane_dispenser.json
 3ce45c3b3482a88d09ded62455e12e9db6cddf89 assets/wandrous/models/item/arcane_inscriber.json
 d77a6fbdccd523590be943b001f617020984100a assets/wandrous/models/item/bestow_blessing_boost_health.json
 5a276b1a7c9ce538afed9891ce06655e63325ab4 assets/wandrous/models/item/bestow_blessing_haste.json

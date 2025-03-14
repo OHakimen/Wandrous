@@ -205,6 +205,8 @@ public class ItemRegister {
     public static final DeferredHolder<Item, BlockItem> GLYPH_PROJECTOR = ITEMS.register("glyph_projector", () -> new BlockItem(BlockRegister.GLYPH_PROJECTOR.get(), new Item.Properties()));
     public static final DeferredHolder<Item, BlockItem> ARCANE_INSCRIBER = ITEMS.register("arcane_inscriber", () -> new BlockItem(BlockRegister.ARCANE_INSCRIBER.get(), new Item.Properties()));
 
+    public static final DeferredHolder<Item, BlockItem> ARCANE_DISPENSER = ITEMS.register("arcane_dispenser", () -> new BlockItem(BlockRegister.ARCANE_DISPENSER.get(), new Item.Properties()));
+
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> TAB = ItemRegister.TABS.register("wandrous", () -> CreativeModeTab.builder()
             .icon(() -> new ItemStack(WAND.get()))
             .title(Component.translatable("itemGroup.wandrous.main"))
