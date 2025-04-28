@@ -1,6 +1,6 @@
 package com.hakimen.wandrous.common.entity.static_spell;
 
-import com.hakimen.wandrous.common.spell.SpellStack;
+import com.hakimen.wandrous.common.api.SpellStack;
 import com.hakimen.wandrous.common.utils.CastingUtils;
 import com.hakimen.wandrous.common.utils.data.Node;
 import com.mojang.datafixers.util.Pair;

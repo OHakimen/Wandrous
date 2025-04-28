@@ -1,7 +1,7 @@
 package com.hakimen.wandrous.client.mover;
 
 import com.hakimen.wandrous.common.entity.projectiles.SpellCastingProjectile;
-import com.hakimen.wandrous.common.spell.mover.ISpellMover;
+import com.hakimen.wandrous.common.api.mover.ISpellMover;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 

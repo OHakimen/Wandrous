@@ -5,7 +5,7 @@ import com.hakimen.wandrous.common.custom.register.WandrousRegistries;
 import com.hakimen.wandrous.common.spell.mover.BoomerangMover;
 import com.hakimen.wandrous.common.spell.mover.GuideMover;
 import com.hakimen.wandrous.common.spell.mover.HomingMover;
-import com.hakimen.wandrous.common.spell.mover.ISpellMover;
+import com.hakimen.wandrous.common.api.mover.ISpellMover;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;

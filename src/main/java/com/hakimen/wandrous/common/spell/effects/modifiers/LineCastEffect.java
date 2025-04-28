@@ -1,8 +1,8 @@
 package com.hakimen.wandrous.common.spell.effects.modifiers;
 
-import com.hakimen.wandrous.common.spell.SpellContext;
-import com.hakimen.wandrous.common.spell.SpellStack;
-import com.hakimen.wandrous.common.spell.SpellStatus;
+import com.hakimen.wandrous.common.api.SpellContext;
+import com.hakimen.wandrous.common.api.SpellStack;
+import com.hakimen.wandrous.common.api.SpellStatus;
 import com.hakimen.wandrous.common.utils.data.Node;
 import net.minecraft.world.phys.Vec3;
 

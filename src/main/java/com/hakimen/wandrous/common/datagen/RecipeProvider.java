@@ -197,6 +197,17 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .save(pRecipeOutput, "greater_recharge_crystal");
 
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegister.ARCANE_DISPENSER.get())
+                .pattern("+++")
+                .pattern("+y+")
+                .pattern("|,|")
+                .define('y', Items.REDSTONE)
+                .define(',', Items.BOW)
+                .define('|', ItemRegister.TEALESTITE_SHARD::get)
+                .define('+', Tags.Items.COBBLESTONES)
+                .unlockedBy(getHasName(ItemRegister.TEALESTITE_SHARD.get()), has(ItemRegister.TEALESTITE_SHARD.get()))
+                .save(pRecipeOutput, "arcane_dispenser");
+
         //CHERT STUFF
         ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ItemRegister.MOSSY_CHERT_BRICKS.get())
                 .requires(ItemRegister.CHERT_BRICKS.get())

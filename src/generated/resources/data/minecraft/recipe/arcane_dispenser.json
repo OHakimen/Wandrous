@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "+": {
+      "tag": "c:cobblestones"
+    },
+    ",": {
+      "item": "minecraft:bow"
+    },
+    "y": {
+      "item": "minecraft:redstone"
+    },
+    "|": {
+      "item": "wandrous:tealestite_shard"
+    }
+  },
+  "pattern": [
+    "+++",
+    "+y+",
+    "|,|"
+  ],
+  "result": {
+    "count": 1,
+    "id": "wandrous:arcane_dispenser"
+  }
+}

@@ -1,7 +1,8 @@
 package com.hakimen.wandrous.common.spell.mover;
 
+import com.hakimen.wandrous.common.api.mover.ISpellMover;
 import com.hakimen.wandrous.common.entity.projectiles.SpellCastingProjectile;
-import com.hakimen.wandrous.common.spell.SpellContext;
+import com.hakimen.wandrous.common.api.SpellContext;
 import net.minecraft.world.entity.Entity;
 
 public class BoomerangMover implements ISpellMover {

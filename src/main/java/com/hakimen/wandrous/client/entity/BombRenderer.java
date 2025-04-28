@@ -4,7 +4,7 @@ import com.hakimen.wandrous.Wandrous;
 import com.hakimen.wandrous.client.mover.IMoverRendererRegister;
 import com.hakimen.wandrous.common.entity.projectiles.BombProjectile;
 import com.hakimen.wandrous.common.entity.projectiles.SpellCastingProjectile;
-import com.hakimen.wandrous.common.spell.mover.ISpellMover;
+import com.hakimen.wandrous.common.api.mover.ISpellMover;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;

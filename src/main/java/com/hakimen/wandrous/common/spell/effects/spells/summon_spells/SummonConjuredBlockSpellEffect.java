@@ -2,7 +2,7 @@ package com.hakimen.wandrous.common.spell.effects.spells.summon_spells;
 
 import com.hakimen.wandrous.common.block_entity.ConjuredBlockEntity;
 import com.hakimen.wandrous.common.registers.BlockEntityRegister;
-import com.hakimen.wandrous.common.spell.SpellContext;
+import com.hakimen.wandrous.common.api.SpellContext;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;

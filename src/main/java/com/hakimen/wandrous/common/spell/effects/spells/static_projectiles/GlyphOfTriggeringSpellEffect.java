@@ -2,9 +2,9 @@ package com.hakimen.wandrous.common.spell.effects.spells.static_projectiles;
 
 import com.hakimen.wandrous.common.entity.static_spell.TriggeringGlyphEntity;
 import com.hakimen.wandrous.common.registers.EntityRegister;
-import com.hakimen.wandrous.common.spell.SpellContext;
-import com.hakimen.wandrous.common.spell.SpellEffect;
-import com.hakimen.wandrous.common.spell.SpellStatus;
+import com.hakimen.wandrous.common.api.SpellContext;
+import com.hakimen.wandrous.common.api.SpellEffect;
+import com.hakimen.wandrous.common.api.SpellStatus;
 import com.hakimen.wandrous.common.utils.CastingUtils;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;

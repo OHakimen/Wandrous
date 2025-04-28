@@ -1,9 +1,9 @@
 package com.hakimen.wandrous.common.spell.effects.spells;
 
-import com.hakimen.wandrous.common.spell.SpellContext;
-import com.hakimen.wandrous.common.spell.SpellEffect;
-import com.hakimen.wandrous.common.spell.SpellStack;
-import com.hakimen.wandrous.common.spell.SpellStatus;
+import com.hakimen.wandrous.common.api.SpellContext;
+import com.hakimen.wandrous.common.api.SpellEffect;
+import com.hakimen.wandrous.common.api.SpellStack;
+import com.hakimen.wandrous.common.api.SpellStatus;
 import com.hakimen.wandrous.common.utils.CastingUtils;
 import com.hakimen.wandrous.common.utils.data.Node;
 import org.apache.commons.lang3.function.TriFunction;
@@ -13,6 +13,7 @@ import java.util.List;
 public class CastingTreeModifierSpellEffect extends SpellEffect {
 
     TriFunction<Node<SpellStack>, CastingUtils, List<SpellStack>, Node<SpellStack>> apply;
+
     public CastingTreeModifierSpellEffect(TriFunction<Node<SpellStack>, CastingUtils, List<SpellStack>, Node<SpellStack>> apply) {
         this.apply = apply;
         setKind(MODIFIER | GREEK_LETTER);

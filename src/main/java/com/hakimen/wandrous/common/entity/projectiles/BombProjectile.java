@@ -2,8 +2,8 @@ package com.hakimen.wandrous.common.entity.projectiles;
 
 import com.hakimen.wandrous.common.payloads.PositionalScreenShakePacket;
 import com.hakimen.wandrous.common.registers.EntityRegister;
-import com.hakimen.wandrous.common.spell.SpellContext;
-import com.hakimen.wandrous.common.spell.mover.ISpellMover;
+import com.hakimen.wandrous.common.api.SpellContext;
+import com.hakimen.wandrous.common.api.mover.ISpellMover;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;

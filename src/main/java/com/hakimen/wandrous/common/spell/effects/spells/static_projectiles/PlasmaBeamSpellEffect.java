@@ -2,11 +2,11 @@ package com.hakimen.wandrous.common.spell.effects.spells.static_projectiles;
 
 import com.hakimen.wandrous.common.entity.projectiles.SpellCastingProjectile;
 import com.hakimen.wandrous.common.entity.static_spell.PlasmaBeamEntity;
-import com.hakimen.wandrous.common.spell.SpellContext;
-import com.hakimen.wandrous.common.spell.SpellEffect;
-import com.hakimen.wandrous.common.spell.SpellStatus;
+import com.hakimen.wandrous.common.api.SpellContext;
+import com.hakimen.wandrous.common.api.SpellEffect;
+import com.hakimen.wandrous.common.api.SpellStatus;
 import com.hakimen.wandrous.common.spell.effects.spells.projectiles.ProjectileSpellEffect;
-import com.hakimen.wandrous.common.spell.mover.ISpellMover;
+import com.hakimen.wandrous.common.api.mover.ISpellMover;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 

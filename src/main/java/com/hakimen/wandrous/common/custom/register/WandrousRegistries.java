@@ -2,8 +2,8 @@ package com.hakimen.wandrous.common.custom.register;
 
 import com.hakimen.wandrous.Wandrous;
 import com.hakimen.wandrous.common.data.Glyph;
-import com.hakimen.wandrous.common.spell.SpellEffect;
-import com.hakimen.wandrous.common.spell.mover.ISpellMover;
+import com.hakimen.wandrous.common.api.SpellEffect;
+import com.hakimen.wandrous.common.api.mover.ISpellMover;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;

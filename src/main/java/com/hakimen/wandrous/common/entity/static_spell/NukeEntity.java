@@ -4,7 +4,7 @@ import com.hakimen.wandrous.common.entity.projectiles.SpellCastingProjectile;
 import com.hakimen.wandrous.common.registers.DamageTypeRegister;
 import com.hakimen.wandrous.common.registers.EntityRegister;
 import com.hakimen.wandrous.common.registers.ParticleRegister;
-import com.hakimen.wandrous.common.spell.SpellContext;
+import com.hakimen.wandrous.common.api.SpellContext;
 import com.hakimen.wandrous.common.utils.CastingUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;

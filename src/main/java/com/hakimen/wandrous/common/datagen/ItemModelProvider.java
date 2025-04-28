@@ -4,7 +4,7 @@ import com.hakimen.wandrous.Wandrous;
 import com.hakimen.wandrous.common.item.SpellEffectItem;
 import com.hakimen.wandrous.common.registers.BlockRegister;
 import com.hakimen.wandrous.common.registers.ItemRegister;
-import com.hakimen.wandrous.common.spell.SpellEffect;
+import com.hakimen.wandrous.common.api.SpellEffect;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;

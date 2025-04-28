@@ -1,9 +1,9 @@
 package com.hakimen.wandrous.common.spell.effects.spells.static_projectiles;
 
 import com.hakimen.wandrous.common.payloads.PositionalScreenShakePacket;
-import com.hakimen.wandrous.common.spell.SpellContext;
-import com.hakimen.wandrous.common.spell.SpellEffect;
-import com.hakimen.wandrous.common.spell.SpellStatus;
+import com.hakimen.wandrous.common.api.SpellContext;
+import com.hakimen.wandrous.common.api.SpellEffect;
+import com.hakimen.wandrous.common.api.SpellStatus;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;

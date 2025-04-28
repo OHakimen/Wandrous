@@ -2,8 +2,8 @@ package com.hakimen.wandrous.common.item;
 
 import com.hakimen.wandrous.common.item.component.SpellCastsDataComponent;
 import com.hakimen.wandrous.common.registers.DataComponentsRegister;
-import com.hakimen.wandrous.common.spell.SpellEffect;
-import com.hakimen.wandrous.common.spell.SpellStatus;
+import com.hakimen.wandrous.common.api.SpellEffect;
+import com.hakimen.wandrous.common.api.SpellStatus;
 import com.hakimen.wandrous.common.utils.ChargesUtils;
 import com.hakimen.wandrous.config.ServerConfig;
 import net.minecraft.ChatFormatting;

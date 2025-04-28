@@ -1,10 +1,10 @@
 package com.hakimen.wandrous.common.utils;
 
 import com.hakimen.wandrous.common.registers.SpellRegister;
-import com.hakimen.wandrous.common.spell.SpellContext;
-import com.hakimen.wandrous.common.spell.SpellEffect;
-import com.hakimen.wandrous.common.spell.SpellStack;
-import com.hakimen.wandrous.common.spell.SpellStatus;
+import com.hakimen.wandrous.common.api.SpellContext;
+import com.hakimen.wandrous.common.api.SpellEffect;
+import com.hakimen.wandrous.common.api.SpellStack;
+import com.hakimen.wandrous.common.api.SpellStatus;
 import com.hakimen.wandrous.common.spell.effects.modifiers.MultiCastEffect;
 import com.hakimen.wandrous.common.spell.effects.spells.CastingTreeModifierSpellEffect;
 import com.hakimen.wandrous.common.utils.data.Node;
@@ -26,7 +26,6 @@ import static com.hakimen.wandrous.config.ServerConfig.STRENGTH_DAMAGE_MODIFIER;
 
 public class CastingUtils {
     public int idx;
-
     public List<ItemStack> toConsumeCharges = new ArrayList<>();
 
     public Node<SpellStack> makeCastingTree(List<SpellStack> effects, List<SpellStack> alleffects) {

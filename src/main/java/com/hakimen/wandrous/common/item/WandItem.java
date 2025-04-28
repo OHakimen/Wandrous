@@ -4,7 +4,7 @@ import com.hakimen.wandrous.Wandrous;
 import com.hakimen.wandrous.client.model.DynamicTextureModel;
 import com.hakimen.wandrous.common.item.component.WandDataComponent;
 import com.hakimen.wandrous.common.registers.*;
-import com.hakimen.wandrous.common.spell.SpellStack;
+import com.hakimen.wandrous.common.api.SpellStack;
 import com.hakimen.wandrous.common.utils.CastingUtils;
 import com.hakimen.wandrous.common.utils.ChargesUtils;
 import com.hakimen.wandrous.common.utils.WandUtils;

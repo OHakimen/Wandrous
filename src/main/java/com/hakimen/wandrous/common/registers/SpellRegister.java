@@ -2,10 +2,10 @@ package com.hakimen.wandrous.common.registers;
 
 import com.hakimen.wandrous.Wandrous;
 import com.hakimen.wandrous.common.custom.register.WandrousRegistries;
-import com.hakimen.wandrous.common.spell.SpellContext;
-import com.hakimen.wandrous.common.spell.SpellEffect;
-import com.hakimen.wandrous.common.spell.SpellStack;
-import com.hakimen.wandrous.common.spell.SpellStatus;
+import com.hakimen.wandrous.common.api.SpellContext;
+import com.hakimen.wandrous.common.api.SpellEffect;
+import com.hakimen.wandrous.common.api.SpellStack;
+import com.hakimen.wandrous.common.api.SpellStatus;
 import com.hakimen.wandrous.common.spell.effects.modifiers.*;
 import com.hakimen.wandrous.common.spell.effects.modifiers.charges.CrumblingChargeHitEffect;
 import com.hakimen.wandrous.common.spell.effects.modifiers.charges.FreezingChargeHitEffect;

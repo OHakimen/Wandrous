@@ -2,9 +2,9 @@ package com.hakimen.wandrous.common.spell.effects.modifiers;
 
 import com.hakimen.wandrous.common.entity.static_spell.TimerEntity;
 import com.hakimen.wandrous.common.registers.EntityRegister;
-import com.hakimen.wandrous.common.spell.SpellContext;
-import com.hakimen.wandrous.common.spell.SpellEffect;
-import com.hakimen.wandrous.common.spell.SpellStatus;
+import com.hakimen.wandrous.common.api.SpellContext;
+import com.hakimen.wandrous.common.api.SpellEffect;
+import com.hakimen.wandrous.common.api.SpellStatus;
 
 public class  DelayCastEffect extends SpellEffect {
     int time;

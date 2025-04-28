@@ -6,7 +6,7 @@ import com.hakimen.wandrous.common.item.component.ScrollDataComponent;
 import com.hakimen.wandrous.common.registers.DataComponentsRegister;
 import com.hakimen.wandrous.common.registers.EffectRegister;
 import com.hakimen.wandrous.common.registers.ItemRegister;
-import com.hakimen.wandrous.common.spell.SpellStack;
+import com.hakimen.wandrous.common.api.SpellStack;
 import com.hakimen.wandrous.common.utils.CastingUtils;
 import com.hakimen.wandrous.common.utils.data.Node;
 import net.minecraft.ChatFormatting;

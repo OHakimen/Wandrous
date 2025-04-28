@@ -1,9 +1,9 @@
 package com.hakimen.wandrous.common.spell.effects.spells.projectiles;
 
 import com.hakimen.wandrous.common.entity.projectiles.ChainShotProjectile;
-import com.hakimen.wandrous.common.spell.SpellContext;
-import com.hakimen.wandrous.common.spell.SpellEffect;
-import com.hakimen.wandrous.common.spell.SpellStatus;
+import com.hakimen.wandrous.common.api.SpellContext;
+import com.hakimen.wandrous.common.api.SpellEffect;
+import com.hakimen.wandrous.common.api.SpellStatus;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 

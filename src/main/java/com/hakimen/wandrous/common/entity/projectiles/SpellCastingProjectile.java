@@ -1,12 +1,12 @@
 package com.hakimen.wandrous.common.entity.projectiles;
 
 import com.hakimen.wandrous.common.registers.SpellMoverRegister;
-import com.hakimen.wandrous.common.spell.SpellContext;
-import com.hakimen.wandrous.common.spell.SpellEffect;
-import com.hakimen.wandrous.common.spell.SpellStack;
+import com.hakimen.wandrous.common.api.SpellContext;
+import com.hakimen.wandrous.common.api.SpellEffect;
+import com.hakimen.wandrous.common.api.SpellStack;
 import com.hakimen.wandrous.common.spell.effects.modifiers.MoverSpellEffect;
 import com.hakimen.wandrous.common.spell.effects.modifiers.ProjectileHitEffect;
-import com.hakimen.wandrous.common.spell.mover.ISpellMover;
+import com.hakimen.wandrous.common.api.mover.ISpellMover;
 import com.hakimen.wandrous.common.utils.CastingUtils;
 import com.hakimen.wandrous.common.utils.data.Node;
 import net.minecraft.commands.arguments.EntityAnchorArgument;

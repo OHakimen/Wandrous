@@ -1,9 +1,9 @@
 package com.hakimen.wandrous.common.spell.effects.spells.static_projectiles.utility;
 
 import com.hakimen.wandrous.common.registers.DamageTypeRegister;
-import com.hakimen.wandrous.common.spell.SpellContext;
-import com.hakimen.wandrous.common.spell.SpellEffect;
-import com.hakimen.wandrous.common.spell.SpellStatus;
+import com.hakimen.wandrous.common.api.SpellContext;
+import com.hakimen.wandrous.common.api.SpellEffect;
+import com.hakimen.wandrous.common.api.SpellStatus;
 import com.hakimen.wandrous.common.utils.CastingUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;

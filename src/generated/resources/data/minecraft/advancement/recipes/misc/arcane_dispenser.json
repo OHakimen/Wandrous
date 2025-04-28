@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_tealestite_shard": {
+      "conditions": {
+        "items": [
+          {
+            "items": "wandrous:tealestite_shard"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:arcane_dispenser"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_tealestite_shard"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:arcane_dispenser"
+    ]
+  }
+}

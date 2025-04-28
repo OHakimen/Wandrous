@@ -1,7 +1,12 @@
-package com.hakimen.wandrous.common.spell;
+package com.hakimen.wandrous.common.api;
 
 import java.util.Random;
 
+
+/**<h1>Spell Status</h1>
+ * This class defines the stats that a spell effect has, meaning it drives most of the spell behaviour as far as control variables go.
+ * <br><br>
+ */
 public class SpellStatus {
 
     protected int manaDrain;

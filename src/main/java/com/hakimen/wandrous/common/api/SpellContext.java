@@ -1,4 +1,4 @@
-package com.hakimen.wandrous.common.spell;
+package com.hakimen.wandrous.common.api;
 
 import com.hakimen.wandrous.common.utils.CastingUtils;
 import com.hakimen.wandrous.common.utils.data.Node;
@@ -10,7 +10,12 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.HashMap;
 import java.util.List;
-
+/**
+ * <h1>Spell Context</h1>
+ * This class gives the context needed for executing spells on casts
+ * <br><br>
+ * Every property are defined as just a key into a hashmap allowing it to be extended by just getting the hashmap and adding extra properties into it
+ */
 public class SpellContext implements Cloneable {
 
     HashMap<String, Object> properties;

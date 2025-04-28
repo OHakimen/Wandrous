@@ -23,5 +23,4 @@ public class Wandrous
 
         Registration.register(container.getEventBus());
     }
-
 }

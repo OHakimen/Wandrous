@@ -1,7 +1,9 @@
 package com.hakimen.wandrous.common.spell.mover;
 
+import com.hakimen.wandrous.common.api.mover.ISpellMover;
 import com.hakimen.wandrous.common.entity.projectiles.SpellCastingProjectile;
-import com.hakimen.wandrous.common.spell.SpellContext;
+import com.hakimen.wandrous.common.api.SpellContext;
+import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.level.Level;
@@ -27,6 +29,7 @@ public class HomingMover implements ISpellMover {
                 LivingEntity target = context.getHomingTarget();
                 if(target.getHealth() > 0){
                     projectile.setNoGravity(true);
+                    projectile.lookAt(EntityAnchorArgument.Anchor.EYES, target.getPosition(0));
                     projectile.setDeltaMovement(target.getPosition(0).subtract(projectile.getPosition(0).subtract(0,+target.getBbHeight()/2f, 0)).normalize()
                             .scale(Math.clamp(target.getPosition(0).distanceTo(projectile.getPosition(0))/4f,0f, context.getStatus().getSpeed() > 0 ? context.getStatus().getSpeed() : 0.1f)));
                 }else {
